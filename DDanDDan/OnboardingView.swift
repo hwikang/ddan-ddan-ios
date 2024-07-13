@@ -25,7 +25,14 @@ struct OnboardingView: View {
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
                 Button {
-                    
+                    HealthKitManager.shared.requestAuthorization { isEnable in
+                        if isEnable {
+                            HealthKitManager.shared.readActiveEnergyBurned { energy in
+                                print(energy)
+                            }
+                        }
+                    }
+
                 } label: {
                     Text("시작하기")
                         .font(.system(size: 16, weight: .medium))

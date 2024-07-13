@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-
 @main
 struct DDanDDanApp: App {
     var body: some Scene {
+        
         WindowGroup {
             OnboardingView()
         }
