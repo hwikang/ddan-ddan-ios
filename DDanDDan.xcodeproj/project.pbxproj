@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F85C2BA02C4CBF6B002E2237 /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C2B9F2C4CBF6B002E2237 /* DialogView.swift */; };
+		F85C2BA22C4CD0B6002E2237 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C2BA12C4CD0B6002E2237 /* SignUpView.swift */; };
+		F85C2BA42C4CD651002E2237 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C2BA32C4CD651002E2237 /* UserDefault.swift */; };
 		F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */; };
 		F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */; };
 		F8AB33322C2EAD2F00BC16C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8AB33312C2EAD2F00BC16C9 /* Assets.xcassets */; };
@@ -15,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F85C2B9F2C4CBF6B002E2237 /* DialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogView.swift; sourceTree = "<group>"; };
+		F85C2BA12C4CD0B6002E2237 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		F85C2BA32C4CD651002E2237 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		F8AB332A2C2EAD2E00BC16C9 /* DDanDDan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDanDDan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDanDDanApp.swift; sourceTree = "<group>"; };
 		F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -55,6 +61,9 @@
 			children = (
 				F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */,
 				F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */,
+				F85C2BA32C4CD651002E2237 /* UserDefault.swift */,
+				F85C2BA12C4CD0B6002E2237 /* SignUpView.swift */,
+				F85C2B9F2C4CBF6B002E2237 /* DialogView.swift */,
 				F8C8E71E2C42AFD00052EA9F /* HealthKitManager.swift */,
 				F8AB33312C2EAD2F00BC16C9 /* Assets.xcassets */,
 				F8AB33332C2EAD2F00BC16C9 /* Preview Content */,
@@ -141,7 +150,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */,
+				F85C2BA22C4CD0B6002E2237 /* SignUpView.swift in Sources */,
+				F85C2BA42C4CD651002E2237 /* UserDefault.swift in Sources */,
 				F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */,
+				F85C2BA02C4CBF6B002E2237 /* DialogView.swift in Sources */,
 				F8C8E71F2C42AFD00052EA9F /* HealthKitManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,7 +293,9 @@
 				DEVELOPMENT_TEAM = L3B9L4FDBB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -314,7 +328,9 @@
 				DEVELOPMENT_TEAM = L3B9L4FDBB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
