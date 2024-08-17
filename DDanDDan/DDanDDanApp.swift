@@ -17,12 +17,15 @@ struct DDanDDanApp: App {
     var body: some Scene {
         
         WindowGroup {
+          
             OnboardingView()
                 .onOpenURL { url in
                     if (AuthApi.isKakaoTalkLoginUrl(url)) {
                         _ = AuthController.handleOpenUrl(url: url)
                     }
                 }
+            
+            
         }
     }
 }

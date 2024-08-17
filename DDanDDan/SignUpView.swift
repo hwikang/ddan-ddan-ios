@@ -8,9 +8,10 @@
 import SwiftUI
 import KakaoSDKUser
 import KakaoSDKCommon
+
 struct SignUpView: View {
     @State private var showSignupTerm = false
-
+    @State public var signUpData = SignUpData()
     var body: some View {
         NavigationView {
             ZStack {
@@ -40,13 +41,15 @@ struct SignUpView: View {
                             .foregroundColor(.black)
                     }
                 }.padding(.bottom)
-                NavigationLink(destination: SignUpTermView(), isActive: $showSignupTerm) { }
+                NavigationLink(destination: SignUpTermView(signUpData: signUpData), isActive: $showSignupTerm) { }
                 
             }
         }
     }
     private func getKakaoUser() {
         UserApi.shared.me() { user, error in
+            
+            signUpData.kakaoUser = user
             showSignupTerm = true
         }
     }
