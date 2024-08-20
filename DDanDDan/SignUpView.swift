@@ -13,7 +13,7 @@ struct SignUpView: View {
     @State private var showSignupTerm = false
     @State public var signUpData = SignUpData()
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color.black.edgesIgnoringSafeArea(.all)
                 VStack {
@@ -40,8 +40,11 @@ struct SignUpView: View {
                             .background(Color(red: 254/255, green: 229/255, blue: 0/255))
                             .foregroundColor(.black)
                     }
-                }.padding(.bottom)
-                NavigationLink(destination: SignUpTermView(signUpData: signUpData), isActive: $showSignupTerm) { }
+                }
+                .padding(.bottom)
+                .navigationDestination(isPresented: $showSignupTerm) {
+                    SignUpTermView(signUpData: signUpData)
+                }
                 
             }
         }

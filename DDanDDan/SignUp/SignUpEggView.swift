@@ -10,51 +10,75 @@ import SwiftUI
 struct SignUpEggView: View {
     @State private var buttonDisabled: Bool = true
     @State private var signUpData: SignUpData
+    @State private var selectedEgg: String? = nil
+    @State private var nextButtonTapped: Bool = false
 
     public init(signUpData: SignUpData) {
         
         self.signUpData = signUpData
     }
     var body: some View {
-        ZStack {
-            Color.black.edgesIgnoringSafeArea(.all)
-            VStack(alignment: .leading) {
+        NavigationStack {
+            ZStack {
+                Color.black.edgesIgnoringSafeArea(.all)
                 VStack(alignment: .leading) {
+                    VStack(alignment: .leading) {
+                        
+                        Text("마음에 드는\n알을 선택해 주세요")
+                            .font(.system(size: 24, weight: .bold))
+                            .foregroundStyle(.white)
+                            .padding(.top, 80)
                     
-                    Text("마음에 드는\n알을 선택해 주세요")
-                        .font(.system(size: 24, weight: .bold))
-                        .foregroundStyle(.white)
-                    
-                        .padding(.top, 80)
-                    
-                    VStack(alignment: .center, spacing: 20) {
-                        HStack(spacing: 30) {
-                            Image("eggPink")
-//                                .frame(width: 120,height: 120)
-//                                .aspectRatio(contentMode: .fit)
-                            Image("eggPink")
-                                .frame(width: 120)
+                        HStack(alignment: .center) {
+                            Spacer()
+                            eggGrid
+                            Spacer()
                         }
-                        HStack(spacing: 30) {
-                            Image("eggPink")
-                                .frame(width: 120)
-                            
-                            Image("eggPink")
-                                .frame(width: 120)
-                        }
-                    }.padding(.top, 75)
-                    
-                }.frame(maxWidth: .infinity, alignment: .leading)
+                    }
+//                    .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 20)
-                
-                Spacer()
-                
-                GreenButton(action: {
-                    print("tap")
-                }, title: "다음", disabled: $buttonDisabled)
-                 
+                    
+                    Spacer()
+                    
+                    GreenButton(action: {
+                        signUpData.selectedEgg = selectedEgg
+                        nextButtonTapped = true
+                    }, title: "다음", disabled: $buttonDisabled)
+                    .onChange(of: selectedEgg) { newValue in
+                        buttonDisabled = selectedEgg == nil
+                    }
+                    
+                }
+            }.navigationDestination(isPresented: $nextButtonTapped) {
+                SignUpNicknameView(signUpData: signUpData)
             }
+            
         }
+    }
+    
+    var eggGrid: some View {
+        VStack(spacing: 20) {
+            HStack(spacing: 30) {
+                Image("eggPink")
+                    .onTapGesture {
+                        selectedEgg = "Pink"
+                    }
+                Image("eggOrange")
+                    .onTapGesture {
+                        selectedEgg = "Orange"
+                    }
+            }
+            HStack(spacing: 30) {
+                Image("eggPurple")
+                    .onTapGesture {
+                        selectedEgg = "Purple"
+                    }
+                Image("eggPink")
+                    .onTapGesture {
+                        selectedEgg = "Pink"
+                    }
+            }
+        }.padding(.top, 75)
     }
 }
 

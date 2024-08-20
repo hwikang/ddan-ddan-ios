@@ -9,4 +9,6 @@ import Foundation
 import KakaoSDKUser
 struct SignUpData {
     var kakaoUser: User?
+    var selectedEgg: String?
+    var nickname: String?
 }

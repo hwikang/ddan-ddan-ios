@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F827E5592C748CBC00C5B320 /* SignUpNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */; };
 		F8311F992C7060E8000455ED /* GreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8311F982C7060E8000455ED /* GreenButton.swift */; };
 		F859C0482C7068DF007B886A /* SignUpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F859C0472C7068DF007B886A /* SignUpData.swift */; };
 		F859C04A2C706A2D007B886A /* SignUpEggView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F859C0492C706A2D007B886A /* SignUpEggView.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameView.swift; sourceTree = "<group>"; };
 		F8311F982C7060E8000455ED /* GreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenButton.swift; sourceTree = "<group>"; };
 		F859C0472C7068DF007B886A /* SignUpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpData.swift; sourceTree = "<group>"; };
 		F859C0492C706A2D007B886A /* SignUpEggView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEggView.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				F8C10C172C57955C0037D6A5 /* SignUpView.swift */,
 				F8C10C192C57970B0037D6A5 /* SignUpTermView.swift */,
 				F859C0492C706A2D007B886A /* SignUpEggView.swift */,
+				F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */,
 				F859C0482C7068DF007B886A /* SignUpData.swift in Sources */,
 				F8C10C182C57955C0037D6A5 /* SignUpView.swift in Sources */,
+				F827E5592C748CBC00C5B320 /* SignUpNicknameView.swift in Sources */,
 				F85C2BA02C4CBF6B002E2237 /* DialogView.swift in Sources */,
 				F8C8E71F2C42AFD00052EA9F /* HealthKitManager.swift in Sources */,
 				F8C10C1A2C57970B0037D6A5 /* SignUpTermView.swift in Sources */,
