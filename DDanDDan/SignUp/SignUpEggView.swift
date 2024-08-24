@@ -12,7 +12,7 @@ struct SignUpEggView: View {
     @State private var signUpData: SignUpData
     @State private var selectedEgg: String? = nil
     @State private var nextButtonTapped: Bool = false
-
+    
     public init(signUpData: SignUpData) {
         
         self.signUpData = signUpData
@@ -22,21 +22,17 @@ struct SignUpEggView: View {
             ZStack {
                 Color.black.edgesIgnoringSafeArea(.all)
                 VStack(alignment: .leading) {
-                    VStack(alignment: .leading) {
-                        
-                        Text("마음에 드는\n알을 선택해 주세요")
-                            .font(.system(size: 24, weight: .bold))
-                            .foregroundStyle(.white)
-                            .padding(.top, 80)
                     
-                        HStack(alignment: .center) {
-                            Spacer()
-                            eggGrid
-                            Spacer()
-                        }
+                    Text("마음에 드는\n알을 선택해 주세요")
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundStyle(.white)
+                        .padding(.top, 80)
+                        .padding(.horizontal, 20)
+                    HStack(alignment: .center) {
+                        Spacer()
+                        eggGrid
+                        Spacer()
                     }
-//                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 20)
                     
                     Spacer()
                     
@@ -59,26 +55,31 @@ struct SignUpEggView: View {
     var eggGrid: some View {
         VStack(spacing: 20) {
             HStack(spacing: 30) {
-                Image("eggPink")
-                    .onTapGesture {
-                        selectedEgg = "Pink"
-                    }
-                Image("eggOrange")
-                    .onTapGesture {
-                        selectedEgg = "Orange"
-                    }
+                EggItem(selectedEgg: $selectedEgg, imageName: "eggPink", title: "Pink")
+                EggItem(selectedEgg: $selectedEgg, imageName: "eggOrange", title: "Orange")
+                
             }
             HStack(spacing: 30) {
-                Image("eggPurple")
-                    .onTapGesture {
-                        selectedEgg = "Purple"
-                    }
-                Image("eggPink")
-                    .onTapGesture {
-                        selectedEgg = "Pink"
-                    }
+                EggItem(selectedEgg: $selectedEgg, imageName: "eggPurple", title: "Purple")
+                EggItem(selectedEgg: $selectedEgg, imageName: "eggPink", title: "Pink")
+                
             }
         }.padding(.top, 75)
+    }
+}
+
+struct EggItem: View {
+    @Binding var selectedEgg: String?
+    public let imageName: String, title: String
+    
+    var body: some View {
+        Image(imageName)
+            .onTapGesture {
+                selectedEgg = title
+            }
+            .overlay(RoundedRectangle(cornerRadius: 8)
+                .strokeBorder(Color(red: 19/255, green: 230/255, blue: 149/255),
+                              lineWidth: selectedEgg == title ? 3 : 0))
     }
 }
 

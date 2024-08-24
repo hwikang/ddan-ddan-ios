@@ -24,6 +24,8 @@
 		F8C10C182C57955C0037D6A5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C10C172C57955C0037D6A5 /* SignUpView.swift */; };
 		F8C10C1A2C57970B0037D6A5 /* SignUpTermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C10C192C57970B0037D6A5 /* SignUpTermView.swift */; };
 		F8C8E71F2C42AFD00052EA9F /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C8E71E2C42AFD00052EA9F /* HealthKitManager.swift */; };
+		F8FD4FAE2C7A09F900147C4F /* SignUpCalorieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FD4FAD2C7A09F900147C4F /* SignUpCalorieView.swift */; };
+		F8FD4FB02C7A0FF600147C4F /* SignUpCalorieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FD4FAF2C7A0FF600147C4F /* SignUpCalorieViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		F8C10C172C57955C0037D6A5 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpView.swift; path = DDanDDan/SignUpView.swift; sourceTree = SOURCE_ROOT; };
 		F8C10C192C57970B0037D6A5 /* SignUpTermView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTermView.swift; sourceTree = "<group>"; };
 		F8C8E71E2C42AFD00052EA9F /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		F8FD4FAD2C7A09F900147C4F /* SignUpCalorieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCalorieView.swift; sourceTree = "<group>"; };
+		F8FD4FAF2C7A0FF600147C4F /* SignUpCalorieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCalorieViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +134,8 @@
 				F8C10C192C57970B0037D6A5 /* SignUpTermView.swift */,
 				F859C0492C706A2D007B886A /* SignUpEggView.swift */,
 				F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */,
+				F8FD4FAD2C7A09F900147C4F /* SignUpCalorieView.swift */,
+				F8FD4FAF2C7A0FF600147C4F /* SignUpCalorieViewModel.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -214,7 +220,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F859C04A2C706A2D007B886A /* SignUpEggView.swift in Sources */,
+				F8FD4FB02C7A0FF600147C4F /* SignUpCalorieViewModel.swift in Sources */,
 				F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */,
+				F8FD4FAE2C7A09F900147C4F /* SignUpCalorieView.swift in Sources */,
 				F8311F992C7060E8000455ED /* GreenButton.swift in Sources */,
 				F85C2BA42C4CD651002E2237 /* UserDefault.swift in Sources */,
 				F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */,
