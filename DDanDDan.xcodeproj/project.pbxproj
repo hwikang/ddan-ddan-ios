@@ -12,7 +12,8 @@
 		F859C0482C7068DF007B886A /* SignUpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F859C0472C7068DF007B886A /* SignUpData.swift */; };
 		F859C04A2C706A2D007B886A /* SignUpEggView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F859C0492C706A2D007B886A /* SignUpEggView.swift */; };
 		F85C2BA02C4CBF6B002E2237 /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C2B9F2C4CBF6B002E2237 /* DialogView.swift */; };
-		F85C2BA42C4CD651002E2237 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C2BA32C4CD651002E2237 /* UserDefault.swift */; };
+		F85C2BA42C4CD651002E2237 /* UserDefaultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C2BA32C4CD651002E2237 /* UserDefaultValue.swift */; };
+		F89A2EB92C7C7F0500FE3A36 /* SignUpSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */; };
 		F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */; };
 		F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */; };
 		F8AB33322C2EAD2F00BC16C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8AB33312C2EAD2F00BC16C9 /* Assets.xcassets */; };
@@ -34,7 +35,8 @@
 		F859C0472C7068DF007B886A /* SignUpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpData.swift; sourceTree = "<group>"; };
 		F859C0492C706A2D007B886A /* SignUpEggView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEggView.swift; sourceTree = "<group>"; };
 		F85C2B9F2C4CBF6B002E2237 /* DialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogView.swift; sourceTree = "<group>"; };
-		F85C2BA32C4CD651002E2237 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		F85C2BA32C4CD651002E2237 /* UserDefaultValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultValue.swift; sourceTree = "<group>"; };
+		F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSuccessView.swift; sourceTree = "<group>"; };
 		F8AB332A2C2EAD2E00BC16C9 /* DDanDDan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDanDDan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDanDDanApp.swift; sourceTree = "<group>"; };
 		F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				F8311F982C7060E8000455ED /* GreenButton.swift */,
+				F85C2B9F2C4CBF6B002E2237 /* DialogView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -84,6 +87,15 @@
 				F859C0472C7068DF007B886A /* SignUpData.swift */,
 			);
 			path = SignUp;
+			sourceTree = "<group>";
+		};
+		F89A2EBA2C7C80AF00FE3A36 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				F85C2BA32C4CD651002E2237 /* UserDefaultValue.swift */,
+				F8C8E71E2C42AFD00052EA9F /* HealthKitManager.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		F8AB33212C2EAD2E00BC16C9 = {
@@ -107,12 +119,10 @@
 			children = (
 				F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */,
 				F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */,
-				F85C2BA32C4CD651002E2237 /* UserDefault.swift */,
+				F89A2EBA2C7C80AF00FE3A36 /* Util */,
 				F8311F9A2C7068C4000455ED /* Entity */,
 				F8311F952C7060B3000455ED /* Components */,
 				F8C10C142C57950D0037D6A5 /* SignUp */,
-				F85C2B9F2C4CBF6B002E2237 /* DialogView.swift */,
-				F8C8E71E2C42AFD00052EA9F /* HealthKitManager.swift */,
 				F8AB33312C2EAD2F00BC16C9 /* Assets.xcassets */,
 				F8AB33332C2EAD2F00BC16C9 /* Preview Content */,
 			);
@@ -136,6 +146,7 @@
 				F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */,
 				F8FD4FAD2C7A09F900147C4F /* SignUpCalorieView.swift */,
 				F8FD4FAF2C7A0FF600147C4F /* SignUpCalorieViewModel.swift */,
+				F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -224,11 +235,12 @@
 				F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */,
 				F8FD4FAE2C7A09F900147C4F /* SignUpCalorieView.swift in Sources */,
 				F8311F992C7060E8000455ED /* GreenButton.swift in Sources */,
-				F85C2BA42C4CD651002E2237 /* UserDefault.swift in Sources */,
+				F85C2BA42C4CD651002E2237 /* UserDefaultValue.swift in Sources */,
 				F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */,
 				F859C0482C7068DF007B886A /* SignUpData.swift in Sources */,
 				F8C10C182C57955C0037D6A5 /* SignUpView.swift in Sources */,
 				F827E5592C748CBC00C5B320 /* SignUpNicknameView.swift in Sources */,
+				F89A2EB92C7C7F0500FE3A36 /* SignUpSuccessView.swift in Sources */,
 				F85C2BA02C4CBF6B002E2237 /* DialogView.swift in Sources */,
 				F8C8E71F2C42AFD00052EA9F /* HealthKitManager.swift in Sources */,
 				F8C10C1A2C57970B0037D6A5 /* SignUpTermView.swift in Sources */,

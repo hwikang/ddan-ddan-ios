@@ -25,10 +25,18 @@ struct SignUpView: View {
                     Button {
                         if UserApi.isKakaoTalkLoginAvailable() {
                             UserApi.shared.loginWithKakaoTalk(serviceTerms: []) { token, error in
+                                if let error = error { 
+                                    print(error)
+                                    return
+                                }
                                 getKakaoUser()
                             }
                         } else {
                             UserApi.shared.loginWithKakaoAccount(serviceTerms: []) { token, error in
+                                if let error = error {
+                                    print(error)
+                                    return
+                                }
                                 getKakaoUser()
                             }
                         }
@@ -49,9 +57,13 @@ struct SignUpView: View {
             }
         }
     }
+    
     private func getKakaoUser() {
         UserApi.shared.me() { user, error in
-            
+            if let error = error {
+                print(error)
+                return
+            }
             signUpData.kakaoUser = user
             showSignupTerm = true
         }

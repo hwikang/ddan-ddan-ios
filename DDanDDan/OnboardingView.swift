@@ -12,12 +12,16 @@ struct OnboardingView: View {
     @State private var currentPageIndex: Int = 0
     @State private var showAuthDialog = false
     @State private var showSignup = false
-
+    
     private let pageItemList: [OnboardingItem] = [
         .init(title: "오늘 소비한 칼로리로\n귀여운 펫을 키워보세요", desc: "desc1", imageName: "image1"),
         .init(title: "펫이 다 자라면\n또 다른 펫을 키울 수 있어요", desc: "desc2", imageName: "image2"),
         .init(title: "꾸준히 운동해\n소중한 펫을 지켜주세요!", desc: "desc3", imageName: "image3")
     ]
+    
+    init() {
+        UserDefaultValue.needToShowOnboarding = false
+    }
     var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)

@@ -14,4 +14,9 @@ struct SignUpCalorieViewModel {
         //TODO: signup 요청
         return true
     }
+    
+    public func login() -> Bool {
+        //TODO: login 요청 + 토큰 저장
+        return true
+    }
 }

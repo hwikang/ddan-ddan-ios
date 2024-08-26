@@ -64,7 +64,7 @@ struct SignUpCalorieView: View {
                 }
             }
             .navigationDestination(isPresented: $nextButtonTapped) {
-                
+                SignUpSuccessView()
             }
         }
     }

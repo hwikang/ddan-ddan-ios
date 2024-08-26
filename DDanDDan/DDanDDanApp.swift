@@ -17,14 +17,13 @@ struct DDanDDanApp: App {
     var body: some Scene {
         
         WindowGroup {
-          
-            OnboardingView()
-                .onOpenURL { url in
-                    if (AuthApi.isKakaoTalkLoginUrl(url)) {
-                        _ = AuthController.handleOpenUrl(url: url)
-                    }
-                }
-            
+            if UserDefaultValue.acessToken != nil {
+                //TODO: 메인 연결
+            } else if UserDefaultValue.needToShowOnboarding {
+                OnboardingView()
+            } else {
+                SignUpView()
+            }
             
         }
     }
