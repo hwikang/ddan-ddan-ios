@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3628649C2C89CA2000029452 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 362864932C89CA1E00029452 /* Pretendard-Medium.otf */; };
+		3628649D2C89CA2000029452 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 362864942C89CA1F00029452 /* Pretendard-Regular.otf */; };
+		3628649F2C89CA2000029452 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 362864962C89CA1F00029452 /* Pretendard-SemiBold.otf */; };
+		362864A12C89CA2000029452 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 362864982C89CA1F00029452 /* Pretendard-Bold.otf */; };
+		362864A52C89CA4100029452 /* neodgm.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 362864A42C89CA4100029452 /* neodgm.ttf */; };
+		362864A82C89D64100029452 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362864A72C89D64100029452 /* Font.swift */; };
 		F827E5592C748CBC00C5B320 /* SignUpNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */; };
 		F8311F992C7060E8000455ED /* GreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8311F982C7060E8000455ED /* GreenButton.swift */; };
 		F859C0482C7068DF007B886A /* SignUpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F859C0472C7068DF007B886A /* SignUpData.swift */; };
@@ -27,6 +33,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		362864932C89CA1E00029452 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		362864942C89CA1F00029452 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		362864962C89CA1F00029452 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		362864982C89CA1F00029452 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		362864A42C89CA4100029452 /* neodgm.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = neodgm.ttf; sourceTree = "<group>"; };
+		362864A62C89D5D900029452 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		362864A72C89D64100029452 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameView.swift; sourceTree = "<group>"; };
 		F8311F982C7060E8000455ED /* GreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenButton.swift; sourceTree = "<group>"; };
 		F859C0472C7068DF007B886A /* SignUpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpData.swift; sourceTree = "<group>"; };
@@ -58,6 +71,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		362864902C89BF9900029452 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				F8AB33312C2EAD2F00BC16C9 /* Assets.xcassets */,
+				362864912C89BFA700029452 /* Fonts */,
+				362864A72C89D64100029452 /* Font.swift */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		362864912C89BFA700029452 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				362864A42C89CA4100029452 /* neodgm.ttf */,
+				362864982C89CA1F00029452 /* Pretendard-Bold.otf */,
+				362864932C89CA1E00029452 /* Pretendard-Medium.otf */,
+				362864942C89CA1F00029452 /* Pretendard-Regular.otf */,
+				362864962C89CA1F00029452 /* Pretendard-SemiBold.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		F8311F952C7060B3000455ED /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +136,8 @@
 		F8AB332C2C2EAD2E00BC16C9 /* DDanDDan */ = {
 			isa = PBXGroup;
 			children = (
+				362864A62C89D5D900029452 /* Info.plist */,
+				362864902C89BF9900029452 /* Resource */,
 				F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */,
 				F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */,
 				F85C2BA32C4CD651002E2237 /* UserDefault.swift */,
@@ -109,7 +146,6 @@
 				F8C10C142C57950D0037D6A5 /* SignUp */,
 				F85C2B9F2C4CBF6B002E2237 /* DialogView.swift */,
 				F8C8E71E2C42AFD00052EA9F /* HealthKitManager.swift */,
-				F8AB33312C2EAD2F00BC16C9 /* Assets.xcassets */,
 				F8AB33332C2EAD2F00BC16C9 /* Preview Content */,
 			);
 			path = DDanDDan;
@@ -202,7 +238,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8AB33352C2EAD2F00BC16C9 /* Preview Assets.xcassets in Resources */,
+				362864A52C89CA4100029452 /* neodgm.ttf in Resources */,
+				3628649F2C89CA2000029452 /* Pretendard-SemiBold.otf in Resources */,
+				3628649D2C89CA2000029452 /* Pretendard-Regular.otf in Resources */,
 				F8AB33322C2EAD2F00BC16C9 /* Assets.xcassets in Resources */,
+				3628649C2C89CA2000029452 /* Pretendard-Medium.otf in Resources */,
+				362864A12C89CA2000029452 /* Pretendard-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +256,7 @@
 			files = (
 				F859C04A2C706A2D007B886A /* SignUpEggView.swift in Sources */,
 				F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */,
+				362864A82C89D64100029452 /* Font.swift in Sources */,
 				F8311F992C7060E8000455ED /* GreenButton.swift in Sources */,
 				F85C2BA42C4CD651002E2237 /* UserDefault.swift in Sources */,
 				F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */,
@@ -362,6 +404,7 @@
 				DEVELOPMENT_TEAM = L3B9L4FDBB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DDanDDan/Info.plist;
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
@@ -398,6 +441,7 @@
 				DEVELOPMENT_TEAM = L3B9L4FDBB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DDanDDan/Info.plist;
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
