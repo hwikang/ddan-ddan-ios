@@ -1,0 +1,502 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F827E5592C748CBC00C5B320 /* SignUpNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */; };
+		F8311F992C7060E8000455ED /* GreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8311F982C7060E8000455ED /* GreenButton.swift */; };
+		F859C0482C7068DF007B886A /* SignUpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F859C0472C7068DF007B886A /* SignUpData.swift */; };
+		F859C04A2C706A2D007B886A /* SignUpEggView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F859C0492C706A2D007B886A /* SignUpEggView.swift */; };
+		F85C2BA02C4CBF6B002E2237 /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C2B9F2C4CBF6B002E2237 /* DialogView.swift */; };
+		F85C2BA42C4CD651002E2237 /* UserDefaultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C2BA32C4CD651002E2237 /* UserDefaultValue.swift */; };
+		F89A2EB92C7C7F0500FE3A36 /* SignUpSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */; };
+		F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */; };
+		F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */; };
+		F8AB33322C2EAD2F00BC16C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8AB33312C2EAD2F00BC16C9 /* Assets.xcassets */; };
+		F8AB33352C2EAD2F00BC16C9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8AB33342C2EAD2F00BC16C9 /* Preview Assets.xcassets */; };
+		F8C10C0D2C5782720037D6A5 /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = F8C10C0C2C5782720037D6A5 /* KakaoSDK */; };
+		F8C10C0F2C5782720037D6A5 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F8C10C0E2C5782720037D6A5 /* KakaoSDKAuth */; };
+		F8C10C112C5782720037D6A5 /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = F8C10C102C5782720037D6A5 /* KakaoSDKCommon */; };
+		F8C10C132C5782720037D6A5 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = F8C10C122C5782720037D6A5 /* KakaoSDKUser */; };
+		F8C10C182C57955C0037D6A5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C10C172C57955C0037D6A5 /* SignUpView.swift */; };
+		F8C10C1A2C57970B0037D6A5 /* SignUpTermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C10C192C57970B0037D6A5 /* SignUpTermView.swift */; };
+		F8C8E71F2C42AFD00052EA9F /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C8E71E2C42AFD00052EA9F /* HealthKitManager.swift */; };
+		F8FD4FAE2C7A09F900147C4F /* SignUpCalorieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FD4FAD2C7A09F900147C4F /* SignUpCalorieView.swift */; };
+		F8FD4FB02C7A0FF600147C4F /* SignUpCalorieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FD4FAF2C7A0FF600147C4F /* SignUpCalorieViewModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameView.swift; sourceTree = "<group>"; };
+		F8311F982C7060E8000455ED /* GreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenButton.swift; sourceTree = "<group>"; };
+		F859C0472C7068DF007B886A /* SignUpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpData.swift; sourceTree = "<group>"; };
+		F859C0492C706A2D007B886A /* SignUpEggView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEggView.swift; sourceTree = "<group>"; };
+		F85C2B9F2C4CBF6B002E2237 /* DialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogView.swift; sourceTree = "<group>"; };
+		F85C2BA32C4CD651002E2237 /* UserDefaultValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultValue.swift; sourceTree = "<group>"; };
+		F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSuccessView.swift; sourceTree = "<group>"; };
+		F8AB332A2C2EAD2E00BC16C9 /* DDanDDan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDanDDan.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDanDDanApp.swift; sourceTree = "<group>"; };
+		F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		F8AB33312C2EAD2F00BC16C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F8AB33342C2EAD2F00BC16C9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F8C10C172C57955C0037D6A5 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpView.swift; path = DDanDDan/SignUpView.swift; sourceTree = SOURCE_ROOT; };
+		F8C10C192C57970B0037D6A5 /* SignUpTermView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTermView.swift; sourceTree = "<group>"; };
+		F8C8E71E2C42AFD00052EA9F /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		F8FD4FAD2C7A09F900147C4F /* SignUpCalorieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCalorieView.swift; sourceTree = "<group>"; };
+		F8FD4FAF2C7A0FF600147C4F /* SignUpCalorieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCalorieViewModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F8AB33272C2EAD2E00BC16C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8C10C132C5782720037D6A5 /* KakaoSDKUser in Frameworks */,
+				F8C10C0D2C5782720037D6A5 /* KakaoSDK in Frameworks */,
+				F8C10C112C5782720037D6A5 /* KakaoSDKCommon in Frameworks */,
+				F8C10C0F2C5782720037D6A5 /* KakaoSDKAuth in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F8311F952C7060B3000455ED /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F8311F982C7060E8000455ED /* GreenButton.swift */,
+				F85C2B9F2C4CBF6B002E2237 /* DialogView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		F8311F9A2C7068C4000455ED /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				F859C0462C7068D6007B886A /* SignUp */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		F859C0462C7068D6007B886A /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				F859C0472C7068DF007B886A /* SignUpData.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		F89A2EBA2C7C80AF00FE3A36 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				F85C2BA32C4CD651002E2237 /* UserDefaultValue.swift */,
+				F8C8E71E2C42AFD00052EA9F /* HealthKitManager.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		F8AB33212C2EAD2E00BC16C9 = {
+			isa = PBXGroup;
+			children = (
+				F8AB332C2C2EAD2E00BC16C9 /* DDanDDan */,
+				F8AB332B2C2EAD2E00BC16C9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F8AB332B2C2EAD2E00BC16C9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F8AB332A2C2EAD2E00BC16C9 /* DDanDDan.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F8AB332C2C2EAD2E00BC16C9 /* DDanDDan */ = {
+			isa = PBXGroup;
+			children = (
+				F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */,
+				F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */,
+				F89A2EBA2C7C80AF00FE3A36 /* Util */,
+				F8311F9A2C7068C4000455ED /* Entity */,
+				F8311F952C7060B3000455ED /* Components */,
+				F8C10C142C57950D0037D6A5 /* SignUp */,
+				F8AB33312C2EAD2F00BC16C9 /* Assets.xcassets */,
+				F8AB33332C2EAD2F00BC16C9 /* Preview Content */,
+			);
+			path = DDanDDan;
+			sourceTree = "<group>";
+		};
+		F8AB33332C2EAD2F00BC16C9 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				F8AB33342C2EAD2F00BC16C9 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F8C10C142C57950D0037D6A5 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				F8C10C172C57955C0037D6A5 /* SignUpView.swift */,
+				F8C10C192C57970B0037D6A5 /* SignUpTermView.swift */,
+				F859C0492C706A2D007B886A /* SignUpEggView.swift */,
+				F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */,
+				F8FD4FAD2C7A09F900147C4F /* SignUpCalorieView.swift */,
+				F8FD4FAF2C7A0FF600147C4F /* SignUpCalorieViewModel.swift */,
+				F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F8AB33292C2EAD2E00BC16C9 /* DDanDDan */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F8AB33382C2EAD2F00BC16C9 /* Build configuration list for PBXNativeTarget "DDanDDan" */;
+			buildPhases = (
+				F8AB33262C2EAD2E00BC16C9 /* Sources */,
+				F8AB33272C2EAD2E00BC16C9 /* Frameworks */,
+				F8AB33282C2EAD2E00BC16C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DDanDDan;
+			packageProductDependencies = (
+				F8C10C0C2C5782720037D6A5 /* KakaoSDK */,
+				F8C10C0E2C5782720037D6A5 /* KakaoSDKAuth */,
+				F8C10C102C5782720037D6A5 /* KakaoSDKCommon */,
+				F8C10C122C5782720037D6A5 /* KakaoSDKUser */,
+			);
+			productName = DDanDDan;
+			productReference = F8AB332A2C2EAD2E00BC16C9 /* DDanDDan.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F8AB33222C2EAD2E00BC16C9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = {
+					F8AB33292C2EAD2E00BC16C9 = {
+						CreatedOnToolsVersion = 15.3;
+					};
+				};
+			};
+			buildConfigurationList = F8AB33252C2EAD2E00BC16C9 /* Build configuration list for PBXProject "DDanDDan" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F8AB33212C2EAD2E00BC16C9;
+			packageReferences = (
+				F8C10C0B2C5782720037D6A5 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+			);
+			productRefGroup = F8AB332B2C2EAD2E00BC16C9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F8AB33292C2EAD2E00BC16C9 /* DDanDDan */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F8AB33282C2EAD2E00BC16C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8AB33352C2EAD2F00BC16C9 /* Preview Assets.xcassets in Resources */,
+				F8AB33322C2EAD2F00BC16C9 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F8AB33262C2EAD2E00BC16C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F859C04A2C706A2D007B886A /* SignUpEggView.swift in Sources */,
+				F8FD4FB02C7A0FF600147C4F /* SignUpCalorieViewModel.swift in Sources */,
+				F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */,
+				F8FD4FAE2C7A09F900147C4F /* SignUpCalorieView.swift in Sources */,
+				F8311F992C7060E8000455ED /* GreenButton.swift in Sources */,
+				F85C2BA42C4CD651002E2237 /* UserDefaultValue.swift in Sources */,
+				F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */,
+				F859C0482C7068DF007B886A /* SignUpData.swift in Sources */,
+				F8C10C182C57955C0037D6A5 /* SignUpView.swift in Sources */,
+				F827E5592C748CBC00C5B320 /* SignUpNicknameView.swift in Sources */,
+				F89A2EB92C7C7F0500FE3A36 /* SignUpSuccessView.swift in Sources */,
+				F85C2BA02C4CBF6B002E2237 /* DialogView.swift in Sources */,
+				F8C8E71F2C42AFD00052EA9F /* HealthKitManager.swift in Sources */,
+				F8C10C1A2C57970B0037D6A5 /* SignUpTermView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F8AB33362C2EAD2F00BC16C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F8AB33372C2EAD2F00BC16C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F8AB33392C2EAD2F00BC16C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DDanDDan/DDanDDan.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"DDanDDan/Preview Content\"";
+				DEVELOPMENT_TEAM = L3B9L4FDBB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = inc.ddanddan.DDanDDan;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F8AB333A2C2EAD2F00BC16C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DDanDDan/DDanDDan.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"DDanDDan/Preview Content\"";
+				DEVELOPMENT_TEAM = L3B9L4FDBB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = inc.ddanddan.DDanDDan;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F8AB33252C2EAD2E00BC16C9 /* Build configuration list for PBXProject "DDanDDan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F8AB33362C2EAD2F00BC16C9 /* Debug */,
+				F8AB33372C2EAD2F00BC16C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F8AB33382C2EAD2F00BC16C9 /* Build configuration list for PBXNativeTarget "DDanDDan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F8AB33392C2EAD2F00BC16C9 /* Debug */,
+				F8AB333A2C2EAD2F00BC16C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F8C10C0B2C5782720037D6A5 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.22.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F8C10C0C2C5782720037D6A5 /* KakaoSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8C10C0B2C5782720037D6A5 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDK;
+		};
+		F8C10C0E2C5782720037D6A5 /* KakaoSDKAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8C10C0B2C5782720037D6A5 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKAuth;
+		};
+		F8C10C102C5782720037D6A5 /* KakaoSDKCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8C10C0B2C5782720037D6A5 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCommon;
+		};
+		F8C10C122C5782720037D6A5 /* KakaoSDKUser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8C10C0B2C5782720037D6A5 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKUser;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = F8AB33222C2EAD2E00BC16C9 /* Project object */;
+}
