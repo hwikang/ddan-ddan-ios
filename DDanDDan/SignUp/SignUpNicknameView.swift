@@ -57,7 +57,7 @@ struct SignUpNicknameView: View {
                 }
             }
             .navigationDestination(isPresented: $nextButtonTapped) {
-                
+                SignUpCalorieView(signUpData: signUpData, viewModel: SignUpCalorieViewModel())
             }
         }
     }

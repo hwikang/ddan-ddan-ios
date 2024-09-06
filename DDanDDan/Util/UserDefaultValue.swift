@@ -8,8 +8,17 @@
 import Foundation
 
 public struct UserDefaultValue {
+    //Auth
+    @UserDefault(key: "acessToken", defaultValue: nil)
+    static public var acessToken: String?  
+    @UserDefault(key: "refreshToken", defaultValue: nil)
+    static public var refreshToken: String?
+    
     @UserDefault(key: "requestAuthDone", defaultValue: false)
     static public var requestAuthDone: Bool
+    @UserDefault(key: "needToShowOnboarding", defaultValue: true)
+    static public var needToShowOnboarding: Bool
+
 }
 
 @propertyWrapper
