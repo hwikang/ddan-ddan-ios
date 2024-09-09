@@ -17,12 +17,13 @@
 		F8311F992C7060E8000455ED /* GreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8311F982C7060E8000455ED /* GreenButton.swift */; };
 		F859C0482C7068DF007B886A /* SignUpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F859C0472C7068DF007B886A /* SignUpData.swift */; };
 		F859C04A2C706A2D007B886A /* SignUpEggView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F859C0492C706A2D007B886A /* SignUpEggView.swift */; };
-		F85C2BA02C4CBF6B002E2237 /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C2B9F2C4CBF6B002E2237 /* DialogView.swift */; };
 		F85C2BA42C4CD651002E2237 /* UserDefaultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C2BA32C4CD651002E2237 /* UserDefaultValue.swift */; };
+		F8758CEF2C8EDF630038CCBB /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8758CEE2C8EDF630038CCBB /* DialogView.swift */; };
+		F8758CF12C8EDF6B0038CCBB /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8758CF02C8EDF6B0038CCBB /* HealthKitManager.swift */; };
+		F8758CF32C8EE1F60038CCBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8758CF22C8EE1F60038CCBB /* Assets.xcassets */; };
 		F89A2EB92C7C7F0500FE3A36 /* SignUpSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */; };
 		F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */; };
 		F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */; };
-		F8AB33322C2EAD2F00BC16C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8AB33312C2EAD2F00BC16C9 /* Assets.xcassets */; };
 		F8AB33352C2EAD2F00BC16C9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8AB33342C2EAD2F00BC16C9 /* Preview Assets.xcassets */; };
 		F8C10C0D2C5782720037D6A5 /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = F8C10C0C2C5782720037D6A5 /* KakaoSDK */; };
 		F8C10C0F2C5782720037D6A5 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F8C10C0E2C5782720037D6A5 /* KakaoSDKAuth */; };
@@ -30,7 +31,6 @@
 		F8C10C132C5782720037D6A5 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = F8C10C122C5782720037D6A5 /* KakaoSDKUser */; };
 		F8C10C182C57955C0037D6A5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C10C172C57955C0037D6A5 /* SignUpView.swift */; };
 		F8C10C1A2C57970B0037D6A5 /* SignUpTermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C10C192C57970B0037D6A5 /* SignUpTermView.swift */; };
-		F8C8E71F2C42AFD00052EA9F /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C8E71E2C42AFD00052EA9F /* HealthKitManager.swift */; };
 		F8FD4FAE2C7A09F900147C4F /* SignUpCalorieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FD4FAD2C7A09F900147C4F /* SignUpCalorieView.swift */; };
 		F8FD4FB02C7A0FF600147C4F /* SignUpCalorieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FD4FAF2C7A0FF600147C4F /* SignUpCalorieViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -47,17 +47,17 @@
 		F8311F982C7060E8000455ED /* GreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenButton.swift; sourceTree = "<group>"; };
 		F859C0472C7068DF007B886A /* SignUpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpData.swift; sourceTree = "<group>"; };
 		F859C0492C706A2D007B886A /* SignUpEggView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEggView.swift; sourceTree = "<group>"; };
-		F85C2B9F2C4CBF6B002E2237 /* DialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogView.swift; sourceTree = "<group>"; };
 		F85C2BA32C4CD651002E2237 /* UserDefaultValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultValue.swift; sourceTree = "<group>"; };
+		F8758CEE2C8EDF630038CCBB /* DialogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogView.swift; sourceTree = "<group>"; };
+		F8758CF02C8EDF6B0038CCBB /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		F8758CF22C8EE1F60038CCBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSuccessView.swift; sourceTree = "<group>"; };
 		F8AB332A2C2EAD2E00BC16C9 /* DDanDDan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDanDDan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDanDDanApp.swift; sourceTree = "<group>"; };
 		F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
-		F8AB33312C2EAD2F00BC16C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F8AB33342C2EAD2F00BC16C9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F8C10C172C57955C0037D6A5 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpView.swift; path = DDanDDan/SignUpView.swift; sourceTree = SOURCE_ROOT; };
 		F8C10C192C57970B0037D6A5 /* SignUpTermView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTermView.swift; sourceTree = "<group>"; };
-		F8C8E71E2C42AFD00052EA9F /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		F8FD4FAD2C7A09F900147C4F /* SignUpCalorieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCalorieView.swift; sourceTree = "<group>"; };
 		F8FD4FAF2C7A0FF600147C4F /* SignUpCalorieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCalorieViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -80,7 +80,7 @@
 		362864902C89BF9900029452 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				F8AB33312C2EAD2F00BC16C9 /* Assets.xcassets */,
+				F8758CF22C8EE1F60038CCBB /* Assets.xcassets */,
 				362864912C89BFA700029452 /* Fonts */,
 				362864A72C89D64100029452 /* Font.swift */,
 			);
@@ -102,8 +102,8 @@
 		F8311F952C7060B3000455ED /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				F8758CEE2C8EDF630038CCBB /* DialogView.swift */,
 				F8311F982C7060E8000455ED /* GreenButton.swift */,
-				F85C2B9F2C4CBF6B002E2237 /* DialogView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -127,8 +127,8 @@
 		F89A2EBA2C7C80AF00FE3A36 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				F8758CF02C8EDF6B0038CCBB /* HealthKitManager.swift */,
 				F85C2BA32C4CD651002E2237 /* UserDefaultValue.swift */,
-				F8C8E71E2C42AFD00052EA9F /* HealthKitManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -160,9 +160,6 @@
 				F8311F9A2C7068C4000455ED /* Entity */,
 				F8311F952C7060B3000455ED /* Components */,
 				F8C10C142C57950D0037D6A5 /* SignUp */,
-				F85C2B9F2C4CBF6B002E2237 /* DialogView.swift */,
-				F8C8E71E2C42AFD00052EA9F /* HealthKitManager.swift */,
-				F8AB33312C2EAD2F00BC16C9 /* Assets.xcassets */,
 				F8AB33332C2EAD2F00BC16C9 /* Preview Content */,
 			);
 			path = DDanDDan;
@@ -261,8 +258,8 @@
 				3628649F2C89CA2000029452 /* Pretendard-SemiBold.otf in Resources */,
 				362864BA2C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf in Resources */,
 				3628649D2C89CA2000029452 /* Pretendard-Regular.otf in Resources */,
-				F8AB33322C2EAD2F00BC16C9 /* Assets.xcassets in Resources */,
 				3628649C2C89CA2000029452 /* Pretendard-Medium.otf in Resources */,
+				F8758CF32C8EE1F60038CCBB /* Assets.xcassets in Resources */,
 				362864A12C89CA2000029452 /* Pretendard-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,14 +277,14 @@
 				362864A82C89D64100029452 /* Font.swift in Sources */,
 				F8FD4FAE2C7A09F900147C4F /* SignUpCalorieView.swift in Sources */,
 				F8311F992C7060E8000455ED /* GreenButton.swift in Sources */,
+				F8758CEF2C8EDF630038CCBB /* DialogView.swift in Sources */,
 				F85C2BA42C4CD651002E2237 /* UserDefaultValue.swift in Sources */,
 				F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */,
 				F859C0482C7068DF007B886A /* SignUpData.swift in Sources */,
 				F8C10C182C57955C0037D6A5 /* SignUpView.swift in Sources */,
+				F8758CF12C8EDF6B0038CCBB /* HealthKitManager.swift in Sources */,
 				F827E5592C748CBC00C5B320 /* SignUpNicknameView.swift in Sources */,
 				F89A2EB92C7C7F0500FE3A36 /* SignUpSuccessView.swift in Sources */,
-				F85C2BA02C4CBF6B002E2237 /* DialogView.swift in Sources */,
-				F8C8E71F2C42AFD00052EA9F /* HealthKitManager.swift in Sources */,
 				F8C10C1A2C57970B0037D6A5 /* SignUpTermView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
