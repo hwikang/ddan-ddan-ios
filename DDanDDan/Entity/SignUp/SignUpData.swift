@@ -7,7 +7,7 @@
 
 import Foundation
 import KakaoSDKUser
-struct SignUpData {
+public struct SignUpData {
     var kakaoUser: User?
     var selectedEgg: String?
     var nickname: String?

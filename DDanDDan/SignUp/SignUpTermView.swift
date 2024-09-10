@@ -8,69 +8,65 @@
 import SwiftUI
 import Combine
 
-struct SignUpTermView: View {
+public struct SignUpTermView: View {
     @State private var serviceTermAgree: Bool = false
     @State private var privacyTermAgree: Bool = false
     @State private var buttonDisabled: Bool = true
-    @State private var nextButtonTapped: Bool = false
     
-    @State private var signUpData: SignUpData
-    public init(signUpData: SignUpData) {
+    @State public var signUpData: SignUpData
+    @Binding public var path: [SignUpPath]
+    
+    public var body: some View {
         
-        self.signUpData = signUpData
-    }
-    var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.black.edgesIgnoringSafeArea(.all)
+        ZStack {
+            Color.black.edgesIgnoringSafeArea(.all)
+            VStack(alignment: .leading) {
                 VStack(alignment: .leading) {
-                    VStack(alignment: .leading) {
-                        
-                        Text("딴딴에 오신 것을 환영합니다")
-                            .font(.system(size: 24, weight: .bold))
-                            .foregroundStyle(.white)
-                        
-                            .padding(.top, 80)
-                        Text("서비스 시작 및 가입을 위해 먼저\n가입 및 정보 제공에 동의해 주세요.")
-                            .font(.system(size: 16))
-                            .foregroundStyle(.gray)
-                            .padding(.top, 8)
-                        Button {
-                            let isAllAgree = serviceTermAgree && privacyTermAgree
-                            buttonDisabled = isAllAgree
-                            serviceTermAgree = !isAllAgree
-                            privacyTermAgree = !isAllAgree
-                        } label: {
-                            let image = serviceTermAgree && privacyTermAgree ? "checkboxCircleSelected" : "checkboxCircle"
-                            Label("전체동의", image: image)
-                                .foregroundColor(.gray)
-                                .font(.system(size: 16, weight: .bold))
-                        }
-                        TermButton(title: "서비스 이용약관", imageName: serviceTermAgree ? "checkboxSelected" :"checkbox", pointTitle: "(필수)") {
-                            serviceTermAgree.toggle()
-                        } viewTerm: {
-                            print("term")
-                        }
-                        .padding(.top, 12)
-                        TermButton(title: "개인정보 처리방침", imageName:privacyTermAgree ? "checkboxSelected" :"checkbox", pointTitle: "(필수)") {
-                            privacyTermAgree.toggle()
-                        }viewTerm: {
-                            print("term")
-                        }
-                        .padding(.top, 12)
-                    }.frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal, 20)
                     
-                    Spacer()
+                    Text("딴딴에 오신 것을 환영합니다")
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundStyle(.white)
                     
-                    GreenButton(action: {
-                        nextButtonTapped = true
-                    }, title: "시작하기", disabled: $buttonDisabled)
-                    
-                }
+                        .padding(.top, 80)
+                    Text("서비스 시작 및 가입을 위해 먼저\n가입 및 정보 제공에 동의해 주세요.")
+                        .font(.system(size: 16))
+                        .foregroundStyle(.gray)
+                        .padding(.top, 8)
+                    Button {
+                        let isAllAgree = serviceTermAgree && privacyTermAgree
+                        buttonDisabled = isAllAgree
+                        serviceTermAgree = !isAllAgree
+                        privacyTermAgree = !isAllAgree
+                    } label: {
+                        let image = serviceTermAgree && privacyTermAgree ? "checkboxCircleSelected" : "checkboxCircle"
+                        Label("전체동의", image: image)
+                            .foregroundColor(.gray)
+                            .font(.system(size: 16, weight: .bold))
+                    }
+                    TermButton(title: "서비스 이용약관", imageName: serviceTermAgree ? "checkboxSelected" :"checkbox", pointTitle: "(필수)") {
+                        serviceTermAgree.toggle()
+                    } viewTerm: {
+                        //TODO: 약관
+                        print("term")
+                    }
+                    .padding(.top, 12)
+                    TermButton(title: "개인정보 처리방침", imageName:privacyTermAgree ? "checkboxSelected" :"checkbox", pointTitle: "(필수)") {
+                        privacyTermAgree.toggle()
+                    }viewTerm: {
+                        //TODO: 약관
+                        print("term")
+                    }
+                    .padding(.top, 12)
+                }.frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 20)
                 
-            }.navigationDestination(isPresented: $nextButtonTapped) {
-                SignUpEggView(signUpData: signUpData)
+                Spacer()
+                
+                GreenButton(action: {
+                    path.append(.egg)
+                    print(path)
+                }, title: "시작하기", disabled: $buttonDisabled)
+                
             }
         }
     }
@@ -115,6 +111,6 @@ struct TermButton: View {
 }
 
 #Preview {
-    SignUpTermView(signUpData: .init())
+    SignUpTermView(signUpData: .init(), path: .constant([]))
 }
 

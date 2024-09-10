@@ -7,48 +7,39 @@
 
 import SwiftUI
 
-struct SignUpEggView: View {
+public struct SignUpEggView: View {
     @State private var buttonDisabled: Bool = true
-    @State private var signUpData: SignUpData
+    @State public var signUpData: SignUpData
     @State private var selectedEgg: String? = nil
-    @State private var nextButtonTapped: Bool = false
+    @Binding public var path: [SignUpPath]
     
-    public init(signUpData: SignUpData) {
-        
-        self.signUpData = signUpData
-    }
-    var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.black.edgesIgnoringSafeArea(.all)
-                VStack(alignment: .leading) {
-                    
-                    Text("마음에 드는\n알을 선택해 주세요")
-                        .font(.system(size: 24, weight: .bold))
-                        .foregroundStyle(.white)
-                        .padding(.top, 80)
-                        .padding(.horizontal, 20)
-                    HStack(alignment: .center) {
-                        Spacer()
-                        eggGrid
-                        Spacer()
-                    }
-                    
+    public var body: some View {
+        ZStack {
+            Color.black.edgesIgnoringSafeArea(.all)
+            VStack(alignment: .leading) {
+                
+                Text("마음에 드는\n알을 선택해 주세요")
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundStyle(.white)
+                    .padding(.top, 80)
+                    .padding(.horizontal, 20)
+                HStack(alignment: .center) {
                     Spacer()
-                    
-                    GreenButton(action: {
-                        signUpData.selectedEgg = selectedEgg
-                        nextButtonTapped = true
-                    }, title: "다음", disabled: $buttonDisabled)
-                    .onChange(of: selectedEgg) { newValue in
-                        buttonDisabled = selectedEgg == nil
-                    }
-                    
+                    eggGrid
+                    Spacer()
                 }
-            }.navigationDestination(isPresented: $nextButtonTapped) {
-                SignUpNicknameView(signUpData: signUpData)
+                
+                Spacer()
+                
+                GreenButton(action: {
+                    signUpData.selectedEgg = selectedEgg
+                    path.append(.nickname)
+                }, title: "다음", disabled: $buttonDisabled)
+                .onChange(of: selectedEgg) { newValue in
+                    buttonDisabled = selectedEgg == nil
+                }
+                
             }
-            
         }
     }
     
@@ -84,5 +75,5 @@ struct EggItem: View {
 }
 
 #Preview {
-    SignUpEggView(signUpData: .init())
+    SignUpEggView(signUpData: .init(), path: .constant([]))
 }

@@ -15,6 +15,7 @@
 		362864BA2C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 362864B92C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf */; };
 		F827E5592C748CBC00C5B320 /* SignUpNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */; };
 		F8311F992C7060E8000455ED /* GreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8311F982C7060E8000455ED /* GreenButton.swift */; };
+		F84B21C52C90227A009FE6F3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84B21C42C90227A009FE6F3 /* SettingView.swift */; };
 		F859C0482C7068DF007B886A /* SignUpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F859C0472C7068DF007B886A /* SignUpData.swift */; };
 		F859C04A2C706A2D007B886A /* SignUpEggView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F859C0492C706A2D007B886A /* SignUpEggView.swift */; };
 		F85C2BA42C4CD651002E2237 /* UserDefaultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C2BA32C4CD651002E2237 /* UserDefaultValue.swift */; };
@@ -45,6 +46,7 @@
 		362864B92C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeoDunggeunmoPro-Regular.ttf"; sourceTree = "<group>"; };
 		F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameView.swift; sourceTree = "<group>"; };
 		F8311F982C7060E8000455ED /* GreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenButton.swift; sourceTree = "<group>"; };
+		F84B21C42C90227A009FE6F3 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		F859C0472C7068DF007B886A /* SignUpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpData.swift; sourceTree = "<group>"; };
 		F859C0492C706A2D007B886A /* SignUpEggView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEggView.swift; sourceTree = "<group>"; };
 		F85C2BA32C4CD651002E2237 /* UserDefaultValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultValue.swift; sourceTree = "<group>"; };
@@ -116,6 +118,30 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		F84B21C12C9021CE009FE6F3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F8FD4FAF2C7A0FF600147C4F /* SignUpCalorieViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F84B21C22C902255009FE6F3 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		F84B21C32C902270009FE6F3 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				F84B21C42C90227A009FE6F3 /* SettingView.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		F859C0462C7068D6007B886A /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,14 +178,15 @@
 		F8AB332C2C2EAD2E00BC16C9 /* DDanDDan */ = {
 			isa = PBXGroup;
 			children = (
+				F84B21C32C902270009FE6F3 /* Setting */,
 				362864AF2C89E76200029452 /* Info.plist */,
 				362864902C89BF9900029452 /* Resource */,
 				F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */,
-				F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */,
 				F89A2EBA2C7C80AF00FE3A36 /* Util */,
 				F8311F9A2C7068C4000455ED /* Entity */,
 				F8311F952C7060B3000455ED /* Components */,
 				F8C10C142C57950D0037D6A5 /* SignUp */,
+				F84B21C22C902255009FE6F3 /* Onboarding */,
 				F8AB33332C2EAD2F00BC16C9 /* Preview Content */,
 			);
 			path = DDanDDan;
@@ -181,8 +208,8 @@
 				F859C0492C706A2D007B886A /* SignUpEggView.swift */,
 				F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */,
 				F8FD4FAD2C7A09F900147C4F /* SignUpCalorieView.swift */,
-				F8FD4FAF2C7A0FF600147C4F /* SignUpCalorieViewModel.swift */,
 				F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */,
+				F84B21C12C9021CE009FE6F3 /* ViewModel */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -276,6 +303,7 @@
 				F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */,
 				362864A82C89D64100029452 /* Font.swift in Sources */,
 				F8FD4FAE2C7A09F900147C4F /* SignUpCalorieView.swift in Sources */,
+				F84B21C52C90227A009FE6F3 /* SettingView.swift in Sources */,
 				F8311F992C7060E8000455ED /* GreenButton.swift in Sources */,
 				F8758CEF2C8EDF630038CCBB /* DialogView.swift in Sources */,
 				F85C2BA42C4CD651002E2237 /* UserDefaultValue.swift in Sources */,
@@ -344,6 +372,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "딴딴_DEV";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -401,6 +430,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "딴딴";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -425,6 +455,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DDanDDan/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "딴딴_DEV";
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
@@ -462,6 +493,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DDanDDan/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "딴딴";
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "운동 데이터 기록을 위해 데이터 접근 권한이 필요합니다";

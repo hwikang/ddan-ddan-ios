@@ -15,8 +15,9 @@ struct SignUpCalorieViewModel {
         return true
     }
     
-    public func login() -> Bool {
+    public func login() async -> Bool {
         //TODO: login 요청 + 토큰 저장
+        UserDefaultValue.acessToken = "test-token"
         return true
     }
 }
