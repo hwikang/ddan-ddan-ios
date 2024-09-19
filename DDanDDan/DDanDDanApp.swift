@@ -19,6 +19,7 @@ struct DDanDDanApp: App {
         WindowGroup {
             if UserDefaultValue.acessToken != nil {
                 //TODO: 메인 연결
+                SettingView()
             } else if UserDefaultValue.needToShowOnboarding {
                 OnboardingView()
             } else {
