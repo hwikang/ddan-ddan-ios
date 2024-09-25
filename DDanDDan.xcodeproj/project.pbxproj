@@ -21,6 +21,7 @@
 		F80DF7392CB3DA2C004FF1F2 /* DeleteUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80DF7382CB3DA2C004FF1F2 /* DeleteUserView.swift */; };
 		F80DF73B2CB3DA38004FF1F2 /* DeleteUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80DF73A2CB3DA38004FF1F2 /* DeleteUserViewModel.swift */; };
 		F811A21E2C9D5A3200176086 /* UpdateNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F811A21D2C9D5A3200176086 /* UpdateNicknameView.swift */; };
+		36BAF1CF2CA4919C00BEBCE7 /* HomeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BAF1CE2CA4919C00BEBCE7 /* HomeButton.swift */; };
 		F827E5592C748CBC00C5B320 /* SignUpNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */; };
 		F8311F992C7060E8000455ED /* GreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8311F982C7060E8000455ED /* GreenButton.swift */; };
 		F84B21C52C90227A009FE6F3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84B21C42C90227A009FE6F3 /* SettingView.swift */; };
@@ -63,6 +64,7 @@
 		F80DF7382CB3DA2C004FF1F2 /* DeleteUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserView.swift; sourceTree = "<group>"; };
 		F80DF73A2CB3DA38004FF1F2 /* DeleteUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserViewModel.swift; sourceTree = "<group>"; };
 		F811A21D2C9D5A3200176086 /* UpdateNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNicknameView.swift; sourceTree = "<group>"; };
+		36BAF1CE2CA4919C00BEBCE7 /* HomeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButton.swift; sourceTree = "<group>"; };
 		F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameView.swift; sourceTree = "<group>"; };
 		F8311F982C7060E8000455ED /* GreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenButton.swift; sourceTree = "<group>"; };
 		F84B21C42C90227A009FE6F3 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 				F809E2FE2CBD0841001BE099 /* DeleteUserConfirmView.swift in Sources */,
 				F80DF7332CB384F8004FF1F2 /* SettingTermView.swift in Sources */,
 				F859C0482C7068DF007B886A /* SignUpData.swift in Sources */,
+				36BAF1CF2CA4919C00BEBCE7 /* HomeButton.swift in Sources */,
 				F8C10C182C57955C0037D6A5 /* SignUpView.swift in Sources */,
 				F809E2FC2CBD06A1001BE099 /* UserManager.swift in Sources */,
 				F8773BBD2CA541F4009A608F /* UpdateNicknameViewModel.swift in Sources */,
