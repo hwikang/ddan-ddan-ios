@@ -21,8 +21,10 @@
 		F80DF7392CB3DA2C004FF1F2 /* DeleteUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80DF7382CB3DA2C004FF1F2 /* DeleteUserView.swift */; };
 		F80DF73B2CB3DA38004FF1F2 /* DeleteUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80DF73A2CB3DA38004FF1F2 /* DeleteUserViewModel.swift */; };
 		F811A21E2C9D5A3200176086 /* UpdateNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F811A21D2C9D5A3200176086 /* UpdateNicknameView.swift */; };
+		36BAF1C72CA483BC00BEBCE7 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BAF1C62CA483BC00BEBCE7 /* HomeView.swift */; };
 		36BAF1CD2CA48BAE00BEBCE7 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BAF1CC2CA48BAE00BEBCE7 /* HomeModel.swift */; };
 		36BAF1CF2CA4919C00BEBCE7 /* HomeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BAF1CE2CA4919C00BEBCE7 /* HomeButton.swift */; };
+		36C1FE052CA4A4EC007CA188 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C1FE042CA4A4EC007CA188 /* HomeViewModel.swift */; };
 		F827E5592C748CBC00C5B320 /* SignUpNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */; };
 		F8311F992C7060E8000455ED /* GreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8311F982C7060E8000455ED /* GreenButton.swift */; };
 		F84B21C52C90227A009FE6F3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84B21C42C90227A009FE6F3 /* SettingView.swift */; };
@@ -65,8 +67,10 @@
 		F80DF7382CB3DA2C004FF1F2 /* DeleteUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserView.swift; sourceTree = "<group>"; };
 		F80DF73A2CB3DA38004FF1F2 /* DeleteUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserViewModel.swift; sourceTree = "<group>"; };
 		F811A21D2C9D5A3200176086 /* UpdateNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNicknameView.swift; sourceTree = "<group>"; };
+		36BAF1C62CA483BC00BEBCE7 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		36BAF1CC2CA48BAE00BEBCE7 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		36BAF1CE2CA4919C00BEBCE7 /* HomeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButton.swift; sourceTree = "<group>"; };
+		36C1FE042CA4A4EC007CA188 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameView.swift; sourceTree = "<group>"; };
 		F8311F982C7060E8000455ED /* GreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenButton.swift; sourceTree = "<group>"; };
 		F84B21C42C90227A009FE6F3 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -151,6 +155,23 @@
 				F80DF73A2CB3DA38004FF1F2 /* DeleteUserViewModel.swift */,
 			);
 			path = DeleteUser;
+			sourceTree = "<group>";
+		};
+		36BAF1CB2CA48B9600BEBCE7 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				36BAF1CC2CA48BAE00BEBCE7 /* HomeModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		36C1FE082CA4A83D007CA188 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				36BAF1C62CA483BC00BEBCE7 /* HomeView.swift */,
+				36C1FE042CA4A4EC007CA188 /* HomeViewModel.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		F8311F952C7060B3000455ED /* Components */ = {
@@ -260,6 +281,7 @@
 				F84B21C32C902270009FE6F3 /* Setting */,
 				362864AF2C89E76200029452 /* Info.plist */,
 				362864902C89BF9900029452 /* Resource */,
+				36C1FE082CA4A83D007CA188 /* Home */,
 				F89A2EBA2C7C80AF00FE3A36 /* Util */,
 				F8311F9A2C7068C4000455ED /* Entity */,
 				F8311F952C7060B3000455ED /* Components */,
@@ -376,6 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36C1FE052CA4A4EC007CA188 /* HomeViewModel.swift in Sources */,
 				F859C04A2C706A2D007B886A /* SignUpEggView.swift in Sources */,
 				F8FD4FB02C7A0FF600147C4F /* SignUpCalorieViewModel.swift in Sources */,
 				F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */,
@@ -403,6 +426,7 @@
 				F89A2EB92C7C7F0500FE3A36 /* SignUpSuccessView.swift in Sources */,
 				F80DF7392CB3DA2C004FF1F2 /* DeleteUserView.swift in Sources */,
 				F8773BC02CA54A02009A608F /* UpdateCalorieView.swift in Sources */,
+				36BAF1C72CA483BC00BEBCE7 /* HomeView.swift in Sources */,
 				F8C10C1A2C57970B0037D6A5 /* SignUpTermView.swift in Sources */,
 				F80DF7362CB38861004FF1F2 /* WebView.swift in Sources */,
 			);
