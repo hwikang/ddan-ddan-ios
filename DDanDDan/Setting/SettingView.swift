@@ -49,8 +49,9 @@ struct SettingView: View {
                 List(SettingPath.allCases, id: \.self) { item in
                     HStack(alignment: .firstTextBaseline) {
                         if item != .notification {
-                            Text(item.description)
-                                .background(NavigationLink("", destination: DetailView(item: "\(item)")).opacity(0))
+                            Button(item.description) {
+                                path.append(item)
+                            }
                         } else {
                             Text(item.description)
                         }
@@ -64,6 +65,9 @@ struct SettingView: View {
                     .foregroundStyle(.white)
                     .listRowBackground(Color.backgroundBlack)
                 }
+                .navigationDestination(for: SettingPath.self, destination: { type in
+                    getDestination(type: type)
+                })
                 
                 .listRowSeparator(.hidden)
                 .listStyle(.plain)
@@ -72,6 +76,15 @@ struct SettingView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
        
+    }
+    
+    private func getDestination(type: SettingPath) -> some View {
+        switch type {
+        case .updateNickname:
+            UpdateNicknameView(viewModel: UpdateNicknameViewModel(), path: $path)
+        default:
+            UpdateNicknameView(viewModel: UpdateNicknameViewModel(), path: $path)
+        }
     }
 }
 

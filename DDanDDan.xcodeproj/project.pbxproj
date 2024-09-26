@@ -13,6 +13,7 @@
 		362864A12C89CA2000029452 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 362864982C89CA1F00029452 /* Pretendard-Bold.otf */; };
 		362864A82C89D64100029452 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362864A72C89D64100029452 /* Font.swift */; };
 		362864BA2C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 362864B92C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf */; };
+		F811A21E2C9D5A3200176086 /* UpdateNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F811A21D2C9D5A3200176086 /* UpdateNicknameView.swift */; };
 		F827E5592C748CBC00C5B320 /* SignUpNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */; };
 		F8311F992C7060E8000455ED /* GreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8311F982C7060E8000455ED /* GreenButton.swift */; };
 		F84B21C52C90227A009FE6F3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84B21C42C90227A009FE6F3 /* SettingView.swift */; };
@@ -22,6 +23,7 @@
 		F8758CEF2C8EDF630038CCBB /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8758CEE2C8EDF630038CCBB /* DialogView.swift */; };
 		F8758CF12C8EDF6B0038CCBB /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8758CF02C8EDF6B0038CCBB /* HealthKitManager.swift */; };
 		F8758CF32C8EE1F60038CCBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8758CF22C8EE1F60038CCBB /* Assets.xcassets */; };
+		F8773BBD2CA541F4009A608F /* UpdateNicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8773BBC2CA541F4009A608F /* UpdateNicknameViewModel.swift */; };
 		F89A2EB92C7C7F0500FE3A36 /* SignUpSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */; };
 		F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */; };
 		F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */; };
@@ -44,6 +46,7 @@
 		362864A72C89D64100029452 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		362864AF2C89E76200029452 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		362864B92C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeoDunggeunmoPro-Regular.ttf"; sourceTree = "<group>"; };
+		F811A21D2C9D5A3200176086 /* UpdateNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNicknameView.swift; sourceTree = "<group>"; };
 		F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameView.swift; sourceTree = "<group>"; };
 		F8311F982C7060E8000455ED /* GreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenButton.swift; sourceTree = "<group>"; };
 		F84B21C42C90227A009FE6F3 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -53,6 +56,7 @@
 		F8758CEE2C8EDF630038CCBB /* DialogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogView.swift; sourceTree = "<group>"; };
 		F8758CF02C8EDF6B0038CCBB /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		F8758CF22C8EE1F60038CCBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F8773BBC2CA541F4009A608F /* UpdateNicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNicknameViewModel.swift; sourceTree = "<group>"; };
 		F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSuccessView.swift; sourceTree = "<group>"; };
 		F8AB332A2C2EAD2E00BC16C9 /* DDanDDan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDanDDan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDanDDanApp.swift; sourceTree = "<group>"; };
@@ -138,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				F84B21C42C90227A009FE6F3 /* SettingView.swift */,
+				F8773BBB2CA54194009A608F /* UpdateNickname */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -148,6 +153,15 @@
 				F859C0472C7068DF007B886A /* SignUpData.swift */,
 			);
 			path = SignUp;
+			sourceTree = "<group>";
+		};
+		F8773BBB2CA54194009A608F /* UpdateNickname */ = {
+			isa = PBXGroup;
+			children = (
+				F811A21D2C9D5A3200176086 /* UpdateNicknameView.swift */,
+				F8773BBC2CA541F4009A608F /* UpdateNicknameViewModel.swift */,
+			);
+			path = UpdateNickname;
 			sourceTree = "<group>";
 		};
 		F89A2EBA2C7C80AF00FE3A36 /* Util */ = {
@@ -307,9 +321,11 @@
 				F8311F992C7060E8000455ED /* GreenButton.swift in Sources */,
 				F8758CEF2C8EDF630038CCBB /* DialogView.swift in Sources */,
 				F85C2BA42C4CD651002E2237 /* UserDefaultValue.swift in Sources */,
+				F811A21E2C9D5A3200176086 /* UpdateNicknameView.swift in Sources */,
 				F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */,
 				F859C0482C7068DF007B886A /* SignUpData.swift in Sources */,
 				F8C10C182C57955C0037D6A5 /* SignUpView.swift in Sources */,
+				F8773BBD2CA541F4009A608F /* UpdateNicknameViewModel.swift in Sources */,
 				F8758CF12C8EDF6B0038CCBB /* HealthKitManager.swift in Sources */,
 				F827E5592C748CBC00C5B320 /* SignUpNicknameView.swift in Sources */,
 				F89A2EB92C7C7F0500FE3A36 /* SignUpSuccessView.swift in Sources */,
