@@ -28,7 +28,7 @@ struct UpdateNicknameView: View {
                         .padding(.top, 10)
                     TextField("별명을 입력해주세요", text: $viewModel.nickname)
                         .padding()
-                        .background(.gray)
+                        .background(.backgroundGray)
                         .foregroundColor(.white)
                         .frame(height: 48)
                         .cornerRadius(8)
@@ -55,5 +55,5 @@ struct UpdateNicknameView: View {
 }
 
 #Preview {
-    UpdateNicknameView(viewModel: UpdateNicknameViewModel(), path: .constant([]))
+    UpdateNicknameView(viewModel: UpdateNicknameViewModel(nickname: ""), path: .constant([]))
 }

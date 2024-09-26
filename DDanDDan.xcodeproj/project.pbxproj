@@ -24,6 +24,8 @@
 		F8758CF12C8EDF6B0038CCBB /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8758CF02C8EDF6B0038CCBB /* HealthKitManager.swift */; };
 		F8758CF32C8EE1F60038CCBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8758CF22C8EE1F60038CCBB /* Assets.xcassets */; };
 		F8773BBD2CA541F4009A608F /* UpdateNicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8773BBC2CA541F4009A608F /* UpdateNicknameViewModel.swift */; };
+		F8773BC02CA54A02009A608F /* UpdateCalorieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8773BBF2CA54A02009A608F /* UpdateCalorieView.swift */; };
+		F8773BC22CA54E49009A608F /* UpdateCalorieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8773BC12CA54E49009A608F /* UpdateCalorieViewModel.swift */; };
 		F89A2EB92C7C7F0500FE3A36 /* SignUpSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */; };
 		F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */; };
 		F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */; };
@@ -57,6 +59,8 @@
 		F8758CF02C8EDF6B0038CCBB /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		F8758CF22C8EE1F60038CCBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F8773BBC2CA541F4009A608F /* UpdateNicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNicknameViewModel.swift; sourceTree = "<group>"; };
+		F8773BBF2CA54A02009A608F /* UpdateCalorieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCalorieView.swift; sourceTree = "<group>"; };
+		F8773BC12CA54E49009A608F /* UpdateCalorieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCalorieViewModel.swift; sourceTree = "<group>"; };
 		F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSuccessView.swift; sourceTree = "<group>"; };
 		F8AB332A2C2EAD2E00BC16C9 /* DDanDDan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDanDDan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDanDDanApp.swift; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				F84B21C42C90227A009FE6F3 /* SettingView.swift */,
+				F8773BBE2CA549EE009A608F /* UpdateCalorie */,
 				F8773BBB2CA54194009A608F /* UpdateNickname */,
 			);
 			path = Setting;
@@ -162,6 +167,15 @@
 				F8773BBC2CA541F4009A608F /* UpdateNicknameViewModel.swift */,
 			);
 			path = UpdateNickname;
+			sourceTree = "<group>";
+		};
+		F8773BBE2CA549EE009A608F /* UpdateCalorie */ = {
+			isa = PBXGroup;
+			children = (
+				F8773BBF2CA54A02009A608F /* UpdateCalorieView.swift */,
+				F8773BC12CA54E49009A608F /* UpdateCalorieViewModel.swift */,
+			);
+			path = UpdateCalorie;
 			sourceTree = "<group>";
 		};
 		F89A2EBA2C7C80AF00FE3A36 /* Util */ = {
@@ -317,6 +331,7 @@
 				F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */,
 				362864A82C89D64100029452 /* Font.swift in Sources */,
 				F8FD4FAE2C7A09F900147C4F /* SignUpCalorieView.swift in Sources */,
+				F8773BC22CA54E49009A608F /* UpdateCalorieViewModel.swift in Sources */,
 				F84B21C52C90227A009FE6F3 /* SettingView.swift in Sources */,
 				F8311F992C7060E8000455ED /* GreenButton.swift in Sources */,
 				F8758CEF2C8EDF630038CCBB /* DialogView.swift in Sources */,
@@ -329,6 +344,7 @@
 				F8758CF12C8EDF6B0038CCBB /* HealthKitManager.swift in Sources */,
 				F827E5592C748CBC00C5B320 /* SignUpNicknameView.swift in Sources */,
 				F89A2EB92C7C7F0500FE3A36 /* SignUpSuccessView.swift in Sources */,
+				F8773BC02CA54A02009A608F /* UpdateCalorieView.swift in Sources */,
 				F8C10C1A2C57970B0037D6A5 /* SignUpTermView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

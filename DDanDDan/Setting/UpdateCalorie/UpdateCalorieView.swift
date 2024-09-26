@@ -1,36 +1,34 @@
 //
-//  SignUpCalorieView.swift
+//  UpdateCalorieView.swift
 //  DDanDDan
 //
-//  Created by paytalab on 8/24/24.
+//  Created by paytalab on 9/26/24.
 //
 
 import SwiftUI
 
-struct SignUpCalorieView: View {
-    private let viewModel: SignUpCalorieViewModel = SignUpCalorieViewModel()
-    @State public var signUpData: SignUpData
-    @State private var calorie: Int = 100
-    @Binding public var path: [SignUpPath]
-    
+struct UpdateCalorieView: View {
+    @ObservedObject var viewModel: UpdateCalorieViewModel
+    @State private var buttonDisabled: Bool = true
+    @Binding var path: [SettingPath]
+
     var body: some View {
         ZStack {
-            Color.black.edgesIgnoringSafeArea(.all)
+            Color.backgroundBlack.edgesIgnoringSafeArea(.all)
             VStack(alignment: .leading) {
                 Text("하루 목표 칼로리를\n설정해주세요")
                     .font(.neoDunggeunmo24)
                     .lineSpacing(8)
                     .foregroundStyle(.white)
-                    .padding(.top, 80)
+                    .padding(.top, 32)
                     .padding(.horizontal, 20)
                 HStack(alignment: .center) {
-                    
                     Button {
-                        increaseCalorie()
+                        viewModel.increaseCalorie()
                     } label: {
                         Image("plusButtonRounded")
                     }
-                    Text(String(calorie))
+                    Text(String(viewModel.calorie))
                         .font(.system(size: 24, weight: .heavy))
                         .foregroundStyle(.buttonGreen)
                         .frame(width: 84, height: 80)
@@ -38,7 +36,7 @@ struct SignUpCalorieView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                     
                     Button {
-                        decreaseCalorie()
+                        viewModel.decreaseCalorie()
                     } label: {
                         Image("minusButtonRounded")
                     }
@@ -50,30 +48,19 @@ struct SignUpCalorieView: View {
                 
                 GreenButton(action: {
                     Task {
-                        if await viewModel.signUp(signupData: signUpData) {
-                            if await viewModel.login() {
-                                path.append(.success)
-                                
-                            }
+                        if await viewModel.update() {
+                            path.removeLast()
                         }
                     }
-                }, title: "다음", disabled: .constant(false))
+                            
+                }, title: "변경 완료", disabled: .constant(false))
             }
             
         }
     }
-    
-    private func increaseCalorie() {
-        guard calorie < 1000 else { return }
-        calorie += 100
-    }
-    
-    private func decreaseCalorie() {
-        guard calorie > 100 else { return }
-        calorie -= 100
-    }
+
 }
 
 #Preview {
-    SignUpCalorieView(signUpData: .init(), path: .constant([]))
+    UpdateCalorieView(viewModel: UpdateCalorieViewModel(calorie: 100), path: .constant([]))
 }

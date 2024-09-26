@@ -44,7 +44,7 @@ struct SettingView: View {
         NavigationStack(path: $path) {
             ZStack {
                
-                Color.backgorundGray.edgesIgnoringSafeArea(.all)
+                Color.backgroundGray.edgesIgnoringSafeArea(.all)
                 
                 List(SettingPath.allCases, id: \.self) { item in
                     HStack(alignment: .firstTextBaseline) {
@@ -78,23 +78,16 @@ struct SettingView: View {
        
     }
     
+    @ViewBuilder
     private func getDestination(type: SettingPath) -> some View {
         switch type {
         case .updateNickname:
-            UpdateNicknameView(viewModel: UpdateNicknameViewModel(), path: $path)
+            UpdateNicknameView(viewModel: UpdateNicknameViewModel(nickname: ""), path: $path)
+        case .updateCalorie:
+            UpdateCalorieView(viewModel: UpdateCalorieViewModel(calorie: 100), path: $path)
         default:
-            UpdateNicknameView(viewModel: UpdateNicknameViewModel(), path: $path)
+            UpdateNicknameView(viewModel: UpdateNicknameViewModel(nickname: ""), path: $path)
         }
-    }
-}
-
-struct DetailView: View {
-    let item: String
-    
-    var body: some View {
-        Text("You selected \(item)")
-            .font(.largeTitle)
-            .navigationTitle(item)
     }
 }
 
