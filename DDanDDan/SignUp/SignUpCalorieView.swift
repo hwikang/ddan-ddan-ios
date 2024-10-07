@@ -2,7 +2,7 @@
 //  SignUpCalorieView.swift
 //  DDanDDan
 //
-//  Created by paytalab on 8/24/24.
+//  Created by hwikang on 8/24/24.
 //
 
 import SwiftUI

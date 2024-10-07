@@ -2,7 +2,7 @@
 //  SignUpNicknameView.swift
 //  DDanDDan
 //
-//  Created by paytalab on 8/20/24.
+//  Created by hwikang on 8/20/24.
 //
 
 import SwiftUI

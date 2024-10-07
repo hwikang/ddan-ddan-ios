@@ -2,7 +2,7 @@
 //  SignUpSuccessView.swift
 //  DDanDDan
 //
-//  Created by paytalab on 8/26/24.
+//  Created by hwikang on 8/26/24.
 //
 
 import SwiftUI

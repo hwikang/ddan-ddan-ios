@@ -2,7 +2,7 @@
 //  SignUpData.swift
 //  DDanDDan
 //
-//  Created by paytalab on 8/17/24.
+//  Created by hwikang on 8/17/24.
 //
 
 import Foundation

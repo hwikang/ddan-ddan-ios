@@ -2,7 +2,7 @@
 //  UpdateCalorieView.swift
 //  DDanDDan
 //
-//  Created by paytalab on 9/26/24.
+//  Created by hwikang on 9/26/24.
 //
 
 import SwiftUI

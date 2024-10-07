@@ -2,7 +2,7 @@
 //  HealthKitManager.swift
 //  DDanDDan
 //
-//  Created by paytalab on 7/13/24.
+//  Created by hwikang on 7/13/24.
 //
 
 import Foundation

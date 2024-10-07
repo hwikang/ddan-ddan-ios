@@ -2,7 +2,7 @@
 //  UpdateNicknameView.swift
 //  DDanDDan
 //
-//  Created by paytalab on 9/20/24.
+//  Created by hwikang on 9/20/24.
 //
 
 import SwiftUI

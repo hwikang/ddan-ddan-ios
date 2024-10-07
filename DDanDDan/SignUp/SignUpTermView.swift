@@ -2,7 +2,7 @@
 //  SignUpTermView.swift
 //  DDanDDan
 //
-//  Created by paytalab on 7/29/24.
+//  Created by hwikang on 7/29/24.
 //
 
 import SwiftUI
