@@ -35,10 +35,9 @@ struct SettingView: View {
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = UIColor.backgroundBlack
         appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        
+        appearance.backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear]
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        
     }
     var body: some View {
         NavigationStack(path: $path) {
@@ -85,6 +84,8 @@ struct SettingView: View {
             UpdateNicknameView(viewModel: UpdateNicknameViewModel(nickname: ""), path: $path)
         case .updateCalorie:
             UpdateCalorieView(viewModel: UpdateCalorieViewModel(calorie: 100), path: $path)
+        case .updateTerms:
+            SettingTermView()
         default:
             UpdateNicknameView(viewModel: UpdateNicknameViewModel(nickname: ""), path: $path)
         }

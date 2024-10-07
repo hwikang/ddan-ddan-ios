@@ -57,6 +57,7 @@ struct UpdateCalorieView: View {
             }
             
         }
+        .navigationTitle("목표 칼로리 수정")
     }
 
 }

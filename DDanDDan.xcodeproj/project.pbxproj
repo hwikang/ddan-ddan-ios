@@ -13,6 +13,8 @@
 		362864A12C89CA2000029452 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 362864982C89CA1F00029452 /* Pretendard-Bold.otf */; };
 		362864A82C89D64100029452 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362864A72C89D64100029452 /* Font.swift */; };
 		362864BA2C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 362864B92C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf */; };
+		F80DF7332CB384F8004FF1F2 /* SettingTermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80DF7322CB384F8004FF1F2 /* SettingTermView.swift */; };
+		F80DF7362CB38861004FF1F2 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80DF7352CB38861004FF1F2 /* WebView.swift */; };
 		F811A21E2C9D5A3200176086 /* UpdateNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F811A21D2C9D5A3200176086 /* UpdateNicknameView.swift */; };
 		F827E5592C748CBC00C5B320 /* SignUpNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */; };
 		F8311F992C7060E8000455ED /* GreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8311F982C7060E8000455ED /* GreenButton.swift */; };
@@ -48,6 +50,8 @@
 		362864A72C89D64100029452 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		362864AF2C89E76200029452 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		362864B92C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeoDunggeunmoPro-Regular.ttf"; sourceTree = "<group>"; };
+		F80DF7322CB384F8004FF1F2 /* SettingTermView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTermView.swift; sourceTree = "<group>"; };
+		F80DF7352CB38861004FF1F2 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		F811A21D2C9D5A3200176086 /* UpdateNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNicknameView.swift; sourceTree = "<group>"; };
 		F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameView.swift; sourceTree = "<group>"; };
 		F8311F982C7060E8000455ED /* GreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenButton.swift; sourceTree = "<group>"; };
@@ -109,10 +113,19 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		F80DF7342CB384FB004FF1F2 /* SettingTerm */ = {
+			isa = PBXGroup;
+			children = (
+				F80DF7322CB384F8004FF1F2 /* SettingTermView.swift */,
+			);
+			path = SettingTerm;
+			sourceTree = "<group>";
+		};
 		F8311F952C7060B3000455ED /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				F8758CEE2C8EDF630038CCBB /* DialogView.swift */,
+				F80DF7352CB38861004FF1F2 /* WebView.swift */,
 				F8311F982C7060E8000455ED /* GreenButton.swift */,
 			);
 			path = Components;
@@ -146,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				F84B21C42C90227A009FE6F3 /* SettingView.swift */,
+				F80DF7342CB384FB004FF1F2 /* SettingTerm */,
 				F8773BBE2CA549EE009A608F /* UpdateCalorie */,
 				F8773BBB2CA54194009A608F /* UpdateNickname */,
 			);
@@ -338,6 +352,7 @@
 				F85C2BA42C4CD651002E2237 /* UserDefaultValue.swift in Sources */,
 				F811A21E2C9D5A3200176086 /* UpdateNicknameView.swift in Sources */,
 				F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */,
+				F80DF7332CB384F8004FF1F2 /* SettingTermView.swift in Sources */,
 				F859C0482C7068DF007B886A /* SignUpData.swift in Sources */,
 				F8C10C182C57955C0037D6A5 /* SignUpView.swift in Sources */,
 				F8773BBD2CA541F4009A608F /* UpdateNicknameViewModel.swift in Sources */,
@@ -346,6 +361,7 @@
 				F89A2EB92C7C7F0500FE3A36 /* SignUpSuccessView.swift in Sources */,
 				F8773BC02CA54A02009A608F /* UpdateCalorieView.swift in Sources */,
 				F8C10C1A2C57970B0037D6A5 /* SignUpTermView.swift in Sources */,
+				F80DF7362CB38861004FF1F2 /* WebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -50,7 +50,8 @@ struct UpdateNicknameView: View {
                 }
             }
         }
-            
+        .navigationTitle("내 별명 수정")
+
     }
 }
 
