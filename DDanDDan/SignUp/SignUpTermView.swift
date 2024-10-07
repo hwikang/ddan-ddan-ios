@@ -64,7 +64,6 @@ public struct SignUpTermView: View {
                 
                 GreenButton(action: {
                     path.append(.egg)
-                    print(path)
                 }, title: "시작하기", disabled: $buttonDisabled)
                 
             }

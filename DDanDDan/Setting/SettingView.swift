@@ -86,6 +86,8 @@ struct SettingView: View {
             UpdateCalorieView(viewModel: UpdateCalorieViewModel(calorie: 100), path: $path)
         case .updateTerms:
             SettingTermView()
+        case .deleteUser:
+            DeleteUserView(viewModel: DeleteUserViewModel())
         default:
             UpdateNicknameView(viewModel: UpdateNicknameViewModel(nickname: ""), path: $path)
         }
