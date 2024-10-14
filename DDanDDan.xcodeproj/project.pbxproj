@@ -13,6 +13,9 @@
 		362864A12C89CA2000029452 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 362864982C89CA1F00029452 /* Pretendard-Bold.otf */; };
 		362864A82C89D64100029452 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362864A72C89D64100029452 /* Font.swift */; };
 		362864BA2C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 362864B92C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf */; };
+		F809E2FA2CBD05F5001BE099 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809E2F92CBD05F5001BE099 /* UserData.swift */; };
+		F809E2FC2CBD06A1001BE099 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809E2FB2CBD06A1001BE099 /* UserManager.swift */; };
+		F809E2FE2CBD0841001BE099 /* DeleteUserConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809E2FD2CBD0841001BE099 /* DeleteUserConfirmView.swift */; };
 		F80DF7332CB384F8004FF1F2 /* SettingTermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80DF7322CB384F8004FF1F2 /* SettingTermView.swift */; };
 		F80DF7362CB38861004FF1F2 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80DF7352CB38861004FF1F2 /* WebView.swift */; };
 		F80DF7392CB3DA2C004FF1F2 /* DeleteUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80DF7382CB3DA2C004FF1F2 /* DeleteUserView.swift */; };
@@ -52,6 +55,9 @@
 		362864A72C89D64100029452 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		362864AF2C89E76200029452 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		362864B92C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeoDunggeunmoPro-Regular.ttf"; sourceTree = "<group>"; };
+		F809E2F92CBD05F5001BE099 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		F809E2FB2CBD06A1001BE099 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		F809E2FD2CBD0841001BE099 /* DeleteUserConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserConfirmView.swift; sourceTree = "<group>"; };
 		F80DF7322CB384F8004FF1F2 /* SettingTermView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTermView.swift; sourceTree = "<group>"; };
 		F80DF7352CB38861004FF1F2 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		F80DF7382CB3DA2C004FF1F2 /* DeleteUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserView.swift; sourceTree = "<group>"; };
@@ -117,6 +123,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		F809E2F82CBD05E4001BE099 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				F809E2F92CBD05F5001BE099 /* UserData.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		F80DF7342CB384FB004FF1F2 /* SettingTerm */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				F80DF7382CB3DA2C004FF1F2 /* DeleteUserView.swift */,
+				F809E2FD2CBD0841001BE099 /* DeleteUserConfirmView.swift */,
 				F80DF73A2CB3DA38004FF1F2 /* DeleteUserViewModel.swift */,
 			);
 			path = DeleteUser;
@@ -147,6 +162,7 @@
 		F8311F9A2C7068C4000455ED /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				F809E2F82CBD05E4001BE099 /* User */,
 				F859C0462C7068D6007B886A /* SignUp */,
 			);
 			path = Entity;
@@ -210,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				F8758CF02C8EDF6B0038CCBB /* HealthKitManager.swift */,
+				F809E2FB2CBD06A1001BE099 /* UserManager.swift */,
 				F85C2BA32C4CD651002E2237 /* UserDefaultValue.swift */,
 			);
 			path = Util;
@@ -234,10 +251,10 @@
 		F8AB332C2C2EAD2E00BC16C9 /* DDanDDan */ = {
 			isa = PBXGroup;
 			children = (
+				F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */,
 				F84B21C32C902270009FE6F3 /* Setting */,
 				362864AF2C89E76200029452 /* Info.plist */,
 				362864902C89BF9900029452 /* Resource */,
-				F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */,
 				F89A2EBA2C7C80AF00FE3A36 /* Util */,
 				F8311F9A2C7068C4000455ED /* Entity */,
 				F8311F952C7060B3000455ED /* Components */,
@@ -357,6 +374,7 @@
 				F859C04A2C706A2D007B886A /* SignUpEggView.swift in Sources */,
 				F8FD4FB02C7A0FF600147C4F /* SignUpCalorieViewModel.swift in Sources */,
 				F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */,
+				F809E2FA2CBD05F5001BE099 /* UserData.swift in Sources */,
 				362864A82C89D64100029452 /* Font.swift in Sources */,
 				F8FD4FAE2C7A09F900147C4F /* SignUpCalorieView.swift in Sources */,
 				F8773BC22CA54E49009A608F /* UpdateCalorieViewModel.swift in Sources */,
@@ -366,9 +384,11 @@
 				F85C2BA42C4CD651002E2237 /* UserDefaultValue.swift in Sources */,
 				F811A21E2C9D5A3200176086 /* UpdateNicknameView.swift in Sources */,
 				F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */,
+				F809E2FE2CBD0841001BE099 /* DeleteUserConfirmView.swift in Sources */,
 				F80DF7332CB384F8004FF1F2 /* SettingTermView.swift in Sources */,
 				F859C0482C7068DF007B886A /* SignUpData.swift in Sources */,
 				F8C10C182C57955C0037D6A5 /* SignUpView.swift in Sources */,
+				F809E2FC2CBD06A1001BE099 /* UserManager.swift in Sources */,
 				F8773BBD2CA541F4009A608F /* UpdateNicknameViewModel.swift in Sources */,
 				F8758CF12C8EDF6B0038CCBB /* HealthKitManager.swift in Sources */,
 				F827E5592C748CBC00C5B320 /* SignUpNicknameView.swift in Sources */,

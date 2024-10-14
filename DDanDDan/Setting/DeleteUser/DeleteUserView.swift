@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct DeleteUserView: View {
-    @ObservedObject var viewModel: DeleteUserViewModel
     @State var selectedReason: Set<String> = []
+    @Binding public var path: [SettingPath]
+    private let reasons: [String] = [
+        "쓰지 않는 앱이에요", "오류가 생겨서 쓸 수 없어요", "개인정보가 불안해요", "앱 사용법을 모르겠어요", "기타"
+    ]
     
     var body: some View {
         
@@ -22,7 +25,7 @@ struct DeleteUserView: View {
                     .foregroundStyle(.white)
                     .padding(.top, 32)
                     .padding(.horizontal, 20)
-                List(viewModel.reasons, id: \.self) { reason in
+                List(reasons, id: \.self) { reason in
                     DeleteUserReasonButton(title: reason, isSelected: selectedReason.contains(reason)) {
                         addReason(reason: reason)
                     } .foregroundStyle(.white)
@@ -32,7 +35,7 @@ struct DeleteUserView: View {
                 .listStyle(.plain)
                 Spacer()
                 GreenButton(action: {
-                    
+                    path.append(.deleteUserConfirm(reasons: selectedReason))
                 }, title: "탈퇴하기", disabled: .constant(selectedReason.isEmpty))
             }
         }
@@ -68,11 +71,9 @@ struct DeleteUserReasonButton: View {
                 Image(isSelected ? "checkboxCircleSelected" :"checkboxCircle")
             }
         }
-
-        
     }
 }
 
 #Preview {
-    DeleteUserView(viewModel: DeleteUserViewModel())
+    DeleteUserView(path: .constant([]))
 }

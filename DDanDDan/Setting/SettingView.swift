@@ -8,11 +8,16 @@
 import SwiftUI
 
 enum SettingPath: Hashable, CaseIterable {
+    static var allCases: [SettingPath] {
+        [.updateNickname, .updateCalorie, .notification, .updateTerms, .deleteUser, .logout]
+    }
+    
     case updateNickname
     case updateCalorie
     case notification
     case updateTerms
     case deleteUser
+    case deleteUserConfirm(reasons: Set<String>)
     case logout
     
     var description: String {
@@ -23,6 +28,7 @@ enum SettingPath: Hashable, CaseIterable {
         case .updateTerms: "약관 및 개인정보 처리 동의"
         case .deleteUser: "탈퇴하기"
         case .logout: "로그아웃"
+        default: ""
         }
     }
 }
@@ -74,7 +80,6 @@ struct SettingView: View {
             .navigationTitle("설정")
             .navigationBarTitleDisplayMode(.inline)
         }
-       
     }
     
     @ViewBuilder
@@ -87,7 +92,9 @@ struct SettingView: View {
         case .updateTerms:
             SettingTermView()
         case .deleteUser:
-            DeleteUserView(viewModel: DeleteUserViewModel())
+            DeleteUserView(path: $path)
+        case .deleteUserConfirm(let reasons):
+            DeleteUserConfirmView(viewModel: DeleteUserViewModel(), path: $path, selectedReason: reasons)
         default:
             UpdateNicknameView(viewModel: UpdateNicknameViewModel(nickname: ""), path: $path)
         }
