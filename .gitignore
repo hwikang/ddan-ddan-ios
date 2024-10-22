@@ -89,7 +89,6 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 
 
-*.appiconset
 *.p8
 *.xcconfig
 
