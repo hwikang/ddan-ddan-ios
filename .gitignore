@@ -2,6 +2,13 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+
 ## User settings
 xcuserdata/
 
@@ -71,16 +78,19 @@ Dependencies/
 .accio/
 
 # fastlane
-#
-# It is recommended to not store the screenshots in the git repo.
-# Instead, use fastlane to re-generate the screenshots whenever they are needed.
-# For more information about the recommended setup visit:
-# https://docs.fastlane.tools/best-practices/source-control/#source-control
-
+*.cer
+*.mobileprovision
+*.ipa
+*.app.dSYM.zip
+.env
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+
+*.p8
+*.xcconfig
 
 # Code Injection
 #
