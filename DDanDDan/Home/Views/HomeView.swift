@@ -6,45 +6,52 @@
 //
 
 import SwiftUI
+import HealthKit
 
 struct HomeView: View {
   @ObservedObject var viewModel: HomeViewModel
   
   var body: some View {
-    ZStack {
-      Color(.backgroundBlack)
-      VStack {
-        navigationBar
-          .padding(.top, 80)
-          .padding(.bottom, 16)
-        kcalView
-          .padding(.bottom, 14)
-        ZStack {
-          viewModel.backgroundImage()
-            .scaledToFit()
-            .padding(.horizontal, 53)
-            .clipped()
-          viewModel.characterImage()
-            .scaledToFit()
-            .padding(.horizontal, 141)
-            .offset(y: 100)
+    NavigationView {  // 최상단에서 NavigationView로 감쌈
+      ZStack {
+        Color(.backgroundBlack)
+          .ignoresSafeArea()
+        VStack {
+          navigationBar
+            .padding(.bottom, 16)
+          kcalView
+            .padding(.bottom, 14)
+          ZStack {
+            viewModel.backgroundImage()
+              .scaledToFit()
+              .padding(.horizontal, 53)
+              .clipped()
+            viewModel.characterImage()
+              .scaledToFit()
+              .padding(.horizontal, 141)
+              .offset(y: 100)
+          }
+          .padding(.bottom, 32)
+          levelView
+            .padding(.bottom, 20)
+          actionButtonView
         }
-        .padding(.bottom, 32)
-        levelView
-          .padding(.bottom, 20)
-        actionButtonView
+        .frame(maxHeight: .infinity, alignment: .top)
       }
-      .frame(maxHeight: .infinity, alignment: .top)
+      .onAppear {
+        HealthKitManager.shared.requestAuthorization { auth in
+          print("HealthKit auth: \(auth)")
+          viewModel.getTotalKcal()
+        }
+      }
+      .navigationBarHidden(true)
     }
-    .ignoresSafeArea()
   }
   
   /// 네비게이션 바
   var navigationBar: some View {
     HStack {
-      Button {
-        print("버튼 클릭됨")
-      } label: {
+      NavigationLink(destination: PetArchiveView()) {  
         Image(.iconDocs)
       }
       .frame(maxWidth: .infinity, alignment: .leading)
@@ -74,7 +81,7 @@ struct HomeView: View {
     }
   }
   
-  /// 레벨 정보뷰
+  /// 레벨 정보 뷰
   var levelView: some View {
     VStack {
       HStack {
@@ -86,7 +93,7 @@ struct HomeView: View {
           .cornerRadius(8)
           .frame(maxWidth: .infinity,alignment: .leading)
         let percentage = Double(viewModel.model.currentKcal) / Double(viewModel.model.goalKcal) * 100
-               Text(String(format: "%.0f%%", percentage))
+        Text(String(format: "%.0f%%", percentage))
           .font(.subTitle1_semibold16)
           .foregroundStyle(.white)
           .frame(maxWidth: .infinity,alignment: .trailing)

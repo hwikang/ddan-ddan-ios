@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import HealthKit
 
 class HomeViewModel: ObservableObject {
   let model: HomeModel
@@ -14,7 +15,13 @@ class HomeViewModel: ObservableObject {
     self.model = model
   }
   
-  /// Returns the correct background image based on the petType
+  func getTotalKcal() {
+    HealthKitManager.shared.readActiveEnergyBurned { kcal in
+      print("💥kacl?: \(kcal)")
+    }
+  }
+  
+  /// 캐릭터에 맞는 배경
   func backgroundImage() -> Image {
     switch model.petType {
     case .pinkCat:
@@ -28,7 +35,7 @@ class HomeViewModel: ObservableObject {
     }
   }
   
-  /// Returns the correct character image based on the petType and level
+  /// 레벨에 맞는 캐릭터 이미지
   func characterImage() -> Image {
     switch (model.petType, model.level) {
     case (.pinkCat, 1):
