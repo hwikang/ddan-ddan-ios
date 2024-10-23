@@ -36,6 +36,8 @@ enum SettingPath: Hashable, CaseIterable {
 struct SettingView: View {
     @State public var path: [SettingPath] = []
     @State private var notificationState = true
+    @State private var showLogoutDialog = false
+
     init() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -53,12 +55,17 @@ struct SettingView: View {
                 
                 List(SettingPath.allCases, id: \.self) { item in
                     HStack(alignment: .firstTextBaseline) {
-                        if item != .notification {
+                        switch item {
+                        case .notification:
+                            Text(item.description)
+                        case .logout:
+                            Button(item.description) {
+                                showLogoutDialog.toggle()
+                            }
+                        default:
                             Button(item.description) {
                                 path.append(item)
                             }
-                        } else {
-                            Text(item.description)
                         }
                         Spacer()
                         if item == .notification {
@@ -73,7 +80,13 @@ struct SettingView: View {
                 .navigationDestination(for: SettingPath.self, destination: { type in
                     getDestination(type: type)
                 })
-                
+                .fullScreenCover(isPresented: $showLogoutDialog) {
+                    DialogView(show: $showLogoutDialog, title: "정말 로그아웃 하시겠습니까", description: "", rightButtonTitle: "로그아웃", leftButtonTitle: "취소") {
+                        Task {
+                            await UserManager.shared.logout()
+                        }
+                    }
+                }
                 .listRowSeparator(.hidden)
                 .listStyle(.plain)
             }
