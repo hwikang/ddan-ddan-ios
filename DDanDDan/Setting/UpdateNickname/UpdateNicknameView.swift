@@ -1,59 +1,60 @@
 //
-//  SignUpNicknameView.swift
+//  UpdateNicknameView.swift
 //  DDanDDan
 //
-//  Created by hwikang on 8/20/24.
+//  Created by hwikang on 9/20/24.
 //
 
 import SwiftUI
 
-struct SignUpNicknameView: View {
+struct UpdateNicknameView: View {
+    @ObservedObject var viewModel: UpdateNicknameViewModel
     @State private var buttonDisabled: Bool = true
-    @State public var signUpData: SignUpData
-    @State private var nickname: String = ""
-    @Binding public var path: [SignUpPath]
-    
+    @Binding var path: [SettingPath]
     var body: some View {
         ZStack {
-            Color.black.edgesIgnoringSafeArea(.all)
+            Color.backgroundBlack.edgesIgnoringSafeArea(.all)
             VStack(alignment: .leading) {
                 VStack(alignment: .leading) {
                     
                     Text("별명을 알려주세요")
-                        .font(.system(size: 24, weight: .bold))
+                        .font(.neoDunggeunmo24)
                         .foregroundStyle(.white)
-                        .padding(.top, 80)
+                        .padding(.top, 32)
                     
                     Text("별명")
                         .font(.system(size: 12, weight: .bold))
                         .foregroundStyle(.gray)
                         .padding(.top, 10)
-                    TextField("별명을 입력해주세요", text: $nickname)
+                    TextField("별명을 입력해주세요", text: $viewModel.nickname)
                         .padding()
                         .background(.backgroundGray)
                         .foregroundColor(.white)
                         .frame(height: 48)
                         .cornerRadius(8)
-                        .border(.secondary)
                 }
                 .padding(.horizontal, 20)
                 
                 Spacer()
                 
                 GreenButton(action: {
-                    signUpData.nickname = nickname
-                    path.append(.calorie)
-                    print("signUpData \(signUpData)")
-                }, title: "다음", disabled: $buttonDisabled)
-                .onChange(of: nickname) { newValue in
-                    buttonDisabled = nickname.isEmpty
+                    Task {
+                        if await viewModel.update() {
+                            path.removeLast()
+                        }
+                    }
+                  
+                }, title: "변경 완료", disabled: $buttonDisabled)
+                .onChange(of: viewModel.nickname) { newValue in
+                    buttonDisabled = viewModel.nickname.isEmpty
                 }
             }
-         
         }
+        .navigationTitle("내 별명 수정")
+
     }
 }
 
 #Preview {
-    SignUpNicknameView(signUpData: .init(), path: .constant([]))
+    UpdateNicknameView(viewModel: UpdateNicknameViewModel(nickname: ""), path: .constant([]))
 }

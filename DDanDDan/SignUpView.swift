@@ -2,18 +2,27 @@
 //  SignUpView.swift
 //  DDanDDan
 //
-//  Created by paytalab on 7/21/24.
+//  Created by hwikang on 7/21/24.
 //
 
 import SwiftUI
 import KakaoSDKUser
 import KakaoSDKCommon
 
+public enum SignUpPath: Hashable {
+    case term
+    case egg
+    case nickname
+    case calorie
+    case success
+    case main
+}
+
 struct SignUpView: View {
-    @State private var showSignupTerm = false
     @State public var signUpData = SignUpData()
+    @State private var path: [SignUpPath] = []
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             ZStack {
                 Color.black.edgesIgnoringSafeArea(.all)
                 VStack {
@@ -50,8 +59,16 @@ struct SignUpView: View {
                     }
                 }
                 .padding(.bottom)
-                .navigationDestination(isPresented: $showSignupTerm) {
-                    SignUpTermView(signUpData: signUpData)
+                .navigationDestination(for: SignUpPath.self) { path in
+                    switch path {
+                    case .term:    SignUpTermView(signUpData: signUpData, path: $path)
+                    case .egg:  SignUpEggView(signUpData: signUpData, path: $path)
+                    case .nickname:  SignUpNicknameView(signUpData: signUpData, path: $path)
+                    case .calorie:  SignUpCalorieView(signUpData: signUpData, path: $path)
+                    case .success:  SignUpSuccessView(path: $path)
+                    case .main: SettingView()
+                    }
+                    
                 }
                 
             }
@@ -65,7 +82,7 @@ struct SignUpView: View {
                 return
             }
             signUpData.kakaoUser = user
-            showSignupTerm = true
+            path.append(.term)
         }
     }
 }

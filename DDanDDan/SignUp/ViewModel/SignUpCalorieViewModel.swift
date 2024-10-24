@@ -2,7 +2,7 @@
 //  SignUpCalorieViewModel.swift
 //  DDanDDan
 //
-//  Created by paytalab on 8/24/24.
+//  Created by hwikang on 8/24/24.
 //
 
 import Foundation
@@ -15,8 +15,9 @@ struct SignUpCalorieViewModel {
         return true
     }
     
-    public func login() -> Bool {
+    public func login() async -> Bool {
         //TODO: login 요청 + 토큰 저장
+        UserDefaultValue.acessToken = "test-token"
         return true
     }
 }

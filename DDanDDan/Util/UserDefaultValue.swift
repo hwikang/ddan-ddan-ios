@@ -2,7 +2,7 @@
 //  UserDefault.swift
 //  DDanDDan
 //
-//  Created by paytalab on 7/21/24.
+//  Created by hwikang on 7/21/24.
 //
 
 import Foundation
