@@ -12,6 +12,7 @@ struct HomeModel {
   var goalKcal: Int
   var feedCount: Int
   var toyCount: Int
+  var level: Int
 }
 
 struct HomeKcalModel {
