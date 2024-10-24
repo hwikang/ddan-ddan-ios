@@ -11,7 +11,7 @@ import SwiftUI
 struct DdanDdan_Watch_Watch_AppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: WatchViewModel(goalKcal: 400))
         }
     }
 }

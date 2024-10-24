@@ -14,8 +14,10 @@
 		362864A12C89CA2000029452 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 362864982C89CA1F00029452 /* Pretendard-Bold.otf */; };
 		362864A82C89D64100029452 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362864A72C89D64100029452 /* Font.swift */; };
 		362864BA2C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 362864B92C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf */; };
+		363CC4462CCAD06E00D2EE47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8758CF22C8EE1F60038CCBB /* Assets.xcassets */; };
 		3650CCCD2CCAA22500ED5967 /* NeoDunggeunmoPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 362864B92C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf */; };
 		3650CCCE2CCAA22B00ED5967 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362864A72C89D64100029452 /* Font.swift */; };
+		3650CCD22CCAB7BD00ED5967 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8758CF02C8EDF6B0038CCBB /* HealthKitManager.swift */; };
 		36BAF1C72CA483BC00BEBCE7 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BAF1C62CA483BC00BEBCE7 /* HomeView.swift */; };
 		36BAF1CD2CA48BAE00BEBCE7 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BAF1CC2CA48BAE00BEBCE7 /* HomeModel.swift */; };
 		36C1FE052CA4A4EC007CA188 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C1FE042CA4A4EC007CA188 /* HomeViewModel.swift */; };
@@ -145,18 +147,8 @@
 		F8FD4FAF2C7A0FF600147C4F /* SignUpCalorieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCalorieViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		3650CCD02CCAA23F00ED5967 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"DdanDdan-Watch-Watch-App-Info.plist",
-			);
-			target = 36E0196B2CCA830A00383318 /* DdanDdan_Watch Watch App */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		36E0196D2CCA830A00383318 /* DdanDdan_Watch Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3650CCD02CCAA23F00ED5967 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "DdanDdan_Watch Watch App"; sourceTree = "<group>"; };
+		36E0196D2CCA830A00383318 /* DdanDdan_Watch Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "DdanDdan_Watch Watch App"; sourceTree = "<group>"; };
 		36E0197E2CCA830C00383318 /* DdanDdan_Watch Watch AppTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "DdanDdan_Watch Watch AppTests"; sourceTree = "<group>"; };
 		36E019882CCA830C00383318 /* DdanDdan_Watch Watch AppUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "DdanDdan_Watch Watch AppUITests"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -588,6 +580,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				363CC4462CCAD06E00D2EE47 /* Assets.xcassets in Resources */,
 				3650CCCD2CCAA22500ED5967 /* NeoDunggeunmoPro-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -628,6 +621,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3650CCCE2CCAA22B00ED5967 /* Font.swift in Sources */,
+				3650CCD22CCAB7BD00ED5967 /* HealthKitManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
