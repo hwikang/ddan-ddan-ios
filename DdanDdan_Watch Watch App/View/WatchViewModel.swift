@@ -26,11 +26,11 @@ final class WatchViewModel: ObservableObject {
     
     func fetchActiveEnergyFromHealthKit() {
         HealthKitManager.shared.readActiveEnergyBurned { [weak self] kcal in
-               DispatchQueue.main.async {
-                   self?.currentKcal = Int(kcal)
-               }
-           }
-       }
+            DispatchQueue.main.async {
+                self?.currentKcal = Int(kcal)
+            }
+        }
+    }
     
     // 목표 칼로리 도달 여부를 반환
     public var isGoalMet: Bool {
