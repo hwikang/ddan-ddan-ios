@@ -7,45 +7,41 @@
 
 import SwiftUI
 import HealthKit
-
 final class HomeViewModel: ObservableObject {
-    /// 기본 정보를 담은 모델
-    /// 오늘의 칼로리 정보
-    var homePetModel: HomeModel
-    var currentKcalModel: HomeKcalModel = .init(currentKcal: 0, level: 0)
+    @Published var homePetModel: HomeModel
+    @Published var currentKcalModel: HomeKcalModel = .init(currentKcal: 0, level: 1)
+    @Published var isGoalMet: Bool = false // 목표 도달 여부를 나타내는 속성
     
     init(model: HomeModel) {
-        /// 서버 통신을 통해 받아오는 펫 정보
         self.homePetModel = model
-        /// HealthKit 통신으로 받아오는 칼로리 정보
         initialCurrnetKcalModel()
     }
     
+    /// 오늘의 칼로리 정보 초기화
     func initialCurrnetKcalModel() {
         HealthKitManager.shared.readActiveEnergyBurned { kcal in
-            print("today Calories: \(kcal)")
+            print("오늘의 칼로리: \(kcal)")
             self.currentKcalModel.currentKcal = Int(kcal)
-            
         }
     }
     
-    /// 3일 치 칼로리 가져오기
-    /// 보상 창으로 이동
-    func getThreeDaysKcal() -> Bool {
-        var isGoalMet: Bool = false
+    /// 3일 치 칼로리 가져오기 (Completion Handler 사용)
+    func getThreeDaysKcal(completion: @escaping (Bool) -> Void) {
         HealthKitManager.shared.readThreeDaysEnergyBurned { [weak self] error in
             guard let self = self else { return }
             if let error = error {
-                print("Error fetching calories: \(error.localizedDescription)")
+                print("칼로리 데이터를 가져오는 중 오류 발생: \(error.localizedDescription)")
+                completion(false)
             } else {
-                print("Three Days Calories: \(HealthKitManager.shared.caloriesArray)")
-                isGoalMet = HealthKitManager.shared.checkIfGoalMet(goalCalories: Double(self.homePetModel.goalKcal))
+                print("3일 치 칼로리: \(HealthKitManager.shared.caloriesArray)")
+                let goalMet = HealthKitManager.shared.checkIfGoalMet(goalCalories: Double(self.homePetModel.goalKcal))
+                self.isGoalMet = goalMet
+                completion(goalMet)
             }
         }
-        return isGoalMet
     }
     
-    /// 캐릭터에 맞는 배경
+    /// 캐릭터에 맞는 배경 이미지
     func backgroundImage() -> Image {
         switch homePetModel.petType {
         case .pinkCat:

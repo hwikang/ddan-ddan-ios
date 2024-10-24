@@ -51,7 +51,7 @@ struct HomeView: View {
     /// 네비게이션 바
     var navigationBar: some View {
         HStack {
-            NavigationLink(destination: PetArchiveView()) {  
+            NavigationLink(destination: PetArchiveView()) {
                 Image(.iconDocs)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
