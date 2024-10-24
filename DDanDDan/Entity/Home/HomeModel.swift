@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct HomeModel {
-  let petType: PetType
-  let goalKcal: Int
-  let currentKcal: Int
-  let level: Int
-  let feedCount: Int
-  let toyCount: Int
+  var petType: PetType
+  var goalKcal: Int
+  var feedCount: Int
+  var toyCount: Int
+}
+
+struct HomeKcalModel {
+    var currentKcal: Int
+    var level: Int 
 }
 
 
