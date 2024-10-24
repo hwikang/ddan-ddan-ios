@@ -17,27 +17,35 @@ enum PetType: String {
 final class WatchViewModel: ObservableObject {
     var goalKcal: Int
     @Published var currentKcal: Int
+    @Published var currentKcalProgress: Double = 0.0
     
-    init(goalKcal: Int, currentKcal: Int = 200) {
+    init(goalKcal: Int, currentKcal: Int = 0) {
         self.goalKcal = goalKcal
         self.currentKcal = currentKcal
-        fetchActiveEnergyFromHealthKit()
+        updateProgress()
     }
     
-    func fetchActiveEnergyFromHealthKit() {
+    /// HealthKit에서 활성 에너지(kcal) 받아와서 현재 칼로리, 도달률 계산
+    public func fetchActiveEnergyFromHealthKit() {
         HealthKitManager.shared.readActiveEnergyBurned { [weak self] kcal in
             DispatchQueue.main.async {
                 self?.currentKcal = Int(kcal)
+                self?.updateProgress()
             }
         }
     }
     
-    // 목표 칼로리 도달 여부를 반환
+    /// 도달률 업데이트
+    public func updateProgress() {
+        currentKcalProgress = calculateProgress()
+    }
+    
+    /// 목표 칼로리 도달 여부를 반환
     public var isGoalMet: Bool {
         return currentKcal >= goalKcal
     }
     
-    // petType에 따른 UI 설정
+    /// petType에 따른 UI 설정
     public func configureUI(petType: PetType) -> (ImageResource, Color) {
         switch petType {
         case .dog:
@@ -51,8 +59,8 @@ final class WatchViewModel: ObservableObject {
         }
     }
     
-    // 목표 대비 진행률 계산
-    public func calculateProgress() -> Double {
+    /// 도달률 계산
+    private func calculateProgress() -> Double {
         guard goalKcal > 0 else { return 0.0 }
         return min(Double(currentKcal) / Double(goalKcal), 1.0)
     }

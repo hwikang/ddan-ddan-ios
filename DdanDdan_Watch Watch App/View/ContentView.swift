@@ -39,7 +39,7 @@ struct ContentView: View {
             Color(.backgroundBlack)
             centerView
             DonutChartView(
-                targetProgress: viewModel.calculateProgress(),
+                targetProgress: $viewModel.currentKcalProgress,
                 lineColor: viewModel.configureUI(petType: petType).1
             )
         }
@@ -56,18 +56,17 @@ struct ContentView: View {
 }
 
 struct DonutChartView: View {
-    var targetProgress: Double
+    @Binding var targetProgress: Double
     @State private var animatedProgress: Double = 0.0
     var lineWidth: CGFloat = 12
     var lineColor: Color
-
+    
     var body: some View {
         ZStack {
             Circle()
                 .stroke(Color.gray.opacity(0.2), lineWidth: lineWidth)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding(15)
-
             Circle()
                 .trim(from: 1 - CGFloat(animatedProgress), to: 1)
                 .stroke(
@@ -82,6 +81,9 @@ struct DonutChartView: View {
                 .animation(.easeInOut(duration: 1), value: animatedProgress) // 애니메이션 효과 추가
         }
         .onAppear {
+            animatedProgress = targetProgress
+        }
+        .onChange(of: targetProgress) {
             animatedProgress = targetProgress
         }
     }
