@@ -16,12 +16,21 @@ enum PetType: String {
 
 final class WatchViewModel: ObservableObject {
     var goalKcal: Int
-    var currentKcal: Int
+    @Published var currentKcal: Int
     
-    init(goalKcal: Int, currentKcal: Int) {
+    init(goalKcal: Int, currentKcal: Int = 200) {
         self.goalKcal = goalKcal
         self.currentKcal = currentKcal
+        fetchActiveEnergyFromHealthKit()
     }
+    
+    func fetchActiveEnergyFromHealthKit() {
+        HealthKitManager.shared.readActiveEnergyBurned { [weak self] kcal in
+               DispatchQueue.main.async {
+                   self?.currentKcal = Int(kcal)
+               }
+           }
+       }
     
     // 목표 칼로리 도달 여부를 반환
     public var isGoalMet: Bool {
