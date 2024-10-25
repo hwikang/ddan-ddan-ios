@@ -10,7 +10,6 @@ import SwiftUI
 public struct SignUpNicknameView: View {
     public let viewModel: SignUpViewModelProtocol
     @State private var buttonDisabled: Bool = true
-    @State public var signUpData: SignUpData
     @State private var nickname: String = ""
     @Binding public var path: [SignUpPath]
     
@@ -59,5 +58,5 @@ public struct SignUpNicknameView: View {
 }
 
 #Preview {
-    SignUpNicknameView(viewModel: SignUpViewModel(repository: SignUpRepository()), signUpData: .init(), path: .constant([]))
+    SignUpNicknameView(viewModel: SignUpViewModel(repository: SignUpRepository()), path: .constant([]))
 }

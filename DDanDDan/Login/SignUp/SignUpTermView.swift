@@ -22,7 +22,6 @@ public struct SignUpTermView: View {
     @State private var privacyTermAgree: Bool = false
     @State private var buttonDisabled: Bool = true
     public let viewModel: SignUpViewModelProtocol
-    @State public var signUpData = SignUpData()
     @State public var path: [SignUpPath] = []
     
     public var body: some View {
@@ -81,9 +80,9 @@ public struct SignUpTermView: View {
             .navigationDestination(for: SignUpPath.self) { path in
                 switch path {
                 case .term: SignUpTermView(viewModel: SignUpViewModel(repository: SignUpRepository()))
-                case .egg: SignUpEggView(viewModel: viewModel, signUpData: signUpData, path: $path)
-                case .nickname: SignUpNicknameView(viewModel: viewModel, signUpData: signUpData, path: $path)
-                case .calorie: SignUpCalorieView(viewModel: viewModel, signUpData: signUpData, path: $path)
+                case .egg: SignUpEggView(viewModel: viewModel, path: $path)
+                case .nickname: SignUpNicknameView(viewModel: viewModel, path: $path)
+                case .calorie: SignUpCalorieView(viewModel: viewModel, path: $path)
                 case .success: SignUpSuccessView(viewModel: viewModel, path: $path)
                 case .main: SettingView()
                 }

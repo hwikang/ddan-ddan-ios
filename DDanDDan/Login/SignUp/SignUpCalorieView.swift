@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SignUpCalorieView: View {
     public let viewModel: SignUpViewModelProtocol
-    @State public var signUpData: SignUpData
     @State private var calorie: Int = 100
     @Binding public var path: [SignUpPath]
     
@@ -72,5 +71,5 @@ struct SignUpCalorieView: View {
 }
 
 #Preview {
-    SignUpCalorieView(viewModel: SignUpViewModel(repository: SignUpRepository()), signUpData: .init(), path: .constant([]))
+    SignUpCalorieView(viewModel: SignUpViewModel(repository: SignUpRepository()), path: .constant([]))
 }

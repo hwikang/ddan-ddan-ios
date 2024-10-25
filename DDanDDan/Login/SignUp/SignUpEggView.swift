@@ -10,7 +10,6 @@ import SwiftUI
 public struct SignUpEggView: View {
     public let viewModel: SignUpViewModelProtocol
     @State private var buttonDisabled: Bool = true
-    @State public var signUpData: SignUpData
     @State private var selectedEgg: String? = nil
     @Binding public var path: [SignUpPath]
   
@@ -76,5 +75,5 @@ struct EggItem: View {
 }
 
 #Preview {
-    SignUpEggView(viewModel: SignUpViewModel(repository: SignUpRepository()), signUpData: .init(), path: .constant([]))
+    SignUpEggView(viewModel: SignUpViewModel(repository: SignUpRepository()), path: .constant([]))
 }
