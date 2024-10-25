@@ -62,7 +62,7 @@ struct OnboardingView: View {
                     }
                 })
                 .fullScreenCover(isPresented: $showSignup) {
-                    SignUpView()
+                    LoginView(viewModel: LoginViewModel(repository: LoginRepository()))
                 }
                 .background(Color.clear)
                 .transaction { transaction in

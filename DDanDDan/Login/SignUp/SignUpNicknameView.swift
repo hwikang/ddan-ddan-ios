@@ -7,13 +7,14 @@
 
 import SwiftUI
 
-struct SignUpNicknameView: View {
+public struct SignUpNicknameView: View {
+    public let viewModel: SignUpViewModelProtocol
     @State private var buttonDisabled: Bool = true
     @State public var signUpData: SignUpData
     @State private var nickname: String = ""
     @Binding public var path: [SignUpPath]
     
-    var body: some View {
+    public var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
             VStack(alignment: .leading) {
@@ -41,9 +42,12 @@ struct SignUpNicknameView: View {
                 Spacer()
                 
                 GreenButton(action: {
-                    signUpData.nickname = nickname
-                    path.append(.calorie)
-                    print("signUpData \(signUpData)")
+                    Task {
+                        if await viewModel.updateNickname(name: nickname) {
+                            path.append(.calorie)
+                            
+                        }
+                    }
                 }, title: "다음", disabled: $buttonDisabled)
                 .onChange(of: nickname) { newValue in
                     buttonDisabled = nickname.isEmpty
@@ -55,5 +59,5 @@ struct SignUpNicknameView: View {
 }
 
 #Preview {
-    SignUpNicknameView(signUpData: .init(), path: .constant([]))
+    SignUpNicknameView(viewModel: SignUpViewModel(repository: SignUpRepository()), signUpData: .init(), path: .constant([]))
 }

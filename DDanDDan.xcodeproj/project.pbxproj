@@ -40,6 +40,14 @@
 		F8773BBD2CA541F4009A608F /* UpdateNicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8773BBC2CA541F4009A608F /* UpdateNicknameViewModel.swift */; };
 		F8773BC02CA54A02009A608F /* UpdateCalorieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8773BBF2CA54A02009A608F /* UpdateCalorieView.swift */; };
 		F8773BC22CA54E49009A608F /* UpdateCalorieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8773BC12CA54E49009A608F /* UpdateCalorieViewModel.swift */; };
+		F88663CC2CC8ED14008DB860 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88663CB2CC8ED14008DB860 /* NetworkManager.swift */; };
+		F88663CF2CC8ED65008DB860 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88663CE2CC8ED65008DB860 /* NetworkError.swift */; };
+		F88663D12CC8EDD4008DB860 /* UserNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88663D02CC8EDD4008DB860 /* UserNetwork.swift */; };
+		F88663D32CC8EE29008DB860 /* AuthNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88663D22CC8EE29008DB860 /* AuthNetwork.swift */; };
+		F88663D52CC8EE89008DB860 /* LoginData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88663D42CC8EE89008DB860 /* LoginData.swift */; };
+		F88663D72CC8F0D2008DB860 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88663D62CC8F0D2008DB860 /* LoginViewModel.swift */; };
+		F88663DA2CC8F952008DB860 /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88663D92CC8F952008DB860 /* LoginRepository.swift */; };
+		F88663E02CCB3585008DB860 /* SignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88663DF2CCB3585008DB860 /* SignUpRepository.swift */; };
 		F89A2EB92C7C7F0500FE3A36 /* SignUpSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */; };
 		F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */; };
 		F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */; };
@@ -48,10 +56,10 @@
 		F8C10C0F2C5782720037D6A5 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F8C10C0E2C5782720037D6A5 /* KakaoSDKAuth */; };
 		F8C10C112C5782720037D6A5 /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = F8C10C102C5782720037D6A5 /* KakaoSDKCommon */; };
 		F8C10C132C5782720037D6A5 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = F8C10C122C5782720037D6A5 /* KakaoSDKUser */; };
-		F8C10C182C57955C0037D6A5 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C10C172C57955C0037D6A5 /* SignUpView.swift */; };
+		F8C10C182C57955C0037D6A5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C10C172C57955C0037D6A5 /* LoginView.swift */; };
 		F8C10C1A2C57970B0037D6A5 /* SignUpTermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C10C192C57970B0037D6A5 /* SignUpTermView.swift */; };
 		F8FD4FAE2C7A09F900147C4F /* SignUpCalorieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FD4FAD2C7A09F900147C4F /* SignUpCalorieView.swift */; };
-		F8FD4FB02C7A0FF600147C4F /* SignUpCalorieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FD4FAF2C7A0FF600147C4F /* SignUpCalorieViewModel.swift */; };
+		F8FD4FB02C7A0FF600147C4F /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FD4FAF2C7A0FF600147C4F /* SignUpViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,15 +98,23 @@
 		F8773BBC2CA541F4009A608F /* UpdateNicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNicknameViewModel.swift; sourceTree = "<group>"; };
 		F8773BBF2CA54A02009A608F /* UpdateCalorieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCalorieView.swift; sourceTree = "<group>"; };
 		F8773BC12CA54E49009A608F /* UpdateCalorieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCalorieViewModel.swift; sourceTree = "<group>"; };
+		F88663CB2CC8ED14008DB860 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		F88663CE2CC8ED65008DB860 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		F88663D02CC8EDD4008DB860 /* UserNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetwork.swift; sourceTree = "<group>"; };
+		F88663D22CC8EE29008DB860 /* AuthNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNetwork.swift; sourceTree = "<group>"; };
+		F88663D42CC8EE89008DB860 /* LoginData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginData.swift; sourceTree = "<group>"; };
+		F88663D62CC8F0D2008DB860 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		F88663D92CC8F952008DB860 /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
+		F88663DF2CCB3585008DB860 /* SignUpRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRepository.swift; sourceTree = "<group>"; };
 		F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSuccessView.swift; sourceTree = "<group>"; };
 		F8AB332A2C2EAD2E00BC16C9 /* DDanDDan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDanDDan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDanDDanApp.swift; sourceTree = "<group>"; };
 		F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		F8AB33342C2EAD2F00BC16C9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		F8C10C172C57955C0037D6A5 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpView.swift; path = DDanDDan/SignUpView.swift; sourceTree = SOURCE_ROOT; };
+		F8C10C172C57955C0037D6A5 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = DDanDDan/LoginView.swift; sourceTree = SOURCE_ROOT; };
 		F8C10C192C57970B0037D6A5 /* SignUpTermView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTermView.swift; sourceTree = "<group>"; };
 		F8FD4FAD2C7A09F900147C4F /* SignUpCalorieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCalorieView.swift; sourceTree = "<group>"; };
-		F8FD4FAF2C7A0FF600147C4F /* SignUpCalorieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCalorieViewModel.swift; sourceTree = "<group>"; };
+		F8FD4FAF2C7A0FF600147C4F /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,19 +238,13 @@
 		F8311F9A2C7068C4000455ED /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				F88663CD2CC8ED5A008DB860 /* Error */,
 				F809E2F82CBD05E4001BE099 /* User */,
 				36BAF1CB2CA48B9600BEBCE7 /* Home */,
 				F859C0462C7068D6007B886A /* SignUp */,
+				F859C0462C7068D6007B886A /* Auth */,
 			);
 			path = Entity;
-			sourceTree = "<group>";
-		};
-		F84B21C12C9021CE009FE6F3 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				F8FD4FAF2C7A0FF600147C4F /* SignUpCalorieViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		F84B21C22C902255009FE6F3 /* Onboarding */ = {
@@ -257,12 +267,13 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
-		F859C0462C7068D6007B886A /* SignUp */ = {
+		F859C0462C7068D6007B886A /* Auth */ = {
 			isa = PBXGroup;
 			children = (
 				F859C0472C7068DF007B886A /* SignUpData.swift */,
+				F88663D42CC8EE89008DB860 /* LoginData.swift */,
 			);
-			path = SignUp;
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		F8773BBB2CA54194009A608F /* UpdateNickname */ = {
@@ -281,6 +292,38 @@
 				F8773BC12CA54E49009A608F /* UpdateCalorieViewModel.swift */,
 			);
 			path = UpdateCalorie;
+			sourceTree = "<group>";
+		};
+		F88663CA2CC8ED0A008DB860 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F88663CB2CC8ED14008DB860 /* NetworkManager.swift */,
+				F88663D02CC8EDD4008DB860 /* UserNetwork.swift */,
+				F88663D22CC8EE29008DB860 /* AuthNetwork.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		F88663CD2CC8ED5A008DB860 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				F88663CE2CC8ED65008DB860 /* NetworkError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		F88663DD2CC9E69D008DB860 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				F8C10C192C57970B0037D6A5 /* SignUpTermView.swift */,
+				F8FD4FAF2C7A0FF600147C4F /* SignUpViewModel.swift */,
+				F88663DF2CCB3585008DB860 /* SignUpRepository.swift */,
+				F859C0492C706A2D007B886A /* SignUpEggView.swift */,
+				F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */,
+				F8FD4FAD2C7A09F900147C4F /* SignUpCalorieView.swift */,
+				F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */,
+			);
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 		F89A2EBA2C7C80AF00FE3A36 /* Util */ = {
@@ -314,6 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */,
+				F88663CA2CC8ED0A008DB860 /* Network */,
 				F84B21C32C902270009FE6F3 /* Setting */,
 				362864AF2C89E76200029452 /* Info.plist */,
 				362864902C89BF9900029452 /* Resource */,
@@ -321,7 +365,7 @@
 				F89A2EBA2C7C80AF00FE3A36 /* Util */,
 				F8311F9A2C7068C4000455ED /* Entity */,
 				F8311F952C7060B3000455ED /* Components */,
-				F8C10C142C57950D0037D6A5 /* SignUp */,
+				F8C10C142C57950D0037D6A5 /* Login */,
 				F84B21C22C902255009FE6F3 /* Onboarding */,
 				F8AB33332C2EAD2F00BC16C9 /* Preview Content */,
 			);
@@ -336,18 +380,15 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		F8C10C142C57950D0037D6A5 /* SignUp */ = {
+		F8C10C142C57950D0037D6A5 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				F8C10C172C57955C0037D6A5 /* SignUpView.swift */,
-				F8C10C192C57970B0037D6A5 /* SignUpTermView.swift */,
-				F859C0492C706A2D007B886A /* SignUpEggView.swift */,
-				F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */,
-				F8FD4FAD2C7A09F900147C4F /* SignUpCalorieView.swift */,
-				F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */,
-				F84B21C12C9021CE009FE6F3 /* ViewModel */,
+				F8C10C172C57955C0037D6A5 /* LoginView.swift */,
+				F88663D62CC8F0D2008DB860 /* LoginViewModel.swift */,
+				F88663D92CC8F952008DB860 /* LoginRepository.swift */,
+				F88663DD2CC9E69D008DB860 /* SignUp */,
 			);
-			path = SignUp;
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -438,7 +479,9 @@
 				36C1FE0E2CA4B3E7007CA188 /* PetArchiveView.swift in Sources */,
 				F859C04A2C706A2D007B886A /* SignUpEggView.swift in Sources */,
 				36022B732CCAA04000D360C0 /* HomeButton.swift in Sources */,
-				F8FD4FB02C7A0FF600147C4F /* SignUpCalorieViewModel.swift in Sources */,
+				F88663DA2CC8F952008DB860 /* LoginRepository.swift in Sources */,
+				F88663CF2CC8ED65008DB860 /* NetworkError.swift in Sources */,
+				F8FD4FB02C7A0FF600147C4F /* SignUpViewModel.swift in Sources */,
 				F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */,
 				F809E2FA2CBD05F5001BE099 /* UserData.swift in Sources */,
 				362864A82C89D64100029452 /* Font.swift in Sources */,
@@ -452,10 +495,12 @@
 				F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */,
 				F809E2FE2CBD0841001BE099 /* DeleteUserConfirmView.swift in Sources */,
 				F80DF7332CB384F8004FF1F2 /* SettingTermView.swift in Sources */,
+				F88663D32CC8EE29008DB860 /* AuthNetwork.swift in Sources */,
 				F859C0482C7068DF007B886A /* SignUpData.swift in Sources */,
 				36BAF1CD2CA48BAE00BEBCE7 /* HomeModel.swift in Sources */,
 				36C1FE0A2CA4AAAE007CA188 /* SuccessView.swift in Sources */,
 				F8C10C182C57955C0037D6A5 /* SignUpView.swift in Sources */,
+				F8C10C182C57955C0037D6A5 /* LoginView.swift in Sources */,
 				F809E2FC2CBD06A1001BE099 /* UserManager.swift in Sources */,
 				F8773BBD2CA541F4009A608F /* UpdateNicknameViewModel.swift in Sources */,
 				F8758CF12C8EDF6B0038CCBB /* HealthKitManager.swift in Sources */,
@@ -464,9 +509,14 @@
 				F80DF73B2CB3DA38004FF1F2 /* DeleteUserViewModel.swift in Sources */,
 				F89A2EB92C7C7F0500FE3A36 /* SignUpSuccessView.swift in Sources */,
 				F80DF7392CB3DA2C004FF1F2 /* DeleteUserView.swift in Sources */,
+				F88663CC2CC8ED14008DB860 /* NetworkManager.swift in Sources */,
 				F8773BC02CA54A02009A608F /* UpdateCalorieView.swift in Sources */,
 				36BAF1C72CA483BC00BEBCE7 /* HomeView.swift in Sources */,
+				F88663D12CC8EDD4008DB860 /* UserNetwork.swift in Sources */,
+				F88663D52CC8EE89008DB860 /* LoginData.swift in Sources */,
+				F88663E02CCB3585008DB860 /* SignUpRepository.swift in Sources */,
 				F8C10C1A2C57970B0037D6A5 /* SignUpTermView.swift in Sources */,
+				F88663D72CC8F0D2008DB860 /* LoginViewModel.swift in Sources */,
 				F80DF7362CB38861004FF1F2 /* WebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

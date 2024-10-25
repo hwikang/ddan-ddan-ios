@@ -18,15 +18,23 @@ struct DDanDDanApp: App {
     var body: some Scene {
         
         WindowGroup {
+            
             if user.accessToken != nil {
-                //TODO: 메인 연결
-                
-            } else if UserDefaultValue.needToShowOnboarding {
-                OnboardingView()
+              
+                if user.isSignUpRequired() {
+                    SignUpTermView(viewModel: SignUpViewModel(repository: SignUpRepository()))
+                } else {
+                    // 메인뷰 진입
+                }
             } else {
-                SignUpView()
+                if UserDefaultValue.needToShowOnboarding {
+                    OnboardingView()
+                } else {
+                    LoginView(viewModel: LoginViewModel(repository: LoginRepository()))
+                }
             }
             
         }
     }
 }
+

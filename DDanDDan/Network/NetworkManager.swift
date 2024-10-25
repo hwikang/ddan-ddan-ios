@@ -19,14 +19,16 @@ public struct NetworkManager {
          
     }()
 
-    public func request<T:Decodable> (url: String, method: HTTPMethod, parameters: Parameters? = nil,
+    public func request<T:Decodable> (url: String, method: HTTPMethod,
+                                      headers: HTTPHeaders? = nil,
+                                      parameters: Parameters? = nil,
                                       encoding: ParameterEncoding = URLEncoding.default) async -> Result<T, NetworkError> {
         guard let url = URL(string: baseURL + url) else {
             return .failure(NetworkError.urlError)
         }
         print("url - \(url)")
         
-        let result = await session.request(url, method: method, parameters: parameters, encoding: encoding)
+        let result = await session.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers)
             .validate().serializingData().response
         if let error = result.error { return .failure(NetworkError.requestFailed(error.errorDescription ?? ""))}
         guard let data = result.data else { return .failure(NetworkError.dataNil) }

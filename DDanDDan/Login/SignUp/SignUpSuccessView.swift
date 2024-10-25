@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct SignUpSuccessView: View {
+    public let viewModel: SignUpViewModelProtocol
     @Binding public var path: [SignUpPath]
+    
     var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
@@ -27,15 +29,17 @@ struct SignUpSuccessView: View {
                 Spacer()
                 
                 GreenButton(action: {
-                    path.removeAll()
-                    path.append(.main)
+//                    path.removeAll()
+//                    path.append(.main)
+                    Task {
+                        await viewModel.login()
+                    }
                 }, title: "시작하기", disabled: .constant(false))
             }
         }
     }
-    
 }
 
 #Preview {
-    SignUpSuccessView(path: .constant([]))
+    SignUpSuccessView(viewModel: SignUpViewModel(repository: SignUpRepository()), path: .constant([]))
 }
