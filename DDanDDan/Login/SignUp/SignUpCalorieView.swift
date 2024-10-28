@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct SignUpCalorieView: View {
-    private let viewModel: SignUpCalorieViewModel = SignUpCalorieViewModel()
-    @State public var signUpData: SignUpData
+    public let viewModel: SignUpViewModelProtocol
     @State private var calorie: Int = 100
     @Binding public var path: [SignUpPath]
     
@@ -50,12 +49,9 @@ struct SignUpCalorieView: View {
                 
                 GreenButton(action: {
                     Task {
-                        if await viewModel.signUp(signupData: signUpData) {
-                            if await viewModel.login() {
-                                path.append(.success)
-                                
-                            }
-                        }
+                        //TODO: 실패처리
+                        await viewModel.updateCalorie(calorie: calorie)
+                        path.append(.success)
                     }
                 }, title: "다음", disabled: .constant(false))
             }
@@ -75,5 +71,5 @@ struct SignUpCalorieView: View {
 }
 
 #Preview {
-    SignUpCalorieView(signUpData: .init(), path: .constant([]))
+    SignUpCalorieView(viewModel: SignUpViewModel(repository: SignUpRepository()), path: .constant([]))
 }

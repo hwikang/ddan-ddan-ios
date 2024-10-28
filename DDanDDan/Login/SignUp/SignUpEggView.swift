@@ -8,11 +8,11 @@
 import SwiftUI
 
 public struct SignUpEggView: View {
+    public let viewModel: SignUpViewModelProtocol
     @State private var buttonDisabled: Bool = true
-    @State public var signUpData: SignUpData
     @State private var selectedEgg: String? = nil
     @Binding public var path: [SignUpPath]
-    
+  
     public var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
@@ -32,7 +32,7 @@ public struct SignUpEggView: View {
                 Spacer()
                 
                 GreenButton(action: {
-                    signUpData.selectedEgg = selectedEgg
+                   //TODO: update Egg
                     path.append(.nickname)
                 }, title: "다음", disabled: $buttonDisabled)
                 .onChange(of: selectedEgg) { newValue in
@@ -46,13 +46,13 @@ public struct SignUpEggView: View {
     var eggGrid: some View {
         VStack(spacing: 20) {
             HStack(spacing: 30) {
-                EggItem(selectedEgg: $selectedEgg, imageName: "eggPink", title: "Pink")
-                EggItem(selectedEgg: $selectedEgg, imageName: "eggOrange", title: "Orange")
+                EggItem(selectedEgg: $selectedEgg, imageName: "eggPink", title: "CAT")
+                EggItem(selectedEgg: $selectedEgg, imageName: "eggOrange", title: "HAMSTER")
                 
             }
             HStack(spacing: 30) {
-                EggItem(selectedEgg: $selectedEgg, imageName: "eggPurple", title: "Purple")
-                EggItem(selectedEgg: $selectedEgg, imageName: "eggPink", title: "Pink")
+                EggItem(selectedEgg: $selectedEgg, imageName: "eggPurple", title: "PENGUIN")
+                EggItem(selectedEgg: $selectedEgg, imageName: "eggBlue", title: "DOG")
                 
             }
         }.padding(.top, 75)
@@ -75,5 +75,5 @@ struct EggItem: View {
 }
 
 #Preview {
-    SignUpEggView(signUpData: .init(), path: .constant([]))
+    SignUpEggView(viewModel: SignUpViewModel(repository: SignUpRepository()), path: .constant([]))
 }

@@ -10,9 +10,12 @@ import Foundation
 actor UserManager: ObservableObject {
     static let shared = UserManager()
     
-    //TODO: 목데이터 제거
-    private var userData: UserData? = .init(id: "", name: "강휘", purposeCalorie: 100, foodQuantity: 2, toyQuantity: 2)
     @MainActor @Published var accessToken: String? = UserDefaultValue.acessToken
+    private var userData: UserData?
+    @MainActor public var kakaoToken: String?
+    private var refreshToken: String? = UserDefaultValue.refreshToken
+    @MainActor private var isOnboardingComplete: Bool = false
+
     private init() {
     }
     
@@ -24,8 +27,30 @@ actor UserManager: ObservableObject {
         return self.userData
     }
     
+    func setToken(accessToken: String, refreshToken: String) async {
+        self.refreshToken = refreshToken
+        await MainActor.run {
+            self.accessToken = accessToken
+           
+        }
+    }
+    @MainActor
+    func isSignUpRequired() -> Bool {
+        !isOnboardingComplete
+    }
+    func login(loginData: LoginData) async {
+        refreshToken = loginData.refreshToken
+        userData = loginData.user
+       
+        await MainActor.run {
+            isOnboardingComplete = loginData.isOnboardingComplete
+            accessToken = loginData.accessToken
+           
+        }
+    }
     func logout() async {
         userData = nil
+        refreshToken = nil
         await MainActor.run {
             accessToken = nil
         }

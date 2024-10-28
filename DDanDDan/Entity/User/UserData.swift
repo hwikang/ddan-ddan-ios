@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserData {
+public struct UserData: Decodable {
     var id: String
     var name: String
     var purposeCalorie: Int
