@@ -10,7 +10,7 @@ import SwiftUI
 public struct SignUpEggView: View {
     public let viewModel: SignUpViewModelProtocol
     @State private var buttonDisabled: Bool = true
-    @State private var selectedEgg: String? = nil
+    @State private var selectedEgg: PetType? = nil
     @Binding public var path: [SignUpPath]
   
     public var body: some View {
@@ -32,8 +32,13 @@ public struct SignUpEggView: View {
                 Spacer()
                 
                 GreenButton(action: {
-                   //TODO: update Egg
-                    path.append(.nickname)
+                    guard let selectedEgg = selectedEgg else { return }
+                    Task {
+                        if await viewModel.updatePet(petType: selectedEgg) {
+                            path.append(.nickname)
+                        }
+                    }
+                  
                 }, title: "다음", disabled: $buttonDisabled)
                 .onChange(of: selectedEgg) { newValue in
                     buttonDisabled = selectedEgg == nil
@@ -46,13 +51,13 @@ public struct SignUpEggView: View {
     var eggGrid: some View {
         VStack(spacing: 20) {
             HStack(spacing: 30) {
-                EggItem(selectedEgg: $selectedEgg, imageName: "eggPink", title: "CAT")
-                EggItem(selectedEgg: $selectedEgg, imageName: "eggOrange", title: "HAMSTER")
+                EggItem(selectedEgg: $selectedEgg, imageName: "eggPink", type: .pinkCat)
+                EggItem(selectedEgg: $selectedEgg, imageName: "eggOrange", type: .greenHam)
                 
             }
             HStack(spacing: 30) {
-                EggItem(selectedEgg: $selectedEgg, imageName: "eggPurple", title: "PENGUIN")
-                EggItem(selectedEgg: $selectedEgg, imageName: "eggBlue", title: "DOG")
+                EggItem(selectedEgg: $selectedEgg, imageName: "eggPurple", type: .purpleDog)
+                EggItem(selectedEgg: $selectedEgg, imageName: "eggBlue", type: .bluePenguin)
                 
             }
         }.padding(.top, 75)
@@ -60,17 +65,17 @@ public struct SignUpEggView: View {
 }
 
 struct EggItem: View {
-    @Binding var selectedEgg: String?
-    public let imageName: String, title: String
+    @Binding var selectedEgg: PetType?
+    public let imageName: String, type: PetType
     
     var body: some View {
         Image(imageName)
             .onTapGesture {
-                selectedEgg = title
+                selectedEgg = type
             }
             .overlay(RoundedRectangle(cornerRadius: 8)
                 .strokeBorder(Color(red: 19/255, green: 230/255, blue: 149/255),
-                              lineWidth: selectedEgg == title ? 3 : 0))
+                              lineWidth: selectedEgg == type ? 3 : 0))
     }
 }
 
