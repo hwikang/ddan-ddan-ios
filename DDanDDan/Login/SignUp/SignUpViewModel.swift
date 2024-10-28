@@ -33,7 +33,7 @@ struct SignUpViewModel: SignUpViewModelProtocol {
     private func setMainPet(petID: String) async -> Bool {
         let result = await repository.setMainPet(petID: petID)
         switch result {
-        case .success(let mainPet):
+        case .success:
            
             return true
         case .failure(let failure):

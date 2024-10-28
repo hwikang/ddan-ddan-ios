@@ -57,6 +57,7 @@
 		F88FC6DC2CCF3B110033D4C9 /* PetsNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FC6DB2CCF3B110033D4C9 /* PetsNetwork.swift */; };
 		F88FC6DF2CCF3BF70033D4C9 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FC6DE2CCF3BF70033D4C9 /* Pet.swift */; };
 		F88FC6E12CCF64150033D4C9 /* MainPet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FC6E02CCF64150033D4C9 /* MainPet.swift */; };
+		F88FC6E32CCF6C6A0033D4C9 /* SettingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FC6E22CCF6C6A0033D4C9 /* SettingRepository.swift */; };
 		F89A2EB92C7C7F0500FE3A36 /* SignUpSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */; };
 		F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */; };
 		F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */; };
@@ -160,6 +161,7 @@
 		F88FC6DB2CCF3B110033D4C9 /* PetsNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsNetwork.swift; sourceTree = "<group>"; };
 		F88FC6DE2CCF3BF70033D4C9 /* Pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
 		F88FC6E02CCF64150033D4C9 /* MainPet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPet.swift; sourceTree = "<group>"; };
+		F88FC6E22CCF6C6A0033D4C9 /* SettingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRepository.swift; sourceTree = "<group>"; };
 		F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSuccessView.swift; sourceTree = "<group>"; };
 		F8AB332A2C2EAD2E00BC16C9 /* DDanDDan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDanDDan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDanDDanApp.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 			isa = PBXGroup;
 			children = (
 				F84B21C42C90227A009FE6F3 /* SettingView.swift */,
+				F88FC6E22CCF6C6A0033D4C9 /* SettingRepository.swift */,
 				F80DF7372CB3DA1C004FF1F2 /* DeleteUser */,
 				F80DF7342CB384FB004FF1F2 /* SettingTerm */,
 				F8773BBE2CA549EE009A608F /* UpdateCalorie */,
@@ -718,6 +721,7 @@
 				F88FC6E12CCF64150033D4C9 /* MainPet.swift in Sources */,
 				F84B21C52C90227A009FE6F3 /* SettingView.swift in Sources */,
 				F8311F992C7060E8000455ED /* GreenButton.swift in Sources */,
+				F88FC6E32CCF6C6A0033D4C9 /* SettingRepository.swift in Sources */,
 				F8758CEF2C8EDF630038CCBB /* DialogView.swift in Sources */,
 				F85C2BA42C4CD651002E2237 /* UserDefaultValue.swift in Sources */,
 				F811A21E2C9D5A3200176086 /* UpdateNicknameView.swift in Sources */,

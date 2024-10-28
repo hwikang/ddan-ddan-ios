@@ -7,15 +7,27 @@
 
 import Foundation
 
-final class UpdateNicknameViewModel: ObservableObject {
+public protocol UpdateNicknameViewModelProtocol: ObservableObject {
+    var nickname: String { get set }
+    func update() async -> Bool
+}
+
+final class UpdateNicknameViewModel: UpdateNicknameViewModelProtocol {
     @Published var nickname: String
-    
-    init(nickname: String) {
+    private let repository: SettingRepositoryProtocol
+    init(nickname: String, repository: SettingRepositoryProtocol) {
         self.nickname = nickname
+        self.repository = repository
     }
    
     public func update() async -> Bool {
-        //TODO: update nickame API
-        return true
+        let result = await repository.update(name: nickname, purposeCalorie: nil)
+        switch result {
+        case .success:
+            return true
+        case .failure(let failure):
+            //TODO: 에러처리
+            return false
+        }
     }
 }

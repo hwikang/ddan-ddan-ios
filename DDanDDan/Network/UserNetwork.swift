@@ -25,7 +25,7 @@ public struct UserNetwork {
     }
     
     public func setMainPet(accessToken: String, petID: String) async -> Result<MainPet, NetworkError> {
-        var parameter: Parameters = ["petId": petID]
+        let parameter: Parameters = ["petId": petID]
         let headers: HTTPHeaders = ["Authorization": "Bearer " + accessToken]
         return await manager.request(url: "/v1/user/me/main-pet", method: .post, headers: headers,
                                      parameters: parameter, encoding: JSONEncoding.default)

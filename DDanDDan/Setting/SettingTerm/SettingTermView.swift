@@ -17,14 +17,13 @@ enum SettingTerm: CaseIterable {
         case .service: "서비스 이용약관"
         }
     }
-    
+    //TODO: 약관 url 변경
     var urlString: String {
         switch self {
         case .privacy: "https://www.naver.com"
         case .service: "https://www.naver.com"
         }
     }
-    
     
 }
 struct SettingTermView: View {

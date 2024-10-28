@@ -99,9 +99,9 @@ struct SettingView: View {
     private func getDestination(type: SettingPath) -> some View {
         switch type {
         case .updateNickname:
-            UpdateNicknameView(viewModel: UpdateNicknameViewModel(nickname: ""), path: $path)
+            UpdateNicknameView(viewModel: UpdateNicknameViewModel(nickname: "", repository: SettingRepository()), path: $path)
         case .updateCalorie:
-            UpdateCalorieView(viewModel: UpdateCalorieViewModel(calorie: 100), path: $path)
+            UpdateCalorieView(viewModel: UpdateCalorieViewModel(calorie: 100, repository: SettingRepository()), path: $path)
         case .updateTerms:
             SettingTermView()
         case .deleteUser:
@@ -109,7 +109,7 @@ struct SettingView: View {
         case .deleteUserConfirm(let reasons):
             DeleteUserConfirmView(viewModel: DeleteUserViewModel(), path: $path, selectedReason: reasons)
         default:
-            UpdateNicknameView(viewModel: UpdateNicknameViewModel(nickname: ""), path: $path)
+            EmptyView()
         }
     }
 }
