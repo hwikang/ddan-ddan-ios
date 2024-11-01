@@ -14,6 +14,8 @@ public struct UserDefaultValue {
     @UserDefault(key: "refreshToken", defaultValue: nil)
     static public var refreshToken: String?
     
+    @UserDefault(key: "isOnboardingComplete", defaultValue: false)
+    static public var isOnboardingComplete: Bool
     @UserDefault(key: "requestAuthDone", defaultValue: false)
     static public var requestAuthDone: Bool
     @UserDefault(key: "needToShowOnboarding", defaultValue: true)

@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct UpdateNicknameView: View {
-    @ObservedObject var viewModel: UpdateNicknameViewModel
+struct UpdateNicknameView<ViewModel: UpdateNicknameViewModelProtocol>: View {
+    @ObservedObject var viewModel: ViewModel
     @State private var buttonDisabled: Bool = true
     @Binding var path: [SettingPath]
     var body: some View {
@@ -56,5 +56,5 @@ struct UpdateNicknameView: View {
 }
 
 #Preview {
-    UpdateNicknameView(viewModel: UpdateNicknameViewModel(nickname: ""), path: .constant([]))
+    UpdateNicknameView(viewModel: UpdateNicknameViewModel(nickname: "", repository: SettingRepository()), path: .constant([]))
 }

@@ -63,5 +63,5 @@ struct UpdateCalorieView: View {
 }
 
 #Preview {
-    UpdateCalorieView(viewModel: UpdateCalorieViewModel(calorie: 100), path: .constant([]))
+    UpdateCalorieView(viewModel: UpdateCalorieViewModel(calorie: 100, repository: SettingRepository()), path: .constant([]))
 }

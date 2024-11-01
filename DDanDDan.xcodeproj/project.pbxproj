@@ -54,6 +54,10 @@
 		F88663D72CC8F0D2008DB860 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88663D62CC8F0D2008DB860 /* LoginViewModel.swift */; };
 		F88663DA2CC8F952008DB860 /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88663D92CC8F952008DB860 /* LoginRepository.swift */; };
 		F88663E02CCB3585008DB860 /* SignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88663DF2CCB3585008DB860 /* SignUpRepository.swift */; };
+		F88FC6DC2CCF3B110033D4C9 /* PetsNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FC6DB2CCF3B110033D4C9 /* PetsNetwork.swift */; };
+		F88FC6DF2CCF3BF70033D4C9 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FC6DE2CCF3BF70033D4C9 /* Pet.swift */; };
+		F88FC6E12CCF64150033D4C9 /* MainPet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FC6E02CCF64150033D4C9 /* MainPet.swift */; };
+		F88FC6E32CCF6C6A0033D4C9 /* SettingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FC6E22CCF6C6A0033D4C9 /* SettingRepository.swift */; };
 		F89A2EB92C7C7F0500FE3A36 /* SignUpSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */; };
 		F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */; };
 		F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */; };
@@ -154,6 +158,10 @@
 		F88663D62CC8F0D2008DB860 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		F88663D92CC8F952008DB860 /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
 		F88663DF2CCB3585008DB860 /* SignUpRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRepository.swift; sourceTree = "<group>"; };
+		F88FC6DB2CCF3B110033D4C9 /* PetsNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsNetwork.swift; sourceTree = "<group>"; };
+		F88FC6DE2CCF3BF70033D4C9 /* Pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
+		F88FC6E02CCF64150033D4C9 /* MainPet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPet.swift; sourceTree = "<group>"; };
+		F88FC6E22CCF6C6A0033D4C9 /* SettingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRepository.swift; sourceTree = "<group>"; };
 		F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSuccessView.swift; sourceTree = "<group>"; };
 		F8AB332A2C2EAD2E00BC16C9 /* DDanDDan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDanDDan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDanDDanApp.swift; sourceTree = "<group>"; };
@@ -313,10 +321,10 @@
 		F8311F9A2C7068C4000455ED /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				F88FC6DD2CCF3BED0033D4C9 /* Pet */,
 				F88663CD2CC8ED5A008DB860 /* Error */,
 				F809E2F82CBD05E4001BE099 /* User */,
 				36BAF1CB2CA48B9600BEBCE7 /* Home */,
-				F859C0462C7068D6007B886A /* SignUp */,
 				F859C0462C7068D6007B886A /* Auth */,
 			);
 			path = Entity;
@@ -334,6 +342,7 @@
 			isa = PBXGroup;
 			children = (
 				F84B21C42C90227A009FE6F3 /* SettingView.swift */,
+				F88FC6E22CCF6C6A0033D4C9 /* SettingRepository.swift */,
 				F80DF7372CB3DA1C004FF1F2 /* DeleteUser */,
 				F80DF7342CB384FB004FF1F2 /* SettingTerm */,
 				F8773BBE2CA549EE009A608F /* UpdateCalorie */,
@@ -375,6 +384,7 @@
 				F88663CB2CC8ED14008DB860 /* NetworkManager.swift */,
 				F88663D02CC8EDD4008DB860 /* UserNetwork.swift */,
 				F88663D22CC8EE29008DB860 /* AuthNetwork.swift */,
+				F88FC6DB2CCF3B110033D4C9 /* PetsNetwork.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -399,6 +409,15 @@
 				F89A2EB82C7C7F0500FE3A36 /* SignUpSuccessView.swift */,
 			);
 			path = SignUp;
+			sourceTree = "<group>";
+		};
+		F88FC6DD2CCF3BED0033D4C9 /* Pet */ = {
+			isa = PBXGroup;
+			children = (
+				F88FC6DE2CCF3BF70033D4C9 /* Pet.swift */,
+				F88FC6E02CCF64150033D4C9 /* MainPet.swift */,
+			);
+			path = Pet;
 			sourceTree = "<group>";
 		};
 		F89A2EBA2C7C80AF00FE3A36 /* Util */ = {
@@ -699,8 +718,10 @@
 				362864A82C89D64100029452 /* Font.swift in Sources */,
 				F8FD4FAE2C7A09F900147C4F /* SignUpCalorieView.swift in Sources */,
 				F8773BC22CA54E49009A608F /* UpdateCalorieViewModel.swift in Sources */,
+				F88FC6E12CCF64150033D4C9 /* MainPet.swift in Sources */,
 				F84B21C52C90227A009FE6F3 /* SettingView.swift in Sources */,
 				F8311F992C7060E8000455ED /* GreenButton.swift in Sources */,
+				F88FC6E32CCF6C6A0033D4C9 /* SettingRepository.swift in Sources */,
 				F8758CEF2C8EDF630038CCBB /* DialogView.swift in Sources */,
 				F85C2BA42C4CD651002E2237 /* UserDefaultValue.swift in Sources */,
 				F811A21E2C9D5A3200176086 /* UpdateNicknameView.swift in Sources */,
@@ -712,7 +733,8 @@
 				363CC4482CCADC6A00D2EE47 /* WatchConnectivityManager.swift in Sources */,
 				36BAF1CD2CA48BAE00BEBCE7 /* HomeModel.swift in Sources */,
 				36C1FE0A2CA4AAAE007CA188 /* SuccessView.swift in Sources */,
-				F8C10C182C57955C0037D6A5 /* SignUpView.swift in Sources */,
+				F8C10C182C57955C0037D6A5 /* LoginView.swift in Sources */,
+				F88FC6DF2CCF3BF70033D4C9 /* Pet.swift in Sources */,
 				F8C10C182C57955C0037D6A5 /* LoginView.swift in Sources */,
 				F809E2FC2CBD06A1001BE099 /* UserManager.swift in Sources */,
 				F8773BBD2CA541F4009A608F /* UpdateNicknameViewModel.swift in Sources */,
@@ -730,6 +752,7 @@
 				F88663E02CCB3585008DB860 /* SignUpRepository.swift in Sources */,
 				F8C10C1A2C57970B0037D6A5 /* SignUpTermView.swift in Sources */,
 				F88663D72CC8F0D2008DB860 /* LoginViewModel.swift in Sources */,
+				F88FC6DC2CCF3B110033D4C9 /* PetsNetwork.swift in Sources */,
 				F80DF7362CB38861004FF1F2 /* WebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

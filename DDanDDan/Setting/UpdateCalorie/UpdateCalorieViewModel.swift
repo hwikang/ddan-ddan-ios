@@ -6,18 +6,36 @@
 //
 
 import Foundation
+public protocol UpdateCalorieViewModelProtocol: ObservableObject {
+    var calorie: Int { get set }
+    func update() async -> Bool
+}
 
-final class UpdateCalorieViewModel: ObservableObject {
+final class UpdateCalorieViewModel: UpdateCalorieViewModelProtocol {
   
     @Published var calorie: Int
-    
-    init(calorie: Int) {
+    private let repository: SettingRepositoryProtocol
+
+    init(calorie: Int, repository: SettingRepositoryProtocol) {
         self.calorie = calorie
+        self.repository = repository
     }
     
     public func update() async -> Bool {
-        //TODO: update nickame API
-        return true
+        guard let userName = await getUserName() else { return false }
+        let result = await repository.update(name: userName, purposeCalorie: calorie)
+        switch result {
+        case .success:
+            return true
+        case .failure(let failure):
+            //TODO: 에러처리
+            return false
+        }
+    }
+    
+    private func getUserName() async -> String? {
+        let user = await UserManager.shared.getUserData()
+        return user?.name
     }
     
     public func increaseCalorie() {

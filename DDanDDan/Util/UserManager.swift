@@ -14,9 +14,10 @@ actor UserManager: ObservableObject {
     private var userData: UserData?
     @MainActor public var kakaoToken: String?
     private var refreshToken: String? = UserDefaultValue.refreshToken
-    @MainActor private var isOnboardingComplete: Bool = false
+    @MainActor private var isOnboardingComplete: Bool = UserDefaultValue.isOnboardingComplete
 
     private init() {
+        
     }
     
     func setUserData(_ data: UserData) {
@@ -34,14 +35,18 @@ actor UserManager: ObservableObject {
            
         }
     }
+    
     @MainActor
     func isSignUpRequired() -> Bool {
         !isOnboardingComplete
     }
+    
     func login(loginData: LoginData) async {
         refreshToken = loginData.refreshToken
         userData = loginData.user
-       
+        UserDefaultValue.acessToken = loginData.accessToken
+        UserDefaultValue.refreshToken = loginData.refreshToken
+        UserDefaultValue.isOnboardingComplete = loginData.isOnboardingComplete
         await MainActor.run {
             isOnboardingComplete = loginData.isOnboardingComplete
             accessToken = loginData.accessToken

@@ -21,11 +21,11 @@ struct HomeKcalModel {
 }
 
 
-enum PetType {
-  case pinkCat
-  case greenHam
-  case purpleDog
-  case bluePenguin
+public enum PetType: String, Decodable {
+  case pinkCat = "CAT"
+  case greenHam = "HAMSTER"
+  case purpleDog = "DOG"
+  case bluePenguin = "PENGUIN"
 }
 
 struct ListItem {

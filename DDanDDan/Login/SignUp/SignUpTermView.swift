@@ -15,6 +15,7 @@ public enum SignUpPath: Hashable {
     case calorie
     case success
     case main
+    case viewTerm(url:String)
 }
 
 public struct SignUpTermView: View {
@@ -55,19 +56,21 @@ public struct SignUpTermView: View {
                         TermButton(title: "서비스 이용약관", imageName: serviceTermAgree ? "checkboxSelected" :"checkbox", pointTitle: "(필수)") {
                             serviceTermAgree.toggle()
                         } viewTerm: {
-                            //TODO: 약관
-                            print("term")
+                            //TODO: 약관 url 변경
+                            path.append(.viewTerm(url: "https://www.naver.com"))
                         }
                         .padding(.top, 12)
                         TermButton(title: "개인정보 처리방침", imageName:privacyTermAgree ? "checkboxSelected" :"checkbox", pointTitle: "(필수)") {
                             privacyTermAgree.toggle()
                         }viewTerm: {
-                            //TODO: 약관
-                            print("term")
+                            //TODO: 약관 url 변경
+                            path.append(.viewTerm(url: "https://www.naver.com"))
                         }
                         .padding(.top, 12)
-                    }.frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal, 20)
+                        
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 20)
                     
                     Spacer()
                     
@@ -88,6 +91,7 @@ public struct SignUpTermView: View {
                 }
                 
             }
+          
         }
        
     }
