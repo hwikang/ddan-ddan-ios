@@ -24,7 +24,7 @@ struct DDanDDanApp: App {
                 if user.isSignUpRequired() {
                     SignUpTermView(viewModel: SignUpViewModel(repository: SignUpRepository()))
                 } else {
-                    // 메인뷰 진입
+                    HomeView(viewModel: HomeViewModel(repository: HomeRepository()))
                 }
             } else {
                 if UserDefaultValue.needToShowOnboarding {
