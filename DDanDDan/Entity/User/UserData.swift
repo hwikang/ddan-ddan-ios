@@ -14,3 +14,16 @@ public struct UserData: Decodable {
     var foodQuantity: Int
     var toyQuantity: Int
 }
+
+public struct DailyInfo: Decodable {
+    var id: String
+    var userId: String
+    var date: String
+    var calorie: Int
+}
+
+
+public struct DailyUserData: Decodable {
+    var user: UserData
+    var dailyInfo: DailyInfo
+}
