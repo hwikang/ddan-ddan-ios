@@ -20,7 +20,17 @@ public struct UserDefaultValue {
     static public var requestAuthDone: Bool
     @UserDefault(key: "needToShowOnboarding", defaultValue: true)
     static public var needToShowOnboarding: Bool
-
+    
+    // Main
+    @UserDefault(key: "purposeKcal", defaultValue: 0)
+    static public var purposeKcal: Int
+    @UserDefault(key: "userId", defaultValue: "")
+    static public var userId: String
+    @UserDefault(key: "petId", defaultValue: "")
+    static public var petId: String
+    
+    @UserDefault(key: "petType", defaultValue: "DOG")
+    static public var petType: String
 }
 
 @propertyWrapper
