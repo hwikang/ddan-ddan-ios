@@ -8,11 +8,46 @@
 import SwiftUI
 import HealthKit
 
+enum HomePath: Hashable, CaseIterable {
+    static var allCases: [HomePath] {
+        [.setting, .petArchive, .achieveGoalKcal, .earnFeed, .eranThreeDay, .newPet, .upgradePet]
+    }
+
+    case setting
+    case petArchive
+    case achieveGoalKcal
+    case earnFeed
+    case eranThreeDay
+    case newPet
+    case upgradePet
+    
+    var description: String {
+        switch self {
+        case .setting:
+            return "설정"
+        case .petArchive:
+            return "펫 보관함"
+        case .achieveGoalKcal:
+            return "목표 칼로리 달성"
+        case .earnFeed:
+            return "먹이 획득"
+        case .eranThreeDay:
+            return "3일 연속 달성 보상"
+        case .newPet:
+            return "새로운 펫"
+        case .upgradePet:
+            return "펫 레벨 업그레이드"
+        }
+    }
+}
+
 struct HomeView: View {
+    @State public var path: [SettingPath] = []
     @ObservedObject var viewModel: HomeViewModel
     
+    
     var body: some View {
-        NavigationView {  // 최상단에서 NavigationView로 감쌈
+        NavigationStack(path: $path) {
             ZStack {
                 Color(.backgroundBlack)
                     .ignoresSafeArea()
@@ -115,6 +150,26 @@ struct HomeView: View {
         .frame(maxWidth: .infinity)
         .frame(height: 66)
         .padding(.horizontal, 32)
+    }
+    
+    @ViewBuilder
+    private func getDestination(type: HomePath) -> some View {
+        switch type {
+        case .setting:
+            SettingView()
+        case .petArchive:
+            PetArchiveView()
+        case .achieveGoalKcal:
+            EmptyView() // 달성알럿
+        case .earnFeed:
+            EmptyView() // 먹어 알럿
+        case .eranThreeDay:
+            SuccessView()
+        case .newPet:
+            EmptyView()
+        case .upgradePet:
+            LevelUpView()
+        }
     }
 }
 
