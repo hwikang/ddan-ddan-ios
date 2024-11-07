@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct DeleteUserView: View {
+    @ObservedObject public var coordinator: AppCoordinator
+    
     @State var selectedReason: Set<String> = []
-    @Binding public var path: [SettingPath]
     private let reasons: [String] = [
         "쓰지 않는 앱이에요", "오류가 생겨서 쓸 수 없어요", "개인정보가 불안해요", "앱 사용법을 모르겠어요", "기타"
     ]
@@ -35,7 +36,7 @@ struct DeleteUserView: View {
                 .listStyle(.plain)
                 Spacer()
                 GreenButton(action: {
-                    path.append(.deleteUserConfirm(reasons: selectedReason))
+                    coordinator.push(to: .deleteUserConfirm(reasons: selectedReason))
                 }, title: "탈퇴하기", disabled: .constant(selectedReason.isEmpty))
             }
         }
@@ -75,5 +76,5 @@ struct DeleteUserReasonButton: View {
 }
 
 #Preview {
-    DeleteUserView(path: .constant([]))
+    DeleteUserView(coordinator: AppCoordinator())
 }

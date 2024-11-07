@@ -10,7 +10,7 @@ import SwiftUI
 struct SignUpCalorieView: View {
     public let viewModel: SignUpViewModelProtocol
     @State private var calorie: Int = 100
-    @Binding public var path: [SignUpPath]
+    @ObservedObject var coordinator: AppCoordinator
     
     var body: some View {
         ZStack {
@@ -51,7 +51,7 @@ struct SignUpCalorieView: View {
                     Task {
                         //TODO: 실패처리
                         await viewModel.updateCalorie(calorie: calorie)
-                        path.append(.success)
+                        coordinator.push(to: .nickname)
                     }
                 }, title: "다음", disabled: .constant(false))
             }
@@ -71,5 +71,5 @@ struct SignUpCalorieView: View {
 }
 
 #Preview {
-    SignUpCalorieView(viewModel: SignUpViewModel(repository: SignUpRepository()), path: .constant([]))
+    SignUpCalorieView(viewModel: SignUpViewModel(repository: SignUpRepository()), coordinator: AppCoordinator())
 }

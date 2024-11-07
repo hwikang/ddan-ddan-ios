@@ -21,9 +21,9 @@ struct SignUpViewModel: SignUpViewModelProtocol {
         let result = await repository.addPet(petType: petType)
         switch result {
         case .success(let pet):
-           
+            UserDefaultValue.petType = pet.type.rawValue
+            UserDefaultValue.petId = pet.id
             return await setMainPet(petID: pet.id)
-           
         case .failure(let failure):
             // TODO: 에러 처리
             return false
@@ -34,7 +34,7 @@ struct SignUpViewModel: SignUpViewModelProtocol {
         let result = await repository.setMainPet(petID: petID)
         switch result {
         case .success:
-           
+            
             return true
         case .failure(let failure):
             // TODO: 에러 처리
@@ -54,6 +54,7 @@ struct SignUpViewModel: SignUpViewModelProtocol {
     }
     public func updateCalorie(calorie: Int) async -> Bool {
         let result = await repository.update(name: nil, purposeCalorie: calorie)
+        UserDefaultValue.purposeKcal = calorie
         switch result {
         case .success:
             return true

@@ -23,10 +23,10 @@ public struct SignUpTermView: View {
     @State private var privacyTermAgree: Bool = false
     @State private var buttonDisabled: Bool = true
     public let viewModel: SignUpViewModelProtocol
-    @State public var path: [SignUpPath] = []
+    @ObservedObject var coordinator: AppCoordinator
     
     public var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $coordinator.navigationPath) {
             
             ZStack {
                 Color.black.edgesIgnoringSafeArea(.all)
@@ -57,14 +57,14 @@ public struct SignUpTermView: View {
                             serviceTermAgree.toggle()
                         } viewTerm: {
                             //TODO: 약관 url 변경
-                            path.append(.viewTerm(url: "https://www.naver.com"))
+                            coordinator.push(to: .viewTerm(url: "https://www.naver.com"))
                         }
                         .padding(.top, 12)
                         TermButton(title: "개인정보 처리방침", imageName:privacyTermAgree ? "checkboxSelected" :"checkbox", pointTitle: "(필수)") {
                             privacyTermAgree.toggle()
                         }viewTerm: {
                             //TODO: 약관 url 변경
-                            path.append(.viewTerm(url: "https://www.naver.com"))
+                            coordinator.push(to: .viewTerm(url: "https://www.naver.com"))
                         }
                         .padding(.top, 12)
                         
@@ -75,23 +75,22 @@ public struct SignUpTermView: View {
                     Spacer()
                     
                     GreenButton(action: {
-                        path.append(.egg)
+                        coordinator.push(to: .egg)
                     }, title: "시작하기", disabled: $buttonDisabled)
                     
                 }
             } 
             .navigationDestination(for: SignUpPath.self) { path in
                 switch path {
-                case .term: SignUpTermView(viewModel: SignUpViewModel(repository: SignUpRepository()))
-                case .egg: SignUpEggView(viewModel: viewModel, path: $path)
-                case .nickname: SignUpNicknameView(viewModel: viewModel, path: $path)
-                case .calorie: SignUpCalorieView(viewModel: viewModel, path: $path)
-                case .success: SignUpSuccessView(viewModel: viewModel, path: $path)
-                case .main: SettingView()
+                case .term: SignUpTermView(viewModel: SignUpViewModel(repository: SignUpRepository()), coordinator: coordinator)
+                case .egg: SignUpEggView(viewModel: viewModel, coordinator: coordinator)
+                case .nickname: SignUpNicknameView(viewModel: viewModel, coordinator: coordinator)
+                case .calorie: SignUpCalorieView(viewModel: viewModel, coordinator: coordinator)
+                case .success: SignUpSuccessView(viewModel: viewModel, coordinator: coordinator)
+                case .main: SettingView(coordinator: coordinator)
                 case .viewTerm(url: let url):
-                    EmptyView()
+                    WebView(url: url)
                 }
-                
             }
           
         }
@@ -138,6 +137,6 @@ struct TermButton: View {
 }
 
 #Preview {
-    SignUpTermView(viewModel: SignUpViewModel(repository: SignUpRepository()))
+    SignUpTermView(viewModel: SignUpViewModel(repository: SignUpRepository()), coordinator: AppCoordinator())
 }
 

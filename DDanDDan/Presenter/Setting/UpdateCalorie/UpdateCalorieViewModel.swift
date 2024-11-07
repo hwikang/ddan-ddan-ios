@@ -26,6 +26,7 @@ final class UpdateCalorieViewModel: UpdateCalorieViewModelProtocol {
         let result = await repository.update(name: userName, purposeCalorie: calorie)
         switch result {
         case .success:
+            UserDefaultValue.purposeKcal = calorie
             return true
         case .failure(let failure):
             //TODO: 에러처리

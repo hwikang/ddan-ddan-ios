@@ -9,10 +9,10 @@ import SwiftUI
 
 struct DeleteUserConfirmView: View {
     @ObservedObject var viewModel: DeleteUserViewModel
-    @Binding public var path: [SettingPath]
+    @ObservedObject public var coordinator: AppCoordinator
     public let selectedReason: Set<String>
+    
     var body: some View {
-        
         ZStack {
             Color.backgroundBlack.edgesIgnoringSafeArea(.all)
             VStack(alignment: .leading) {
@@ -35,7 +35,7 @@ struct DeleteUserConfirmView: View {
                 GreenButton(action: {
                     Task {
                         if await viewModel.deleteUser(reason: selectedReason) {
-                            path.removeAll()
+                            coordinator.popToRoot()
                         }
                     }
                 }, title: "탈퇴하기", disabled: .constant(selectedReason.isEmpty))
@@ -46,5 +46,5 @@ struct DeleteUserConfirmView: View {
 }
 
 #Preview {
-    DeleteUserConfirmView(viewModel: DeleteUserViewModel(), path: .constant([]), selectedReason: [])
+    DeleteUserConfirmView(viewModel: DeleteUserViewModel(), coordinator: AppCoordinator(), selectedReason: [])
 }

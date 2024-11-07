@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SignUpSuccessView: View {
     public let viewModel: SignUpViewModelProtocol
-    @Binding public var path: [SignUpPath]
+    @ObservedObject var coordinator: AppCoordinator
     
     var body: some View {
         ZStack {
@@ -29,8 +29,8 @@ struct SignUpSuccessView: View {
                 Spacer()
                 
                 GreenButton(action: {
-                    path.removeAll()
-                    path.append(.main)
+                    coordinator.navigationPath.removeLast(coordinator.navigationPath.count - 1)
+                    coordinator.push(to: .main)
                     Task {
                         await viewModel.login()
                     }
@@ -41,5 +41,5 @@ struct SignUpSuccessView: View {
 }
 
 #Preview {
-    SignUpSuccessView(viewModel: SignUpViewModel(repository: SignUpRepository()), path: .constant([]))
+    SignUpSuccessView(viewModel: SignUpViewModel(repository: SignUpRepository()), coordinator: AppCoordinator())
 }

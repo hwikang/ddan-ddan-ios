@@ -11,7 +11,7 @@ public struct SignUpEggView: View {
     public let viewModel: SignUpViewModelProtocol
     @State private var buttonDisabled: Bool = true
     @State private var selectedEgg: PetType? = nil
-    @Binding public var path: [SignUpPath]
+    @ObservedObject var coordinator: AppCoordinator
   
     public var body: some View {
         ZStack {
@@ -35,7 +35,7 @@ public struct SignUpEggView: View {
                     guard let selectedEgg = selectedEgg else { return }
                     Task {
                         if await viewModel.updatePet(petType: selectedEgg) {
-                            path.append(.nickname)
+                            coordinator.push(to: .nickname)
                         }
                     }
                   
@@ -80,5 +80,5 @@ struct EggItem: View {
 }
 
 #Preview {
-    SignUpEggView(viewModel: SignUpViewModel(repository: SignUpRepository()), path: .constant([]))
+    SignUpEggView(viewModel: SignUpViewModel(repository: SignUpRepository()), coordinator: AppCoordinator())
 }

@@ -10,8 +10,8 @@ import SwiftUI
 struct UpdateCalorieView: View {
     @ObservedObject var viewModel: UpdateCalorieViewModel
     @State private var buttonDisabled: Bool = true
-    @Binding var path: [SettingPath]
-
+    @ObservedObject public var coordinator: AppCoordinator
+    
     var body: some View {
         ZStack {
             Color.backgroundBlack.edgesIgnoringSafeArea(.all)
@@ -49,7 +49,7 @@ struct UpdateCalorieView: View {
                 GreenButton(action: {
                     Task {
                         if await viewModel.update() {
-                            path.removeLast()
+                            coordinator.pop()
                         }
                     }
                             
@@ -63,5 +63,5 @@ struct UpdateCalorieView: View {
 }
 
 #Preview {
-    UpdateCalorieView(viewModel: UpdateCalorieViewModel(calorie: 100, repository: SettingRepository()), path: .constant([]))
+    UpdateCalorieView(viewModel: UpdateCalorieViewModel(calorie: 100, repository: SettingRepository()), coordinator: AppCoordinator())
 }

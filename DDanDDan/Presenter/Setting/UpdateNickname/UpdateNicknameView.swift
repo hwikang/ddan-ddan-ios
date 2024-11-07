@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct UpdateNicknameView<ViewModel: UpdateNicknameViewModelProtocol>: View {
+    @ObservedObject public var coordinator: AppCoordinator
     @ObservedObject var viewModel: ViewModel
     @State private var buttonDisabled: Bool = true
-    @Binding var path: [SettingPath]
+    
     var body: some View {
         ZStack {
             Color.backgroundBlack.edgesIgnoringSafeArea(.all)
@@ -40,7 +41,7 @@ struct UpdateNicknameView<ViewModel: UpdateNicknameViewModelProtocol>: View {
                 GreenButton(action: {
                     Task {
                         if await viewModel.update() {
-                            path.removeLast()
+                            coordinator.pop()
                         }
                     }
                   
@@ -56,5 +57,5 @@ struct UpdateNicknameView<ViewModel: UpdateNicknameViewModelProtocol>: View {
 }
 
 #Preview {
-    UpdateNicknameView(viewModel: UpdateNicknameViewModel(nickname: "", repository: SettingRepository()), path: .constant([]))
+    UpdateNicknameView(coordinator: AppCoordinator(), viewModel: UpdateNicknameViewModel(nickname: "", repository: SettingRepository()))
 }

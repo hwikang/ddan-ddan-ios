@@ -11,7 +11,7 @@ public struct SignUpNicknameView: View {
     public let viewModel: SignUpViewModelProtocol
     @State private var buttonDisabled: Bool = true
     @State private var nickname: String = ""
-    @Binding public var path: [SignUpPath]
+    @ObservedObject var coordinator: AppCoordinator
     
     public var body: some View {
         ZStack {
@@ -43,7 +43,7 @@ public struct SignUpNicknameView: View {
                 GreenButton(action: {
                     Task {
                         if await viewModel.updateNickname(name: nickname) {
-                            path.append(.calorie)
+                            coordinator.push(to: .nickname)
                             
                         }
                     }
@@ -58,5 +58,5 @@ public struct SignUpNicknameView: View {
 }
 
 #Preview {
-    SignUpNicknameView(viewModel: SignUpViewModel(repository: SignUpRepository()), path: .constant([]))
+    SignUpNicknameView(viewModel: SignUpViewModel(repository: SignUpRepository()), coordinator: AppCoordinator())
 }
