@@ -15,6 +15,12 @@ public struct UserData: Decodable {
     var toyQuantity: Int
 }
 
+public struct HomeUserInfo {
+    var purposeCalorie: Int
+    var foodQuantity: Int
+    var toyQuantity: Int
+}
+
 public struct DailyInfo: Decodable {
     var id: String
     var userId: String
