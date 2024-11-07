@@ -19,18 +19,20 @@ enum HomePath: Hashable {
 }
 
 struct HomeView: View {
-    @State private var path: [HomePath] = []
-    @ObservedObject var viewModel: HomeViewModel
+    @ObservedObject var coordinator: AppCoordinator
+    @StateObject var viewModel: HomeViewModel
     
-    init(viewModel: HomeViewModel) {
-        self.viewModel = viewModel
+    @State private var showImageDialog = false
+    
+    init(viewModel: HomeViewModel, coordinator: AppCoordinator) {
+        self.coordinator = coordinator
+        self._viewModel = StateObject(wrappedValue: viewModel) 
     }
     
     var body: some View {
-        NavigationStack(path: $path) {
-            ZStack {
-                Color(.backgroundBlack)
-                    .ignoresSafeArea()
+        ZStack {
+            Color(.backgroundBlack)
+                .ignoresSafeArea()
                 VStack {
                     navigationBar
                         .padding(.bottom, 16)
@@ -50,23 +52,24 @@ struct HomeView: View {
                     levelView
                         .padding(.bottom, 20)
                     actionButtonView
-                }
-                .frame(maxHeight: .infinity, alignment: .top)
             }
-            .onAppear {
-                HealthKitManager.shared.requestAuthorization { auth in
-                    print("HealthKit auth: \(auth)")
-                }
-                Task {
-                    await viewModel.fetchHomeInfo()
-                }
-                print(path)
-            }
-            .navigationDestination(for: HomePath.self) { path in
-                getDestination(type: path)
-            }
-            .navigationBarHidden(true)
+            .frame(maxHeight: .infinity, alignment: .top)
         }
+        .navigationDestination(for: HomePath.self) { path in
+            switch path {
+            case .achieveGoalKcal:
+                SuccessView()
+            case .setting:
+                SettingView(coordinator: coordinator)
+            case .petArchive:
+                PetArchiveView(viewModel: PetArchiveViewModel(repository: HomeRepository()), coordinator: coordinator)
+            case .earnFeed, .eranThreeDay, .newPet:
+                EmptyView()
+            case .upgradePet:
+                LevelUpView()
+            }
+        }
+        .navigationBarHidden(true)
     }
 }
 
@@ -75,8 +78,7 @@ extension HomeView {
     var navigationBar: some View {
         HStack {
             Button(action: {
-                path.append(.petArchive) // 아카이브 화면으로 이동
-                print(path)
+                coordinator.push(to: .petArchive)
             }) {
                 Image(.iconDocs)
             }
@@ -84,8 +86,7 @@ extension HomeView {
             .padding(.leading, 20)
             
             Button(action: {
-                path.append(.setting) // 설정 화면으로 이동
-                print(path)
+                coordinator.push(to: .setting)
             }) {
                 Image(.iconSetting)
             }
