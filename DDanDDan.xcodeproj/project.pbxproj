@@ -19,6 +19,9 @@
 		3650CCCD2CCAA22500ED5967 /* NeoDunggeunmoPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 362864B92C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf */; };
 		3650CCCE2CCAA22B00ED5967 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362864A72C89D64100029452 /* Font.swift */; };
 		3650CCD22CCAB7BD00ED5967 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8758CF02C8EDF6B0038CCBB /* HealthKitManager.swift */; };
+		367A796B2CDCB2060055771B /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A796A2CDCB2060055771B /* HomeRepository.swift */; };
+		367A796D2CDCB30A0055771B /* PetArchiveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A796C2CDCB30A0055771B /* PetArchiveModel.swift */; };
+		367A796F2CDCBC210055771B /* PathString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A796E2CDCBC210055771B /* PathString.swift */; };
 		36BAF1C72CA483BC00BEBCE7 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BAF1C62CA483BC00BEBCE7 /* HomeView.swift */; };
 		36BAF1CD2CA48BAE00BEBCE7 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BAF1CC2CA48BAE00BEBCE7 /* HomeModel.swift */; };
 		36C1FE052CA4A4EC007CA188 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C1FE042CA4A4EC007CA188 /* HomeViewModel.swift */; };
@@ -120,6 +123,9 @@
 		362864AF2C89E76200029452 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		362864B92C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeoDunggeunmoPro-Regular.ttf"; sourceTree = "<group>"; };
 		363CC4472CCADC6A00D2EE47 /* WatchConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityManager.swift; sourceTree = "<group>"; };
+		367A796A2CDCB2060055771B /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
+		367A796C2CDCB30A0055771B /* PetArchiveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetArchiveModel.swift; sourceTree = "<group>"; };
+		367A796E2CDCBC210055771B /* PathString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathString.swift; sourceTree = "<group>"; };
 		36BAF1C62CA483BC00BEBCE7 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		36BAF1CC2CA48BAE00BEBCE7 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		36BAF1CE2CA4919C00BEBCE7 /* HomeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButton.swift; sourceTree = "<group>"; };
@@ -248,21 +254,36 @@
 		36340DF12CC4DE060001AF2A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				36022B722CCAA04000D360C0 /* HomeButton.swift */,
-				36C1FE092CA4AAAE007CA188 /* SuccessView.swift */,
-				36C1FE0B2CA4AAE7007CA188 /* LevelUpView.swift */,
-				36C1FE0D2CA4B3E7007CA188 /* PetArchiveView.swift */,
-				36BAF1C62CA483BC00BEBCE7 /* HomeView.swift */,
+				367A79692CDCAB560055771B /* Archive */,
+				367A79682CDCAB4D0055771B /* Challenge */,
+				367A79672CDCAB390055771B /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		36340DF22CC4DE0D0001AF2A /* ViewModels */ = {
+		367A79672CDCAB390055771B /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				36C1FE042CA4A4EC007CA188 /* HomeViewModel.swift */,
+				36022B722CCAA04000D360C0 /* HomeButton.swift */,
 			);
-			path = ViewModels;
+			path = Components;
+			sourceTree = "<group>";
+		};
+		367A79682CDCAB4D0055771B /* Challenge */ = {
+			isa = PBXGroup;
+			children = (
+				36C1FE0B2CA4AAE7007CA188 /* LevelUpView.swift */,
+				36C1FE092CA4AAAE007CA188 /* SuccessView.swift */,
+			);
+			path = Challenge;
+			sourceTree = "<group>";
+		};
+		367A79692CDCAB560055771B /* Archive */ = {
+			isa = PBXGroup;
+			children = (
+				36C1FE0D2CA4B3E7007CA188 /* PetArchiveView.swift */,
+			);
+			path = Archive;
 			sourceTree = "<group>";
 		};
 		36BAF1CB2CA48B9600BEBCE7 /* Home */ = {
@@ -276,7 +297,9 @@
 		36C1FE082CA4A83D007CA188 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				36340DF22CC4DE0D0001AF2A /* ViewModels */,
+				367A796A2CDCB2060055771B /* HomeRepository.swift */,
+				36C1FE042CA4A4EC007CA188 /* HomeViewModel.swift */,
+				36BAF1C62CA483BC00BEBCE7 /* HomeView.swift */,
 				36340DF12CC4DE060001AF2A /* Views */,
 			);
 			path = Home;
@@ -385,6 +408,7 @@
 				F88663D02CC8EDD4008DB860 /* UserNetwork.swift */,
 				F88663D22CC8EE29008DB860 /* AuthNetwork.swift */,
 				F88FC6DB2CCF3B110033D4C9 /* PetsNetwork.swift */,
+				367A796E2CDCBC210055771B /* PathString.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -416,6 +440,7 @@
 			children = (
 				F88FC6DE2CCF3BF70033D4C9 /* Pet.swift */,
 				F88FC6E02CCF64150033D4C9 /* MainPet.swift */,
+				367A796C2CDCB30A0055771B /* PetArchiveModel.swift */,
 			);
 			path = Pet;
 			sourceTree = "<group>";
@@ -706,6 +731,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				367A796D2CDCB30A0055771B /* PetArchiveModel.swift in Sources */,
 				36C1FE052CA4A4EC007CA188 /* HomeViewModel.swift in Sources */,
 				36C1FE0E2CA4B3E7007CA188 /* PetArchiveView.swift in Sources */,
 				F859C04A2C706A2D007B886A /* SignUpEggView.swift in Sources */,
@@ -714,6 +740,7 @@
 				F88663CF2CC8ED65008DB860 /* NetworkError.swift in Sources */,
 				F8FD4FB02C7A0FF600147C4F /* SignUpViewModel.swift in Sources */,
 				F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */,
+				367A796B2CDCB2060055771B /* HomeRepository.swift in Sources */,
 				F809E2FA2CBD05F5001BE099 /* UserData.swift in Sources */,
 				362864A82C89D64100029452 /* Font.swift in Sources */,
 				F8FD4FAE2C7A09F900147C4F /* SignUpCalorieView.swift in Sources */,
@@ -754,6 +781,7 @@
 				F88663D72CC8F0D2008DB860 /* LoginViewModel.swift in Sources */,
 				F88FC6DC2CCF3B110033D4C9 /* PetsNetwork.swift in Sources */,
 				F80DF7362CB38861004FF1F2 /* WebView.swift in Sources */,
+				367A796F2CDCBC210055771B /* PathString.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
