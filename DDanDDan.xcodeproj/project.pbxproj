@@ -305,6 +305,7 @@
 				F88FC6E22CCF6C6A0033D4C9 /* SettingRepository.swift */,
 				F88663D92CC8F952008DB860 /* LoginRepository.swift */,
 				367A796A2CDCB2060055771B /* HomeRepository.swift */,
+				F88663DF2CCB3585008DB860 /* SignUpRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -448,7 +449,6 @@
 			children = (
 				F8C10C192C57970B0037D6A5 /* SignUpTermView.swift */,
 				F8FD4FAF2C7A0FF600147C4F /* SignUpViewModel.swift */,
-				F88663DF2CCB3585008DB860 /* SignUpRepository.swift */,
 				F859C0492C706A2D007B886A /* SignUpEggView.swift */,
 				F827E5582C748CBC00C5B320 /* SignUpNicknameView.swift */,
 				F8FD4FAD2C7A09F900147C4F /* SignUpCalorieView.swift */,
