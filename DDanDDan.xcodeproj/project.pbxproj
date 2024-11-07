@@ -22,6 +22,7 @@
 		367A796B2CDCB2060055771B /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A796A2CDCB2060055771B /* HomeRepository.swift */; };
 		367A796D2CDCB30A0055771B /* PetArchiveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A796C2CDCB30A0055771B /* PetArchiveModel.swift */; };
 		367A796F2CDCBC210055771B /* PathString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A796E2CDCBC210055771B /* PathString.swift */; };
+		367A79732CDD092A0055771B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A79722CDD092A0055771B /* AppCoordinator.swift */; };
 		36BAF1C72CA483BC00BEBCE7 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BAF1C62CA483BC00BEBCE7 /* HomeView.swift */; };
 		36BAF1CD2CA48BAE00BEBCE7 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BAF1CC2CA48BAE00BEBCE7 /* HomeModel.swift */; };
 		36C1FE052CA4A4EC007CA188 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C1FE042CA4A4EC007CA188 /* HomeViewModel.swift */; };
@@ -126,6 +127,7 @@
 		367A796A2CDCB2060055771B /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
 		367A796C2CDCB30A0055771B /* PetArchiveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetArchiveModel.swift; sourceTree = "<group>"; };
 		367A796E2CDCBC210055771B /* PathString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathString.swift; sourceTree = "<group>"; };
+		367A79722CDD092A0055771B /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		36BAF1C62CA483BC00BEBCE7 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		36BAF1CC2CA48BAE00BEBCE7 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		36BAF1CE2CA4919C00BEBCE7 /* HomeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButton.swift; sourceTree = "<group>"; };
@@ -264,7 +266,6 @@
 		367A79672CDCAB390055771B /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				36022B722CCAA04000D360C0 /* HomeButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -286,6 +287,28 @@
 			path = Archive;
 			sourceTree = "<group>";
 		};
+		367A79702CDD08950055771B /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				F8311F952C7060B3000455ED /* Components */,
+				F8C10C142C57950D0037D6A5 /* Login */,
+				F84B21C22C902255009FE6F3 /* Onboarding */,
+				36C1FE082CA4A83D007CA188 /* Home */,
+				F84B21C32C902270009FE6F3 /* Setting */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		367A79712CDD08C90055771B /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				F88FC6E22CCF6C6A0033D4C9 /* SettingRepository.swift */,
+				F88663D92CC8F952008DB860 /* LoginRepository.swift */,
+				367A796A2CDCB2060055771B /* HomeRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		36BAF1CB2CA48B9600BEBCE7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,7 +320,6 @@
 		36C1FE082CA4A83D007CA188 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				367A796A2CDCB2060055771B /* HomeRepository.swift */,
 				36C1FE042CA4A4EC007CA188 /* HomeViewModel.swift */,
 				36BAF1C62CA483BC00BEBCE7 /* HomeView.swift */,
 				36340DF12CC4DE060001AF2A /* Views */,
@@ -334,6 +356,7 @@
 		F8311F952C7060B3000455ED /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				36022B722CCAA04000D360C0 /* HomeButton.swift */,
 				F8758CEE2C8EDF630038CCBB /* DialogView.swift */,
 				F80DF7352CB38861004FF1F2 /* WebView.swift */,
 				F8311F982C7060E8000455ED /* GreenButton.swift */,
@@ -365,7 +388,6 @@
 			isa = PBXGroup;
 			children = (
 				F84B21C42C90227A009FE6F3 /* SettingView.swift */,
-				F88FC6E22CCF6C6A0033D4C9 /* SettingRepository.swift */,
 				F80DF7372CB3DA1C004FF1F2 /* DeleteUser */,
 				F80DF7342CB384FB004FF1F2 /* SettingTerm */,
 				F8773BBE2CA549EE009A608F /* UpdateCalorie */,
@@ -483,16 +505,14 @@
 			isa = PBXGroup;
 			children = (
 				F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */,
-				F88663CA2CC8ED0A008DB860 /* Network */,
-				F84B21C32C902270009FE6F3 /* Setting */,
-				362864AF2C89E76200029452 /* Info.plist */,
+				367A79722CDD092A0055771B /* AppCoordinator.swift */,
 				362864902C89BF9900029452 /* Resource */,
-				36C1FE082CA4A83D007CA188 /* Home */,
 				F89A2EBA2C7C80AF00FE3A36 /* Util */,
+				F88663CA2CC8ED0A008DB860 /* Network */,
+				367A79712CDD08C90055771B /* Repository */,
+				367A79702CDD08950055771B /* Presenter */,
+				362864AF2C89E76200029452 /* Info.plist */,
 				F8311F9A2C7068C4000455ED /* Entity */,
-				F8311F952C7060B3000455ED /* Components */,
-				F8C10C142C57950D0037D6A5 /* Login */,
-				F84B21C22C902255009FE6F3 /* Onboarding */,
 				F8AB33332C2EAD2F00BC16C9 /* Preview Content */,
 			);
 			path = DDanDDan;
@@ -511,7 +531,6 @@
 			children = (
 				F8C10C172C57955C0037D6A5 /* LoginView.swift */,
 				F88663D62CC8F0D2008DB860 /* LoginViewModel.swift */,
-				F88663D92CC8F952008DB860 /* LoginRepository.swift */,
 				F88663DD2CC9E69D008DB860 /* SignUp */,
 			);
 			path = Login;
@@ -759,6 +778,7 @@
 				F859C0482C7068DF007B886A /* SignUpData.swift in Sources */,
 				363CC4482CCADC6A00D2EE47 /* WatchConnectivityManager.swift in Sources */,
 				36BAF1CD2CA48BAE00BEBCE7 /* HomeModel.swift in Sources */,
+				367A79732CDD092A0055771B /* AppCoordinator.swift in Sources */,
 				36C1FE0A2CA4AAAE007CA188 /* SuccessView.swift in Sources */,
 				F8C10C182C57955C0037D6A5 /* LoginView.swift in Sources */,
 				F88FC6DF2CCF3BF70033D4C9 /* Pet.swift in Sources */,

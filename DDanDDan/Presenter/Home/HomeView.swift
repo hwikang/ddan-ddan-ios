@@ -8,11 +8,7 @@
 import SwiftUI
 import HealthKit
 
-enum HomePath: Hashable, CaseIterable {
-    static var allCases: [HomePath] {
-        [.setting, .petArchive, .achieveGoalKcal, .earnFeed, .eranThreeDay, .newPet, .upgradePet]
-    }
-
+enum HomePath: Hashable {
     case setting
     case petArchive
     case achieveGoalKcal
@@ -20,29 +16,10 @@ enum HomePath: Hashable, CaseIterable {
     case eranThreeDay
     case newPet
     case upgradePet
-    
-    var description: String {
-        switch self {
-        case .setting:
-            return "설정"
-        case .petArchive:
-            return "펫 보관함"
-        case .achieveGoalKcal:
-            return "목표 칼로리 달성"
-        case .earnFeed:
-            return "먹이 획득"
-        case .eranThreeDay:
-            return "3일 연속 달성 보상"
-        case .newPet:
-            return "새로운 펫"
-        case .upgradePet:
-            return "펫 레벨 업그레이드"
-        }
-    }
 }
 
 struct HomeView: View {
-    @State public var path: [HomePath] = []
+    @State private var path: [HomePath] = []
     @ObservedObject var viewModel: HomeViewModel
     
     init(viewModel: HomeViewModel) {
@@ -77,30 +54,39 @@ struct HomeView: View {
                 .frame(maxHeight: .infinity, alignment: .top)
             }
             .onAppear {
-                /// 권한을 받지 않았을 경우 권한 받기 필요
                 HealthKitManager.shared.requestAuthorization { auth in
                     print("HealthKit auth: \(auth)")
                 }
                 Task {
                     await viewModel.fetchHomeInfo()
                 }
+                print(path)
+            }
+            .navigationDestination(for: HomePath.self) { path in
+                getDestination(type: path)
             }
             .navigationBarHidden(true)
         }
     }
-    
+}
+
+extension HomeView {
     /// 네비게이션 바
     var navigationBar: some View {
         HStack {
-            NavigationLink(destination: PetArchiveView()) {
+            Button(action: {
+                path.append(.petArchive) // 아카이브 화면으로 이동
+                print(path)
+            }) {
                 Image(.iconDocs)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading, 20)
             
-            Button {
-                print("설정 클릭됨")
-            } label: {
+            Button(action: {
+                path.append(.setting) // 설정 화면으로 이동
+                print(path)
+            }) {
                 Image(.iconSetting)
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
@@ -122,7 +108,6 @@ struct HomeView: View {
         }
     }
     
-    /// 레벨 정보 뷰
     var levelView: some View {
         VStack {
             HStack {
@@ -132,7 +117,7 @@ struct HomeView: View {
                     .foregroundStyle(.white)
                     .background(.borderGray)
                     .cornerRadius(8)
-                    .frame(maxWidth: .infinity,alignment: .leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 
                 let adjustedGoalKcal = max(Double(viewModel.homePetModel.goalKcal), 1)
                 let percentage = Double(viewModel.currentKcalModel.currentKcal) / adjustedGoalKcal * 100
@@ -140,7 +125,7 @@ struct HomeView: View {
                 Text(String(format: "%.0f%%", percentage))
                     .font(.subTitle1_semibold16)
                     .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity,alignment: .trailing)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
             }
             Image(.gaugeBackground)
                 .resizable()
@@ -150,7 +135,6 @@ struct HomeView: View {
         .padding(.horizontal, 32)
     }
     
-    /// 액션 버튼 뷰
     var actionButtonView: some View {
         HStack(spacing: 12) {
             HomeButton(buttonTitle: "먹이주기", count: viewModel.homePetModel.feedCount)
@@ -181,7 +165,3 @@ struct HomeView: View {
         }
     }
 }
-
-//#Preview {
-//  HomeView(viewModel: HomeViewModel(model: HomeModel(petType: .purpleDog, goalKcal: 200, currentKcal: 50, level: 4, feedCount: 3, toyCount: 2)))
-//}
