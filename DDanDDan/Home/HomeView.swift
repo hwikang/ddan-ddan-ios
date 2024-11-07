@@ -42,9 +42,12 @@ enum HomePath: Hashable, CaseIterable {
 }
 
 struct HomeView: View {
-    @State public var path: [SettingPath] = []
+    @State public var path: [HomePath] = []
     @ObservedObject var viewModel: HomeViewModel
     
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         NavigationStack(path: $path) {
@@ -77,6 +80,9 @@ struct HomeView: View {
                 /// 권한을 받지 않았을 경우 권한 받기 필요
                 HealthKitManager.shared.requestAuthorization { auth in
                     print("HealthKit auth: \(auth)")
+                }
+                Task {
+                    await viewModel.fetchHomeInfo()
                 }
             }
             .navigationBarHidden(true)
@@ -127,7 +133,10 @@ struct HomeView: View {
                     .background(.borderGray)
                     .cornerRadius(8)
                     .frame(maxWidth: .infinity,alignment: .leading)
-                let percentage = Double(viewModel.currentKcalModel.currentKcal) / Double(viewModel.homePetModel.goalKcal) * 100
+                
+                let adjustedGoalKcal = max(Double(viewModel.homePetModel.goalKcal), 1)
+                let percentage = Double(viewModel.currentKcalModel.currentKcal) / adjustedGoalKcal * 100
+                
                 Text(String(format: "%.0f%%", percentage))
                     .font(.subTitle1_semibold16)
                     .foregroundStyle(.white)
