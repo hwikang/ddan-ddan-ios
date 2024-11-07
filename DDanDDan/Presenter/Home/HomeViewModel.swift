@@ -9,19 +9,30 @@ import SwiftUI
 import HealthKit
 
 final class HomeViewModel: ObservableObject {
-    @Published var homePetModel: HomeModel = .init(petType: .purpleDog, goalKcal: 0, feedCount: 0, toyCount: 0, level: 0)
+    @Published var homePetModel: HomeModel = .init(
+        petType: .init(rawValue: UserDefaultValue.petType) ?? .purpleDog,
+        goalKcal: UserDefaultValue.purposeKcal,
+        feedCount: 0,
+        toyCount: 0,
+        level: 0
+    )
     @Published var currentKcalModel: HomeKcalModel = .init(currentKcal: 0, level: 1)
     @Published var isGoalMet: Bool = false
+    @Published var archeivePercent: Double = 0
     
     private let homeRepository: HomeRepositoryProtocol
-
+    
     init(repository: HomeRepositoryProtocol) {
         self.homeRepository = repository
+        Task {
+            await fetchHomeInfo()
+        }
         initialCurrnetKcalModel()
     }
     
     @MainActor
     func fetchHomeInfo() async {
+        
         let userInfo = await homeRepository.getUserInfo()
         let mainPetInfo = await homeRepository.getMainPetInfo()
         
@@ -35,6 +46,10 @@ final class HomeViewModel: ObservableObject {
                 toyCount: userData.toyQuantity,
                 level: petData.mainPet.level
             )
+            self.archeivePercent = petData.mainPet.expPercent
+            self.currentKcalModel.level = petData.mainPet.level
+            UserDefaultValue.petType = petData.mainPet.type.rawValue
+            UserDefaultValue.petId = petData.mainPet.id
             
             await updateGoalStatus()
         }
@@ -43,8 +58,10 @@ final class HomeViewModel: ObservableObject {
     /// 오늘의 칼로리 정보 초기화
     func initialCurrnetKcalModel() {
         HealthKitManager.shared.readActiveEnergyBurned { kcal in
-            print("오늘의 칼로리: \(kcal)")
-            self.currentKcalModel.currentKcal = Int(kcal)
+            DispatchQueue.main.async {
+                print("오늘의 칼로리: \(kcal)")
+                self.currentKcalModel.currentKcal = Int(kcal)
+            }
         }
     }
     
@@ -133,4 +150,12 @@ final class HomeViewModel: ObservableObject {
             return Image(.pinkEgg).resizable() // Default character
         }
     }
+    
+    @MainActor
+    private func updateGoalStatus() async {
+        let goalCalories = Double(homePetModel.goalKcal)
+        let goalMet = HealthKitManager.shared.checkIfGoalMet(goalCalories: goalCalories)
+        self.isGoalMet = goalMet
+    }
+    
 }
