@@ -29,8 +29,8 @@ struct SignUpSuccessView: View {
                 Spacer()
                 
                 GreenButton(action: {
-//                    path.removeAll()
-//                    path.append(.main)
+                    path.removeAll()
+                    path.append(.main)
                     Task {
                         await viewModel.login()
                     }

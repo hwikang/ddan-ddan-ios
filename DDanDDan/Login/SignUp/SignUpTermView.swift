@@ -88,6 +88,8 @@ public struct SignUpTermView: View {
                 case .calorie: SignUpCalorieView(viewModel: viewModel, path: $path)
                 case .success: SignUpSuccessView(viewModel: viewModel, path: $path)
                 case .main: SettingView()
+                case .viewTerm(url: let url):
+                    EmptyView()
                 }
                 
             }
