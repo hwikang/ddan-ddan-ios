@@ -9,6 +9,7 @@ import Foundation
 
 protocol HomeRepositoryProtocol {
     // MARK: GET Method
+    func getUserInfo() async -> Result<HomeUserInfo, NetworkError>
     func getMainPetInfo() async -> Result<MainPet, NetworkError>
     func getPetArchive() async -> Result<PetArchiveModel, NetworkError>
     func getSpecificPet(petId: String) async -> Result<Pet, NetworkError>
@@ -31,16 +32,25 @@ public struct HomeRepository: HomeRepositoryProtocol {
     private let petNetwork = PetsNetwork()
     
     // MARK: - GET
+    public func getUserInfo() async -> Result<HomeUserInfo, NetworkError> {
+        guard let accessToken = await UserManager.shared.accessToken else { return .failure(.requestFailed("Access Token Nil"))}
+        
+        print(accessToken)
+        let result = await userNetwork.fetchUserInfo(accessToken: accessToken)
+        
+        return result.map { userData in
+            HomeUserInfo(
+                purposeCalorie: userData.purposeCalorie,
+                foodQuantity: userData.foodQuantity,
+                toyQuantity: userData.toyQuantity
+            )
+        }
+    }
     
     public func getMainPetInfo() async -> Result<MainPet, NetworkError> {
         guard let accessToken = await UserManager.shared.accessToken else { return .failure(.requestFailed("Access Token Nil"))}
         
         let result = await userNetwork.fetchUserMainPet(accessToken: accessToken)
-        
-        if case .success(let userData) = result {
-            
-        }
-        
         return result
     }
     
@@ -48,11 +58,6 @@ public struct HomeRepository: HomeRepositoryProtocol {
         guard let accessToken = await UserManager.shared.accessToken else { return .failure(.requestFailed("Access Token Nil"))}
         
         let result = await petNetwork.fetchPetArchieve(accessToken: accessToken)
-        
-        if case .success(let userData) = result {
-            
-        }
-        
         return result
     }
     
@@ -60,11 +65,6 @@ public struct HomeRepository: HomeRepositoryProtocol {
         guard let accessToken = await UserManager.shared.accessToken else { return .failure(.requestFailed("Access Token Nil"))}
         
         let result = await petNetwork.fetchSpecificPet(accessToken: accessToken, petId: petId)
-        
-        if case .success(let userData) = result {
-            
-        }
-        
         return result
     }
     
@@ -74,11 +74,6 @@ public struct HomeRepository: HomeRepositoryProtocol {
         guard let accessToken = await UserManager.shared.accessToken else { return .failure(.requestFailed("Access Token Nil"))}
         
         let result = await userNetwork.setMainPet(accessToken: accessToken, petID: petId)
-        
-        if case .success(let userData) = result {
-            
-        }
-        
         return result
     }
     
@@ -86,11 +81,6 @@ public struct HomeRepository: HomeRepositoryProtocol {
         guard let accessToken = await UserManager.shared.accessToken else { return .failure(.requestFailed("Access Token Nil"))}
         
         let result = await petNetwork.postPetFeed(accessToken: accessToken, petId: petId)
-        
-        if case .success(let userData) = result {
-            
-        }
-        
         return result
     }
     
@@ -98,11 +88,6 @@ public struct HomeRepository: HomeRepositoryProtocol {
         guard let accessToken = await UserManager.shared.accessToken else { return .failure(.requestFailed("Access Token Nil"))}
         
         let result = await petNetwork.postPetPlay(accessToken: accessToken, petId: petId)
-        
-        if case .success(let userData) = result {
-            
-        }
-        
         return result
     }
     
@@ -110,11 +95,6 @@ public struct HomeRepository: HomeRepositoryProtocol {
         guard let accessToken = await UserManager.shared.accessToken else { return .failure(.requestFailed("Access Token Nil"))}
         
         let result = await petNetwork.addPet(accessToken: accessToken, petType: petType)
-        
-        if case .success(let userData) = result {
-            
-        }
-        
         return result
     }
     
@@ -122,11 +102,6 @@ public struct HomeRepository: HomeRepositoryProtocol {
         guard let accessToken = await UserManager.shared.accessToken else { return .failure(.requestFailed("Access Token Nil"))}
         
         let result = await petNetwork.addRandomPet(accessToken: accessToken)
-        
-        if case .success(let userData) = result {
-            
-        }
-        
         return result
     }
     
@@ -134,11 +109,6 @@ public struct HomeRepository: HomeRepositoryProtocol {
         guard let accessToken = await UserManager.shared.accessToken else { return .failure(.requestFailed("Access Token Nil"))}
         
         let result = await userNetwork.patchDailyKcal(accessToken: accessToken, calorie: calorie)
-        
-        if case .success(let userData) = result {
-            
-        }
-        
         return result
     }
 }
