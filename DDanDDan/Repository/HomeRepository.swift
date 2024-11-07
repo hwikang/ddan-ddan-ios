@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol HomeRepositoryProtocol {
+public protocol HomeRepositoryProtocol {
     // MARK: GET Method
     func getUserInfo() async -> Result<HomeUserInfo, NetworkError>
     func getMainPetInfo() async -> Result<MainPet, NetworkError>
@@ -16,8 +16,8 @@ protocol HomeRepositoryProtocol {
     
     // MARK: POST Method
     func updateMainPet(petId: String) async -> Result<MainPet, NetworkError>
-    func feedPet(petId: String) async -> Result<DailyInfo, NetworkError>
-    func playPet(petId: String) async -> Result<DailyInfo, NetworkError>
+    func feedPet(petId: String) async -> Result<DailyUserData, NetworkError>
+    func playPet(petId: String) async -> Result<DailyUserData, NetworkError>
     func addNewPet(petType: PetType) async -> Result<Pet, NetworkError>
     func addNewRandomPet() async -> Result<Pet, NetworkError>
     
@@ -35,7 +35,7 @@ public struct HomeRepository: HomeRepositoryProtocol {
     public func getUserInfo() async -> Result<HomeUserInfo, NetworkError> {
         guard let accessToken = await UserManager.shared.accessToken else { return .failure(.requestFailed("Access Token Nil"))}
         
-        print(accessToken)
+       // print(accessToken)
         let result = await userNetwork.fetchUserInfo(accessToken: accessToken)
         
         return result.map { userData in
@@ -77,14 +77,14 @@ public struct HomeRepository: HomeRepositoryProtocol {
         return result
     }
     
-    public func feedPet(petId: String) async -> Result<DailyInfo, NetworkError> {
+    public func feedPet(petId: String) async -> Result<DailyUserData, NetworkError> {
         guard let accessToken = await UserManager.shared.accessToken else { return .failure(.requestFailed("Access Token Nil"))}
         
         let result = await petNetwork.postPetFeed(accessToken: accessToken, petId: petId)
         return result
     }
     
-    public func playPet(petId: String) async -> Result<DailyInfo, NetworkError> {
+    public func playPet(petId: String) async -> Result<DailyUserData, NetworkError> {
         guard let accessToken = await UserManager.shared.accessToken else { return .failure(.requestFailed("Access Token Nil"))}
         
         let result = await petNetwork.postPetPlay(accessToken: accessToken, petId: petId)

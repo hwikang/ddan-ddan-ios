@@ -81,12 +81,20 @@ final class HomeViewModel: ObservableObject {
         }
     }
     
+    func feedPet() async {
+        let result = await homeRepository.feedPet(petId: UserDefaultValue.petId)
+        
+        if case .success(let userData) = result {
+            homePetModel.feedCount = userData.user.foodQuantity
+        }
+    }
     
-    @MainActor
-    private func updateGoalStatus() async {
-        let goalCalories = Double(homePetModel.goalKcal)
-        let goalMet = HealthKitManager.shared.checkIfGoalMet(goalCalories: goalCalories)
-        self.isGoalMet = goalMet
+    func playWithPet() async {
+        let result = await homeRepository.playPet(petId: UserDefaultValue.petId)
+        
+        if case .success(let userData) = result {
+            homePetModel.toyCount = userData.user.toyQuantity
+        }
     }
     
     /// 캐릭터에 맞는 배경 이미지

@@ -33,25 +33,25 @@ struct HomeView: View {
         ZStack {
             Color(.backgroundBlack)
                 .ignoresSafeArea()
-                VStack {
-                    navigationBar
-                        .padding(.bottom, 16)
-                    kcalView
-                        .padding(.bottom, 14)
-                    ZStack {
-                        viewModel.backgroundImage()
-                            .scaledToFit()
-                            .padding(.horizontal, 53)
-                            .clipped()
-                        viewModel.characterImage()
-                            .scaledToFit()
-                            .padding(.horizontal, 141)
-                            .offset(y: 100)
-                    }
-                    .padding(.bottom, 32)
-                    levelView
-                        .padding(.bottom, 20)
-                    actionButtonView
+            VStack {
+                navigationBar
+                    .padding(.bottom, 16)
+                kcalView
+                    .padding(.bottom, 14)
+                ZStack {
+                    viewModel.backgroundImage()
+                        .scaledToFit()
+                        .padding(.horizontal, 53)
+                        .clipped()
+                    viewModel.characterImage()
+                        .scaledToFit()
+                        .padding(.horizontal, 141)
+                        .offset(y: 100)
+                }
+                .padding(.bottom, 32)
+                levelView
+                    .padding(.bottom, 20)
+                actionButtonView
             }
             .frame(maxHeight: .infinity, alignment: .top)
         }
@@ -139,30 +139,24 @@ extension HomeView {
     var actionButtonView: some View {
         HStack(spacing: 12) {
             HomeButton(buttonTitle: "먹이주기", count: viewModel.homePetModel.feedCount)
+                .onTapGesture {
+                    Task {
+                        await viewModel.feedPet()
+                    }
+                }
             HomeButton(buttonTitle: "놀아주기", count: viewModel.homePetModel.toyCount)
+                .onTapGesture {
+                    Task {
+                        await viewModel.playWithPet()
+                    }
+                }
         }
         .frame(maxWidth: .infinity)
         .frame(height: 66)
         .padding(.horizontal, 32)
     }
-    
-    @ViewBuilder
-    private func getDestination(type: HomePath) -> some View {
-        switch type {
-        case .setting:
-            SettingView()
-        case .petArchive:
-            PetArchiveView()
-        case .achieveGoalKcal:
-            EmptyView() // 달성알럿
-        case .earnFeed:
-            EmptyView() // 먹어 알럿
-        case .eranThreeDay:
-            SuccessView()
-        case .newPet:
-            EmptyView()
-        case .upgradePet:
-            LevelUpView()
-        }
-    }
+}
+
+#Preview {
+    HomeView(viewModel: HomeViewModel(repository: HomeRepository()), coordinator: AppCoordinator())
 }
