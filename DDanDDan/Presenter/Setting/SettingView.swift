@@ -81,7 +81,7 @@ struct SettingView: View {
             .navigationDestination(for: SettingPath.self, destination: { type in
                 getDestination(type: type)
             })
-            .fullScreenCover(isPresented: $showLogoutDialog) {
+            .transparentFullScreenCover(isPresented: $showLogoutDialog) {
                 DialogView(show: $showLogoutDialog, title: "정말 로그아웃 하시겠습니까", description: "", rightButtonTitle: "로그아웃", leftButtonTitle: "취소") {
                     Task {
                         await UserManager.shared.logout()
