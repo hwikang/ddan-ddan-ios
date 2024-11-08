@@ -88,6 +88,9 @@ struct SettingView: View {
                     }
                 }
             }
+            .transaction{ tran in
+                tran.disablesAnimations = true
+            }
             .listRowSeparator(.hidden)
             .listStyle(.plain)
         }
