@@ -60,6 +60,7 @@ struct DialogView: View {
             .cornerRadius(8)
             .shadow(radius: 20)
         }
+        .background(Color.clear.opacity(0))
     }
 }
 
