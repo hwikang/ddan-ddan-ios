@@ -29,8 +29,7 @@ struct SignUpSuccessView: View {
                 Spacer()
                 
                 GreenButton(action: {
-                    coordinator.navigationPath.removeLast(coordinator.navigationPath.count - 1)
-                    coordinator.push(to: .main)
+                    coordinator.popToRoot()
                     Task {
                         await viewModel.login()
                     }
