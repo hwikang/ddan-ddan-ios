@@ -11,8 +11,14 @@ struct HomeModel {
     var petType: PetType
     var goalKcal: Int
     var feedCount: Int
-  var toyCount: Int
-  var level: Int
+    var toyCount: Int
+    var level: Int
+}
+
+struct WatchPetModel {
+    var petType: PetType
+    var goalKcal: Int
+    var level: Int
 }
 
 struct HomeKcalModel {

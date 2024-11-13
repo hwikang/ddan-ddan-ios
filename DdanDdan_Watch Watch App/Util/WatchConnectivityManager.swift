@@ -11,6 +11,8 @@ import SwiftUI
 /// 워치 앱에서의 WatchConnectivity 설정
 class WatchConnectivityManager: NSObject, ObservableObject, WCSessionDelegate {
     static let shared = WatchConnectivityManager()
+    
+    @Published var watchPet: WatchPetModel?
 
     override private init() {
         super.init()
@@ -28,5 +30,11 @@ class WatchConnectivityManager: NSObject, ObservableObject, WCSessionDelegate {
     }
 
     /// 워치로 iPhone으로부터 메시지를 받았을 때 처리하는 메서드
-    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {    }
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+        if let watchPet = message["watchPet"] as? WatchPetModel {
+            DispatchQueue.main.async {
+                self.watchPet = watchPet
+            }
+        }
+    }
 }
