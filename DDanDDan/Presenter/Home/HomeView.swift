@@ -55,6 +55,20 @@ struct HomeView: View {
             }
             .frame(maxHeight: .infinity, alignment: .top)
         }
+        .transparentFullScreenCover(isPresented: $showImageDialog, content: {
+            ImageDialogView(
+                show: $showImageDialog,
+                image: .eatGraphic,
+                title: "먹이를 얻었어요!",
+                description: "사과 \(viewModel.earnFood)개",
+                buttonTitle: "획득하기"
+            ) {
+            // 이후 동작 정의 -> 서버 통신 및 뷰 업데이트
+                Task {
+                    await viewModel.patchCurrentKcal()
+                }
+            }
+        })
         .navigationDestination(for: HomePath.self) { path in
             switch path {
             case .achieveGoalKcal:

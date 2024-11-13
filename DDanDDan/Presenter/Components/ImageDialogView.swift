@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ImageDialogView: View {
     @Binding public var show: Bool
-    public let image: ImageResource, title: String, description: String, rightButtonTitle: String ,leftButtonTitle: String
-    var rightButtonHandler: (() -> Void)?
+    public let image: ImageResource, title: String, description: String, buttonTitle: String
+    var buttonHandler: (() -> Void)?
     
     var body: some View {
         ZStack {
@@ -19,19 +19,20 @@ struct ImageDialogView: View {
             
             VStack(alignment: .center) {
                 Image(image)
+                    .resizable()
+                    .frame(width: 64, height: 64)
                 Text(title)
                     .font(.headline)
                     .font(.system(size: 16, weight: .medium))
                     .foregroundStyle(Color.white)
                     .padding()
-                
                 Text(description)
                     .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(Color(red: 166/255, green: 166/255, blue: 166/255))
-                Button(rightButtonTitle) {
+                Button(buttonTitle) {
                     withAnimation {
                         show.toggle()
-                        rightButtonHandler?()
+                        buttonHandler?()
                     }
                 }
                 .frame(minWidth: 0, maxWidth: .infinity)
