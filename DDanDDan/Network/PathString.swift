@@ -19,4 +19,8 @@ enum PathString {
         static let mainPet = "/v1/user/me/main-pet"
         static let updateDailyKcal = "/v1/user/me/daily-calorie"
     }
+    
+    enum Auth {
+        static let reissue = "/v1/auth/reissue"
+    }
 }
