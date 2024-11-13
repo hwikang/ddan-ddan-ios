@@ -15,6 +15,7 @@ final class WatchViewModel: ObservableObject {
     @Published var currentKcal: Int
     @Published var currentKcalProgress: Double = 0.0
     @Published var viewConfig: (Image, Color)?
+    @Published var showLoginAlert = false
     
     init(currentKcal: Int = 0) {
         self.currentKcal = currentKcal
@@ -66,6 +67,7 @@ final class WatchViewModel: ObservableObject {
                     self.goalKcal = watchPet.goalKcal
                     self.viewConfig = configureUI(petType: watchPet.petType, level: watchPet.level)
                     self.updateProgress()
+                } else {
                     self.showLoginAlert = true 
                 }
             }

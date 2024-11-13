@@ -52,6 +52,13 @@ struct ContentView: View {
         .onTapGesture {
             isTapped.toggle()
         }
+        .alert(isPresented: $viewModel.showLoginAlert) {
+            Alert(
+                title: Text("로그인이 필요합니다"),
+                message: Text("iOS 앱에서 먼저 로그인해주세요."),
+                dismissButton: .default(Text("확인"))
+            )
+        }
     }
 }
 
