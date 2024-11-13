@@ -11,14 +11,12 @@ struct ContentView: View {
     @State private var isTapped: Bool = false
     @ObservedObject var viewModel: WatchViewModel
     
-    var petType: PetType = .dog
-    
     var centerView: some View {
         Group {
             if isTapped {
                 kcalLabel
             } else {
-                Image(viewModel.configureUI(petType: petType).0)
+                viewModel.viewConfig?.0 ?? Image(.blueEgg)
             }
         }
     }
@@ -27,7 +25,9 @@ struct ContentView: View {
         HStack(alignment: .lastTextBaseline) {
             Text("\(viewModel.currentKcal)")
                 .font(.neoDunggeunmo48)
-                .foregroundStyle(viewModel.isGoalMet ? viewModel.configureUI(petType: petType).1 : .white)
+                .foregroundStyle(
+                    viewModel.isGoalMet ? viewModel.viewConfig?.1 ?? .white : .white
+                )
             Text("kcal")
                 .font(.neoDunggeunmo16)
                 .foregroundStyle(.white)
@@ -40,7 +40,7 @@ struct ContentView: View {
             centerView
             DonutChartView(
                 targetProgress: $viewModel.currentKcalProgress,
-                lineColor: viewModel.configureUI(petType: petType).1
+                lineColor: viewModel.viewConfig?.1 ?? .blueGraphics
             )
         }
         .ignoresSafeArea()
