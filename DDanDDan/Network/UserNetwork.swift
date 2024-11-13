@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 public struct UserNetwork {
-    private let manager = NetworkManager()
+    private let manager = NetworkManager(interceptor: TokenInterceptor())
     
     // MARK: - GET
     
