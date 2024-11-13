@@ -20,6 +20,9 @@ final class HomeViewModel: ObservableObject {
     @Published var isGoalMet: Bool = false
     @Published var archeivePercent: Double = 0
     
+    @Published var earnFood: Int = 0
+    @Published var isPresentEarnFood: Bool = false
+    
     private let homeRepository: HomeRepositoryProtocol
     
     init(repository: HomeRepositoryProtocol) {
@@ -55,12 +58,22 @@ final class HomeViewModel: ObservableObject {
         }
     }
     
-    /// 오늘의 칼로리 정보 초기화
     func initialCurrnetKcalModel() {
+        let lastDate = UserDefaultValue.date
+        let currentDate = Date()
+        let calendar = Calendar.current
+        
+        // 날짜가 다르면 currentKcal을 0으로 초기화하고 저장된 날짜 업데이트
+        if !calendar.isDate(lastDate, inSameDayAs: currentDate) {
+            UserDefaultValue.currentKcal = 0
+            UserDefaultValue.date = currentDate
+        }
+        
+        // HealthKit에서 오늘의 소모 칼로리 읽기
         HealthKitManager.shared.readActiveEnergyBurned { kcal in
-            DispatchQueue.main.async {
-                print("오늘의 칼로리: \(kcal)")
-                self.currentKcalModel.currentKcal = Int(kcal)
+            DispatchQueue.main.async { [weak self] in
+                self?.currentKcalModel.currentKcal = Int(kcal)
+                self?.earnFeed()
             }
         }
     }
@@ -81,6 +94,37 @@ final class HomeViewModel: ObservableObject {
         }
     }
     
+    func earnFeed() {
+        var earnedFeed = 0
+        
+        // HealthKit에서 소모 칼로리 읽기
+        HealthKitManager.shared.readActiveEnergyBurned { kcal in
+            let increaseKcal = kcal - UserDefaultValue.currentKcal
+            
+            if increaseKcal >= 100 {
+                earnedFeed = Int(increaseKcal / 100)
+                if earnedFeed > 0 {
+                    self.earnFood = earnedFeed
+                    self.isPresentEarnFood = true
+                    
+                    UserDefaultValue.currentKcal = kcal
+                }
+            }
+        }
+    }
+    
+    func patchCurrentKcal() async {
+        let result = await homeRepository.updateDailyKcal(calorie: currentKcalModel.currentKcal)
+        
+        if case .success(let dailyInfo) = result {
+            DispatchQueue.main.async { [weak self] in
+                self?.homePetModel.feedCount = dailyInfo.user.foodQuantity
+            }
+        }
+    }
+    
+    
+    /// 먹이주기
     func feedPet() async {
         let result = await homeRepository.feedPet(petId: UserDefaultValue.petId)
         
@@ -89,6 +133,7 @@ final class HomeViewModel: ObservableObject {
         }
     }
     
+    /// 놀아주기
     func playWithPet() async {
         let result = await homeRepository.playPet(petId: UserDefaultValue.petId)
         
