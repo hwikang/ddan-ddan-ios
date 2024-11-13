@@ -9,13 +9,14 @@ import Foundation
 import Alamofire
 
 public struct NetworkManager {
-    public init() {}
     private let baseURL = "https://ddan-ddan.com"
-    private let session: Session = {
+    private let session: Session
+    
+    public init(interceptor: Interceptor? = nil) {
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .returnCacheDataElseLoad
-        return Session(configuration: config)
-    }()
+        self.session = Session(configuration: config, interceptor: interceptor)
+    }
 
     public func request<T: Decodable>(url: String, method: HTTPMethod,
                                        headers: HTTPHeaders? = nil,

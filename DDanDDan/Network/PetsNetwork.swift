@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 public struct PetsNetwork {
-    private let manager = NetworkManager()
+    private let manager = NetworkManager(interceptor: TokenInterceptor())
     
     // MARK: - GET
     
