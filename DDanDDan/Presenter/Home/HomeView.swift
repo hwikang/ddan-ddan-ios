@@ -137,7 +137,7 @@ extension HomeView {
                 let adjustedGoalKcal = max(Double(viewModel.homePetModel.goalKcal), 1)
                 let percentage = Double(viewModel.currentKcalModel.currentKcal) / adjustedGoalKcal * 100
                 
-                Text(String(format: "%.0f%%", percentage))
+                Text(String(format: "%.0f%%", viewModel.currentKcalModel.exp))
                     .font(.subTitle1_semibold16)
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity, alignment: .trailing)

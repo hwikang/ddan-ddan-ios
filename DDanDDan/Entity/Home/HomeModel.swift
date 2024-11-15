@@ -24,6 +24,7 @@ struct WatchPetModel {
 struct HomeKcalModel {
     var currentKcal: Int
     var level: Int
+    var exp: Double
 }
 
 

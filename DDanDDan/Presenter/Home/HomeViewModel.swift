@@ -10,15 +10,14 @@ import HealthKit
 
 final class HomeViewModel: ObservableObject {
     @Published var homePetModel: HomeModel = .init(
-        petType: .init(rawValue: UserDefaultValue.petType) ?? .purpleDog,
+        petType: .init(rawValue: UserDefaultValue.petType) ?? .pinkCat,
         goalKcal: UserDefaultValue.purposeKcal,
         feedCount: 0,
         toyCount: 0,
         level: 0
     )
-    @Published var currentKcalModel: HomeKcalModel = .init(currentKcal: 0, level: 1)
+    @Published var currentKcalModel: HomeKcalModel = .init(currentKcal: 0, level: 1, exp: 0)
     @Published var isGoalMet: Bool = false
-    @Published var archeivePercent: Double = 0
     
     @Published var earnFood: Int = 0
     @Published var isPresentEarnFood: Bool = false
@@ -49,8 +48,10 @@ final class HomeViewModel: ObservableObject {
                 toyCount: userData.toyQuantity,
                 level: petData.mainPet.level
             )
-            self.archeivePercent = petData.mainPet.expPercent
+            
             self.currentKcalModel.level = petData.mainPet.level
+            self.currentKcalModel.exp = petData.mainPet.expPercent
+            
             UserDefaultValue.petType = petData.mainPet.type.rawValue
             UserDefaultValue.petId = petData.mainPet.id
             
@@ -60,6 +61,7 @@ final class HomeViewModel: ObservableObject {
                 level: petData.mainPet.level
             )
             
+            print("meeage 보내기")
             WatchConnectivityManager.shared.sendMessage(message: ["watchPet" : watchData])
             
             await updateGoalStatus()
