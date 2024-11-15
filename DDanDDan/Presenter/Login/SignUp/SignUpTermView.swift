@@ -75,7 +75,7 @@ public struct SignUpTermView: View {
                     Spacer()
                     
                     GreenButton(action: {
-                        coordinator.push(to: .egg)
+                        coordinator.push(to: .nickname)
                     }, title: "시작하기", disabled: $buttonDisabled)
                     
                 }

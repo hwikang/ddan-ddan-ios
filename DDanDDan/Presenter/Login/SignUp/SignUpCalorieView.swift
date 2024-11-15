@@ -51,7 +51,7 @@ struct SignUpCalorieView: View {
                     Task {
                         //TODO: 실패처리
                         await viewModel.updateCalorie(calorie: calorie)
-                        coordinator.push(to: .nickname)
+                        coordinator.push(to: .egg)
                     }
                 }, title: "다음", disabled: .constant(false))
             }

@@ -43,7 +43,7 @@ public struct SignUpNicknameView: View {
                 GreenButton(action: {
                     Task {
                         if await viewModel.updateNickname(name: nickname) {
-                            coordinator.push(to: .nickname)
+                            coordinator.push(to: .calorie)
                             
                         }
                     }
