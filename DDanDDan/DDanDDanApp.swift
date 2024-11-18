@@ -27,25 +27,24 @@ struct DDanDDanApp: App {
 }
 
 struct ContentView: View {
-    @StateObject var user = UserManager.shared
     @EnvironmentObject var coordinator: AppCoordinator
-    @StateObject private var homeViewModel = HomeViewModel(repository: HomeRepository())
+    @StateObject var user = UserManager.shared
     
     var body: some View {
         NavigationStack(path: $coordinator.navigationPath) {
-            if user.accessToken != nil {
-                if user.isSignUpRequired() {
-                    SignUpTermView(viewModel: SignUpViewModel(repository: SignUpRepository()), coordinator: coordinator)
-                } else {
-                    HomeView(viewModel: homeViewModel, coordinator: coordinator)
-                }
-            } else {
-                if UserDefaultValue.needToShowOnboarding {
-                    OnboardingView()
-                } else {
-                    LoginView(viewModel: LoginViewModel(repository: LoginRepository()))
-                }
+            switch coordinator.rootView {
+            case .splash:
+                SplashView(viewModel: SplashViewModel(coordinator: coordinator, homeRepository: HomeRepository()))
+            case .signUp:
+                SignUpTermView(viewModel: SignUpViewModel(repository: SignUpRepository()), coordinator: coordinator)
+            case .home:
+                HomeView(repository: HomeRepository(), coordinator: coordinator)
+            case .onboarding:
+                OnboardingView()
+            case .login:
+                LoginView(viewModel: LoginViewModel(repository: LoginRepository()))
             }
         }
     }
 }
+
