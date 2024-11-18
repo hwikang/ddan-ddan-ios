@@ -24,9 +24,13 @@ struct HomeView: View {
     
     @State private var showImageDialog = false
     
-    init(viewModel: HomeViewModel, coordinator: AppCoordinator) {
+    init(repository: HomeRepositoryProtocol, coordinator: AppCoordinator) {
         self.coordinator = coordinator
-        self._viewModel = StateObject(wrappedValue: viewModel) 
+        self._viewModel = StateObject(wrappedValue: HomeViewModel(
+            repository: repository,
+            userInfo: coordinator.userInfo,
+            petInfo: coordinator.petInfo
+        ))
     }
     
     var body: some View {
@@ -177,8 +181,4 @@ extension HomeView {
         .frame(height: 66)
         .padding(.horizontal, 32)
     }
-}
-
-#Preview {
-    HomeView(viewModel: HomeViewModel(repository: HomeRepository()), coordinator: AppCoordinator())
 }

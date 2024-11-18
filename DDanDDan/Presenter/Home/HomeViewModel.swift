@@ -10,7 +10,7 @@ import HealthKit
 
 final class HomeViewModel: ObservableObject {
     @Published var homePetModel: HomeModel = .init(
-        petType: .init(rawValue: UserDefaultValue.petType) ?? .pinkCat,
+        petType: .init(rawValue: UserDefaultValue.petType) ?? .purpleDog,
         goalKcal: UserDefaultValue.purposeKcal,
         feedCount: 0,
         toyCount: 0,
@@ -19,18 +19,48 @@ final class HomeViewModel: ObservableObject {
     @Published var currentKcalModel: HomeKcalModel = .init(currentKcal: 0, level: 1, exp: 0)
     @Published var isGoalMet: Bool = false
     @Published var isHealthKitAuthorized: Bool = true // 초기값은 true로 설정
+
     
     @Published var earnFood: Int = 0
     @Published var isPresentEarnFood: Bool = false
     
     private let homeRepository: HomeRepositoryProtocol
     
-    init(repository: HomeRepositoryProtocol) {
+    init(
+        repository: HomeRepositoryProtocol,
+        userInfo: HomeUserInfo? = nil,
+        petInfo: MainPet? = nil
+    ) {
         self.homeRepository = repository
-        Task {
+        initialHomeInfo(userInfo: userInfo, petInfo: petInfo)
         checkHealthKitAuthorization()
-        }
         initialCurrnetKcalModel()
+    }
+    
+    
+    func initialHomeInfo(
+        userInfo: HomeUserInfo?,
+        petInfo: MainPet?
+    ) {
+        // Splash에서 전달된 데이터를 기반으로 초기화
+        if let userInfo = userInfo, let petInfo = petInfo {
+            self.homePetModel = HomeModel(
+                petType: petInfo.mainPet.type,
+                goalKcal: userInfo.purposeCalorie,
+                feedCount: userInfo.foodQuantity,
+                toyCount: userInfo.toyQuantity,
+                level: petInfo.mainPet.level
+            )
+            self.currentKcalModel = HomeKcalModel(
+                currentKcal: Int(UserDefaultValue.currentKcal),
+                level: petInfo.mainPet.level,
+                exp: petInfo.mainPet.expPercent
+            )
+        } else {
+            Task {
+                await fetchHomeInfo()
+            }
+        }
     }
     
     @MainActor
