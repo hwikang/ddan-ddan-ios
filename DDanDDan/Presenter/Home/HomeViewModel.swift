@@ -18,6 +18,7 @@ final class HomeViewModel: ObservableObject {
     )
     @Published var currentKcalModel: HomeKcalModel = .init(currentKcal: 0, level: 1, exp: 0)
     @Published var isGoalMet: Bool = false
+    @Published var isHealthKitAuthorized: Bool = true // 초기값은 true로 설정
     
     @Published var earnFood: Int = 0
     @Published var isPresentEarnFood: Bool = false
@@ -27,7 +28,7 @@ final class HomeViewModel: ObservableObject {
     init(repository: HomeRepositoryProtocol) {
         self.homeRepository = repository
         Task {
-            await fetchHomeInfo()
+        checkHealthKitAuthorization()
         }
         initialCurrnetKcalModel()
     }
@@ -169,4 +170,23 @@ final class HomeViewModel: ObservableObject {
         self.isGoalMet = goalMet
     }
     
+    private func checkHealthKitAuthorization() {
+        let healthKitManager = HealthKitManager.shared
+        
+        // 현재 권한 상태를 확인
+        let currentStatus = healthKitManager.checkAuthorization()
+        
+        if currentStatus == .notDetermined {
+            healthKitManager.requestAuthorization { [weak self] authorized in
+                DispatchQueue.main.async {
+                    if authorized {
+                        self?.isHealthKitAuthorized = healthKitManager.checkAuthorization() == .sharingAuthorized
+                    } else {
+                        self?.isHealthKitAuthorized = false
+                    }
+                }
+            }
+        }
+    }
+
 }

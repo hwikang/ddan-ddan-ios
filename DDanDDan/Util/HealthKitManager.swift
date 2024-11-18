@@ -31,6 +31,14 @@ class HealthKitManager: ObservableObject {
         return status == .sharingAuthorized
     }
     
+    func checkAuthorization() -> HKAuthorizationStatus {
+        guard let healthStore = healthStore else { return .notDetermined }
+        
+        let stepType = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!
+        
+        return healthStore.authorizationStatus(for: stepType)
+    }
+    
     
     func requestAuthorization(completion: @escaping (Bool) -> Void) {
         guard let healthStore = healthStore else {

@@ -69,6 +69,14 @@ struct HomeView: View {
                 }
             }
         })
+        .alert("건강 데이터 접근 권한 필요", isPresented: Binding(
+            get: { !viewModel.isHealthKitAuthorized },
+            set: { _ in viewModel.isHealthKitAuthorized = true } // Alert가 닫힐 때 true로 업데이트
+        )) {
+            Button("확인", role: .cancel) { }
+        } message: {
+            Text("건강 데이터 접근 권한이 없으면 앱이 정상적으로 동작하지 않을 수 있습니다.\n\n설정 > 앱 > 건강 > 데이터 접근 및 기기에서 설정 가능합니다.")
+        }
         .navigationDestination(for: HomePath.self) { path in
             switch path {
             case .achieveGoalKcal:
