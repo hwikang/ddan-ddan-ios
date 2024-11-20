@@ -9,16 +9,13 @@ import SwiftUI
 import HealthKit
 
 final class HomeViewModel: ObservableObject {
-    @Published var homePetModel: HomeModel = .init(
-        petType: .init(rawValue: UserDefaultValue.petType) ?? .purpleDog,
-        goalKcal: UserDefaultValue.purposeKcal,
-        feedCount: 0,
-        toyCount: 0,
-        level: 0
-    )
-    @Published var currentKcalModel: HomeKcalModel = .init(currentKcal: 0, level: 1, exp: 0)
+    @Published var homePetModel: HomeModel = .init(petType: .bluePenguin, level: 0, exp: 0, goalKcal: 0, feedCount: 0, toyCount: 0)
+    
     @Published var isGoalMet: Bool = false
+    @Published var isLevelUp: Bool = false
+    
     @Published var isHealthKitAuthorized: Bool = true // 초기값은 true로 설정
+    @Published var currentKcal = 0
     @Published var threeDaysTotalKcal: Int = 0
     
     @Published var earnFood: Int = 0
@@ -47,21 +44,15 @@ final class HomeViewModel: ObservableObject {
         if let userInfo = userInfo, let petInfo = petInfo {
             self.homePetModel = HomeModel(
                 petType: petInfo.mainPet.type,
+                level: petInfo.mainPet.level,
+                exp: Double(petInfo.mainPet.expPercent),
                 goalKcal: userInfo.purposeCalorie,
                 feedCount: userInfo.foodQuantity,
-                toyCount: userInfo.toyQuantity,
-                level: petInfo.mainPet.level
+                toyCount: userInfo.toyQuantity
             )
-            self.currentKcalModel = HomeKcalModel(
-                currentKcal: Int(UserDefaultValue.currentKcal),
-                level: petInfo.mainPet.level,
-                exp: petInfo.mainPet.expPercent
-            )
+            
+            currentKcal = Int(UserDefaultValue.currentKcal)
             self.petId = petInfo.mainPet.id
-        } else {
-            Task {
-                await fetchHomeInfo()
-            }
         }
         
         initialCurrnetKcalModel()
@@ -70,27 +61,30 @@ final class HomeViewModel: ObservableObject {
     @MainActor
     func fetchHomeInfo() async {
         
-        let userInfo = await homeRepository.getUserInfo()
-        let mainPetInfo = await homeRepository.getMainPetInfo()
+        let userData = await homeRepository.getUserInfo()
+        let mainPetData = await homeRepository.getMainPetInfo()
         
-        if case .success(let userData) = userInfo,
-           case .success(let petData) = mainPetInfo {
-            UserDefaultValue.userId = userData.id
-            UserDefaultValue.petType = petData.mainPet.type.rawValue
-            UserDefaultValue.petId = petData.mainPet.id
-            UserDefaultValue.purposeKcal = userData.purposeCalorie
+        if case .success(let userInfo) = userData,
+           case .success(let petInfo) = mainPetData {
+            UserDefaultValue.userId = userInfo.id
+            UserDefaultValue.petType = petInfo.mainPet.type.rawValue
+            UserDefaultValue.petId = petInfo.mainPet.id
+            UserDefaultValue.purposeKcal = userInfo.purposeCalorie
             
-            self.petId = petData.mainPet.id
+            self.petId = petInfo.mainPet.id
             self.homePetModel = HomeModel(
-                petType: petData.mainPet.type,
-                goalKcal: userData.purposeCalorie,
-                feedCount: userData.foodQuantity,
-                toyCount: userData.toyQuantity,
-                level: petData.mainPet.level
+                petType: petInfo.mainPet.type,
+                level: petInfo.mainPet.level,
+                exp: Double(petInfo.mainPet.expPercent),
+                goalKcal: userInfo.purposeCalorie,
+                feedCount: userInfo.foodQuantity,
+                toyCount: userInfo.toyQuantity
             )
             
-            self.currentKcalModel.level = petData.mainPet.level
-            self.currentKcalModel.exp = petData.mainPet.expPercent
+            if UserDefaultValue.level != petInfo.mainPet.level {
+                isLevelUp = true
+                UserDefaultValue.level = petInfo.mainPet.level
+            }
         }
     }
     
@@ -137,11 +131,12 @@ final class HomeViewModel: ObservableObject {
     }
     
     func patchCurrentKcal(earnedFeed: Int) async {
-        let result = await homeRepository.updateDailyKcal(calorie: currentKcalModel.currentKcal)
+        let result = await homeRepository.updateDailyKcal(calorie: currentKcal)
         
         if case .success(let dailyInfo) = result {
             DispatchQueue.main.async { [weak self] in
-                self?.homePetModel.feedCount = dailyInfo.user.foodQuantity
+                guard let self else { return }
+                self.homePetModel.feedCount = dailyInfo.user.foodQuantity
                 
                 // 지급한 칼로리만큼 업데이트
                 UserDefaultValue.currentKcal += Double(earnedFeed * 100)
@@ -152,7 +147,6 @@ final class HomeViewModel: ObservableObject {
     
     
     /// 먹이주기
-    @MainActor
     func feedPet() async {
         guard homePetModel.feedCount > 0 else {
             DispatchQueue.main.async { [weak self] in
@@ -164,16 +158,14 @@ final class HomeViewModel: ObservableObject {
         
         let result = await homeRepository.feedPet(petId: petId)
         if case .success(_) = result {
-            showRandomBubble(type: .eat)
-            homePetModel.feedCount = homePetModel.feedCount - 1
-            Task {
-                await fetchHomeInfo()
+            DispatchQueue.main.async { [weak self] in
+                self?.showRandomBubble(type: .eat)
+                self?.homePetModel.feedCount = (self?.homePetModel.feedCount ?? 1) - 1
             }
         }
     }
     
     /// 놀아주기
-    @MainActor
     func playWithPet() async {
         guard homePetModel.toyCount > 0 else {
             DispatchQueue.main.async { [weak self] in
@@ -186,14 +178,15 @@ final class HomeViewModel: ObservableObject {
         let result = await homeRepository.playPet(petId: petId)
 
         if case .success(_) = result {
-            showRandomBubble(type: .play)
-            homePetModel.toyCount = homePetModel.toyCount - 1
+            DispatchQueue.main.async { [weak self] in
+                self?.showRandomBubble(type: .play)
+                self?.homePetModel.toyCount = (self?.homePetModel.toyCount ?? 1) - 1
+            }
         }
     }
     
     // 말풍선 이미지 선택 로직
     func bubbleImage(for characterCount: Int) -> ImageResource {
-        print(characterCount)
         switch characterCount {
         case 1...3:
             return .minBubble

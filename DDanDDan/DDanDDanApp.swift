@@ -45,7 +45,7 @@ struct ContentView: View {
             case .signUp:
                 SignUpTermView(viewModel: SignUpViewModel(repository: SignUpRepository()), coordinator: coordinator)
             case .home:
-                HomeView(repository: HomeRepository(), coordinator: coordinator)
+                HomeView(coordinator: coordinator, viewModel: .init(repository: HomeRepository(), userInfo: coordinator.userInfo, petInfo: coordinator.petInfo))
             case .onboarding:
                 OnboardingView(coordinator: coordinator)
             case .login:

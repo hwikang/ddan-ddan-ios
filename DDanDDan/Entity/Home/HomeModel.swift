@@ -9,10 +9,11 @@ import SwiftUI
 
 struct HomeModel {
     var petType: PetType
+    var level: Int
+    var exp: Double
     var goalKcal: Int
     var feedCount: Int
     var toyCount: Int
-    var level: Int
 }
 
 struct WatchPetModel: Codable {
@@ -20,13 +21,6 @@ struct WatchPetModel: Codable {
     var goalKcal: Int
     var level: Int
 }
-
-struct HomeKcalModel {
-    var currentKcal: Int
-    var level: Int
-    var exp: Double
-}
-
 
 public enum PetType: String, Codable {
     case pinkCat = "CAT"
