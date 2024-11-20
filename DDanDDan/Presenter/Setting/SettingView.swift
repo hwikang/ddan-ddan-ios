@@ -110,7 +110,7 @@ struct SettingView: View {
         case .updateCalorie:
             UpdateCalorieView(viewModel: UpdateCalorieViewModel(calorie: 100, repository: SettingRepository()), coordinator: coordinator)
         case .updateTerms:
-            SettingTermView()
+            SettingTermView(coordinator: coordinator)
         case .deleteUser:
             DeleteUserView(coordinator: coordinator)
         case .deleteUserConfirm(let reasons):

@@ -27,27 +27,32 @@ enum SettingTerm: CaseIterable {
     
 }
 struct SettingTermView: View {
+    @ObservedObject public var coordinator: AppCoordinator
+    
     var body: some View {
         ZStack {
             Color.backgroundBlack.edgesIgnoringSafeArea(.all)
-            List(SettingTerm.allCases, id: \.self) { item in
-                NavigationLink(destination: WebView(url: item.urlString)) {
-                    Text(item.description)
-
+            VStack {
+                CustomNavigationBar(title: "약관 및 개인정보 처리 동의") {
+                    coordinator.pop()
                 }
-                .foregroundStyle(.white)
-                .listRowBackground(Color.backgroundBlack)
-                
+                List(SettingTerm.allCases, id: \.self) { item in
+                    NavigationLink(destination: WebView(url: item.urlString)) {
+                        Text(item.description)
+                        
+                    }
+                    .foregroundStyle(.white)
+                    .listRowBackground(Color.backgroundBlack)
+                    
+                }
+                .listRowSeparator(.hidden)
+                .listStyle(.plain)
             }
-            .listRowSeparator(.hidden)
-            .listStyle(.plain)
-            
-            
         }
-        .navigationTitle("약관 및 개인정보 처리 동의")
+        .navigationBarHidden(true)
     }
 }
 
 #Preview {
-    SettingTermView()
+    SettingTermView(coordinator: .init())
 }
