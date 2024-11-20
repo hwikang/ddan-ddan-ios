@@ -68,7 +68,7 @@ final class WatchViewModel: ObservableObject {
                     self.viewConfig = configureUI(petType: watchPet.petType, level: watchPet.level)
                     self.updateProgress()
                 } else {
-                    self.showLoginAlert = true 
+                    self.showLoginAlert = true
                 }
             }
             .store(in: &cancellables)

@@ -41,8 +41,22 @@ final class WatchConnectivityManager: NSObject, ObservableObject, WCSessionDeleg
     
     /// WCSessionDelegate 프로토콜 메서드 - 세션 활성화 완료 시 호출
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: (any Error)?) {
-        print("WCSession activation completed with state: \(activationState)")
-    }
+            print("WCSession activation completed with state: \(activationState)")
+            
+            // 세션이 활성화된 후 펫 정보를 보냄
+            if activationState == .activated {
+                // 여기에 펫 정보를 보내는 코드 추가
+                let watchData = WatchPetModel(
+                    petType: PetType(rawValue: UserDefaultValue.petType) ?? .purpleDog,
+                    goalKcal: UserDefaultValue.purposeKcal,
+                    level: 1 // 실제 값을 넣어야 합니다.
+                )
+                let message = ["watchPet": watchData]
+                print("메시지 보내짐?")
+                sendMessage(message: message)
+            }
+        }
+        
     
     /// 세션 비활성화되었을 때 호출
     func sessionDidBecomeInactive(_ session: WCSession) {    }

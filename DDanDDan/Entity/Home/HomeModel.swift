@@ -15,7 +15,7 @@ struct HomeModel {
     var level: Int
 }
 
-struct WatchPetModel {
+struct WatchPetModel: Codable {
     var petType: PetType
     var goalKcal: Int
     var level: Int
@@ -28,7 +28,7 @@ struct HomeKcalModel {
 }
 
 
-public enum PetType: String, Decodable {
+public enum PetType: String, Codable {
     case pinkCat = "CAT"
     case greenHam = "HAMSTER"
     case purpleDog = "DOG"

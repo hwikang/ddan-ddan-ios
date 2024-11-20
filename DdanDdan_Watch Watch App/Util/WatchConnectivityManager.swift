@@ -31,9 +31,13 @@ class WatchConnectivityManager: NSObject, ObservableObject, WCSessionDelegate {
 
     /// 워치로 iPhone으로부터 메시지를 받았을 때 처리하는 메서드
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        if let watchPet = message["watchPet"] as? WatchPetModel {
-            DispatchQueue.main.async {
-                self.watchPet = watchPet
+        print("Received message: \(message)")
+        if let watchPetData = message["watchPet"] as? Data {
+            let decoder = JSONDecoder()
+            if let watchPet = try? decoder.decode(WatchPetModel.self, from: watchPetData) {
+                DispatchQueue.main.async {
+                    self.watchPet = watchPet
+                }
             }
         }
     }
