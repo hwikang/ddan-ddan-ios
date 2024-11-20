@@ -84,8 +84,10 @@ struct HomeView: View {
                 PetArchiveView(viewModel: PetArchiveViewModel(repository: HomeRepository()), coordinator: coordinator)
             case .successThreeDay:
                 SuccessView(coordinator: coordinator)
+            case .newPet:
+                NewPetView(coordinator: coordinator)
             case .upgradePet:
-                LevelUpView()
+                LevelUpView(coordinator: coordinator)
             }
         }
         .navigationBarHidden(true)

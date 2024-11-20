@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SuccessView: View {
+    @ObservedObject var coordinator: AppCoordinator
+    
   var body: some View {
     ZStack(alignment: .top) {
       Color(.backgroundBlack)
@@ -39,5 +41,5 @@ struct SuccessView: View {
 }
 
 #Preview {
-  SuccessView()
+    SuccessView(coordinator: .init())
 }

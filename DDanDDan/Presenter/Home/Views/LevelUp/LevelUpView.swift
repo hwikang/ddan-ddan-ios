@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LevelUpView: View {
+    @ObservedObject var coordinator: AppCoordinator
   let listItems: [ListItem] = [
     .init(image: Image(.kcalGraphic), title: "3일간 소모한 칼로리", content: "\(121)kcal"),
     .init(image: Image(.luckyGraphic), title: "받은 장난감", content: "행운의 풀떼기 1개")]
@@ -35,7 +36,7 @@ struct LevelUpView: View {
         }
         Spacer()
         GreenButton(action: {
-          print("click")
+            coordinator.pop()
         }, title: "획득하기", disabled: .constant(false))
         .padding(.bottom, 44)
       }
@@ -65,5 +66,5 @@ struct LevelUpView: View {
 }
 
 #Preview {
-    LevelUpView()
+    LevelUpView(coordinator: .init())
 }
