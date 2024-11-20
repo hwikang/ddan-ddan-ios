@@ -11,9 +11,7 @@ import HealthKit
 enum HomePath: Hashable {
     case setting
     case petArchive
-    case achieveGoalKcal
-    case earnFeed
-    case eranThreeDay
+    case successThreeDay
     case newPet
     case upgradePet
 }
@@ -21,8 +19,6 @@ enum HomePath: Hashable {
 struct HomeView: View {
     @ObservedObject var coordinator: AppCoordinator
     @StateObject var viewModel: HomeViewModel
-    
-    @State private var showImageDialog = false
     
     init(repository: HomeRepositoryProtocol, coordinator: AppCoordinator) {
         self.coordinator = coordinator
@@ -83,14 +79,12 @@ struct HomeView: View {
         }
         .navigationDestination(for: HomePath.self) { path in
             switch path {
-            case .achieveGoalKcal:
-                SuccessView()
             case .setting:
                 SettingView(coordinator: coordinator)
             case .petArchive:
                 PetArchiveView(viewModel: PetArchiveViewModel(repository: HomeRepository()), coordinator: coordinator)
-            case .earnFeed, .eranThreeDay, .newPet:
-                EmptyView()
+            case .successThreeDay:
+                SuccessView(coordinator: coordinator)
             case .upgradePet:
                 LevelUpView()
             }
