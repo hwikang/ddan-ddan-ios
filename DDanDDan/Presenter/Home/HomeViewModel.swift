@@ -28,6 +28,10 @@ final class HomeViewModel: ObservableObject {
     @Published var bubbleImage: ImageResource = .minBubble
     @Published var showBubble: Bool = false
     
+    @Published var showToast: Bool = false
+    @Published var toastMessage: String = ""
+    
+    private var petId = ""
     
     private let homeRepository: HomeRepositoryProtocol
     
@@ -53,6 +57,7 @@ final class HomeViewModel: ObservableObject {
                 level: petInfo.mainPet.level,
                 exp: petInfo.mainPet.expPercent
             )
+            self.petId = petInfo.mainPet.id
         } else {
             Task {
                 await fetchHomeInfo()
@@ -173,17 +178,34 @@ final class HomeViewModel: ObservableObject {
     /// 먹이주기
     @MainActor
     func feedPet() async {
+        guard homePetModel.feedCount > 0 else {
+            DispatchQueue.main.async { [weak self] in
+                self?.toastMessage = "먹이가 부족해요!"
+                self?.showToastMessage()
+            }
+            return
+        }
+        
         let result = await homeRepository.feedPet(petId: petId)
         if case .success(_) = result {
             showRandomBubble(type: .eat)
             homePetModel.feedCount = homePetModel.feedCount - 1
-            
+            Task {
+                await fetchHomeInfo()
+            }
         }
     }
     
     /// 놀아주기
     @MainActor
     func playWithPet() async {
+        guard homePetModel.toyCount > 0 else {
+            DispatchQueue.main.async { [weak self] in
+                self?.toastMessage = "장남감이 부족해요!"
+                self?.showToastMessage()
+            }
+            return
+        }
         
         let result = await homeRepository.playPet(petId: petId)
 
