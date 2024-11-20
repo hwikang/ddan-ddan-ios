@@ -24,6 +24,11 @@ final class HomeViewModel: ObservableObject {
     @Published var earnFood: Int = 0
     @Published var isPresentEarnFood: Bool = false
     
+    @Published var bubbleText = ""
+    @Published var bubbleImage: ImageResource = .minBubble
+    @Published var showBubble: Bool = false
+    
+    
     private let homeRepository: HomeRepositoryProtocol
     
     init(
@@ -166,21 +171,25 @@ final class HomeViewModel: ObservableObject {
     
     
     /// 먹이주기
+    @MainActor
     func feedPet() async {
         let result = await homeRepository.feedPet(petId: petId)
-        
-        if case .success(let userData) = result {
-            homePetModel.feedCount = userData.user.foodQuantity
+        if case .success(_) = result {
+            showRandomBubble(type: .eat)
+            homePetModel.feedCount = homePetModel.feedCount - 1
             
         }
     }
     
     /// 놀아주기
+    @MainActor
     func playWithPet() async {
-        let result = await homeRepository.playPet(petId: petId)
         
-        if case .success(let userData) = result {
-            homePetModel.toyCount = userData.user.toyQuantity
+        let result = await homeRepository.playPet(petId: petId)
+
+        if case .success(_) = result {
+            showRandomBubble(type: .play)
+            homePetModel.toyCount = homePetModel.toyCount - 1
         }
     }
     
@@ -194,11 +203,52 @@ final class HomeViewModel: ObservableObject {
         return homePetModel.petType.image(for: homePetModel.level)
     }
     
+    // 말풍선 이미지 선택 로직
+    func bubbleImage(for characterCount: Int) -> ImageResource {
+        print(characterCount)
+        switch characterCount {
+        case 1...3:
+            return .minBubble
+        case 3...5:
+            return .fourBubble
+        case 5...6:
+            return .fiveBubble
+        default:
+            return .maxBubble
+        }
+    }
+    
     @MainActor
-    private func updateGoalStatus() async {
-        let goalCalories = Double(homePetModel.goalKcal)
-        let goalMet = HealthKitManager.shared.checkIfGoalMet(goalCalories: goalCalories)
-        self.isGoalMet = goalMet
+    func showRandomBubble(type: bubbleTextType) {
+        // 이전에 보였던 말풍선이 사라지도록 설정
+        showBubble = false
+        let randomMessage = type.getRandomText().randomElement() ?? "안녕"
+        self.bubbleText = randomMessage
+        self.bubbleImage = self.bubbleImage(for: randomMessage.count)
+        
+        // 새로운 말풍선이 보이도록 설정
+        withAnimation {
+            self.showBubble = true
+        }
+        
+        // 3초 후에 자동으로 사라지게 설정
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            withAnimation(.easeInOut(duration: 0.3)) {
+                self.showBubble = false
+            }
+        }
+    }
+    
+    
+    private func showToastMessage() {
+        showToast = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            self?.hideToastMessage()
+        }
+    }
+    
+    private func hideToastMessage() {
+        showToast = false
     }
     
     private func checkHealthKitAuthorization() {

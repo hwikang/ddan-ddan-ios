@@ -46,7 +46,15 @@ struct HomeView: View {
                     viewModel.characterImage()
                         .scaledToFit()
                         .padding(.horizontal, 141)
-                        .offset(y: 100)
+                        .offset(y: 95)
+                        .onTapGesture {
+                            viewModel.showRandomBubble(type: .normal)
+                        }
+                    bubbleView
+                        .opacity(viewModel.showBubble ? 1 : 0)
+                        .transition(.opacity)
+                        .frame(minWidth: 75, maxWidth: 167, minHeight: 56)
+                        .offset(y: 20)
                 }
                 .padding(.bottom, 32)
                 levelView
@@ -65,6 +73,7 @@ struct HomeView: View {
                     // 이후 동작 정의 -> 서버 통신 및 뷰 업데이트
                     Task {
                         await viewModel.patchCurrentKcal(earnedFeed: viewModel.earnFood)
+                        viewModel.showRandomBubble(type: .success)
                     }
                 }
             }
@@ -114,6 +123,25 @@ extension HomeView {
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
             .padding(.trailing, 20)
+        }
+    }
+    
+    var bubbleView: some View {
+        ZStack {
+            // 말풍선 이미지 선택 (글자 수에 따라 조정)
+            Image(viewModel.bubbleImage)
+                .opacity(viewModel.showBubble ? 1 : 0)
+                .offset(y: viewModel.showBubble ? 0 : 20) // 초기 위치 조정
+                .animation(.easeInOut(duration: 0.3).delay(0.1), value: viewModel.showBubble) // 나타날 때 애니메이션
+            
+            Text(viewModel.bubbleText)
+                .font(.neoDunggeunmo14)
+                .foregroundStyle(.backgroundBlack)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 8)
+                .opacity(viewModel.showBubble ? 1 : 0)
+                .offset(y: viewModel.showBubble ? -8 : 20) // 텍스트 위치 조정
+                .animation(.easeInOut(duration: 0.3).delay(0.1), value: viewModel.showBubble) // 나타날 때 애니메이션
         }
     }
     
