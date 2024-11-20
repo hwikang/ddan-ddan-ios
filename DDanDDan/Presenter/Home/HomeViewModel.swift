@@ -104,10 +104,24 @@ final class HomeViewModel: ObservableObject {
         // HealthKit에서 오늘의 소모 칼로리 읽기
         HealthKitManager.shared.readActiveEnergyBurned { kcal in
             DispatchQueue.main.async { [weak self] in
-                self?.currentKcalModel.currentKcal = Int(kcal)
+                self?.currentKcal = Int(kcal)
                 self?.earnFeed()
+                
+                if Int(kcal) > UserDefaultValue.purposeKcal {
+                    self?.showRandomBubble(type: .success)
+                } else {
+                    self?.showRandomBubble(type: .failure)
+                }
+                
+                HealthKitManager.shared.checkIfGoalMet(goalCalories: Double(self?.homePetModel.goalKcal ?? 0)) { [weak self] totalKcal, goalMet in
+                    DispatchQueue.main.async {
+                        self?.isGoalMet = goalMet
+                        self?.threeDaysTotalKcal = Int(totalKcal)
+                    }
+                }
             }
         }
+        
     }
 
     func earnFeed() {
@@ -244,6 +258,10 @@ final class HomeViewModel: ObservableObject {
                     if authorized {
                         self?.isHealthKitAuthorized = healthKitManager.checkAuthorization() == .sharingAuthorized
                         self?.initialCurrnetKcalModel()
+                        HealthKitManager.shared.checkIfGoalMet(goalCalories: Double(self?.homePetModel.goalKcal ?? 0)) { [weak self] totalKcal, goalMet in
+                            self?.isGoalMet = goalMet
+                            self?.threeDaysTotalKcal = Int(totalKcal)
+                        }
                     } else {
                         self?.isHealthKitAuthorized = false
                     }

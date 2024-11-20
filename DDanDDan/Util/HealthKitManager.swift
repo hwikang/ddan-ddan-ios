@@ -11,8 +11,6 @@ import HealthKit
 class HealthKitManager: ObservableObject {
     static let shared = HealthKitManager()
     
-    /// 3일치 칼로리를 저장하는 배열
-    var caloriesArray: [Double] = []
     private var healthStore: HKHealthStore?
     private let energyBurnedType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!
     
@@ -88,18 +86,16 @@ class HealthKitManager: ObservableObject {
         healthStore.execute(query)
     }
     
-    /// 3일치의 칼로리를 배열에 저장하는 함수
-    /// - Parameter completion: 데이터를 성공적으로 가져오면 `nil`, 오류가 발생하면 `Error`를 반환하는 클로저
-    func readThreeDaysEnergyBurned(completion: @escaping (Error?) -> Void) {
+    func checkIfGoalMet(goalCalories: Double, completion: @escaping (Double, Bool) -> Void) {
         guard let healthStore = healthStore else {
-            completion(NSError(domain: "HealthStoreError", code: 1, userInfo: [NSLocalizedDescriptionKey: "HealthStore is not available"]))
+            completion(0, false)
             return
         }
         
         let calendar = Calendar.current
         let endDate = Date()
         guard let startDate = calendar.date(byAdding: .day, value: -3, to: endDate) else {
-            completion(NSError(domain: "DateError", code: 2, userInfo: [NSLocalizedDescriptionKey: "Failed to calculate the start date"]))
+            completion(0, false)
             return
         }
         
@@ -107,24 +103,21 @@ class HealthKitManager: ObservableObject {
         
         let query = HKSampleQuery(sampleType: energyBurnedType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { [weak self] (query, samples, error) in
             guard let self = self, let samples = samples as? [HKQuantitySample] else {
-                completion(error)
+                completion(0, false)
                 return
             }
-            caloriesArray = samples.map { $0.quantity.doubleValue(for: HKUnit.kilocalorie()) }
-            completion(nil) // 에러가 없을 경우 nil을 반환
+            
+            // 칼로리 합산
+            let totalCalories = samples.reduce(0) { $0 + $1.quantity.doubleValue(for: HKUnit.kilocalorie()) }
+            
+            // 목표 칼로리 초과 여부 판단
+            let goalMet = totalCalories >= goalCalories
+            
+            // 합계와 목표 달성 여부를 반환
+            completion(totalCalories, goalMet)
         }
         
         healthStore.execute(query)
     }
-    
-    /// 3일의 칼로리가 목표 칼로리를 넘었는지 확인하는 함수
-    ///  - Parameter goalCalories: 사용자가 설정한 목표 칼로리 값
-    func checkIfGoalMet(goalCalories: Double) -> Bool {
-        for calorie in caloriesArray {
-            if calorie < goalCalories {
-                return false
-            }
-        }
-        return true
-    }
+
 }

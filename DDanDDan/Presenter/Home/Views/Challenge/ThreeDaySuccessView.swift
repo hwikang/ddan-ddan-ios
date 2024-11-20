@@ -42,6 +42,7 @@ struct ThreeDaySuccessView: View {
             }
         }
         .ignoresSafeArea()
+        .navigationBarHidden(true)
     }
     /// 리스트 컴포넌트 뷰
     func listComponentView(image: Image, title: String, content: String) -> some View {
