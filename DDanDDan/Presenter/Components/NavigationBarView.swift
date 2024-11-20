@@ -19,11 +19,9 @@ struct CustomNavigationBar: View {
             HStack {
                 if let backButtonAction = backButtonAction {
                     Button(action: backButtonAction) {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(.white)
-                            .imageScale(.large)
+                        Image(.arrow)
                     }
-                    .padding(.leading)
+                    .frame(width: 24, height: 24)
                 }
                 
                 Spacer()
@@ -36,10 +34,10 @@ struct CustomNavigationBar: View {
                 
                 if backButtonAction != nil {
                     Spacer()
-                        .frame(width: 44) // 버튼과 균형 맞춤
+                        .frame(width: 24)
                 }
             }
         }
-        .frame(height: 56) // 네비게이션 바 높이
+        .frame(height: 40)
     }
 }
