@@ -7,6 +7,8 @@
 
 import Foundation
 
+import Alamofire
+
 public struct UserData: Decodable {
     var id: String
     var name: String
@@ -16,6 +18,7 @@ public struct UserData: Decodable {
 }
 
 public struct HomeUserInfo {
+    var id: String
     var purposeCalorie: Int
     var foodQuantity: Int
     var toyQuantity: Int
@@ -32,4 +35,10 @@ public struct DailyInfo: Decodable {
 public struct DailyUserData: Decodable {
     var user: UserData
     var dailyInfo: DailyInfo
+}
+
+public struct EmptyEntity: Codable, EmptyResponse {
+    public static func emptyValue() -> EmptyEntity {
+        return .init()
+    }
 }

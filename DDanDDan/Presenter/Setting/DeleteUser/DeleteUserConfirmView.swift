@@ -35,7 +35,7 @@ struct DeleteUserConfirmView: View {
                 GreenButton(action: {
                     Task {
                         if await viewModel.deleteUser(reason: selectedReason) {
-                            coordinator.popToRoot()
+                            coordinator.setRoot(to: .login)
                         }
                     }
                 }, title: "탈퇴하기", disabled: .constant(selectedReason.isEmpty))

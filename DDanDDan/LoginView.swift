@@ -38,5 +38,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(viewModel: LoginViewModel(repository: LoginRepository()))
+    LoginView(viewModel: LoginViewModel(repository: LoginRepository(), appCoordinator: .init()))
 }

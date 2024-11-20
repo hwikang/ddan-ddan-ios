@@ -31,6 +31,13 @@ public struct UserDefaultValue {
     
     @UserDefault(key: "petType", defaultValue: "DOG")
     static public var petType: String
+    
+    // 보상을 위한 값
+    @UserDefault(key: "date", defaultValue: Date())
+    static public var date: Date
+    @UserDefault(key: "currentKcal", defaultValue: 0)
+    static public var currentKcal: Double
+    
 }
 
 @propertyWrapper

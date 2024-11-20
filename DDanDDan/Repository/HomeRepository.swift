@@ -16,8 +16,8 @@ public protocol HomeRepositoryProtocol {
     
     // MARK: POST Method
     func updateMainPet(petId: String) async -> Result<MainPet, NetworkError>
-    func feedPet(petId: String) async -> Result<DailyUserData, NetworkError>
-    func playPet(petId: String) async -> Result<DailyUserData, NetworkError>
+    func feedPet(petId: String) async -> Result<EmptyEntity, NetworkError>
+    func playPet(petId: String) async -> Result<EmptyEntity, NetworkError>
     func addNewPet(petType: PetType) async -> Result<Pet, NetworkError>
     func addNewRandomPet() async -> Result<Pet, NetworkError>
     
@@ -40,6 +40,7 @@ public struct HomeRepository: HomeRepositoryProtocol {
         
         return result.map { userData in
             HomeUserInfo(
+                id: userData.id,
                 purposeCalorie: userData.purposeCalorie,
                 foodQuantity: userData.foodQuantity,
                 toyQuantity: userData.toyQuantity
@@ -77,14 +78,14 @@ public struct HomeRepository: HomeRepositoryProtocol {
         return result
     }
     
-    public func feedPet(petId: String) async -> Result<DailyUserData, NetworkError> {
+    public func feedPet(petId: String) async -> Result<EmptyEntity, NetworkError> {
         guard let accessToken = await UserManager.shared.accessToken else { return .failure(.requestFailed("Access Token Nil"))}
         
         let result = await petNetwork.postPetFeed(accessToken: accessToken, petId: petId)
         return result
     }
     
-    public func playPet(petId: String) async -> Result<DailyUserData, NetworkError> {
+    public func playPet(petId: String) async -> Result<EmptyEntity, NetworkError> {
         guard let accessToken = await UserManager.shared.accessToken else { return .failure(.requestFailed("Access Token Nil"))}
         
         let result = await petNetwork.postPetPlay(accessToken: accessToken, petId: petId)

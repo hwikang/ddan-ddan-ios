@@ -85,6 +85,7 @@ struct SettingView: View {
                 DialogView(show: $showLogoutDialog, title: "정말 로그아웃 하시겠습니까", description: "", rightButtonTitle: "로그아웃", leftButtonTitle: "취소") {
                     Task {
                         await UserManager.shared.logout()
+                        coordinator.setRoot(to: .login)
                     }
                 }
             }

@@ -11,9 +11,13 @@ import KakaoSDKCommon
 
 public class LoginViewModel: ObservableObject {
     private let repository: LoginRepositoryProtocol
-    init(repository: LoginRepositoryProtocol) {
+    let appCoordinator: AppCoordinator
+    
+    init(repository: LoginRepositoryProtocol, appCoordinator: AppCoordinator) {
         self.repository = repository
+        self.appCoordinator = appCoordinator
     }
+    
     func kakaoLogin() {
         if UserApi.isKakaoTalkLoginAvailable() {
             UserApi.shared.loginWithKakaoTalk(serviceTerms: []) { [weak self] token, error in
@@ -22,6 +26,7 @@ public class LoginViewModel: ObservableObject {
                     return
                 }
                 self?.login(token: token?.accessToken)
+                self?.appCoordinator.setRoot(to: .home)
             }
         } else {
             UserApi.shared.loginWithKakaoAccount(serviceTerms: []) { [weak self] token, error in
@@ -30,6 +35,7 @@ public class LoginViewModel: ObservableObject {
                     return
                 }
                 self?.login(token: token?.accessToken)
+                self?.appCoordinator.setRoot(to: .home)
             }
         }
     }

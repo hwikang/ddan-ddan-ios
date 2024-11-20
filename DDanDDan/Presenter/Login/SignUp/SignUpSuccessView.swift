@@ -29,7 +29,6 @@ struct SignUpSuccessView: View {
                 Spacer()
                 
                 GreenButton(action: {
-                    coordinator.popToRoot()
                     Task {
                         await viewModel.login()
                     }

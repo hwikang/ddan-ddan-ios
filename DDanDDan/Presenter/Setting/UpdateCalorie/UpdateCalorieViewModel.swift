@@ -22,7 +22,14 @@ final class UpdateCalorieViewModel: UpdateCalorieViewModelProtocol {
     }
     
     public func update() async -> Bool {
-        guard let userName = await getUserName() else { return false }
+        var userName = ""
+        
+        if let user = await getUserName() {
+            userName = user
+        } else {
+            userName = UserDefaultValue.userId
+        }
+        
         let result = await repository.update(name: userName, purposeCalorie: calorie)
         switch result {
         case .success:

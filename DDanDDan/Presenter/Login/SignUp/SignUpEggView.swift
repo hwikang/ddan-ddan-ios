@@ -35,7 +35,7 @@ public struct SignUpEggView: View {
                     guard let selectedEgg = selectedEgg else { return }
                     Task {
                         if await viewModel.updatePet(petType: selectedEgg) {
-                            coordinator.push(to: .nickname)
+                            coordinator.push(to: .success)
                         }
                     }
                   

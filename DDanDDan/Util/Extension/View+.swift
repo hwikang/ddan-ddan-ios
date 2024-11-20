@@ -19,6 +19,28 @@ extension View {
     }
 }
 
+
+struct TransparentOverlayView<Content: View>: View {
+    @Binding var isPresented: Bool
+    let content: Content
+
+    init(isPresented: Binding<Bool>, @ViewBuilder content: () -> Content) {
+        self._isPresented = isPresented
+        self.content = content()
+    }
+
+    var body: some View {
+        ZStack {
+            if isPresented {
+                content
+                    .background(Color.black.opacity(0.5)) // Optional background
+                    .transition(.identity) // No animation
+            }
+        }
+        .animation(nil, value: isPresented) // Ensure no animation
+    }
+}
+
 struct TransparentBackground: UIViewRepresentable {
     func makeUIView(context: Context) -> UIView {
         let view = UIView()
