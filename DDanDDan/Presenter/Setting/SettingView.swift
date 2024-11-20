@@ -38,65 +38,56 @@ struct SettingView: View {
     @State private var notificationState = true
     @State private var showLogoutDialog = false
     
-    init(coordinator: AppCoordinator) {
-        self.coordinator = coordinator
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor.backgroundBlack
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear]
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-    }
-    
     var body: some View {
         ZStack {
-            
             Color.backgroundGray.edgesIgnoringSafeArea(.all)
-            
-            List(SettingPath.allCases, id: \.self) { item in
-                HStack(alignment: .firstTextBaseline) {
-                    switch item {
-                    case .notification:
-                        Text(item.description)
-                    case .logout:
-                        Button(item.description) {
-                            showLogoutDialog.toggle()
+            VStack {
+                CustomNavigationBar(title: "설정") {
+                    coordinator.pop()
+                }
+                List(SettingPath.allCases, id: \.self) { item in
+                    HStack(alignment: .firstTextBaseline) {
+                        switch item {
+                        case .notification:
+                            Text(item.description)
+                        case .logout:
+                            Button(item.description) {
+                                showLogoutDialog.toggle()
+                            }
+                        default:
+                            Button(item.description) {
+                                coordinator.push(to: item)
+                            }
                         }
-                    default:
-                        Button(item.description) {
-                            coordinator.push(to: item)
+                        Spacer()
+                        if item == .notification {
+                            Toggle("", isOn: $notificationState).labelsHidden()
+                        } else {
+                            Image(systemName: "chevron.right").foregroundColor(.white)
                         }
                     }
-                    Spacer()
-                    if item == .notification {
-                        Toggle("", isOn: $notificationState).labelsHidden()
-                    } else {
-                        Image(systemName: "chevron.right").foregroundColor(.white)
+                    .foregroundStyle(.white)
+                    .listRowBackground(Color.backgroundBlack)
+                }
+                .navigationDestination(for: SettingPath.self, destination: { type in
+                    getDestination(type: type)
+                })
+                .transparentFullScreenCover(isPresented: $showLogoutDialog) {
+                    DialogView(show: $showLogoutDialog, title: "정말 로그아웃 하시겠습니까", description: "", rightButtonTitle: "로그아웃", leftButtonTitle: "취소") {
+                        Task {
+                            await UserManager.shared.logout()
+                            coordinator.setRoot(to: .login)
+                        }
                     }
                 }
-                .foregroundStyle(.white)
-                .listRowBackground(Color.backgroundBlack)
-            }
-            .navigationDestination(for: SettingPath.self, destination: { type in
-                getDestination(type: type)
-            })
-            .transparentFullScreenCover(isPresented: $showLogoutDialog) {
-                DialogView(show: $showLogoutDialog, title: "정말 로그아웃 하시겠습니까", description: "", rightButtonTitle: "로그아웃", leftButtonTitle: "취소") {
-                    Task {
-                        await UserManager.shared.logout()
-                        coordinator.setRoot(to: .login)
-                    }
+                .transaction{ tran in
+                    tran.disablesAnimations = true
                 }
+                .listRowSeparator(.hidden)
+                .listStyle(.plain)
             }
-            .transaction{ tran in
-                tran.disablesAnimations = true
-            }
-            .listRowSeparator(.hidden)
-            .listStyle(.plain)
         }
-        .navigationTitle("설정")
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarHidden(true)
         .onAppear {
             print("설정뷰 진입 완료")
         }
@@ -110,7 +101,7 @@ struct SettingView: View {
         case .updateCalorie:
             UpdateCalorieView(viewModel: UpdateCalorieViewModel(calorie: 100, repository: SettingRepository()), coordinator: coordinator)
         case .updateTerms:
-            SettingTermView()
+            SettingTermView(coordinator: coordinator)
         case .deleteUser:
             DeleteUserView(coordinator: coordinator)
         case .deleteUserConfirm(let reasons):

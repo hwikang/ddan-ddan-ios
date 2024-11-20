@@ -16,6 +16,9 @@ struct UpdateCalorieView: View {
         ZStack {
             Color.backgroundBlack.edgesIgnoringSafeArea(.all)
             VStack(alignment: .leading) {
+                CustomNavigationBar(title: "목표 칼로리 수정") {
+                    coordinator.pop()
+                }
                 Text("하루 목표 칼로리를\n설정해주세요")
                     .font(.neoDunggeunmo24)
                     .lineSpacing(8)
@@ -24,9 +27,9 @@ struct UpdateCalorieView: View {
                     .padding(.horizontal, 20)
                 HStack(alignment: .center) {
                     Button {
-                        viewModel.increaseCalorie()
+                        viewModel.decreaseCalorie()
                     } label: {
-                        Image("plusButtonRounded")
+                        Image("minusButtonRounded")
                     }
                     Text(String(viewModel.calorie))
                         .font(.system(size: 24, weight: .heavy))
@@ -34,13 +37,11 @@ struct UpdateCalorieView: View {
                         .frame(width: 84, height: 80)
                         .background(.backgroundGray)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
-                    
                     Button {
-                        viewModel.decreaseCalorie()
+                        viewModel.increaseCalorie()
                     } label: {
-                        Image("minusButtonRounded")
+                        Image("plusButtonRounded")
                     }
-                    
                 }.frame(maxWidth: .infinity)
                     .padding(.top, 56)
                 
@@ -57,7 +58,7 @@ struct UpdateCalorieView: View {
             }
             
         }
-        .navigationTitle("목표 칼로리 수정")
+        .navigationBarHidden(true)
     }
 
 }

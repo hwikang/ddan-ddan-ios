@@ -13,6 +13,7 @@ actor UserManager: ObservableObject {
     @MainActor @Published var accessToken: String? = UserDefaultValue.acessToken
     private var userData: UserData?
     @MainActor public var kakaoToken: String?
+    @MainActor public var appleToken: String?
     private var refreshToken: String? = UserDefaultValue.refreshToken
     @MainActor private var isOnboardingComplete: Bool = UserDefaultValue.isOnboardingComplete
 

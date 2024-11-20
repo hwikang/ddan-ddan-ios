@@ -12,10 +12,15 @@ struct DeleteUserConfirmView: View {
     @ObservedObject public var coordinator: AppCoordinator
     public let selectedReason: Set<String>
     
+    @State var isChecked: Bool = false
+    
     var body: some View {
         ZStack {
             Color.backgroundBlack.edgesIgnoringSafeArea(.all)
             VStack(alignment: .leading) {
+                CustomNavigationBar(title: "") {
+                    coordinator.pop()
+                }
                 Text(viewModel.name + "님\n탈퇴하기 전에 확인해주세요")
                     .font(.heading3_bold24)
                     .lineSpacing(8)
@@ -30,17 +35,24 @@ struct DeleteUserConfirmView: View {
                     .padding(.horizontal, 20)
 
                 Image("deleteUser").frame(maxWidth: .infinity, alignment: .center)
-                
                 Spacer()
+                CheckButton(isChecked: isChecked, title: "모두 다 꼼꼼히 확인했어요") {
+                    isChecked.toggle()
+                }
+                .padding(.leading, 20)
+                .padding(.bottom, 20)
                 GreenButton(action: {
-                    Task {
-                        if await viewModel.deleteUser(reason: selectedReason) {
-                            coordinator.setRoot(to: .login)
+                    if isChecked {
+                        Task {
+                            if await viewModel.deleteUser(reason: selectedReason) {
+                                coordinator.setRoot(to: .login)
+                            }
                         }
                     }
                 }, title: "탈퇴하기", disabled: .constant(selectedReason.isEmpty))
             }
         }
+        .navigationBarHidden(true)
     }
     
 }

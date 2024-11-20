@@ -43,6 +43,10 @@
 		36F6E7A22CEE018600B395FB /* NewPetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F6E7A12CEE018600B395FB /* NewPetViewModel.swift */; };
 		36F6E7E92CEE40AE00B395FB /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 36F6E7E82CEE40AE00B395FB /* Config.xcconfig */; };
 		36F6E7EB2CEE411D00B395FB /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F6E7EA2CEE411D00B395FB /* Config.swift */; };
+		36F6E81C2CEE4FF900B395FB /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F6E81B2CEE4FF900B395FB /* Array+.swift */; };
+		36F6E81D2CEE680300B395FB /* UserDefaultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C2BA32C4CD651002E2237 /* UserDefaultValue.swift */; };
+		36F6E81F2CEE7B4900B395FB /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F6E81E2CEE7B4900B395FB /* NavigationBarView.swift */; };
+		36F6E8212CEE7DE000B395FB /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F6E8202CEE7DE000B395FB /* CheckButton.swift */; };
 		F809E2FA2CBD05F5001BE099 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809E2F92CBD05F5001BE099 /* UserData.swift */; };
 		F809E2FC2CBD06A1001BE099 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809E2FB2CBD06A1001BE099 /* UserManager.swift */; };
 		F809E2FE2CBD0841001BE099 /* DeleteUserConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809E2FD2CBD0841001BE099 /* DeleteUserConfirmView.swift */; };
@@ -163,6 +167,9 @@
 		36F6E7A12CEE018600B395FB /* NewPetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPetViewModel.swift; sourceTree = "<group>"; };
 		36F6E7E82CEE40AE00B395FB /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		36F6E7EA2CEE411D00B395FB /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		36F6E81B2CEE4FF900B395FB /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
+		36F6E81E2CEE7B4900B395FB /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
+		36F6E8202CEE7DE000B395FB /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
 		F809E2F92CBD05F5001BE099 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		F809E2FB2CBD06A1001BE099 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		F809E2FD2CBD0841001BE099 /* DeleteUserConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserConfirmView.swift; sourceTree = "<group>"; };
@@ -326,13 +333,12 @@
 		367A79702CDD08950055771B /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				36F6E7EC2CEE45D600B395FB /* Splash */,
 				F8311F952C7060B3000455ED /* Components */,
 				F8C10C142C57950D0037D6A5 /* Login */,
 				F84B21C22C902255009FE6F3 /* Onboarding */,
 				36C1FE082CA4A83D007CA188 /* Home */,
 				F84B21C32C902270009FE6F3 /* Setting */,
-				360E6B352CEBC5F10059661E /* SplashView.swift */,
-				360E6B372CEBC8A60059661E /* SplashViewModel.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -352,6 +358,7 @@
 			isa = PBXGroup;
 			children = (
 				367A79AA2CDE07980055771B /* View+.swift */,
+				36F6E81B2CEE4FF900B395FB /* Array+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -372,6 +379,15 @@
 				36340DF12CC4DE060001AF2A /* Views */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		36F6E7EC2CEE45D600B395FB /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				360E6B352CEBC5F10059661E /* SplashView.swift */,
+				360E6B372CEBC8A60059661E /* SplashViewModel.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 		F809E2F82CBD05E4001BE099 /* User */ = {
@@ -409,6 +425,8 @@
 				F80DF7352CB38861004FF1F2 /* WebView.swift */,
 				F8311F982C7060E8000455ED /* GreenButton.swift */,
 				367A79772CDD617A0055771B /* ToastView.swift */,
+				36F6E81E2CEE7B4900B395FB /* NavigationBarView.swift */,
+				36F6E8202CEE7DE000B395FB /* CheckButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -782,6 +800,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				367A7A532CE5129A0055771B /* HomeModel.swift in Sources */,
+				36F6E81D2CEE680300B395FB /* UserDefaultValue.swift in Sources */,
 				3650CCCE2CCAA22B00ED5967 /* Font.swift in Sources */,
 				3650CCD22CCAB7BD00ED5967 /* HealthKitManager.swift in Sources */,
 			);
@@ -822,7 +841,9 @@
 				F8FD4FAE2C7A09F900147C4F /* SignUpCalorieView.swift in Sources */,
 				360E6B382CEBC8A60059661E /* SplashViewModel.swift in Sources */,
 				360E6B362CEBC5F10059661E /* SplashView.swift in Sources */,
+				36F6E81C2CEE4FF900B395FB /* Array+.swift in Sources */,
 				F8773BC22CA54E49009A608F /* UpdateCalorieViewModel.swift in Sources */,
+				36F6E81F2CEE7B4900B395FB /* NavigationBarView.swift in Sources */,
 				F88FC6E12CCF64150033D4C9 /* MainPet.swift in Sources */,
 				F84B21C52C90227A009FE6F3 /* SettingView.swift in Sources */,
 				367A79782CDD617A0055771B /* ToastView.swift in Sources */,
@@ -867,6 +888,7 @@
 				F88663D72CC8F0D2008DB860 /* LoginViewModel.swift in Sources */,
 				F88FC6DC2CCF3B110033D4C9 /* PetsNetwork.swift in Sources */,
 				F80DF7362CB38861004FF1F2 /* WebView.swift in Sources */,
+				36F6E8212CEE7DE000B395FB /* CheckButton.swift in Sources */,
 				367A796F2CDCBC210055771B /* PathString.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

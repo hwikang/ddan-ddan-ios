@@ -18,18 +18,10 @@ enum HomePath: Hashable {
 
 struct HomeView: View {
     @ObservedObject var coordinator: AppCoordinator
-    @ObservedObject var viewModel: HomeViewModel
-    
-    init(repository: HomeRepositoryProtocol, coordinator: AppCoordinator) {
-        self.coordinator = coordinator
-        self.viewModel = HomeViewModel(
-            repository: repository,
-            userInfo: coordinator.userInfo,
-            petInfo: coordinator.petInfo
-        )
-    }
+    @StateObject var viewModel: HomeViewModel
     
     var body: some View {
+        
         ZStack {
             Color(.backgroundBlack)
                 .ignoresSafeArea()
@@ -87,13 +79,13 @@ struct HomeView: View {
                     }
                 }
             }
-            .onChange(of: viewModel.currentKcalModel.exp) { newExp in
+            .onChange(of: viewModel.homePetModel.exp) { newExp in
                 if newExp == 100 {
                     coordinator.push(to: .newPet)
                 }
             }
-            .onChange(of: viewModel.homePetModel.level) { newLevel in
-                coordinator.push(to: .upgradePet(level: viewModel.currentKcalModel.level + 1))
+            .onChange(of: viewModel.isLevelUp) { newLevel in
+                if newLevel { coordinator.push(to: .upgradePet(level: (viewModel.homePetModel.level) + 1)) }
             }
             .onChange(of: viewModel.isGoalMet) { newValue in
                 if newValue { coordinator.push(to: .successThreeDay(totalKcal: viewModel.threeDaysTotalKcal))}
@@ -104,7 +96,7 @@ struct HomeView: View {
             case .setting:
                 SettingView(coordinator: coordinator)
             case .petArchive:
-                PetArchiveView(viewModel: PetArchiveViewModel(repository: HomeRepository()), coordinator: coordinator)
+                PetArchiveView(coordinator: coordinator, viewModel: PetArchiveViewModel(repository: HomeRepository()))
             case .successThreeDay(let totalKcal):
                 ThreeDaySuccessView(coordinator: coordinator, totalKcal: totalKcal)
             case .newPet:
@@ -114,6 +106,13 @@ struct HomeView: View {
             }
         }
         .navigationBarHidden(true)
+        .onAppear {
+            if viewModel.homePetModel.level == 0 {
+                Task {
+                    await viewModel.fetchHomeInfo()
+                }
+            }
+        }
     }
 }
 
@@ -160,7 +159,7 @@ extension HomeView {
     
     var kcalView: some View {
         HStack(spacing: 4) {
-            Text("\(viewModel.currentKcalModel.currentKcal)")
+            Text("\(viewModel.currentKcal)")
                 .font(.neoDunggeunmo52)
                 .foregroundStyle(.white)
             Text("/")
@@ -182,7 +181,7 @@ extension HomeView {
                     .background(.borderGray)
                     .cornerRadius(8)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Text(String(format: "%.0f%%", viewModel.currentKcalModel.exp))
+                Text(String(format: "%.0f%%", viewModel.homePetModel.exp))
                     .font(.subTitle1_semibold16)
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -193,7 +192,7 @@ extension HomeView {
                     .frame(height: 28)
                 
                 // expCount 계산
-                let expCount = min(Int(viewModel.currentKcalModel.exp / 3), 28)
+                let expCount = min(Int(viewModel.homePetModel.exp) / 3, 28)
                 
                 // Rectangle 생성
                 HStack(spacing: 4) {  // HStack을 사용하여 왼쪽 정렬 및 패딩 처리
@@ -238,5 +237,5 @@ extension HomeView {
 }
 
 #Preview {
-    HomeView(repository: HomeRepository(), coordinator: .init())
+    HomeView(coordinator: .init(), viewModel: HomeViewModel(repository: HomeRepository()))
 }

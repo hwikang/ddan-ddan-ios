@@ -33,6 +33,7 @@ struct NewPetView: View {
             }
         }
         .ignoresSafeArea()
+        .navigationBarHidden(true)
     }
     
     var imageView: some View {

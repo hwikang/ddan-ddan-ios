@@ -24,6 +24,8 @@ public struct UserDefaultValue {
     // Main
     @UserDefault(key: "purposeKcal", defaultValue: 0)
     static public var purposeKcal: Int
+    @UserDefault(key: "level", defaultValue: 1)
+    static public var level: Int
     @UserDefault(key: "userId", defaultValue: "")
     static public var userId: String
     @UserDefault(key: "petId", defaultValue: "")
