@@ -16,19 +16,26 @@ struct DDanDDanApp: App {
     
     init() {
         KakaoSDK.initSDK(appKey: "87ce44f4ab5c4efbff8e1db25c007bbe")
+        appCoordinator.determineRootView()
     }
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(appCoordinator)
+                .environmentObject(user)
+                .onOpenURL { url in
+                    if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                        AuthController.handleOpenUrl(url: url)
+                    }
+                }
         }
     }
 }
 
 struct ContentView: View {
     @EnvironmentObject var coordinator: AppCoordinator
-    @StateObject var user = UserManager.shared
+    @EnvironmentObject var user: UserManager
     
     var body: some View {
         NavigationStack(path: $coordinator.navigationPath) {
@@ -40,9 +47,9 @@ struct ContentView: View {
             case .home:
                 HomeView(repository: HomeRepository(), coordinator: coordinator)
             case .onboarding:
-                OnboardingView()
+                OnboardingView(coordinator: coordinator)
             case .login:
-                LoginView(viewModel: LoginViewModel(repository: LoginRepository()))
+                LoginView(viewModel: LoginViewModel(repository: LoginRepository(), appCoordinator: coordinator))
             }
         }
     }

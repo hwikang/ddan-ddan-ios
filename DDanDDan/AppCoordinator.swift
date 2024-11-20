@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import Combine
+
 enum AppPath: Hashable {
     case splash
     case signUp
@@ -28,7 +30,18 @@ final class AppCoordinator: ObservableObject {
     // 시트를 표시하기 위한 뷰를 저장하는 프로퍼티
     @Published var sheetView: AnyView?
     
+    @StateObject var user = UserManager.shared
+    
+    func determineRootView() {
+        if let _ = user.accessToken {
+            rootView = user.isSignUpRequired() ? .signUp : .home
+        } else {
+            rootView = UserDefaultValue.needToShowOnboarding ? .onboarding : .login
+        }
+    }
+    
     func setRoot(to path: AppPath) {
+        navigationPath.removeLast(navigationPath.count)
         rootView = path
     }
     
