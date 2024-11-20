@@ -61,20 +61,21 @@ struct HomeView: View {
                     title: "먹이를 얻었어요!",
                     description: "사과 \(viewModel.earnFood)개",
                 buttonTitle: "획득하기"
-            ) {
-            // 이후 동작 정의 -> 서버 통신 및 뷰 업데이트
-                Task {
-                    await viewModel.patchCurrentKcal()
+                ) {
+                    // 이후 동작 정의 -> 서버 통신 및 뷰 업데이트
+                    Task {
+                        await viewModel.patchCurrentKcal(earnedFeed: viewModel.earnFood)
+                    }
                 }
             }
-        })
-        .alert("건강 데이터 접근 권한 필요", isPresented: Binding(
-            get: { !viewModel.isHealthKitAuthorized },
-            set: { _ in viewModel.isHealthKitAuthorized = true } // Alert가 닫힐 때 true로 업데이트
-        )) {
-            Button("확인", role: .cancel) { }
-        } message: {
-            Text("건강 데이터 접근 권한이 없으면 앱이 정상적으로 동작하지 않을 수 있습니다.\n\n설정 > 앱 > 건강 > 데이터 접근 및 기기에서 설정 가능합니다.")
+            .onChange(of: viewModel.currentKcalModel.exp) { newExp in
+                if newExp == 100 {
+                    coordinator.push(to: .upgradePet)
+                }
+            }
+            .onChange(of: viewModel.homePetModel.level) { newLevel in
+                coordinator.push(to: .upgradePet)
+            }
         }
         .navigationDestination(for: HomePath.self) { path in
             switch path {
@@ -140,18 +141,35 @@ extension HomeView {
                     .background(.borderGray)
                     .cornerRadius(8)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                
-                let adjustedGoalKcal = max(Double(viewModel.homePetModel.goalKcal), 1)
-                let percentage = Double(viewModel.currentKcalModel.currentKcal) / adjustedGoalKcal * 100
-                
                 Text(String(format: "%.0f%%", viewModel.currentKcalModel.exp))
                     .font(.subTitle1_semibold16)
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity, alignment: .trailing)
             }
-            Image(.gaugeBackground)
-                .resizable()
-                .frame(height: 28)
+            ZStack(alignment: .leading) {
+                Image(.gaugeBackground)
+                    .resizable()
+                    .frame(height: 28)
+                
+                // expCount 계산
+                let expCount = min(Int(viewModel.currentKcalModel.exp / 3), 28)
+                
+                // Rectangle 생성
+                HStack(spacing: 4) {  // HStack을 사용하여 왼쪽 정렬 및 패딩 처리
+                    ForEach(0..<29, id: \.self) { index in
+                        if index < expCount {
+                            Rectangle()
+                                .fill(viewModel.homePetModel.petType.color)
+                                .frame(width: 8, height: 12)
+                        } else {
+                            Rectangle()
+                                .fill(Color.clear)  // 비어 있는 부분은 투명하게
+                                .frame(width: 8, height: 12)
+                        }
+                    }
+                }
+                .padding(.leading, 12) // 첫 번째 여백은 8, 그 외의 여백은 HStack 내에서 처리됨
+            }
         }
         .frame(maxWidth: .infinity)
         .padding(.horizontal, 32)
