@@ -54,13 +54,12 @@ struct HomeView: View {
                 actionButtonView
             }
             .frame(maxHeight: .infinity, alignment: .top)
-        }
-        .transparentFullScreenCover(isPresented: $showImageDialog, content: {
-            ImageDialogView(
-                show: $showImageDialog,
-                image: .eatGraphic,
-                title: "먹이를 얻었어요!",
-                description: "사과 \(viewModel.earnFood)개",
+            TransparentOverlayView(isPresented: $viewModel.isPresentEarnFood) {
+                ImageDialogView(
+                    show: $viewModel.isPresentEarnFood,
+                    image: .eatGraphic,
+                    title: "먹이를 얻었어요!",
+                    description: "사과 \(viewModel.earnFood)개",
                 buttonTitle: "획득하기"
             ) {
             // 이후 동작 정의 -> 서버 통신 및 뷰 업데이트
