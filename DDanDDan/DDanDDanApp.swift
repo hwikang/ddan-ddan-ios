@@ -15,7 +15,7 @@ struct DDanDDanApp: App {
     @StateObject private var appCoordinator = AppCoordinator()
     
     init() {
-        KakaoSDK.initSDK(appKey: "87ce44f4ab5c4efbff8e1db25c007bbe")
+        KakaoSDK.initSDK(appKey: Config.kakaoKey)
         appCoordinator.determineRootView()
     }
     

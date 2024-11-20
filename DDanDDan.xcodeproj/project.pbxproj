@@ -41,6 +41,8 @@
 		36C1FE0E2CA4B3E7007CA188 /* PetArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C1FE0D2CA4B3E7007CA188 /* PetArchiveView.swift */; };
 		36E0198F2CCA830C00383318 /* DdanDdan_Watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 36E0196C2CCA830A00383318 /* DdanDdan_Watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		36F6E7A22CEE018600B395FB /* NewPetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F6E7A12CEE018600B395FB /* NewPetViewModel.swift */; };
+		36F6E7E92CEE40AE00B395FB /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 36F6E7E82CEE40AE00B395FB /* Config.xcconfig */; };
+		36F6E7EB2CEE411D00B395FB /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F6E7EA2CEE411D00B395FB /* Config.swift */; };
 		F809E2FA2CBD05F5001BE099 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809E2F92CBD05F5001BE099 /* UserData.swift */; };
 		F809E2FC2CBD06A1001BE099 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809E2FB2CBD06A1001BE099 /* UserManager.swift */; };
 		F809E2FE2CBD0841001BE099 /* DeleteUserConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809E2FD2CBD0841001BE099 /* DeleteUserConfirmView.swift */; };
@@ -159,6 +161,8 @@
 		36E0197B2CCA830C00383318 /* DdanDdan_Watch Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DdanDdan_Watch Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E019852CCA830C00383318 /* DdanDdan_Watch Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DdanDdan_Watch Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36F6E7A12CEE018600B395FB /* NewPetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPetViewModel.swift; sourceTree = "<group>"; };
+		36F6E7E82CEE40AE00B395FB /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		36F6E7EA2CEE411D00B395FB /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		F809E2F92CBD05F5001BE099 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		F809E2FB2CBD06A1001BE099 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		F809E2FD2CBD0841001BE099 /* DeleteUserConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserConfirmView.swift; sourceTree = "<group>"; };
@@ -478,6 +482,7 @@
 				F88FC6DB2CCF3B110033D4C9 /* PetsNetwork.swift */,
 				367A796E2CDCBC210055771B /* PathString.swift */,
 				367A79DC2CE4B65D0055771B /* TokenInterceptor.swift */,
+				36F6E7EA2CEE411D00B395FB /* Config.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -561,6 +566,7 @@
 				362864AF2C89E76200029452 /* Info.plist */,
 				F8311F9A2C7068C4000455ED /* Entity */,
 				F8AB33332C2EAD2F00BC16C9 /* Preview Content */,
+				36F6E7E82CEE40AE00B395FB /* Config.xcconfig */,
 			);
 			path = DDanDDan;
 			sourceTree = "<group>";
@@ -761,6 +767,7 @@
 				3628649F2C89CA2000029452 /* Pretendard-SemiBold.otf in Resources */,
 				362864BA2C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf in Resources */,
 				3628649D2C89CA2000029452 /* Pretendard-Regular.otf in Resources */,
+				36F6E7E92CEE40AE00B395FB /* Config.xcconfig in Resources */,
 				3628649C2C89CA2000029452 /* Pretendard-Medium.otf in Resources */,
 				F8758CF32C8EE1F60038CCBB /* Assets.xcassets in Resources */,
 				362864A12C89CA2000029452 /* Pretendard-Bold.otf in Resources */,
@@ -836,6 +843,7 @@
 				36C1FE0A2CA4AAAE007CA188 /* LevelUpView.swift in Sources */,
 				F8C10C182C57955C0037D6A5 /* LoginView.swift in Sources */,
 				F88FC6DF2CCF3BF70033D4C9 /* Pet.swift in Sources */,
+				36F6E7EB2CEE411D00B395FB /* Config.swift in Sources */,
 				367A79DD2CE4B65D0055771B /* TokenInterceptor.swift in Sources */,
 				367A797A2CDD6D410055771B /* ImageDialogView.swift in Sources */,
 				F8C10C182C57955C0037D6A5 /* LoginView.swift in Sources */,
@@ -1046,6 +1054,7 @@
 		};
 		F8AB33362C2EAD2F00BC16C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36F6E7E82CEE40AE00B395FB /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1110,6 +1119,7 @@
 		};
 		F8AB33372C2EAD2F00BC16C9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36F6E7E82CEE40AE00B395FB /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1191,6 +1201,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				KAKAO_KEY = "$(KAKAO_KEY)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1232,6 +1243,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				KAKAO_KEY = "$(KAKAO_KEY)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

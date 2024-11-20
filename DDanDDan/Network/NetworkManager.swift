@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 public struct NetworkManager {
-    private let baseURL = "https://ddan-ddan.com"
+    private let baseURL = Config.baseURL
     private let session: Session
     
     public init(interceptor: Interceptor? = nil) {
