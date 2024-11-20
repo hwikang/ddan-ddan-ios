@@ -40,6 +40,7 @@ public struct HomeRepository: HomeRepositoryProtocol {
         
         return result.map { userData in
             HomeUserInfo(
+                id: userData.id,
                 purposeCalorie: userData.purposeCalorie,
                 foodQuantity: userData.foodQuantity,
                 toyQuantity: userData.toyQuantity

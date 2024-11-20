@@ -16,6 +16,7 @@ public struct UserData: Decodable {
 }
 
 public struct HomeUserInfo {
+    var id: String
     var purposeCalorie: Int
     var foodQuantity: Int
     var toyQuantity: Int

@@ -32,17 +32,9 @@ final class HomeViewModel: ObservableObject {
         petInfo: MainPet? = nil
     ) {
         self.homeRepository = repository
-        initialHomeInfo(userInfo: userInfo, petInfo: petInfo)
+        
         checkHealthKitAuthorization()
-        initialCurrnetKcalModel()
-    }
-    
-    
-    func initialHomeInfo(
-        userInfo: HomeUserInfo?,
-        petInfo: MainPet?
-    ) {
-        // Splash에서 전달된 데이터를 기반으로 초기화
+        
         if let userInfo = userInfo, let petInfo = petInfo {
             self.homePetModel = HomeModel(
                 petType: petInfo.mainPet.type,
@@ -61,6 +53,8 @@ final class HomeViewModel: ObservableObject {
                 await fetchHomeInfo()
             }
         }
+        
+        initialCurrnetKcalModel()
     }
     
     @MainActor
@@ -71,7 +65,12 @@ final class HomeViewModel: ObservableObject {
         
         if case .success(let userData) = userInfo,
            case .success(let petData) = mainPetInfo {
-            // HomeModel을 업데이트합니다.
+            UserDefaultValue.userId = userData.id
+            UserDefaultValue.petType = petData.mainPet.type.rawValue
+            UserDefaultValue.petId = petData.mainPet.id
+            UserDefaultValue.purposeKcal = userData.purposeCalorie
+            
+            self.petId = petData.mainPet.id
             self.homePetModel = HomeModel(
                 petType: petData.mainPet.type,
                 goalKcal: userData.purposeCalorie,
@@ -83,16 +82,12 @@ final class HomeViewModel: ObservableObject {
             self.currentKcalModel.level = petData.mainPet.level
             self.currentKcalModel.exp = petData.mainPet.expPercent
             
-            UserDefaultValue.petType = petData.mainPet.type.rawValue
-            UserDefaultValue.petId = petData.mainPet.id
-            
             let watchData = WatchPetModel.init(
                 petType: petData.mainPet.type,
                 goalKcal: userData.purposeCalorie,
                 level: petData.mainPet.level
             )
             
-            print("meeage 보내기")
             WatchConnectivityManager.shared.sendMessage(message: ["watchPet" : watchData])
             
             await updateGoalStatus()
@@ -136,30 +131,35 @@ final class HomeViewModel: ObservableObject {
     }
     
     func earnFeed() {
-        var earnedFeed = 0
-        
-        // HealthKit에서 소모 칼로리 읽기
         HealthKitManager.shared.readActiveEnergyBurned { kcal in
-            let increaseKcal = kcal - UserDefaultValue.currentKcal
+            let lastCheckedKcal = UserDefaultValue.currentKcal
+            let increaseKcal = kcal - lastCheckedKcal
             
-            if increaseKcal >= 100 {
-                earnedFeed = Int(increaseKcal / 100)
-                if earnedFeed > 0 {
-                    self.earnFood = earnedFeed
-                    self.isPresentEarnFood = true
-                    
-                    UserDefaultValue.currentKcal = kcal
-                }
+            guard increaseKcal >= 100 else {
+                print("100 칼로리가 넘지 않았습니다. 증가량: \(increaseKcal)")
+                return
+            }
+            
+            // 지급할 먹이 계산
+            let earnedFeed = Int(increaseKcal / 100)
+
+            if earnedFeed > 0 {
+                self.earnFood = earnedFeed
+                self.isPresentEarnFood = true
             }
         }
     }
     
-    func patchCurrentKcal() async {
+    func patchCurrentKcal(earnedFeed: Int) async {
         let result = await homeRepository.updateDailyKcal(calorie: currentKcalModel.currentKcal)
         
         if case .success(let dailyInfo) = result {
             DispatchQueue.main.async { [weak self] in
                 self?.homePetModel.feedCount = dailyInfo.user.foodQuantity
+                
+                // 지급한 칼로리만큼 업데이트
+                UserDefaultValue.currentKcal += Double(earnedFeed * 100)
+                print("업데이트된 칼로리: \(UserDefaultValue.currentKcal)")
             }
         }
     }
@@ -167,16 +167,17 @@ final class HomeViewModel: ObservableObject {
     
     /// 먹이주기
     func feedPet() async {
-        let result = await homeRepository.feedPet(petId: UserDefaultValue.petId)
+        let result = await homeRepository.feedPet(petId: petId)
         
         if case .success(let userData) = result {
             homePetModel.feedCount = userData.user.foodQuantity
+            
         }
     }
     
     /// 놀아주기
     func playWithPet() async {
-        let result = await homeRepository.playPet(petId: UserDefaultValue.petId)
+        let result = await homeRepository.playPet(petId: petId)
         
         if case .success(let userData) = result {
             homePetModel.toyCount = userData.user.toyQuantity
