@@ -90,3 +90,26 @@ struct ListItem {
     let title: String
     let content: String
 }
+
+enum bubbleTextType {
+    case success
+    case failure
+    case normal
+    case eat
+    case play
+    
+    func getRandomText() -> [String] {
+        switch self {
+        case .success:
+            return ["오늘도 잘 먹었군", "득근득근", "벌컵벌컵"]
+        case .failure:
+            return ["앗 근손실", "혼내준다", "지방이 늘어나요"]
+        case .normal:
+            return ["안녕", "배고파요", "운동하자"]
+        case .eat:
+            return ["맛있다!", "욤뇸뇸", "쩝쩝박사"]
+        case .play:
+            return ["신난다!", "조아조아", "눈누난나 ♫"]
+        }
+    }
+}
