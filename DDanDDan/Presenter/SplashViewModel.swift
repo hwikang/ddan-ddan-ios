@@ -30,6 +30,10 @@ final class SplashViewModel: ObservableObject {
                 self.coordinator.userInfo = userData
                 self.coordinator.petInfo = petData
                 self.coordinator.setRoot(to: .home)
+                
+                let watchData = WatchPetModel(petType: petData.mainPet.type, goalKcal: userData.purposeCalorie, level: petData.mainPet.level)
+                print("meeage 보내기")
+                WatchConnectivityManager.shared.sendMessage(message: ["watchPet" : watchData])
             }
         } else {
             DispatchQueue.main.async {
