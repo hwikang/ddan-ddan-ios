@@ -24,9 +24,9 @@ struct UpdateCalorieView: View {
                     .padding(.horizontal, 20)
                 HStack(alignment: .center) {
                     Button {
-                        viewModel.increaseCalorie()
+                        viewModel.decreaseCalorie()
                     } label: {
-                        Image("plusButtonRounded")
+                        Image("minusButtonRounded")
                     }
                     Text(String(viewModel.calorie))
                         .font(.system(size: 24, weight: .heavy))
@@ -34,13 +34,11 @@ struct UpdateCalorieView: View {
                         .frame(width: 84, height: 80)
                         .background(.backgroundGray)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
-                    
                     Button {
-                        viewModel.decreaseCalorie()
+                        viewModel.increaseCalorie()
                     } label: {
-                        Image("minusButtonRounded")
+                        Image("plusButtonRounded")
                     }
-                    
                 }.frame(maxWidth: .infinity)
                     .padding(.top, 56)
                 

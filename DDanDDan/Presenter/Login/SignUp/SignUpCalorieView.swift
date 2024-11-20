@@ -23,11 +23,10 @@ struct SignUpCalorieView: View {
                     .padding(.top, 80)
                     .padding(.horizontal, 20)
                 HStack(alignment: .center) {
-                    
                     Button {
-                        increaseCalorie()
+                        decreaseCalorie()
                     } label: {
-                        Image("plusButtonRounded")
+                        Image("minusButtonRounded")
                     }
                     Text(String(calorie))
                         .font(.system(size: 24, weight: .heavy))
@@ -37,9 +36,9 @@ struct SignUpCalorieView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                     
                     Button {
-                        decreaseCalorie()
+                        increaseCalorie()
                     } label: {
-                        Image("minusButtonRounded")
+                        Image("plusButtonRounded")
                     }
                     
                 }.frame(maxWidth: .infinity)
