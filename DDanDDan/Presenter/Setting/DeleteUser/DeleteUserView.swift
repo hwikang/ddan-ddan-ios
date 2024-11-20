@@ -20,6 +20,9 @@ struct DeleteUserView: View {
         ZStack {
             Color.backgroundBlack.edgesIgnoringSafeArea(.all)
             VStack(alignment: .leading) {
+                CustomNavigationBar(title: "") {
+                    coordinator.pop()
+                }
                 Text("탈퇴하는 이유가 무엇인가요?")
                     .font(.heading3_bold24)
                     .lineSpacing(8)
@@ -40,6 +43,7 @@ struct DeleteUserView: View {
                 }, title: "탈퇴하기", disabled: .constant(selectedReason.isEmpty))
             }
         }
+        .navigationBarHidden(true)
     }
     
     private func addReason(reason: String) {

@@ -12,10 +12,15 @@ struct DeleteUserConfirmView: View {
     @ObservedObject public var coordinator: AppCoordinator
     public let selectedReason: Set<String>
     
+    @State var isChecked: Bool = false
+    
     var body: some View {
         ZStack {
             Color.backgroundBlack.edgesIgnoringSafeArea(.all)
             VStack(alignment: .leading) {
+                CustomNavigationBar(title: "") {
+                    coordinator.pop()
+                }
                 Text(viewModel.name + "님\n탈퇴하기 전에 확인해주세요")
                     .font(.heading3_bold24)
                     .lineSpacing(8)
@@ -41,6 +46,7 @@ struct DeleteUserConfirmView: View {
                 }, title: "탈퇴하기", disabled: .constant(selectedReason.isEmpty))
             }
         }
+        .navigationBarHidden(true)
     }
     
 }

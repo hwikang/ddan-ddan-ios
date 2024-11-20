@@ -45,6 +45,7 @@
 		36F6E7EB2CEE411D00B395FB /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F6E7EA2CEE411D00B395FB /* Config.swift */; };
 		36F6E81C2CEE4FF900B395FB /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F6E81B2CEE4FF900B395FB /* Array+.swift */; };
 		36F6E81D2CEE680300B395FB /* UserDefaultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C2BA32C4CD651002E2237 /* UserDefaultValue.swift */; };
+		36F6E81F2CEE7B4900B395FB /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F6E81E2CEE7B4900B395FB /* NavigationBarView.swift */; };
 		F809E2FA2CBD05F5001BE099 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809E2F92CBD05F5001BE099 /* UserData.swift */; };
 		F809E2FC2CBD06A1001BE099 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809E2FB2CBD06A1001BE099 /* UserManager.swift */; };
 		F809E2FE2CBD0841001BE099 /* DeleteUserConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809E2FD2CBD0841001BE099 /* DeleteUserConfirmView.swift */; };
@@ -166,6 +167,7 @@
 		36F6E7E82CEE40AE00B395FB /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		36F6E7EA2CEE411D00B395FB /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		36F6E81B2CEE4FF900B395FB /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
+		36F6E81E2CEE7B4900B395FB /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
 		F809E2F92CBD05F5001BE099 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		F809E2FB2CBD06A1001BE099 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		F809E2FD2CBD0841001BE099 /* DeleteUserConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserConfirmView.swift; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 				F80DF7352CB38861004FF1F2 /* WebView.swift */,
 				F8311F982C7060E8000455ED /* GreenButton.swift */,
 				367A79772CDD617A0055771B /* ToastView.swift */,
+				36F6E81E2CEE7B4900B395FB /* NavigationBarView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -837,6 +840,7 @@
 				360E6B362CEBC5F10059661E /* SplashView.swift in Sources */,
 				36F6E81C2CEE4FF900B395FB /* Array+.swift in Sources */,
 				F8773BC22CA54E49009A608F /* UpdateCalorieViewModel.swift in Sources */,
+				36F6E81F2CEE7B4900B395FB /* NavigationBarView.swift in Sources */,
 				F88FC6E12CCF64150033D4C9 /* MainPet.swift in Sources */,
 				F84B21C52C90227A009FE6F3 /* SettingView.swift in Sources */,
 				367A79782CDD617A0055771B /* ToastView.swift in Sources */,
