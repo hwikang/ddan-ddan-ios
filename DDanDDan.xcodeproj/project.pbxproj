@@ -10,6 +10,7 @@
 		36022B732CCAA04000D360C0 /* HomeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36022B722CCAA04000D360C0 /* HomeButton.swift */; };
 		360E6B362CEBC5F10059661E /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360E6B352CEBC5F10059661E /* SplashView.swift */; };
 		360E6B382CEBC8A60059661E /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360E6B372CEBC8A60059661E /* SplashViewModel.swift */; };
+		360E6B3C2CEDF53F0059661E /* NewPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360E6B3B2CEDF53F0059661E /* NewPetView.swift */; };
 		3628649C2C89CA2000029452 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 362864932C89CA1E00029452 /* Pretendard-Medium.otf */; };
 		3628649D2C89CA2000029452 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 362864942C89CA1F00029452 /* Pretendard-Regular.otf */; };
 		3628649F2C89CA2000029452 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 362864962C89CA1F00029452 /* Pretendard-SemiBold.otf */; };
@@ -127,6 +128,7 @@
 		36022B722CCAA04000D360C0 /* HomeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButton.swift; sourceTree = "<group>"; };
 		360E6B352CEBC5F10059661E /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		360E6B372CEBC8A60059661E /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		360E6B3B2CEDF53F0059661E /* NewPetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPetView.swift; sourceTree = "<group>"; };
 		362864932C89CA1E00029452 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		362864942C89CA1F00029452 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		362864962C89CA1F00029452 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 			children = (
 				36C1FE0B2CA4AAE7007CA188 /* LevelUpView.swift */,
 				36C1FE092CA4AAAE007CA188 /* SuccessView.swift */,
+				360E6B3B2CEDF53F0059661E /* NewPetView.swift */,
 			);
 			path = Challenge;
 			sourceTree = "<group>";
@@ -805,6 +808,7 @@
 				F88FC6E12CCF64150033D4C9 /* MainPet.swift in Sources */,
 				F84B21C52C90227A009FE6F3 /* SettingView.swift in Sources */,
 				367A79782CDD617A0055771B /* ToastView.swift in Sources */,
+				360E6B3C2CEDF53F0059661E /* NewPetView.swift in Sources */,
 				F8311F992C7060E8000455ED /* GreenButton.swift in Sources */,
 				F88FC6E32CCF6C6A0033D4C9 /* SettingRepository.swift in Sources */,
 				F8758CEF2C8EDF630038CCBB /* DialogView.swift in Sources */,
