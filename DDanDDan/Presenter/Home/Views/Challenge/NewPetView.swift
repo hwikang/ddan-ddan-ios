@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NewPetView: View {
     @ObservedObject var coordinator: AppCoordinator
+    @StateObject var viewModel: NewPetViewModel
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -23,6 +24,9 @@ struct NewPetView: View {
                     .padding(.vertical, 32)
                 Spacer()
                 GreenButton(action: {
+                    Task {
+                        await viewModel.createRandomPet()
+                    }
                     coordinator.pop()
                 }, title: "시작하기", disabled: .constant(false))
                 .padding(.bottom, 44)
