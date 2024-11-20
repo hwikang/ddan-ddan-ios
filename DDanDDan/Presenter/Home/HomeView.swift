@@ -11,9 +11,9 @@ import HealthKit
 enum HomePath: Hashable {
     case setting
     case petArchive
-    case successThreeDay
+    case successThreeDay(totalKcal: Int)
     case newPet
-    case upgradePet
+    case upgradePet(level: Int)
 }
 
 struct HomeView: View {
@@ -68,7 +68,7 @@ struct HomeView: View {
                     image: .eatGraphic,
                     title: "먹이를 얻었어요!",
                     description: "사과 \(viewModel.earnFood)개",
-                buttonTitle: "획득하기"
+                    buttonTitle: "획득하기"
                 ) {
                     // 이후 동작 정의 -> 서버 통신 및 뷰 업데이트
                     Task {
@@ -79,11 +79,14 @@ struct HomeView: View {
             }
             .onChange(of: viewModel.currentKcalModel.exp) { newExp in
                 if newExp == 100 {
-                    coordinator.push(to: .upgradePet)
+                    coordinator.push(to: .newPet)
                 }
             }
             .onChange(of: viewModel.homePetModel.level) { newLevel in
-                coordinator.push(to: .upgradePet)
+                coordinator.push(to: .upgradePet(level: viewModel.currentKcalModel.level + 1))
+            }
+            .onChange(of: viewModel.isGoalMet) { newValue in
+                if newValue { coordinator.push(to: .successThreeDay(totalKcal: viewModel.threeDaysTotalKcal))}
             }
         }
         .navigationDestination(for: HomePath.self) { path in
@@ -92,12 +95,12 @@ struct HomeView: View {
                 SettingView(coordinator: coordinator)
             case .petArchive:
                 PetArchiveView(viewModel: PetArchiveViewModel(repository: HomeRepository()), coordinator: coordinator)
-            case .successThreeDay:
-                SuccessView(coordinator: coordinator)
+            case .successThreeDay(let totalKcal):
+                ThreeDaySuccessView(coordinator: coordinator, totalKcal: totalKcal)
             case .newPet:
-                NewPetView(coordinator: coordinator)
-            case .upgradePet:
-                LevelUpView(coordinator: coordinator)
+                NewPetView(coordinator: coordinator, viewModel: NewPetViewModel(homeRepository: HomeRepository()))
+            case .upgradePet(let level):
+                LevelUpView(coordinator: coordinator, level: level)
             }
         }
         .navigationBarHidden(true)
@@ -222,4 +225,8 @@ extension HomeView {
         .frame(height: 66)
         .padding(.horizontal, 32)
     }
+}
+
+#Preview {
+    HomeView(repository: HomeRepository(), coordinator: .init())
 }

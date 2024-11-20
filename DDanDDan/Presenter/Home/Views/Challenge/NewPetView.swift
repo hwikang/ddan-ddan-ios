@@ -45,5 +45,5 @@ struct NewPetView: View {
 }
 
 #Preview {
-    NewPetView(coordinator: .init())
+    NewPetView(coordinator: .init(), viewModel: .init(homeRepository: HomeRepository()))
 }

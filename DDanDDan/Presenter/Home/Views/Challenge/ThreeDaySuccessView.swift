@@ -9,10 +9,7 @@ import SwiftUI
 
 struct ThreeDaySuccessView: View {
     @ObservedObject var coordinator: AppCoordinator
-    
-    let listItems: [ListItem] = [
-        .init(image: Image(.kcalGraphic), title: "3일간 소모한 칼로리", content: "\(121)kcal"),
-        .init(image: Image(.luckyGraphic), title: "받은 장난감", content: "행운의 풀떼기 1개")]
+    var totalKcal: Int
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -26,14 +23,16 @@ struct ThreeDaySuccessView: View {
                     .padding(.bottom, 80)
                 
                 VStack(spacing: 16) {
-                    // 리스트 뷰 렌더링
-                    ForEach(0..<listItems.count, id: \.self) { index in
-                        listComponentView(
-                            image: listItems[index].image,
-                            title: listItems[index].title,
-                            content: listItems[index].content)
-                        .padding(.horizontal, 16)
-                    }
+                    listComponentView(
+                        image: Image(.kcalGraphic),
+                        title: "3일간 소모한 칼로리",
+                        content: "\(totalKcal)kcal"
+                    )
+                    listComponentView(
+                        image: Image(.luckyGraphic),
+                        title: "받은 장난감",
+                        content: "행운의 풀떼기 1개"
+                    )
                 }
                 Spacer()
                 GreenButton(action: {
@@ -67,5 +66,5 @@ struct ThreeDaySuccessView: View {
 }
 
 #Preview {
-    LevelUpView(coordinator: .init(), level: 1)
+    ThreeDaySuccessView(coordinator: .init(), totalKcal: 0)
 }

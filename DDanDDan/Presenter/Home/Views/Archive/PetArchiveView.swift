@@ -121,15 +121,15 @@ struct PetArchiveView: View {
     }
     
     private func showToastMessage() {
-            showToast = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                hideToastMessage()
-            }
+        showToast = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            hideToastMessage()
         }
-        
-        private func hideToastMessage() {
-            showToast = false
-        }
+    }
+    
+    private func hideToastMessage() {
+        showToast = false
+    }
 }
 
 
