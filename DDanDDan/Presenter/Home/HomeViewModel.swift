@@ -191,16 +191,6 @@ final class HomeViewModel: ObservableObject {
         }
     }
     
-    /// 캐릭터에 맞는 배경 이미지
-    func backgroundImage() -> Image {
-        return homePetModel.petType.backgroundImage
-    }
-    
-    /// 레벨에 맞는 캐릭터 이미지
-    func characterImage() -> Image {
-        return homePetModel.petType.image(for: homePetModel.level)
-    }
-    
     // 말풍선 이미지 선택 로직
     func bubbleImage(for characterCount: Int) -> ImageResource {
         print(characterCount)
