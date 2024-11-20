@@ -19,6 +19,10 @@ final class WatchViewModel: ObservableObject {
     
     init(currentKcal: Int = 0) {
         self.currentKcal = currentKcal
+        
+        let petType = PetType(rawValue: UserDefaultValue.petType)
+        self.viewConfig = configureUI(petType: petType ?? .bluePenguin, level: UserDefaultValue.level)
+        
         updateProgress()
         bindWatchApp()
     }
@@ -52,7 +56,7 @@ final class WatchViewModel: ObservableObject {
     private func calculateProgress() -> Double {
         if let goalKcal {
             guard goalKcal > 0 else { return 0.0 }
-            return min(Double(currentKcal) / Double(goalKcal), 1.0)
+            return min(Double(currentKcal) / Double(UserDefaultValue.purposeKcal), 1.0)
         }
         return 0
     }

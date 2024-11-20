@@ -44,6 +44,7 @@
 		36F6E7E92CEE40AE00B395FB /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 36F6E7E82CEE40AE00B395FB /* Config.xcconfig */; };
 		36F6E7EB2CEE411D00B395FB /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F6E7EA2CEE411D00B395FB /* Config.swift */; };
 		36F6E81C2CEE4FF900B395FB /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F6E81B2CEE4FF900B395FB /* Array+.swift */; };
+		36F6E81D2CEE680300B395FB /* UserDefaultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85C2BA32C4CD651002E2237 /* UserDefaultValue.swift */; };
 		F809E2FA2CBD05F5001BE099 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809E2F92CBD05F5001BE099 /* UserData.swift */; };
 		F809E2FC2CBD06A1001BE099 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809E2FB2CBD06A1001BE099 /* UserManager.swift */; };
 		F809E2FE2CBD0841001BE099 /* DeleteUserConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809E2FD2CBD0841001BE099 /* DeleteUserConfirmView.swift */; };
@@ -793,6 +794,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				367A7A532CE5129A0055771B /* HomeModel.swift in Sources */,
+				36F6E81D2CEE680300B395FB /* UserDefaultValue.swift in Sources */,
 				3650CCCE2CCAA22B00ED5967 /* Font.swift in Sources */,
 				3650CCD22CCAB7BD00ED5967 /* HealthKitManager.swift in Sources */,
 			);
