@@ -18,15 +18,15 @@ enum HomePath: Hashable {
 
 struct HomeView: View {
     @ObservedObject var coordinator: AppCoordinator
-    @StateObject var viewModel: HomeViewModel
+    @ObservedObject var viewModel: HomeViewModel
     
     init(repository: HomeRepositoryProtocol, coordinator: AppCoordinator) {
         self.coordinator = coordinator
-        self._viewModel = StateObject(wrappedValue: HomeViewModel(
+        self.viewModel = HomeViewModel(
             repository: repository,
             userInfo: coordinator.userInfo,
             petInfo: coordinator.petInfo
-        ))
+        )
     }
     
     var body: some View {
@@ -39,11 +39,11 @@ struct HomeView: View {
                 kcalView
                     .padding(.bottom, 14)
                 ZStack {
-                    viewModel.backgroundImage()
+                    viewModel.homePetModel.petType.backgroundImage
                         .scaledToFit()
                         .padding(.horizontal, 53)
                         .clipped()
-                    viewModel.characterImage()
+                    viewModel.homePetModel.petType.image(for: viewModel.homePetModel.level)
                         .scaledToFit()
                         .padding(.horizontal, 141)
                         .offset(y: 95)

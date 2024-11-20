@@ -37,14 +37,20 @@ public struct NetworkManager {
             print("🔹 Parameters: \(parameters)")
         }
         
-        let result = session.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers)
-            .validate()
+        let result = await session.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers)
+            .validate().serializingData().response
         
         // 응답 로그 출력
         print("\n📥 Response:")
         if let error = result.error {
             print("🔹 Error: \(error.localizedDescription)")
             return .failure(NetworkError.requestFailed(error.errorDescription ?? ""))
+        }
+        
+        guard let data = result.data else {
+            print("🔹 Error: Data is nil")
+            print("====================================")
+            return .failure(NetworkError.dataNil)
         }
         
         guard let response = result.response else {
@@ -56,21 +62,15 @@ public struct NetworkManager {
         print("🔹 Status Code: \(response.statusCode)")
         
         if 200..<400 ~= response.statusCode {
-            if let data = result.data, !data.isEmpty {
-                do {
-                    let decodedResponse = try JSONDecoder().decode(T.self, from: data)
-                    print("🔹 Success: \(decodedResponse)")
-                    return .success(decodedResponse)
-                } catch {
-                    print("🔹 Decoding Error: \(error.localizedDescription)")
-                    return .failure(NetworkError.failToDecode(error.localizedDescription))
-                }
-            } else if T.self is EmptyResponse.Type, let emptyResponse = T.self as? EmptyResponse.Type {
-                print("🔹 Empty Response")
-                return .success(emptyResponse.emptyValue() as! T)
-            } else {
-                print("🔹 Error: Data is nil or empty, and T is not EmptyResponse")
-                return .failure(NetworkError.dataNil)
+            do {
+                let networkResponse = try JSONDecoder().decode(T.self, from: data)
+                print("🔹 Success: \(networkResponse)")
+                print("====================================")
+                return .success(networkResponse)
+            } catch {
+                print("🔹 Decoding Error: \(error.localizedDescription)")
+                print("====================================")
+                return .failure(NetworkError.failToDecode(error.localizedDescription))
             }
         } else {
             print("🔹 Server Error: \(response.statusCode)")
