@@ -35,12 +35,18 @@ struct DeleteUserConfirmView: View {
                     .padding(.horizontal, 20)
 
                 Image("deleteUser").frame(maxWidth: .infinity, alignment: .center)
-                
                 Spacer()
+                CheckButton(isChecked: isChecked, title: "모두 다 꼼꼼히 확인했어요") {
+                    isChecked.toggle()
+                }
+                .padding(.leading, 20)
+                .padding(.bottom, 20)
                 GreenButton(action: {
-                    Task {
-                        if await viewModel.deleteUser(reason: selectedReason) {
-                            coordinator.setRoot(to: .login)
+                    if isChecked {
+                        Task {
+                            if await viewModel.deleteUser(reason: selectedReason) {
+                                coordinator.setRoot(to: .login)
+                            }
                         }
                     }
                 }, title: "탈퇴하기", disabled: .constant(selectedReason.isEmpty))
