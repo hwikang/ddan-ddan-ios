@@ -19,7 +19,7 @@ final class HomeViewModel: ObservableObject {
     @Published var currentKcalModel: HomeKcalModel = .init(currentKcal: 0, level: 1, exp: 0)
     @Published var isGoalMet: Bool = false
     @Published var isHealthKitAuthorized: Bool = true // 초기값은 true로 설정
-
+    @Published var threeDaysTotalKcal: Int = 0
     
     @Published var earnFood: Int = 0
     @Published var isPresentEarnFood: Bool = false
@@ -91,16 +91,6 @@ final class HomeViewModel: ObservableObject {
             
             self.currentKcalModel.level = petData.mainPet.level
             self.currentKcalModel.exp = petData.mainPet.expPercent
-            
-            let watchData = WatchPetModel.init(
-                petType: petData.mainPet.type,
-                goalKcal: userData.purposeCalorie,
-                level: petData.mainPet.level
-            )
-            
-            WatchConnectivityManager.shared.sendMessage(message: ["watchPet" : watchData])
-            
-            await updateGoalStatus()
         }
     }
     
@@ -109,12 +99,14 @@ final class HomeViewModel: ObservableObject {
         let currentDate = Date()
         let calendar = Calendar.current
         
+        if UserDefaultValue.currentKcal < 0 { UserDefaultValue.currentKcal = 0 }
+        
         // 날짜가 다르면 currentKcal을 0으로 초기화하고 저장된 날짜 업데이트
         if !calendar.isDate(lastDate, inSameDayAs: currentDate) {
             UserDefaultValue.currentKcal = 0
             UserDefaultValue.date = currentDate
         }
-        
+       
         // HealthKit에서 오늘의 소모 칼로리 읽기
         HealthKitManager.shared.readActiveEnergyBurned { kcal in
             DispatchQueue.main.async { [weak self] in
@@ -123,23 +115,7 @@ final class HomeViewModel: ObservableObject {
             }
         }
     }
-    
-    /// 3일 치 칼로리 가져오기 (Completion Handler 사용)
-    func getThreeDaysKcal(completion: @escaping (Bool) -> Void) {
-        HealthKitManager.shared.readThreeDaysEnergyBurned { [weak self] error in
-            guard let self = self else { return }
-            if let error = error {
-                print("칼로리 데이터를 가져오는 중 오류 발생: \(error.localizedDescription)")
-                completion(false)
-            } else {
-                print("3일 치 칼로리: \(HealthKitManager.shared.caloriesArray)")
-                let goalMet = HealthKitManager.shared.checkIfGoalMet(goalCalories: Double(homePetModel.goalKcal))
-                self.isGoalMet = goalMet
-                completion(goalMet)
-            }
-        }
-    }
-    
+
     func earnFeed() {
         HealthKitManager.shared.readActiveEnergyBurned { kcal in
             let lastCheckedKcal = UserDefaultValue.currentKcal
@@ -152,7 +128,7 @@ final class HomeViewModel: ObservableObject {
             
             // 지급할 먹이 계산
             let earnedFeed = Int(increaseKcal / 100)
-
+            
             if earnedFeed > 0 {
                 self.earnFood = earnedFeed
                 self.isPresentEarnFood = true
@@ -284,6 +260,7 @@ final class HomeViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     if authorized {
                         self?.isHealthKitAuthorized = healthKitManager.checkAuthorization() == .sharingAuthorized
+                        self?.initialCurrnetKcalModel()
                     } else {
                         self?.isHealthKitAuthorized = false
                     }
@@ -291,5 +268,4 @@ final class HomeViewModel: ObservableObject {
             }
         }
     }
-
 }
