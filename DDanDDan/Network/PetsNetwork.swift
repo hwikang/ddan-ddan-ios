@@ -61,7 +61,7 @@ public struct PetsNetwork {
         )
     }
     
-    public func postPetFeed(accessToken: String, petId: String) async -> Result<DailyUserData, NetworkError> {
+    public func postPetFeed(accessToken: String, petId: String) async -> Result<EmptyEntity, NetworkError> {
         let parameter: Parameters = [
             "petId": petId
         ]
@@ -75,7 +75,7 @@ public struct PetsNetwork {
         )
     }
     
-    public func postPetPlay(accessToken: String, petId: String) async -> Result<DailyUserData, NetworkError> {
+    public func postPetPlay(accessToken: String, petId: String) async -> Result<EmptyEntity, NetworkError> {
         let parameter: Parameters = [
             "petId": petId
         ]

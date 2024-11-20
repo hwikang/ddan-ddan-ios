@@ -7,6 +7,8 @@
 
 import Foundation
 
+import Alamofire
+
 public struct UserData: Decodable {
     var id: String
     var name: String
@@ -33,4 +35,10 @@ public struct DailyInfo: Decodable {
 public struct DailyUserData: Decodable {
     var user: UserData
     var dailyInfo: DailyInfo
+}
+
+public struct EmptyEntity: Codable, EmptyResponse {
+    public static func emptyValue() -> EmptyEntity {
+        return .init()
+    }
 }
