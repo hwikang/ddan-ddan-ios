@@ -36,8 +36,8 @@
 		36BAF1C72CA483BC00BEBCE7 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BAF1C62CA483BC00BEBCE7 /* HomeView.swift */; };
 		36BAF1CD2CA48BAE00BEBCE7 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BAF1CC2CA48BAE00BEBCE7 /* HomeModel.swift */; };
 		36C1FE052CA4A4EC007CA188 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C1FE042CA4A4EC007CA188 /* HomeViewModel.swift */; };
-		36C1FE0A2CA4AAAE007CA188 /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C1FE092CA4AAAE007CA188 /* SuccessView.swift */; };
-		36C1FE0C2CA4AAE7007CA188 /* LevelUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C1FE0B2CA4AAE7007CA188 /* LevelUpView.swift */; };
+		36C1FE0A2CA4AAAE007CA188 /* LevelUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C1FE092CA4AAAE007CA188 /* LevelUpView.swift */; };
+		36C1FE0C2CA4AAE7007CA188 /* ThreeDaySuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C1FE0B2CA4AAE7007CA188 /* ThreeDaySuccessView.swift */; };
 		36C1FE0E2CA4B3E7007CA188 /* PetArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C1FE0D2CA4B3E7007CA188 /* PetArchiveView.swift */; };
 		36E0198F2CCA830C00383318 /* DdanDdan_Watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 36E0196C2CCA830A00383318 /* DdanDdan_Watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F809E2FA2CBD05F5001BE099 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809E2F92CBD05F5001BE099 /* UserData.swift */; };
@@ -151,8 +151,8 @@
 		36BAF1CC2CA48BAE00BEBCE7 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		36BAF1CE2CA4919C00BEBCE7 /* HomeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButton.swift; sourceTree = "<group>"; };
 		36C1FE042CA4A4EC007CA188 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		36C1FE092CA4AAAE007CA188 /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
-		36C1FE0B2CA4AAE7007CA188 /* LevelUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelUpView.swift; sourceTree = "<group>"; };
+		36C1FE092CA4AAAE007CA188 /* LevelUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelUpView.swift; sourceTree = "<group>"; };
+		36C1FE0B2CA4AAE7007CA188 /* ThreeDaySuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDaySuccessView.swift; sourceTree = "<group>"; };
 		36C1FE0D2CA4B3E7007CA188 /* PetArchiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetArchiveView.swift; sourceTree = "<group>"; };
 		36E0196C2CCA830A00383318 /* DdanDdan_Watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DdanDdan_Watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E0197B2CCA830C00383318 /* DdanDdan_Watch Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DdanDdan_Watch Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -253,7 +253,7 @@
 		360E6B3D2CEDF8010059661E /* LevelUp */ = {
 			isa = PBXGroup;
 			children = (
-				36C1FE0B2CA4AAE7007CA188 /* LevelUpView.swift */,
+				36C1FE092CA4AAAE007CA188 /* LevelUpView.swift */,
 			);
 			path = LevelUp;
 			sourceTree = "<group>";
@@ -301,7 +301,7 @@
 		367A79682CDCAB4D0055771B /* Challenge */ = {
 			isa = PBXGroup;
 			children = (
-				36C1FE092CA4AAAE007CA188 /* SuccessView.swift */,
+				36C1FE0B2CA4AAE7007CA188 /* ThreeDaySuccessView.swift */,
 				360E6B3B2CEDF53F0059661E /* NewPetView.swift */,
 			);
 			path = Challenge;
@@ -830,7 +830,7 @@
 				363CC4482CCADC6A00D2EE47 /* WatchConnectivityManager.swift in Sources */,
 				36BAF1CD2CA48BAE00BEBCE7 /* HomeModel.swift in Sources */,
 				367A79732CDD092A0055771B /* AppCoordinator.swift in Sources */,
-				36C1FE0A2CA4AAAE007CA188 /* SuccessView.swift in Sources */,
+				36C1FE0A2CA4AAAE007CA188 /* LevelUpView.swift in Sources */,
 				F8C10C182C57955C0037D6A5 /* LoginView.swift in Sources */,
 				F88FC6DF2CCF3BF70033D4C9 /* Pet.swift in Sources */,
 				367A79DD2CE4B65D0055771B /* TokenInterceptor.swift in Sources */,
@@ -840,7 +840,7 @@
 				367A79762CDD544A0055771B /* PetArchiveViewModel.swift in Sources */,
 				F8773BBD2CA541F4009A608F /* UpdateNicknameViewModel.swift in Sources */,
 				F8758CF12C8EDF6B0038CCBB /* HealthKitManager.swift in Sources */,
-				36C1FE0C2CA4AAE7007CA188 /* LevelUpView.swift in Sources */,
+				36C1FE0C2CA4AAE7007CA188 /* ThreeDaySuccessView.swift in Sources */,
 				F827E5592C748CBC00C5B320 /* SignUpNicknameView.swift in Sources */,
 				F80DF73B2CB3DA38004FF1F2 /* DeleteUserViewModel.swift in Sources */,
 				F89A2EB92C7C7F0500FE3A36 /* SignUpSuccessView.swift in Sources */,

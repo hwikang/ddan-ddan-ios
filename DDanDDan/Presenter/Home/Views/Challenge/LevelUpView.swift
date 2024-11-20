@@ -7,14 +7,9 @@
 
 import SwiftUI
 
-struct LevelUpView: View {
+struct SuccessView: View {
     @ObservedObject var coordinator: AppCoordinator
-    private let level: Int
     
-    init(coordinator: AppCoordinator, level: Int) {
-        self.coordinator = coordinator
-        self.level = level
-    }
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -22,7 +17,7 @@ struct LevelUpView: View {
             VStack {
                 Spacer()
                 imageView
-                Text("lv.\(level)로\n업그레이드 되었어요!")
+                Text("lv.\(2)로\n업그레이드 되었어요!")
                     .multilineTextAlignment(.center)
                     .font(.neoDunggeunmo24)
                     .foregroundStyle(.white)
@@ -47,5 +42,5 @@ struct LevelUpView: View {
 }
 
 #Preview {
-    LevelUpView(coordinator: .init(), level: 1)
+    SuccessView(coordinator: .init())
 }
