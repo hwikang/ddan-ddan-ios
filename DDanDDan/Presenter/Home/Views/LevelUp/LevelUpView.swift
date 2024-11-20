@@ -35,6 +35,7 @@ struct LevelUpView: View {
             }
         }
         .ignoresSafeArea()
+        .navigationBarHidden(true)
     }
     
     var imageView: some View {
