@@ -326,13 +326,12 @@
 		367A79702CDD08950055771B /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				36F6E7EC2CEE45D600B395FB /* Splash */,
 				F8311F952C7060B3000455ED /* Components */,
 				F8C10C142C57950D0037D6A5 /* Login */,
 				F84B21C22C902255009FE6F3 /* Onboarding */,
 				36C1FE082CA4A83D007CA188 /* Home */,
 				F84B21C32C902270009FE6F3 /* Setting */,
-				360E6B352CEBC5F10059661E /* SplashView.swift */,
-				360E6B372CEBC8A60059661E /* SplashViewModel.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -372,6 +371,15 @@
 				36340DF12CC4DE060001AF2A /* Views */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		36F6E7EC2CEE45D600B395FB /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				360E6B352CEBC5F10059661E /* SplashView.swift */,
+				360E6B372CEBC8A60059661E /* SplashViewModel.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 		F809E2F82CBD05E4001BE099 /* User */ = {
