@@ -40,8 +40,6 @@ public struct NetworkManager {
         let result = session.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers)
             .validate()
         
-        let serializedResult = await result.serializingData().response
-        
         // 응답 로그 출력
         print("\n📥 Response:")
         if let error = result.error {
