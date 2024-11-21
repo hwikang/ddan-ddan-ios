@@ -154,9 +154,8 @@ final class HomeViewModel: ObservableObject {
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
                 self.homePetModel.feedCount = dailyInfo.user.foodQuantity
-                
-                // 지급한 칼로리만큼 업데이트
-                UserDefaultValue.currentKcal += Double(earnedFeed * 100)
+                UserDefaultValue.currentKcal = Double(dailyInfo.dailyInfo.calorie)
+                UserDefaultValue.date = dailyInfo.dailyInfo.date.toDate() ?? Date()
                 print("업데이트된 칼로리: \(UserDefaultValue.currentKcal)")
             }
         }
