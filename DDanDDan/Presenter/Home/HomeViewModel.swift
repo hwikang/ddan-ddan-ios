@@ -85,6 +85,9 @@ final class HomeViewModel: ObservableObject {
                 isLevelUp = true
                 UserDefaultValue.level = petInfo.mainPet.level
             }
+            
+            let watchData = WatchPetModel(petType: petInfo.mainPet.type, goalKcal: userInfo.purposeCalorie, level: petInfo.mainPet.level)
+            WatchConnectivityManager.shared.sendMessage(message: ["watchPet": watchData])
         }
     }
     

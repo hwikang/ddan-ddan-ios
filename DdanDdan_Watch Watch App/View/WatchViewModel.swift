@@ -20,11 +20,8 @@ final class WatchViewModel: ObservableObject {
     init(currentKcal: Int = 0) {
         self.currentKcal = currentKcal
         
-        let petType = PetType(rawValue: UserDefaultValue.petType)
-        self.viewConfig = configureUI(petType: petType ?? .bluePenguin, level: UserDefaultValue.level)
-        
-        updateProgress()
         bindWatchApp()
+        updateProgress()
     }
     
     /// HealthKit에서 활성 에너지(kcal) 받아와서 현재 칼로리, 도달률 계산
@@ -56,7 +53,7 @@ final class WatchViewModel: ObservableObject {
     private func calculateProgress() -> Double {
         if let goalKcal {
             guard goalKcal > 0 else { return 0.0 }
-            return min(Double(currentKcal) / Double(UserDefaultValue.purposeKcal), 1.0)
+            return min(Double(currentKcal) / Double(goalKcal), 1.0)
         }
         return 0
     }

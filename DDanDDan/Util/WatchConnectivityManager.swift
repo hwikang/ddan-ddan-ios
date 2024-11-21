@@ -29,13 +29,17 @@ final class WatchConnectivityManager: NSObject, ObservableObject, WCSessionDeleg
     /// - Parameters
     /// `message`: 전송할 키값과 데이터
     func sendMessage(message: [String: Any]) {
+        print("Sending message to Watch")
         if WCSession.default.isReachable {
-            WCSession.default.sendMessage(message, replyHandler: nil) { error in
-                print("Error sending Message: \(error.localizedDescription)")
-            }
+            WCSession.default.sendMessage(message, replyHandler: { response in
+                print("Message sent successfully: \(response)")
+            }, errorHandler: { error in
+                print("Error sending message: \(error.localizedDescription)")
+            })
+        } else {
+            print("Watch is not reachable")
         }
     }
-    
     
     // MARK: - 필수 구현 메서드 및 Delegate 메서드
     
