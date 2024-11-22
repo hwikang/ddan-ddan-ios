@@ -61,30 +61,22 @@ public struct PetsNetwork {
         )
     }
     
-    public func postPetFeed(accessToken: String, petId: String) async -> Result<EmptyEntity, NetworkError> {
-        let parameter: Parameters = [
-            "petId": petId
-        ]
+    public func postPetFeed(accessToken: String, petId: String) async -> Result<UserPetData, NetworkError> {
         let headers: HTTPHeaders = ["Authorization": "Bearer " + accessToken]
         
         return await manager.request(
-            url: PathString.Pet.userPets + petId + "/food",
+            url: PathString.Pet.fetchPet + petId + "/food",
             method: .post, headers: headers,
-            parameters: parameter,
             encoding: JSONEncoding.default
         )
     }
     
-    public func postPetPlay(accessToken: String, petId: String) async -> Result<EmptyEntity, NetworkError> {
-        let parameter: Parameters = [
-            "petId": petId
-        ]
+    public func postPetPlay(accessToken: String, petId: String) async -> Result<UserPetData, NetworkError> {
         let headers: HTTPHeaders = ["Authorization": "Bearer " + accessToken]
         
         return await manager.request(
-            url: PathString.Pet.userPets + petId + "/play",
+            url: PathString.Pet.fetchPet + petId + "/play",
             method: .post, headers: headers,
-            parameters: parameter,
             encoding: JSONEncoding.default
         )
     }

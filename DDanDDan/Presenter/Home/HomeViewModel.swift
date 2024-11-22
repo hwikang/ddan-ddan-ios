@@ -51,7 +51,6 @@ final class HomeViewModel: ObservableObject {
                 toyCount: userInfo.toyQuantity
             )
             
-            currentKcal = Int(UserDefaultValue.currentKcal)
             self.petId = petInfo.mainPet.id
         }
         
@@ -182,30 +181,47 @@ final class HomeViewModel: ObservableObject {
         }
         
         let result = await homeRepository.feedPet(petId: petId)
-        if case .success(_) = result {
+        if case .success(let petData) = result {
             DispatchQueue.main.async { [weak self] in
-                self?.showRandomBubble(type: .eat)
-                self?.homePetModel.feedCount = (self?.homePetModel.feedCount ?? 1) - 1
+                guard let self else { return }
+                
+                self.showRandomBubble(type: .eat)
+                self.homePetModel.feedCount = petData.user.foodQuantity
+                self.homePetModel.exp = petData.pet.expPercent
+                
+                // 레벨 변화 확인
+                if self.homePetModel.level != petData.pet.level {
+                    self.homePetModel.level = petData.pet.level
+                    self.isLevelUp = true
+                }
             }
         }
     }
-    
+
     /// 놀아주기
     func playWithPet() async {
         guard homePetModel.toyCount > 0 else {
             DispatchQueue.main.async { [weak self] in
-                self?.toastMessage = "장남감이 부족해요!"
+                self?.toastMessage = "장난감이 부족해요!"
                 self?.showToastMessage()
             }
             return
         }
         
         let result = await homeRepository.playPet(petId: petId)
-
-        if case .success(_) = result {
+        if case .success(let petData) = result {
             DispatchQueue.main.async { [weak self] in
-                self?.showRandomBubble(type: .play)
-                self?.homePetModel.toyCount = (self?.homePetModel.toyCount ?? 1) - 1
+                guard let self else { return }
+                
+                self.showRandomBubble(type: .play)
+                self.homePetModel.toyCount = petData.user.toyQuantity
+                self.homePetModel.exp = petData.pet.expPercent
+                
+                // 레벨 변화 확인
+                if self.homePetModel.level != petData.pet.level {
+                    self.homePetModel.level = petData.pet.level
+                    self.isLevelUp = true
+                }
             }
         }
     }
