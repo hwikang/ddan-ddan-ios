@@ -10,10 +10,12 @@ import SwiftUI
 struct LevelUpView: View {
     @ObservedObject var coordinator: AppCoordinator
     private let level: Int
+    private let petType: PetType
     
-    init(coordinator: AppCoordinator, level: Int) {
+    init(coordinator: AppCoordinator, level: Int, petType: PetType) {
         self.coordinator = coordinator
         self.level = level
+        self.petType = petType
     }
     
     var body: some View {
@@ -29,7 +31,7 @@ struct LevelUpView: View {
                     .padding(.vertical, 32)
                 Spacer()
                 GreenButton(action: {
-                    print("click")
+                    coordinator.pop()
                 }, title: "성장하기", disabled: .constant(false))
                 .padding(.bottom, 44)
             }
@@ -41,12 +43,12 @@ struct LevelUpView: View {
     var imageView: some View {
         ZStack {
             Image(.pangGraphics)
-            Image(.blueLv3)
+            petType.image(for: level)
                 .offset(y: 18)
         }
     }
 }
 
 #Preview {
-    LevelUpView(coordinator: .init(), level: 1)
+    LevelUpView(coordinator: .init(), level: 1, petType: .bluePenguin)
 }

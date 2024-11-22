@@ -13,7 +13,7 @@ enum HomePath: Hashable {
     case petArchive
     case successThreeDay(totalKcal: Int)
     case newPet
-    case upgradePet(level: Int)
+    case upgradePet(level: Int, petType: PetType)
 }
 
 struct HomeView: View {
@@ -79,16 +79,14 @@ struct HomeView: View {
                     }
                 }
             }
-            .onChange(of: viewModel.homePetModel.exp) { newExp in
-                if newExp == 100 {
-                    coordinator.push(to: .newPet)
-                }
-            }
             .onChange(of: viewModel.isLevelUp) { newLevel in
-                if newLevel { coordinator.push(to: .upgradePet(level: (viewModel.homePetModel.level) + 1)) }
-            }
-            .onChange(of: viewModel.isGoalMet) { newValue in
-                if newValue { coordinator.push(to: .successThreeDay(totalKcal: viewModel.threeDaysTotalKcal))}
+                if newLevel {
+                    coordinator.push( to: .upgradePet(
+                        level: viewModel.homePetModel.level,
+                        petType: viewModel.homePetModel.petType
+                    )
+                    )
+                }
             }
         }
         .navigationDestination(for: HomePath.self) { path in
@@ -101,8 +99,8 @@ struct HomeView: View {
                 ThreeDaySuccessView(coordinator: coordinator, totalKcal: totalKcal)
             case .newPet:
                 NewPetView(coordinator: coordinator, viewModel: NewPetViewModel(homeRepository: HomeRepository()))
-            case .upgradePet(let level):
-                LevelUpView(coordinator: coordinator, level: level)
+            case .upgradePet(let level, let petType):
+                LevelUpView(coordinator: coordinator, level: level, petType: petType)
             }
         }
         .navigationBarHidden(true)
