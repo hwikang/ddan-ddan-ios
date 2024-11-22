@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -33,6 +33,15 @@
 		367A79DD2CE4B65D0055771B /* TokenInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A79DC2CE4B65D0055771B /* TokenInterceptor.swift */; };
 		367A79DF2CE4C3180055771B /* ReissueData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367A79DE2CE4C3180055771B /* ReissueData.swift */; };
 		367A7A532CE5129A0055771B /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BAF1CC2CA48BAE00BEBCE7 /* HomeModel.swift */; };
+		3692E0512CF00CB70079D2B8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3692E0452CF00CB70079D2B8 /* Preview Assets.xcassets */; };
+		3692E0522CF00CB70079D2B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3692E0472CF00CB70079D2B8 /* Assets.xcassets */; };
+		3692E0532CF00CB70079D2B8 /* WatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3692E0492CF00CB70079D2B8 /* WatchConnectivityManager.swift */; };
+		3692E0542CF00CB70079D2B8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3692E04B2CF00CB70079D2B8 /* ContentView.swift */; };
+		3692E0552CF00CB70079D2B8 /* WatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3692E04C2CF00CB70079D2B8 /* WatchViewModel.swift */; };
+		3692E0562CF00CB70079D2B8 /* DdanDdan_WatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3692E04F2CF00CB70079D2B8 /* DdanDdan_WatchApp.swift */; };
+		3692E0592CF00CBA0079D2B8 /* DdanDdan_Watch_Watch_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3692E0572CF00CBA0079D2B8 /* DdanDdan_Watch_Watch_AppTests.swift */; };
+		3692E05D2CF00CBC0079D2B8 /* DdanDdan_Watch_Watch_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3692E05A2CF00CBC0079D2B8 /* DdanDdan_Watch_Watch_AppUITests.swift */; };
+		3692E05E2CF00CBC0079D2B8 /* DdanDdan_Watch_Watch_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3692E05B2CF00CBC0079D2B8 /* DdanDdan_Watch_Watch_AppUITestsLaunchTests.swift */; };
 		36BAF1C72CA483BC00BEBCE7 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BAF1C62CA483BC00BEBCE7 /* HomeView.swift */; };
 		36BAF1CD2CA48BAE00BEBCE7 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BAF1CC2CA48BAE00BEBCE7 /* HomeModel.swift */; };
 		36C1FE052CA4A4EC007CA188 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C1FE042CA4A4EC007CA188 /* HomeViewModel.swift */; };
@@ -154,6 +163,16 @@
 		367A79AA2CDE07980055771B /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		367A79DC2CE4B65D0055771B /* TokenInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenInterceptor.swift; sourceTree = "<group>"; };
 		367A79DE2CE4C3180055771B /* ReissueData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueData.swift; sourceTree = "<group>"; };
+		3692E0452CF00CB70079D2B8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3692E0472CF00CB70079D2B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3692E0492CF00CB70079D2B8 /* WatchConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityManager.swift; sourceTree = "<group>"; };
+		3692E04B2CF00CB70079D2B8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3692E04C2CF00CB70079D2B8 /* WatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchViewModel.swift; sourceTree = "<group>"; };
+		3692E04E2CF00CB70079D2B8 /* DdanDdan_Watch Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "DdanDdan_Watch Watch App.entitlements"; sourceTree = "<group>"; };
+		3692E04F2CF00CB70079D2B8 /* DdanDdan_WatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DdanDdan_WatchApp.swift; sourceTree = "<group>"; };
+		3692E0572CF00CBA0079D2B8 /* DdanDdan_Watch_Watch_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DdanDdan_Watch_Watch_AppTests.swift; sourceTree = "<group>"; };
+		3692E05A2CF00CBC0079D2B8 /* DdanDdan_Watch_Watch_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DdanDdan_Watch_Watch_AppUITests.swift; sourceTree = "<group>"; };
+		3692E05B2CF00CBC0079D2B8 /* DdanDdan_Watch_Watch_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DdanDdan_Watch_Watch_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		36BAF1C62CA483BC00BEBCE7 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		36BAF1CC2CA48BAE00BEBCE7 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		36BAF1CE2CA4919C00BEBCE7 /* HomeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButton.swift; sourceTree = "<group>"; };
@@ -213,12 +232,6 @@
 		F8FD4FAD2C7A09F900147C4F /* SignUpCalorieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCalorieView.swift; sourceTree = "<group>"; };
 		F8FD4FAF2C7A0FF600147C4F /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		36E0196D2CCA830A00383318 /* DdanDdan_Watch Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "DdanDdan_Watch Watch App"; sourceTree = "<group>"; };
-		36E0197E2CCA830C00383318 /* DdanDdan_Watch Watch AppTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "DdanDdan_Watch Watch AppTests"; sourceTree = "<group>"; };
-		36E019882CCA830C00383318 /* DdanDdan_Watch Watch AppUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "DdanDdan_Watch Watch AppUITests"; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		36E019692CCA830A00383318 /* Frameworks */ = {
@@ -363,6 +376,69 @@
 				36F6E8222CEE8F0B00B395FB /* String+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		3692E0462CF00CB70079D2B8 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				3692E0452CF00CB70079D2B8 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3692E0482CF00CB70079D2B8 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				3692E0472CF00CB70079D2B8 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		3692E04A2CF00CB70079D2B8 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				3692E0492CF00CB70079D2B8 /* WatchConnectivityManager.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		3692E04D2CF00CB70079D2B8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3692E04B2CF00CB70079D2B8 /* ContentView.swift */,
+				3692E04C2CF00CB70079D2B8 /* WatchViewModel.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3692E0502CF00CB70079D2B8 /* DdanDdan_Watch Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				3692E0462CF00CB70079D2B8 /* Preview Content */,
+				3692E0482CF00CB70079D2B8 /* Resource */,
+				3692E04A2CF00CB70079D2B8 /* Util */,
+				3692E04D2CF00CB70079D2B8 /* View */,
+				3692E04E2CF00CB70079D2B8 /* DdanDdan_Watch Watch App.entitlements */,
+				3692E04F2CF00CB70079D2B8 /* DdanDdan_WatchApp.swift */,
+			);
+			path = "DdanDdan_Watch Watch App";
+			sourceTree = "<group>";
+		};
+		3692E0582CF00CBA0079D2B8 /* DdanDdan_Watch Watch AppTests */ = {
+			isa = PBXGroup;
+			children = (
+				3692E0572CF00CBA0079D2B8 /* DdanDdan_Watch_Watch_AppTests.swift */,
+			);
+			path = "DdanDdan_Watch Watch AppTests";
+			sourceTree = "<group>";
+		};
+		3692E05C2CF00CBC0079D2B8 /* DdanDdan_Watch Watch AppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3692E05A2CF00CBC0079D2B8 /* DdanDdan_Watch_Watch_AppUITests.swift */,
+				3692E05B2CF00CBC0079D2B8 /* DdanDdan_Watch_Watch_AppUITestsLaunchTests.swift */,
+			);
+			path = "DdanDdan_Watch Watch AppUITests";
 			sourceTree = "<group>";
 		};
 		36BAF1CB2CA48B9600BEBCE7 /* Home */ = {
@@ -554,13 +630,14 @@
 			isa = PBXGroup;
 			children = (
 				F8AB332C2C2EAD2E00BC16C9 /* DDanDDan */,
-				36E0196D2CCA830A00383318 /* DdanDdan_Watch Watch App */,
-				36E0197E2CCA830C00383318 /* DdanDdan_Watch Watch AppTests */,
-				36E019882CCA830C00383318 /* DdanDdan_Watch Watch AppUITests */,
+				3692E0502CF00CB70079D2B8 /* DdanDdan_Watch Watch App */,
+				3692E0582CF00CBA0079D2B8 /* DdanDdan_Watch Watch AppTests */,
+				3692E05C2CF00CBC0079D2B8 /* DdanDdan_Watch Watch AppUITests */,
 				F8AB332B2C2EAD2E00BC16C9 /* Products */,
 				36022B712CCAA02500D360C0 /* Recovered References */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		F8AB332B2C2EAD2E00BC16C9 /* Products */ = {
 			isa = PBXGroup;
@@ -624,9 +701,6 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				36E0196D2CCA830A00383318 /* DdanDdan_Watch Watch App */,
-			);
 			name = "DdanDdan_Watch Watch App";
 			packageProductDependencies = (
 			);
@@ -647,9 +721,6 @@
 			dependencies = (
 				36E0197D2CCA830C00383318 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				36E0197E2CCA830C00383318 /* DdanDdan_Watch Watch AppTests */,
-			);
 			name = "DdanDdan_Watch Watch AppTests";
 			packageProductDependencies = (
 			);
@@ -669,9 +740,6 @@
 			);
 			dependencies = (
 				36E019872CCA830C00383318 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				36E019882CCA830C00383318 /* DdanDdan_Watch Watch AppUITests */,
 			);
 			name = "DdanDdan_Watch Watch AppUITests";
 			packageProductDependencies = (
@@ -762,6 +830,8 @@
 			files = (
 				363CC4462CCAD06E00D2EE47 /* Assets.xcassets in Resources */,
 				3650CCCD2CCAA22500ED5967 /* NeoDunggeunmoPro-Regular.ttf in Resources */,
+				3692E0512CF00CB70079D2B8 /* Preview Assets.xcassets in Resources */,
+				3692E0522CF00CB70079D2B8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,6 +872,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				367A7A532CE5129A0055771B /* HomeModel.swift in Sources */,
+				3692E0532CF00CB70079D2B8 /* WatchConnectivityManager.swift in Sources */,
+				3692E0542CF00CB70079D2B8 /* ContentView.swift in Sources */,
+				3692E0552CF00CB70079D2B8 /* WatchViewModel.swift in Sources */,
+				3692E0562CF00CB70079D2B8 /* DdanDdan_WatchApp.swift in Sources */,
 				3650CCCE2CCAA22B00ED5967 /* Font.swift in Sources */,
 				3650CCD22CCAB7BD00ED5967 /* HealthKitManager.swift in Sources */,
 			);
@@ -811,6 +885,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3692E0592CF00CBA0079D2B8 /* DdanDdan_Watch_Watch_AppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -818,6 +893,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3692E05D2CF00CBC0079D2B8 /* DdanDdan_Watch_Watch_AppUITests.swift in Sources */,
+				3692E05E2CF00CBC0079D2B8 /* DdanDdan_Watch_Watch_AppUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
