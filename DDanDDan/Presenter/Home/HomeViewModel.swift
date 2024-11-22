@@ -12,6 +12,7 @@ final class HomeViewModel: ObservableObject {
     @Published var homePetModel: HomeModel = .init(petType: .bluePenguin, level: 0, exp: 0, goalKcal: 0, feedCount: 0, toyCount: 0)
     
     @Published var isGoalMet: Bool = false
+    @Published var isMaxLevel: Bool = false
     @Published var isLevelUp: Bool = false
     
     @Published var isHealthKitAuthorized: Bool = true // 초기값은 true로 설정
@@ -124,12 +125,12 @@ final class HomeViewModel: ObservableObject {
                     self?.showRandomBubble(type: .failure)
                 }
                 
-                HealthKitManager.shared.checkIfGoalMet(goalCalories: Double(self?.homePetModel.goalKcal ?? 0)) { [weak self] totalKcal, goalMet in
-                    DispatchQueue.main.async {
-                        self?.isGoalMet = goalMet
-                        self?.threeDaysTotalKcal = Int(totalKcal)
-                    }
-                }
+//                HealthKitManager.shared.checkIfGoalMet(goalCalories: Double(self?.homePetModel.goalKcal ?? 0)) { [weak self] totalKcal, goalMet in
+//                    DispatchQueue.main.async {
+//                        self?.isGoalMet = goalMet
+//                        self?.threeDaysTotalKcal = Int(totalKcal)
+//                    }
+//                }
             }
         }
         
@@ -162,8 +163,15 @@ final class HomeViewModel: ObservableObject {
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
                 self.homePetModel.feedCount = dailyInfo.user.foodQuantity
+                
+                if self.homePetModel.toyCount != dailyInfo.user.toyQuantity {
+                    isGoalMet = true
+                    /// 근데 3일 총 칼로리 어케 함
+                }
+                
                 UserDefaultValue.currentKcal = Double(dailyInfo.dailyInfo.calorie)
                 UserDefaultValue.date = dailyInfo.dailyInfo.date.toDate() ?? Date()
+                
                 print("업데이트된 칼로리: \(UserDefaultValue.currentKcal)")
             }
         }
@@ -194,6 +202,10 @@ final class HomeViewModel: ObservableObject {
                     self.homePetModel.level = petData.pet.level
                     self.isLevelUp = true
                 }
+                
+                if petData.pet.level == 5 && petData.pet.expPercent == 100 && !isMaxLevel {
+                    self.isMaxLevel = true
+                }
             }
         }
     }
@@ -221,6 +233,10 @@ final class HomeViewModel: ObservableObject {
                 if self.homePetModel.level != petData.pet.level {
                     self.homePetModel.level = petData.pet.level
                     self.isLevelUp = true
+                }
+                
+                if petData.pet.level == 5 && petData.pet.expPercent == 100 && !isMaxLevel {
+                    self.isMaxLevel = true
                 }
             }
         }

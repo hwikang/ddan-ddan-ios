@@ -88,6 +88,16 @@ struct HomeView: View {
                     )
                 }
             }
+            .onChange(of: viewModel.isMaxLevel) { newLevel in
+                if newLevel {
+                    coordinator.push( to: .newPet)
+                }
+            }
+            .onChange(of: viewModel.isGoalMet) { newLevel in
+                if newLevel {
+                    coordinator.push( to: .successThreeDay(totalKcal: 1000))
+                }
+            }
         }
         .navigationDestination(for: HomePath.self) { path in
             switch path {
