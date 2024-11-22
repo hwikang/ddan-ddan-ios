@@ -62,6 +62,9 @@ public class LoginViewModel: NSObject, ObservableObject {
             switch result {
             case .success(let loginData):
                 await UserManager.shared.login(loginData: loginData)
+                DispatchQueue.main.async { [weak self] in
+                    self?.appCoordinator.determineRootView()
+                }
             case .failure(let error):
                 DispatchQueue.main.async { [weak self] in
                     self?.showToastMessage()

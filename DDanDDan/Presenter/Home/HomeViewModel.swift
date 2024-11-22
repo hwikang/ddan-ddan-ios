@@ -85,6 +85,18 @@ final class HomeViewModel: ObservableObject {
                 isLevelUp = true
                 UserDefaultValue.level = petInfo.mainPet.level
             }
+            
+            let goalKcal = userInfo.purposeCalorie
+            let petType = petInfo.mainPet.type.rawValue
+            let level = petInfo.mainPet.level
+            
+            let message = ["purposeKcal": goalKcal]
+            let petTypeMessage = ["petType": petType]
+            let levelMessage = ["level" : level]
+            
+            WatchConnectivityManager.shared.sendMessage(message: message)
+            WatchConnectivityManager.shared.sendMessage(message: petTypeMessage)
+            WatchConnectivityManager.shared.sendMessage(message: levelMessage)
         }
     }
     
@@ -151,9 +163,8 @@ final class HomeViewModel: ObservableObject {
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
                 self.homePetModel.feedCount = dailyInfo.user.foodQuantity
-                
-                // 지급한 칼로리만큼 업데이트
-                UserDefaultValue.currentKcal += Double(earnedFeed * 100)
+                UserDefaultValue.currentKcal = Double(dailyInfo.dailyInfo.calorie)
+                UserDefaultValue.date = dailyInfo.dailyInfo.date.toDate() ?? Date()
                 print("업데이트된 칼로리: \(UserDefaultValue.currentKcal)")
             }
         }

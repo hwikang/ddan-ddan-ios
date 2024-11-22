@@ -29,13 +29,17 @@ final class WatchConnectivityManager: NSObject, ObservableObject, WCSessionDeleg
     /// - Parameters
     /// `message`: 전송할 키값과 데이터
     func sendMessage(message: [String: Any]) {
+        print("Sending message to Watch")
         if WCSession.default.isReachable {
-            WCSession.default.sendMessage(message, replyHandler: nil) { error in
-                print("Error sending Message: \(error.localizedDescription)")
-            }
+            WCSession.default.sendMessage(message, replyHandler: { response in
+                print("Message sent successfully: \(response)")
+            }, errorHandler: { error in
+                print("Error sending message: \(error.localizedDescription)")
+            })
+        } else {
+            print("Watch is not reachable")
         }
     }
-    
     
     // MARK: - 필수 구현 메서드 및 Delegate 메서드
     
@@ -46,14 +50,17 @@ final class WatchConnectivityManager: NSObject, ObservableObject, WCSessionDeleg
             // 세션이 활성화된 후 펫 정보를 보냄
             if activationState == .activated {
                 // 여기에 펫 정보를 보내는 코드 추가
-                let watchData = WatchPetModel(
-                    petType: PetType(rawValue: UserDefaultValue.petType) ?? .purpleDog,
-                    goalKcal: UserDefaultValue.purposeKcal,
-                    level: 1 // 실제 값을 넣어야 합니다.
-                )
-                let message = ["watchPet": watchData]
-                print("메시지 보내짐?")
+                let goalKcal = UserDefaultValue.purposeKcal
+                let petType = UserDefaultValue.petType
+                let level = UserDefaultValue.level
+                
+                let message = ["purposeKcal": goalKcal]
+                let petTypeMessage = ["petType": petType]
+                let levelMessage = ["level" : level]
+                
                 sendMessage(message: message)
+                sendMessage(message: petTypeMessage)
+                sendMessage(message: levelMessage)
             }
         }
         
