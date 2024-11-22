@@ -33,10 +33,11 @@ class WatchConnectivityManager: NSObject, ObservableObject, WCSessionDelegate {
         func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
             print("Received message: \(message)")
             
-            // 메시지에서 "watchPet" 데이터 추출
-            if let watchPetData = message["watchPet"] as? WatchPetModel {
+            if let purposrKcal = message["purposeKcal"] as? Double,
+               let petType = message["petType"] as? String,
+               let level = message["level"] as? Int {
                 DispatchQueue.main.async {
-                    self.watchPet = watchPetData
+                    self.watchPet = WatchPetModel(petType: PetType(rawValue: petType) ?? .pinkCat, goalKcal: Int(purposrKcal), level: level)
                 }
             }
         }
