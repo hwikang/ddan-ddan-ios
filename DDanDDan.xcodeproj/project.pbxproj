@@ -50,7 +50,6 @@
 		36C1FE0E2CA4B3E7007CA188 /* PetArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C1FE0D2CA4B3E7007CA188 /* PetArchiveView.swift */; };
 		36E0198F2CCA830C00383318 /* DdanDdan_Watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 36E0196C2CCA830A00383318 /* DdanDdan_Watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		36F6E7A22CEE018600B395FB /* NewPetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F6E7A12CEE018600B395FB /* NewPetViewModel.swift */; };
-		36F6E7E92CEE40AE00B395FB /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 36F6E7E82CEE40AE00B395FB /* Config.xcconfig */; };
 		36F6E7EB2CEE411D00B395FB /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F6E7EA2CEE411D00B395FB /* Config.swift */; };
 		36F6E81C2CEE4FF900B395FB /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F6E81B2CEE4FF900B395FB /* Array+.swift */; };
 		36F6E81F2CEE7B4900B395FB /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F6E81E2CEE7B4900B395FB /* NavigationBarView.swift */; };
@@ -184,7 +183,6 @@
 		36E0197B2CCA830C00383318 /* DdanDdan_Watch Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DdanDdan_Watch Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E019852CCA830C00383318 /* DdanDdan_Watch Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DdanDdan_Watch Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36F6E7A12CEE018600B395FB /* NewPetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPetViewModel.swift; sourceTree = "<group>"; };
-		36F6E7E82CEE40AE00B395FB /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		36F6E7EA2CEE411D00B395FB /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		36F6E81B2CEE4FF900B395FB /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		36F6E81E2CEE7B4900B395FB /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
@@ -663,7 +661,6 @@
 				362864AF2C89E76200029452 /* Info.plist */,
 				F8311F9A2C7068C4000455ED /* Entity */,
 				F8AB33332C2EAD2F00BC16C9 /* Preview Content */,
-				36F6E7E82CEE40AE00B395FB /* Config.xcconfig */,
 			);
 			path = DDanDDan;
 			sourceTree = "<group>";
@@ -857,7 +854,6 @@
 				3628649F2C89CA2000029452 /* Pretendard-SemiBold.otf in Resources */,
 				362864BA2C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf in Resources */,
 				3628649D2C89CA2000029452 /* Pretendard-Regular.otf in Resources */,
-				36F6E7E92CEE40AE00B395FB /* Config.xcconfig in Resources */,
 				3628649C2C89CA2000029452 /* Pretendard-Medium.otf in Resources */,
 				F8758CF32C8EE1F60038CCBB /* Assets.xcassets in Resources */,
 				362864A12C89CA2000029452 /* Pretendard-Bold.otf in Resources */,
@@ -1155,7 +1151,6 @@
 		};
 		F8AB33362C2EAD2F00BC16C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 36F6E7E82CEE40AE00B395FB /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1220,7 +1215,6 @@
 		};
 		F8AB33372C2EAD2F00BC16C9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 36F6E7E82CEE40AE00B395FB /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1415,8 +1409,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kakao/kakao-ios-sdk.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.22.5;
+				kind = exactVersion;
+				version = 2.22.6;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
