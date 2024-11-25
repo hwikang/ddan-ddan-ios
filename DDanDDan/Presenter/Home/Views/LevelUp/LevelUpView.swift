@@ -24,6 +24,8 @@ struct LevelUpView: View {
             VStack {
                 Spacer()
                 imageView
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal, 40)
                 Text("lv.\(level)로\n업그레이드 되었어요!")
                     .multilineTextAlignment(.center)
                     .font(.neoDunggeunmo24)
@@ -44,11 +46,13 @@ struct LevelUpView: View {
         ZStack {
             Image(.pangGraphics)
             petType.image(for: level)
-                .offset(y: 18)
+                .resizable()
+                .frame(width: 96, height: 96)
+                .aspectRatio(contentMode: .fill)
         }
     }
 }
 
 #Preview {
-    LevelUpView(coordinator: .init(), level: 1, petType: .bluePenguin)
+    LevelUpView(coordinator: .init(), level: 4, petType: .bluePenguin)
 }
