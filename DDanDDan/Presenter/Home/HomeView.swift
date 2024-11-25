@@ -76,11 +76,7 @@ struct HomeView: View {
                     description: "사과 \(viewModel.earnFood)개",
                     buttonTitle: "획득하기"
                 ) {
-                    // 이후 동작 정의 -> 서버 통신 및 뷰 업데이트
-                    Task {
-                        await viewModel.patchCurrentKcal(earnedFeed: viewModel.earnFood)
-                        viewModel.showRandomBubble(type: .success)
-                    }
+                    viewModel.showRandomBubble(type: .success)
                 }
             }
             .onChange(of: viewModel.isLevelUp) { newLevel in
@@ -119,10 +115,8 @@ struct HomeView: View {
         }
         .navigationBarHidden(true)
         .onAppear {
-            if viewModel.homePetModel.level == 0 {
-                Task {
-                    await viewModel.fetchHomeInfo()
-                }
+            Task {
+                await viewModel.fetchHomeInfo()
             }
         }
     }

@@ -29,7 +29,9 @@ final class HomeViewModel: ObservableObject {
     @Published var toastMessage: String = ""
     
     private var petId = ""
+    private var previousKcal: Int = 0
     
+    private let healthKitManager = HealthKitManager.shared
     private let homeRepository: HomeRepositoryProtocol
     
     init(
@@ -39,8 +41,10 @@ final class HomeViewModel: ObservableObject {
     ) {
         self.homeRepository = repository
         
+        // 권한 체크
         checkHealthKitAuthorization()
         
+        // 스플래쉬에서 받아오는 정보들
         if let userInfo = userInfo, let petInfo = petInfo {
             self.homePetModel = HomeModel(
                 petType: petInfo.mainPet.type,
@@ -54,7 +58,17 @@ final class HomeViewModel: ObservableObject {
             self.petId = petInfo.mainPet.id
         }
         
-        initialCurrnetKcalModel()
+        observeHealthKitData()
+    }
+    
+    private func observeHealthKitData() {
+        healthKitManager.observeActiveEnergyBurned { [weak self] newKcal in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.currentKcal = Int(newKcal)
+                self.handleKcalUpdate(newKcal: Int(newKcal))
+            }
+        }
     }
     
     @MainActor
@@ -80,11 +94,6 @@ final class HomeViewModel: ObservableObject {
                 toyCount: userInfo.toyQuantity
             )
             
-            if UserDefaultValue.level != petInfo.mainPet.level {
-                isLevelUp = true
-                UserDefaultValue.level = petInfo.mainPet.level
-            }
-            
             let goalKcal = userInfo.purposeCalorie
             let petType = petInfo.mainPet.type.rawValue
             let level = petInfo.mainPet.level
@@ -99,79 +108,32 @@ final class HomeViewModel: ObservableObject {
         }
     }
     
-    func initialCurrnetKcalModel() {
-        let lastDate = UserDefaultValue.date
-        let currentDate = Date()
-        let calendar = Calendar.current
-        
-        if UserDefaultValue.currentKcal < 0 { UserDefaultValue.currentKcal = 0 }
-        
-        // 날짜가 다르면 currentKcal을 0으로 초기화하고 저장된 날짜 업데이트
-        if !calendar.isDate(lastDate, inSameDayAs: currentDate) {
-            UserDefaultValue.currentKcal = 0
-            UserDefaultValue.date = currentDate
-        }
-       
-        // HealthKit에서 오늘의 소모 칼로리 읽기
-        HealthKitManager.shared.readActiveEnergyBurned { kcal in
-            DispatchQueue.main.async { [weak self] in
-                self?.currentKcal = Int(kcal)
-                self?.earnFeed()
-                
-                if Int(kcal) > UserDefaultValue.purposeKcal {
-                    self?.showRandomBubble(type: .success)
-                } else {
-                    self?.showRandomBubble(type: .failure)
-                }
-                
-//                HealthKitManager.shared.checkIfGoalMet(goalCalories: Double(self?.homePetModel.goalKcal ?? 0)) { [weak self] totalKcal, goalMet in
-//                    DispatchQueue.main.async {
-//                        self?.isGoalMet = goalMet
-//                        self?.threeDaysTotalKcal = Int(totalKcal)
-//                    }
-//                }
-            }
-        }
-        
-    }
-
-    func earnFeed() {
-        HealthKitManager.shared.readActiveEnergyBurned { kcal in
-            let lastCheckedKcal = UserDefaultValue.currentKcal
-            let increaseKcal = kcal - lastCheckedKcal
-            
-            guard increaseKcal >= 100 else {
-                print("100 칼로리가 넘지 않았습니다. 증가량: \(increaseKcal)")
-                return
-            }
-            
-            // 지급할 먹이 계산
-            let earnedFeed = Int(increaseKcal / 100)
-            
-            if earnedFeed > 0 {
-                self.earnFood = earnedFeed
-                self.isPresentEarnFood = true
-            }
-        }
-    }
-    
-    func patchCurrentKcal(earnedFeed: Int) async {
+    func saveCurrentKcal(currentKcal: Int) async {
         let result = await homeRepository.updateDailyKcal(calorie: currentKcal)
         
         if case .success(let dailyInfo) = result {
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
-                self.homePetModel.feedCount = dailyInfo.user.foodQuantity
+                
+                /// 현재 먹이 개수와 다르면 먹이 얻기
+                if self.homePetModel.feedCount != dailyInfo.user.foodQuantity {
+                    self.earnFood = dailyInfo.user.foodQuantity - self.homePetModel.feedCount
+                    self.isPresentEarnFood = true
+                }
                 
                 if self.homePetModel.toyCount != dailyInfo.user.toyQuantity {
-                    isGoalMet = true
-                    /// 근데 3일 총 칼로리 어케 함
+                    HealthKitManager.shared.readThreeDaysTotalKcal { [weak self] totalKcal in
+                        guard let self else { return }
+                        self.threeDaysTotalKcal = Int(totalKcal)
+                        self.isGoalMet = true
+                    }
                 }
+                
+                self.homePetModel.feedCount = dailyInfo.user.foodQuantity
+                self.homePetModel.toyCount = dailyInfo.user.toyQuantity
                 
                 UserDefaultValue.currentKcal = Double(dailyInfo.dailyInfo.calorie)
                 UserDefaultValue.date = dailyInfo.dailyInfo.date.toDate() ?? Date()
-                
-                print("업데이트된 칼로리: \(UserDefaultValue.currentKcal)")
             }
         }
     }
@@ -208,7 +170,7 @@ final class HomeViewModel: ObservableObject {
             }
         }
     }
-
+    
     /// 놀아주기
     func playWithPet() async {
         guard homePetModel.toyCount > 0 else {
@@ -294,26 +256,8 @@ final class HomeViewModel: ObservableObject {
     }
     
     private func checkHealthKitAuthorization() {
-        let healthKitManager = HealthKitManager.shared
-        
-        // 현재 권한 상태를 확인
-        let currentStatus = healthKitManager.checkAuthorization()
-        
-        if currentStatus == .notDetermined {
-            healthKitManager.requestAuthorization { [weak self] authorized in
-                DispatchQueue.main.async {
-                    if authorized {
-                        self?.isHealthKitAuthorized = healthKitManager.checkAuthorization() == .sharingAuthorized
-                        self?.initialCurrnetKcalModel()
-                        HealthKitManager.shared.checkIfGoalMet(goalCalories: Double(self?.homePetModel.goalKcal ?? 0)) { [weak self] totalKcal, goalMet in
-                            self?.isGoalMet = goalMet
-                            self?.threeDaysTotalKcal = Int(totalKcal)
-                        }
-                    } else {
-                        self?.isHealthKitAuthorized = false
-                    }
-                }
-            }
+        if !healthKitManager.isAuthorized() {
+            healthKitManager.requestAuthorization { _ in }
         }
     }
 }
