@@ -87,8 +87,8 @@ struct PetArchiveView: View {
                     if !viewModel.petId.isEmpty {
                         Task {
                             await viewModel.selectMainPet(id: viewModel.petId)
+                            
                         }
-                        coordinator.pop()
                     } else {
                         showToastMessage()
                     }
@@ -114,6 +114,9 @@ struct PetArchiveView: View {
             Task {
                 await viewModel.fetchPetArchive()
             }
+        }
+        .onChange(of: viewModel.isSelectedMainPet) { newValue in
+            if newValue { coordinator.pop() }
         }
     }
     
