@@ -116,19 +116,11 @@ struct PetArchiveView: View {
             }
         }
         .onChange(of: viewModel.isSelectedMainPet) { newValue in
-            if newValue { coordinator.pop() }
+            if newValue {
+                coordinator.triggerHomeUpdate()
+                coordinator.pop()
+            }
         }
-    }
-    
-    private func showToastMessage() {
-        showToast = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            hideToastMessage()
-        }
-    }
-    
-    private func hideToastMessage() {
-        showToast = false
     }
 }
 

@@ -88,16 +88,25 @@ struct HomeView: View {
                     )
                 }
             }
-            .onChange(of: viewModel.isMaxLevel) { newLevel in
-                if newLevel {
+            .onChange(of: viewModel.isMaxLevel) { newValue in
+                if newValue {
                     coordinator.push( to: .newPet)
                 }
             }
-            .onChange(of: viewModel.isGoalMet) { newLevel in
-                if newLevel {
+            .onChange(of: viewModel.isGoalMet) { newValue in
+                if newValue {
                     coordinator.push( to: .successThreeDay(totalKcal: 1000))
                 }
             }
+            .onReceive(coordinator.$shouldUpdateHomeView) { shouldUpdate in
+                if shouldUpdate {
+                    Task {
+                        await viewModel.fetchHomeInfo()
+                    }
+                    coordinator.shouldUpdateHomeView = false
+                }
+            }
+
         }
         .navigationDestination(for: HomePath.self) { path in
             switch path {
@@ -114,11 +123,6 @@ struct HomeView: View {
             }
         }
         .navigationBarHidden(true)
-        .onAppear {
-            Task {
-                await viewModel.fetchHomeInfo()
-            }
-        }
     }
 }
 
