@@ -79,6 +79,16 @@ struct HomeView: View {
                     viewModel.showRandomBubble(type: .success)
                 }
             }
+            TransparentOverlayView(isPresented: $viewModel.isDailyGoalMet) {
+                DialogView(
+                    show: $viewModel.isDailyGoalMet,
+                    title: "목표 칼로리를 달성했어요!",
+                    description: "먹이 3개를 받으세요.",
+                    rightButtonTitle: "확인",
+                    leftButtonTitle: "취소") {
+                        viewModel.homePetModel.feedCount += 3
+                    }
+            }
             .onChange(of: viewModel.isLevelUp) { newLevel in
                 if newLevel {
                     coordinator.push( to: .upgradePet(
