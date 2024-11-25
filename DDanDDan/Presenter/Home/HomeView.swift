@@ -49,7 +49,7 @@ struct HomeView: View {
                                 viewModel.showRandomBubble(type: .normal)
                             }
                     }
-                    .offset(y: 65)
+                    .offset(y: 70)
                     
                 }
                 .padding(.bottom, 32)
