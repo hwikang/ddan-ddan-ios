@@ -35,18 +35,22 @@ struct HomeView: View {
                         .scaledToFit()
                         .padding(.horizontal, 53)
                         .clipped()
-                    viewModel.homePetModel.petType.image(for: viewModel.homePetModel.level)
-                        .scaledToFit()
-                        .padding(.horizontal, 141)
-                        .offset(y: 95)
-                        .onTapGesture {
-                            viewModel.showRandomBubble(type: .normal)
-                        }
-                    bubbleView
-                        .opacity(viewModel.showBubble ? 1 : 0)
-                        .transition(.opacity)
-                        .frame(minWidth: 75, maxWidth: 167, minHeight: 56)
-                        .offset(y: 20)
+                    VStack {
+                        Image(viewModel.bubbleImage)
+                            .opacity(viewModel.showBubble ? 1 : 0)
+                            .animation(.easeInOut(duration: 0.3).delay(0.1), value: viewModel.showBubble)
+                            .transition(.opacity)
+                            .frame(minWidth: 75, maxWidth: 167, minHeight: 56)
+                            .offset(y: 10)
+                        viewModel.homePetModel.petType.image(for: viewModel.homePetModel.level)
+                            .scaledToFit()
+                            .frame(width: 105, height: 105)
+                            .onTapGesture {
+                                viewModel.showRandomBubble(type: .normal)
+                            }
+                    }
+                    .offset(y: 65)
+                    
                 }
                 .padding(.bottom, 32)
                 levelView
@@ -143,25 +147,6 @@ extension HomeView {
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
             .padding(.trailing, 20)
-        }
-    }
-    
-    var bubbleView: some View {
-        ZStack {
-            // 말풍선 이미지 선택 (글자 수에 따라 조정)
-            Image(viewModel.bubbleImage)
-                .opacity(viewModel.showBubble ? 1 : 0)
-                .offset(y: viewModel.showBubble ? 0 : 20) // 초기 위치 조정
-                .animation(.easeInOut(duration: 0.3).delay(0.1), value: viewModel.showBubble) // 나타날 때 애니메이션
-            
-            Text(viewModel.bubbleText)
-                .font(.neoDunggeunmo14)
-                .foregroundStyle(.backgroundBlack)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 8)
-                .opacity(viewModel.showBubble ? 1 : 0)
-                .offset(y: viewModel.showBubble ? -8 : 20) // 텍스트 위치 조정
-                .animation(.easeInOut(duration: 0.3).delay(0.1), value: viewModel.showBubble) // 나타날 때 애니메이션
         }
     }
     

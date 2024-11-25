@@ -22,8 +22,7 @@ final class HomeViewModel: ObservableObject {
     @Published var earnFood: Int = 0
     @Published var isPresentEarnFood: Bool = false
     
-    @Published var bubbleText = ""
-    @Published var bubbleImage: ImageResource = .minBubble
+    @Published var bubbleImage: ImageResource = .default1
     @Published var showBubble: Bool = false
     
     @Published var showToast: Bool = false
@@ -242,41 +241,46 @@ final class HomeViewModel: ObservableObject {
         }
     }
     
-    // 말풍선 이미지 선택 로직
-    func bubbleImage(for characterCount: Int) -> ImageResource {
-        switch characterCount {
-        case 1...3:
-            return .minBubble
-        case 3...5:
-            return .fourBubble
-        case 5...6:
-            return .fiveBubble
-        default:
-            return .maxBubble
-        }
-    }
     
     @MainActor
     func showRandomBubble(type: bubbleTextType) {
-        // 이전에 보였던 말풍선이 사라지도록 설정
-        showBubble = false
-        let randomMessage = type.getRandomText().randomElement() ?? "안녕"
-        self.bubbleText = randomMessage
-        self.bubbleImage = self.bubbleImage(for: randomMessage.count)
-        
-        // 새로운 말풍선이 보이도록 설정
-        withAnimation {
-            self.showBubble = true
-        }
-        
-        // 3초 후에 자동으로 사라지게 설정
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            withAnimation(.easeInOut(duration: 0.3)) {
-                self.showBubble = false
+        // 이전 말풍선이 없을 때만 보이도록
+        if showBubble == false {
+            self.bubbleImage = type.getRandomText().randomElement() ?? .default1
+            
+            withAnimation {
+                self.showBubble = true
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    self.showBubble = false
+                }
             }
         }
     }
     
+    private func handleKcalUpdate(newKcal: Int) {
+        let kcalDifference = (newKcal % 100) - (previousKcal % 100)
+        
+        if kcalDifference >= 1 {
+            Task {
+                await saveCurrentKcal(currentKcal: newKcal)
+            }
+            previousKcal = newKcal
+        }
+        
+        // 목표 칼로리 초과 여부 확인 및 말풍선 처리
+        if newKcal >= homePetModel.goalKcal {
+            DispatchQueue.main.async { [weak self] in
+                self?.showRandomBubble(type: .success)
+            }
+        } else {
+            DispatchQueue.main.async { [weak self] in
+                self?.showRandomBubble(type: .failure)
+            }
+        }
+    }
     
     private func showToastMessage() {
         showToast = true
