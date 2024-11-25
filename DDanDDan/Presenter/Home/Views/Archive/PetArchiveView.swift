@@ -10,8 +10,6 @@ import SwiftUI
 struct PetArchiveView: View {
     @ObservedObject var coordinator: AppCoordinator
     @StateObject var viewModel: PetArchiveViewModel
-
-    @State private var showToast = false
     
     let columns = [
         GridItem(.flexible()),
@@ -90,22 +88,22 @@ struct PetArchiveView: View {
                             
                         }
                     } else {
-                        showToastMessage()
+                        viewModel.showToastMessage()
                     }
                 }, title: "선택 완료", disabled: .constant(false))
                 .padding(.bottom, 44)
             }
-            if showToast {
+            if viewModel.showToast {
                 VStack {
                     ToastView(message: "새로운 펫을 준비중이에요")
                         .onTapGesture {
-                            hideToastMessage() // 탭하면 토스트 사라짐
+                            viewModel.hideToastMessage()
                         }
                 }
                 .transition(.asymmetric(
                     insertion: .move(edge: .top).combined(with: .opacity),
                     removal: .opacity)) // 사라질 때는 페이드 아웃만
-                .animation(.spring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.3), value: showToast)
+                .animation(.spring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.3), value: viewModel.showToast)
                 .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 250)
             }
         }

@@ -15,6 +15,7 @@ final class PetArchiveViewModel: ObservableObject {
     @Published var selectedIndex: Int? = nil
     @Published var petId: String = ""
     @Published var isSelectedMainPet: Bool = false
+    @Published var showToast = false
     
     
     init(repository: HomeRepositoryProtocol) {
@@ -62,5 +63,16 @@ final class PetArchiveViewModel: ObservableObject {
                 self?.isSelectedMainPet = true
             }
         }
+    }
+    
+    func showToastMessage() {
+        showToast = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            self?.hideToastMessage()
+        }
+    }
+    
+    func hideToastMessage() {
+        showToast = false
     }
 }
