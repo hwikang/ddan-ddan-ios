@@ -32,6 +32,8 @@ final class AppCoordinator: ObservableObject {
     
     @StateObject var user = UserManager.shared
     
+    @Published var shouldUpdateHomeView = false
+
     func determineRootView() {
         if let _ = user.accessToken {
             rootView = user.isSignUpRequired() ? .signUp : .home
@@ -71,4 +73,9 @@ final class AppCoordinator: ObservableObject {
         print("push: \(path)")
         navigationPath.append(path)
     }
+    
+    func triggerHomeUpdate() {
+        shouldUpdateHomeView = true
+    }
+    
 }

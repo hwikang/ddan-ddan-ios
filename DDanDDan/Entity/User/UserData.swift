@@ -37,6 +37,11 @@ public struct DailyUserData: Decodable {
     var dailyInfo: DailyInfo
 }
 
+public struct UserPetData: Decodable {
+    var user: UserData
+    var pet: Pet
+}
+
 public struct EmptyEntity: Codable, EmptyResponse {
     public static func emptyValue() -> EmptyEntity {
         return .init()

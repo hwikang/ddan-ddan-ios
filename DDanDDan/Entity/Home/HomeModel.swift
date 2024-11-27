@@ -92,18 +92,18 @@ enum bubbleTextType {
     case eat
     case play
     
-    func getRandomText() -> [String] {
+    func getRandomText() -> [ImageResource] {
         switch self {
         case .success:
-            return ["오늘도 잘 먹었군", "득근득근", "벌컵벌컵"]
+            return [.success1, .success2, .success3]
         case .failure:
-            return ["앗 근손실", "혼내준다", "지방이 늘어나요"]
+            return [.failure1, .failure2, .failure3]
         case .normal:
-            return ["안녕", "배고파요", "운동하자"]
+            return [.default1, .default2, .default3]
         case .eat:
-            return ["맛있다!", "욤뇸뇸", "쩝쩝박사"]
+            return [.eat1, .eat2, .eat3]
         case .play:
-            return ["신난다!", "조아조아", "눈누난나 ♫"]
+            return [.play1, .play2, .play3]
         }
     }
 }

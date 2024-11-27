@@ -11,7 +11,9 @@ import HealthKit
 final class HomeViewModel: ObservableObject {
     @Published var homePetModel: HomeModel = .init(petType: .bluePenguin, level: 0, exp: 0, goalKcal: 0, feedCount: 0, toyCount: 0)
     
+    @Published var isDailyGoalMet: Bool = false
     @Published var isGoalMet: Bool = false
+    @Published var isMaxLevel: Bool = false
     @Published var isLevelUp: Bool = false
     
     @Published var isHealthKitAuthorized: Bool = true // 초기값은 true로 설정
@@ -21,15 +23,16 @@ final class HomeViewModel: ObservableObject {
     @Published var earnFood: Int = 0
     @Published var isPresentEarnFood: Bool = false
     
-    @Published var bubbleText = ""
-    @Published var bubbleImage: ImageResource = .minBubble
+    @Published var bubbleImage: ImageResource = .default1
     @Published var showBubble: Bool = false
     
     @Published var showToast: Bool = false
     @Published var toastMessage: String = ""
     
     private var petId = ""
+    private var previousKcal: Int = 0
     
+    private let healthKitManager = HealthKitManager.shared
     private let homeRepository: HomeRepositoryProtocol
     
     init(
@@ -39,8 +42,10 @@ final class HomeViewModel: ObservableObject {
     ) {
         self.homeRepository = repository
         
+        // 권한 체크
         checkHealthKitAuthorization()
         
+        // 스플래쉬에서 받아오는 정보들
         if let userInfo = userInfo, let petInfo = petInfo {
             self.homePetModel = HomeModel(
                 petType: petInfo.mainPet.type,
@@ -51,11 +56,10 @@ final class HomeViewModel: ObservableObject {
                 toyCount: userInfo.toyQuantity
             )
             
-            currentKcal = Int(UserDefaultValue.currentKcal)
             self.petId = petInfo.mainPet.id
         }
         
-        initialCurrnetKcalModel()
+        observeHealthKitData()
     }
     
     @MainActor
@@ -81,11 +85,6 @@ final class HomeViewModel: ObservableObject {
                 toyCount: userInfo.toyQuantity
             )
             
-            if UserDefaultValue.level != petInfo.mainPet.level {
-                isLevelUp = true
-                UserDefaultValue.level = petInfo.mainPet.level
-            }
-            
             let goalKcal = userInfo.purposeCalorie
             let petType = petInfo.mainPet.type.rawValue
             let level = petInfo.mainPet.level
@@ -100,77 +99,6 @@ final class HomeViewModel: ObservableObject {
         }
     }
     
-    func initialCurrnetKcalModel() {
-        let lastDate = UserDefaultValue.date
-        let currentDate = Date()
-        let calendar = Calendar.current
-        
-        if UserDefaultValue.currentKcal < 0 { UserDefaultValue.currentKcal = 0 }
-        
-        // 날짜가 다르면 currentKcal을 0으로 초기화하고 저장된 날짜 업데이트
-        if !calendar.isDate(lastDate, inSameDayAs: currentDate) {
-            UserDefaultValue.currentKcal = 0
-            UserDefaultValue.date = currentDate
-        }
-       
-        // HealthKit에서 오늘의 소모 칼로리 읽기
-        HealthKitManager.shared.readActiveEnergyBurned { kcal in
-            DispatchQueue.main.async { [weak self] in
-                self?.currentKcal = Int(kcal)
-                self?.earnFeed()
-                
-                if Int(kcal) > UserDefaultValue.purposeKcal {
-                    self?.showRandomBubble(type: .success)
-                } else {
-                    self?.showRandomBubble(type: .failure)
-                }
-                
-                HealthKitManager.shared.checkIfGoalMet(goalCalories: Double(self?.homePetModel.goalKcal ?? 0)) { [weak self] totalKcal, goalMet in
-                    DispatchQueue.main.async {
-                        self?.isGoalMet = goalMet
-                        self?.threeDaysTotalKcal = Int(totalKcal)
-                    }
-                }
-            }
-        }
-        
-    }
-
-    func earnFeed() {
-        HealthKitManager.shared.readActiveEnergyBurned { kcal in
-            let lastCheckedKcal = UserDefaultValue.currentKcal
-            let increaseKcal = kcal - lastCheckedKcal
-            
-            guard increaseKcal >= 100 else {
-                print("100 칼로리가 넘지 않았습니다. 증가량: \(increaseKcal)")
-                return
-            }
-            
-            // 지급할 먹이 계산
-            let earnedFeed = Int(increaseKcal / 100)
-            
-            if earnedFeed > 0 {
-                self.earnFood = earnedFeed
-                self.isPresentEarnFood = true
-            }
-        }
-    }
-    
-    func patchCurrentKcal(earnedFeed: Int) async {
-        let result = await homeRepository.updateDailyKcal(calorie: currentKcal)
-        
-        if case .success(let dailyInfo) = result {
-            DispatchQueue.main.async { [weak self] in
-                guard let self else { return }
-                self.homePetModel.feedCount = dailyInfo.user.foodQuantity
-                UserDefaultValue.currentKcal = Double(dailyInfo.dailyInfo.calorie)
-                UserDefaultValue.date = dailyInfo.dailyInfo.date.toDate() ?? Date()
-                print("업데이트된 칼로리: \(UserDefaultValue.currentKcal)")
-            }
-        }
-    }
-    
-    
     /// 먹이주기
     func feedPet() async {
         guard homePetModel.feedCount > 0 else {
@@ -182,10 +110,23 @@ final class HomeViewModel: ObservableObject {
         }
         
         let result = await homeRepository.feedPet(petId: petId)
-        if case .success(_) = result {
+        if case .success(let petData) = result {
             DispatchQueue.main.async { [weak self] in
-                self?.showRandomBubble(type: .eat)
-                self?.homePetModel.feedCount = (self?.homePetModel.feedCount ?? 1) - 1
+                guard let self else { return }
+                
+                self.showRandomBubble(type: .eat)
+                self.homePetModel.feedCount = petData.user.foodQuantity
+                self.homePetModel.exp = petData.pet.expPercent
+                
+                // 레벨 변화 확인
+                if self.homePetModel.level != petData.pet.level {
+                    self.homePetModel.level = petData.pet.level
+                    self.isLevelUp = true
+                }
+                
+                if petData.pet.level == 5 && petData.pet.expPercent == 100 && !isMaxLevel {
+                    self.isMaxLevel = true
+                }
             }
         }
     }
@@ -194,58 +135,135 @@ final class HomeViewModel: ObservableObject {
     func playWithPet() async {
         guard homePetModel.toyCount > 0 else {
             DispatchQueue.main.async { [weak self] in
-                self?.toastMessage = "장남감이 부족해요!"
+                self?.toastMessage = "장난감이 부족해요!"
                 self?.showToastMessage()
             }
             return
         }
         
         let result = await homeRepository.playPet(petId: petId)
-
-        if case .success(_) = result {
+        if case .success(let petData) = result {
             DispatchQueue.main.async { [weak self] in
-                self?.showRandomBubble(type: .play)
-                self?.homePetModel.toyCount = (self?.homePetModel.toyCount ?? 1) - 1
+                guard let self else { return }
+                
+                self.showRandomBubble(type: .play)
+                self.homePetModel.toyCount = petData.user.toyQuantity
+                self.homePetModel.exp = petData.pet.expPercent
+                
+                // 레벨 변화 확인
+                if self.homePetModel.level != petData.pet.level {
+                    self.homePetModel.level = petData.pet.level
+                    self.isLevelUp = true
+                }
+                
+                if petData.pet.level == 5 && petData.pet.expPercent == 100 && !isMaxLevel {
+                    self.isMaxLevel = true
+                }
             }
         }
     }
     
-    // 말풍선 이미지 선택 로직
-    func bubbleImage(for characterCount: Int) -> ImageResource {
-        switch characterCount {
-        case 1...3:
-            return .minBubble
-        case 3...5:
-            return .fourBubble
-        case 5...6:
-            return .fiveBubble
-        default:
-            return .maxBubble
+    
+    // MARK: - HealthKit
+    
+    private func observeHealthKitData() {
+        healthKitManager.observeActiveEnergyBurned { [weak self] newKcal in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.currentKcal = Int(newKcal)
+                self.handleKcalUpdate(newKcal: Int(newKcal))
+            }
         }
     }
+
+    /// 서버 전송 - 칼로리 업데이트 시
+    private func handleKcalUpdate(newKcal: Int) {
+        let kcalDifference = (newKcal % 100) - (previousKcal % 100)
+        
+        if kcalDifference >= 1 {
+            Task {
+                await saveCurrentKcal(currentKcal: newKcal)
+            }
+            previousKcal = newKcal
+        }
+        
+        if newKcal >= homePetModel.goalKcal {
+            DispatchQueue.main.async { [weak self] in
+                self?.showRandomBubble(type: .success)
+            }
+        } else {
+            DispatchQueue.main.async { [weak self] in
+                self?.showRandomBubble(type: .failure)
+            }
+        }
+    }
+    
+    /// 현재 칼로리 저장
+    private func saveCurrentKcal(currentKcal: Int) async {
+        let result = await homeRepository.updateDailyKcal(calorie: currentKcal)
+        
+        if case .success(let dailyInfo) = result {
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                
+                /// 현재 먹이 개수와 다르면 먹이 얻기
+                if self.homePetModel.feedCount != dailyInfo.user.foodQuantity {
+                    self.earnFood = dailyInfo.user.foodQuantity - self.homePetModel.feedCount
+                    self.isPresentEarnFood = true
+                }
+                
+                if self.homePetModel.toyCount != dailyInfo.user.toyQuantity {
+                    healthKitManager.readThreeDaysTotalKcal { [weak self] totalKcal in
+                        guard let self else { return }
+                        self.threeDaysTotalKcal = Int(totalKcal)
+                        self.isGoalMet = true
+                    }
+                }
+                
+                if currentKcal >= dailyInfo.user.purposeCalorie {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.isDailyGoalMet = true
+                    }
+                }
+                
+                self.homePetModel.feedCount = dailyInfo.user.foodQuantity
+                self.homePetModel.toyCount = dailyInfo.user.toyQuantity
+                
+                UserDefaultValue.currentKcal = Double(dailyInfo.dailyInfo.calorie)
+                UserDefaultValue.date = dailyInfo.dailyInfo.date.toDate() ?? Date()
+            }
+        }
+    }
+    
+    /// HealthKit 권한 확인 및 요청
+    private func checkHealthKitAuthorization() {
+        if !healthKitManager.isAuthorized() {
+            healthKitManager.requestAuthorization { _ in }
+        }
+    }
+    
+    // MARK: - Toast & Bubble
     
     @MainActor
     func showRandomBubble(type: bubbleTextType) {
-        // 이전에 보였던 말풍선이 사라지도록 설정
-        showBubble = false
-        let randomMessage = type.getRandomText().randomElement() ?? "안녕"
-        self.bubbleText = randomMessage
-        self.bubbleImage = self.bubbleImage(for: randomMessage.count)
-        
-        // 새로운 말풍선이 보이도록 설정
-        withAnimation {
-            self.showBubble = true
-        }
-        
-        // 3초 후에 자동으로 사라지게 설정
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            withAnimation(.easeInOut(duration: 0.3)) {
-                self.showBubble = false
+        // 이전 말풍선이 없을 때만 보이도록
+        if showBubble == false {
+            self.bubbleImage = type.getRandomText().randomElement() ?? .default1
+            
+            withAnimation {
+                self.showBubble = true
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    self.showBubble = false
+                }
             }
         }
     }
     
     
+    /// 토스트 메시지 관련 메서드
     private func showToastMessage() {
         showToast = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
@@ -255,29 +273,5 @@ final class HomeViewModel: ObservableObject {
     
     private func hideToastMessage() {
         showToast = false
-    }
-    
-    private func checkHealthKitAuthorization() {
-        let healthKitManager = HealthKitManager.shared
-        
-        // 현재 권한 상태를 확인
-        let currentStatus = healthKitManager.checkAuthorization()
-        
-        if currentStatus == .notDetermined {
-            healthKitManager.requestAuthorization { [weak self] authorized in
-                DispatchQueue.main.async {
-                    if authorized {
-                        self?.isHealthKitAuthorized = healthKitManager.checkAuthorization() == .sharingAuthorized
-                        self?.initialCurrnetKcalModel()
-                        HealthKitManager.shared.checkIfGoalMet(goalCalories: Double(self?.homePetModel.goalKcal ?? 0)) { [weak self] totalKcal, goalMet in
-                            self?.isGoalMet = goalMet
-                            self?.threeDaysTotalKcal = Int(totalKcal)
-                        }
-                    } else {
-                        self?.isHealthKitAuthorized = false
-                    }
-                }
-            }
-        }
     }
 }

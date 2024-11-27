@@ -13,8 +13,9 @@ final class PetArchiveViewModel: ObservableObject {
     
     @Published var petList: [Pet] = []
     @Published var selectedIndex: Int? = nil
-    @Published var isLoading: Bool = false // 추가된 상태 변수
     @Published var petId: String = ""
+    @Published var isSelectedMainPet: Bool = false
+    @Published var showToast = false
     
     
     init(repository: HomeRepositoryProtocol) {
@@ -47,8 +48,8 @@ final class PetArchiveViewModel: ObservableObject {
         
         if case .success(let petArchive) = petArchiveModel {
             UserDefaultValue.userId = petArchive.ownerUserId
-            DispatchQueue.main.async {
-                self.petList = petArchive.pets
+            DispatchQueue.main.async { [weak self] in
+                self?.petList = petArchive.pets
             }
         }
     }
@@ -58,6 +59,20 @@ final class PetArchiveViewModel: ObservableObject {
         if case .success(let pet) = result {
             UserDefaultValue.petId = pet.mainPet.id
             UserDefaultValue.petType = pet.mainPet.type.rawValue
+            DispatchQueue.main.async { [weak self] in
+                self?.isSelectedMainPet = true
+            }
         }
+    }
+    
+    func showToastMessage() {
+        showToast = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            self?.hideToastMessage()
+        }
+    }
+    
+    func hideToastMessage() {
+        showToast = false
     }
 }

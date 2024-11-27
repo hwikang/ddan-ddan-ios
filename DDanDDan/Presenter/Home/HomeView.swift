@@ -13,7 +13,7 @@ enum HomePath: Hashable {
     case petArchive
     case successThreeDay(totalKcal: Int)
     case newPet
-    case upgradePet(level: Int)
+    case upgradePet(level: Int, petType: PetType)
 }
 
 struct HomeView: View {
@@ -35,18 +35,22 @@ struct HomeView: View {
                         .scaledToFit()
                         .padding(.horizontal, 53)
                         .clipped()
-                    viewModel.homePetModel.petType.image(for: viewModel.homePetModel.level)
-                        .scaledToFit()
-                        .padding(.horizontal, 141)
-                        .offset(y: 95)
-                        .onTapGesture {
-                            viewModel.showRandomBubble(type: .normal)
-                        }
-                    bubbleView
-                        .opacity(viewModel.showBubble ? 1 : 0)
-                        .transition(.opacity)
-                        .frame(minWidth: 75, maxWidth: 167, minHeight: 56)
-                        .offset(y: 20)
+                    VStack {
+                        Image(viewModel.bubbleImage)
+                            .opacity(viewModel.showBubble ? 1 : 0)
+                            .animation(.easeInOut(duration: 0.3).delay(0.1), value: viewModel.showBubble)
+                            .transition(.opacity)
+                            .frame(minWidth: 75, maxWidth: 167, minHeight: 56)
+                            .offset(y: 10)
+                        viewModel.homePetModel.petType.image(for: viewModel.homePetModel.level)
+                            .scaledToFit()
+                            .frame(width: 105, height: 105)
+                            .onTapGesture {
+                                viewModel.showRandomBubble(type: .normal)
+                            }
+                    }
+                    .offset(y: 70)
+                    
                 }
                 .padding(.bottom, 32)
                 levelView
@@ -72,24 +76,47 @@ struct HomeView: View {
                     description: "사과 \(viewModel.earnFood)개",
                     buttonTitle: "획득하기"
                 ) {
-                    // 이후 동작 정의 -> 서버 통신 및 뷰 업데이트
-                    Task {
-                        await viewModel.patchCurrentKcal(earnedFeed: viewModel.earnFood)
-                        viewModel.showRandomBubble(type: .success)
-                    }
+                    viewModel.showRandomBubble(type: .success)
                 }
             }
-            .onChange(of: viewModel.homePetModel.exp) { newExp in
-                if newExp == 100 {
-                    coordinator.push(to: .newPet)
-                }
+            TransparentOverlayView(isPresented: $viewModel.isDailyGoalMet) {
+                DialogView(
+                    show: $viewModel.isDailyGoalMet,
+                    title: "목표 칼로리를 달성했어요!",
+                    description: "먹이 3개를 받으세요.",
+                    rightButtonTitle: "확인",
+                    leftButtonTitle: "취소") {
+                        viewModel.homePetModel.feedCount += 3
+                    }
             }
             .onChange(of: viewModel.isLevelUp) { newLevel in
-                if newLevel { coordinator.push(to: .upgradePet(level: (viewModel.homePetModel.level) + 1)) }
+                if newLevel {
+                    coordinator.push( to: .upgradePet(
+                        level: viewModel.homePetModel.level,
+                        petType: viewModel.homePetModel.petType
+                    )
+                    )
+                }
+            }
+            .onChange(of: viewModel.isMaxLevel) { newValue in
+                if newValue {
+                    coordinator.push( to: .newPet)
+                }
             }
             .onChange(of: viewModel.isGoalMet) { newValue in
-                if newValue { coordinator.push(to: .successThreeDay(totalKcal: viewModel.threeDaysTotalKcal))}
+                if newValue {
+                    coordinator.push( to: .successThreeDay(totalKcal: 1000))
+                }
             }
+            .onReceive(coordinator.$shouldUpdateHomeView) { shouldUpdate in
+                if shouldUpdate {
+                    Task {
+                        await viewModel.fetchHomeInfo()
+                    }
+                    coordinator.shouldUpdateHomeView = false
+                }
+            }
+
         }
         .navigationDestination(for: HomePath.self) { path in
             switch path {
@@ -101,18 +128,11 @@ struct HomeView: View {
                 ThreeDaySuccessView(coordinator: coordinator, totalKcal: totalKcal)
             case .newPet:
                 NewPetView(coordinator: coordinator, viewModel: NewPetViewModel(homeRepository: HomeRepository()))
-            case .upgradePet(let level):
-                LevelUpView(coordinator: coordinator, level: level)
+            case .upgradePet(let level, let petType):
+                LevelUpView(coordinator: coordinator, level: level, petType: petType)
             }
         }
         .navigationBarHidden(true)
-        .onAppear {
-            if viewModel.homePetModel.level == 0 {
-                Task {
-                    await viewModel.fetchHomeInfo()
-                }
-            }
-        }
     }
 }
 
@@ -135,25 +155,6 @@ extension HomeView {
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
             .padding(.trailing, 20)
-        }
-    }
-    
-    var bubbleView: some View {
-        ZStack {
-            // 말풍선 이미지 선택 (글자 수에 따라 조정)
-            Image(viewModel.bubbleImage)
-                .opacity(viewModel.showBubble ? 1 : 0)
-                .offset(y: viewModel.showBubble ? 0 : 20) // 초기 위치 조정
-                .animation(.easeInOut(duration: 0.3).delay(0.1), value: viewModel.showBubble) // 나타날 때 애니메이션
-            
-            Text(viewModel.bubbleText)
-                .font(.neoDunggeunmo14)
-                .foregroundStyle(.backgroundBlack)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 8)
-                .opacity(viewModel.showBubble ? 1 : 0)
-                .offset(y: viewModel.showBubble ? -8 : 20) // 텍스트 위치 조정
-                .animation(.easeInOut(duration: 0.3).delay(0.1), value: viewModel.showBubble) // 나타날 때 애니메이션
         }
     }
     

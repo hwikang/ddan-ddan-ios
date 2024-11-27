@@ -13,12 +13,12 @@ struct LoginView: View {
     @ObservedObject var viewModel: LoginViewModel
     var body: some View {
             ZStack {
-                Color.black.edgesIgnoringSafeArea(.all)
+                Color.backgroundBlack.edgesIgnoringSafeArea(.all)
                 VStack {
                     Spacer()
-                    Rectangle()
-                        .fill(Color.gray)
-                        .frame(width: 280, height: 280)
+                    Image(.splashLogo)
+                        .resizable()
+                        .frame(width: 145, height: 165)
                     Spacer()
                     
                     Button {
@@ -31,7 +31,7 @@ struct LoginView: View {
                             .foregroundColor(.black)
                             .padding(.horizontal, 20)
                     }
-                    .padding(.bottom, 24)
+                    .padding(.bottom, 9)
                     Button {
                         viewModel.appleLogin()
                         
@@ -45,14 +45,14 @@ struct LoginView: View {
                             .padding(.horizontal, 20)
                     }
                 }
-                .padding(.bottom)
+                .padding(.bottom, 40)
                 TransparentOverlayView(isPresented: $viewModel.showToast) {
                     VStack {
                         ToastView(message: viewModel.toastMessage)
                     }
                     .transition(.asymmetric(
                         insertion: .move(edge: .top).combined(with: .opacity),
-                        removal: .opacity)) // 사라질 때는 페이드 아웃만
+                        removal: .opacity))
                     .animation(.spring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.3), value: viewModel.showToast)
                     .position(x: UIScreen.main.bounds.width / 2 + 10, y: UIScreen.main.bounds.height - 250)
                 }

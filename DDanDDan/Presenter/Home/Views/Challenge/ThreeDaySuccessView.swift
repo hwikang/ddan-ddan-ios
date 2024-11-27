@@ -34,6 +34,7 @@ struct ThreeDaySuccessView: View {
                         content: "행운의 풀떼기 1개"
                     )
                 }
+                .padding(.horizontal, 20)
                 Spacer()
                 GreenButton(action: {
                     coordinator.pop()
@@ -51,6 +52,9 @@ struct ThreeDaySuccessView: View {
                 .cornerRadius(8)
             HStack {
                 image
+                    .resizable()
+                    .frame(width: 56, height: 56)
+                    .padding(.trailing, 12)
                 VStack(alignment: .leading, spacing: 4) {
                     Text(title)
                         .font(.heading5_semibold18)
@@ -60,7 +64,7 @@ struct ThreeDaySuccessView: View {
                         .foregroundStyle(.textBodyTeritary)
                 }
             }
-            .padding(.horizontal,20)
+            .padding(.all,12)
         }
         .frame(height: 80)
     }

@@ -29,15 +29,6 @@ class HealthKitManager: ObservableObject {
         return status == .sharingAuthorized
     }
     
-    func checkAuthorization() -> HKAuthorizationStatus {
-        guard let healthStore = healthStore else { return .notDetermined }
-        
-        let stepType = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!
-        
-        return healthStore.authorizationStatus(for: stepType)
-    }
-    
-    
     func requestAuthorization(completion: @escaping (Bool) -> Void) {
         guard let healthStore = healthStore else {
             completion(false)
@@ -53,6 +44,23 @@ class HealthKitManager: ObservableObject {
         }
     }
     
+    func observeActiveEnergyBurned(completion: @escaping (Double) -> Void) {
+        guard let healthStore = healthStore else {
+            completion(0)
+            return
+        }
+        
+        let query = HKObserverQuery(sampleType: energyBurnedType, predicate: nil) { _, _, error in
+            guard error == nil else { return }
+
+            // 변화가 있을 때 새로운 데이터를 가져옴
+            self.readActiveEnergyBurned { kcal in
+                completion(kcal)
+            }
+        }
+        
+        healthStore.execute(query)
+    }
     
     func readActiveEnergyBurned(completion: @escaping (Double) -> Void) {
         guard let healthStore = healthStore else {
@@ -86,38 +94,39 @@ class HealthKitManager: ObservableObject {
         healthStore.execute(query)
     }
     
-    func checkIfGoalMet(goalCalories: Double, completion: @escaping (Double, Bool) -> Void) {
+    func readThreeDaysTotalKcal(completion: @escaping (Double) -> Void) {
         guard let healthStore = healthStore else {
-            completion(0, false)
+            completion(0)
             return
         }
         
         let calendar = Calendar.current
         let endDate = Date()
         guard let startDate = calendar.date(byAdding: .day, value: -3, to: endDate) else {
-            completion(0, false)
+            completion(0)
+            return
+        }
+        
+        guard let energyBurnedType = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned) else {
+            completion(0)
             return
         }
         
         let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
         
-        let query = HKSampleQuery(sampleType: energyBurnedType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { [weak self] (query, samples, error) in
-            guard let self = self, let samples = samples as? [HKQuantitySample] else {
-                completion(0, false)
+        let query = HKSampleQuery(sampleType: energyBurnedType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { query, samples, error in
+            guard let samples = samples as? [HKQuantitySample], error == nil else {
+                completion(0)
                 return
             }
             
             // 칼로리 합산
             let totalCalories = samples.reduce(0) { $0 + $1.quantity.doubleValue(for: HKUnit.kilocalorie()) }
             
-            // 목표 칼로리 초과 여부 판단
-            let goalMet = totalCalories >= goalCalories
-            
-            // 합계와 목표 달성 여부를 반환
-            completion(totalCalories, goalMet)
+            completion(totalCalories)
         }
         
         healthStore.execute(query)
     }
-
+    
 }
