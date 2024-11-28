@@ -11,7 +11,7 @@ import SwiftUI
 /// WatchConnectivity 관리하는 클래스, iOS - Watch 간 데이터 통신 담당
 final class WatchConnectivityManager: NSObject, ObservableObject, WCSessionDelegate {
     static let shared = WatchConnectivityManager()
-
+    
     // MARK: - Init
     
     override private init() {
@@ -29,16 +29,15 @@ final class WatchConnectivityManager: NSObject, ObservableObject, WCSessionDeleg
     /// - Parameters
     /// `message`: 전송할 키값과 데이터
     func sendMessage(message: [String: Any]) {
-            print("Sending message to Watch")
-            if WCSession.default.isReachable {
-                WCSession.default.sendMessage(message, replyHandler: { response in
-                    print("Message sent successfully: \(response)")
-                }, errorHandler: { error in
+        print("Sending message to Watch")
+        if WCSession.default.isReachable {
+            WCSession.default.sendMessage(message, replyHandler: { response in
+                print("Message sent successfully: \(response)")
+            }, errorHandler: { error in
                 print("Error sending message: \(error.localizedDescription)")
-                })
-            } else {
-                print("Watch is not reachable")
-            }
+            })
+        } else {
+            print("Watch is not reachable")
         }
     }
     
@@ -56,12 +55,12 @@ final class WatchConnectivityManager: NSObject, ObservableObject, WCSessionDeleg
     
     /// WCSessionDelegate 프로토콜 메서드 - 세션 활성화 완료 시 호출
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: (any Error)?) {
-            print("WCSession activation completed with state: \(activationState)")
-            
-            // 세션이 활성화된 후 펫 정보를 보냄
-            if activationState == .activated {
-                // 여기에 펫 정보를 보내는 코드 추가
-                let goalKcal = UserDefaultValue.purposeKcal
+        print("WCSession activation completed with state: \(activationState)")
+        
+        // 세션이 활성화된 후 펫 정보를 보냄
+        if activationState == .activated {
+            // 여기에 펫 정보를 보내는 코드 추가
+            let goalKcal = UserDefaultValue.purposeKcal
             let petType = UserDefaultValue.petType
             let level = UserDefaultValue.level
             

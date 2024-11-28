@@ -212,8 +212,10 @@ final class HomeViewModel: ObservableObject {
                 if self.homePetModel.toyCount != dailyInfo.user.toyQuantity {
                     healthKitManager.readThreeDaysTotalKcal { [weak self] totalKcal in
                         guard let self else { return }
-                        self.threeDaysTotalKcal = Int(totalKcal)
-                        self.isGoalMet = true
+                        DispatchQueue.main.async {
+                            self.threeDaysTotalKcal = Int(totalKcal)
+                            self.isGoalMet = true
+                        }
                     }
                 }
                 

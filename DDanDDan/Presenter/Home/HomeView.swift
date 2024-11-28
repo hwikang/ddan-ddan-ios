@@ -105,7 +105,7 @@ struct HomeView: View {
             }
             .onChange(of: viewModel.isGoalMet) { newValue in
                 if newValue {
-                    coordinator.push( to: .successThreeDay(totalKcal: 1000))
+                    coordinator.push( to: .successThreeDay(totalKcal: viewModel.threeDaysTotalKcal))
                 }
             }
             .onReceive(coordinator.$shouldUpdateHomeView) { shouldUpdate in
