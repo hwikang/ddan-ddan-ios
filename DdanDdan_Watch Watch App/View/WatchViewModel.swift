@@ -16,6 +16,8 @@ final class WatchViewModel: ObservableObject {
     @Published var currentKcalProgress: Double = 0.0
     @Published var viewConfig: (Image, Color)?
     @Published var showLoginAlert = false
+    
+    private let healthKitManager: HealthKitManager = .shared
     private let watchConnectivityManager: WatchConnectivityManager = .shared
     
     init(currentKcal: Int = 0) {
@@ -25,12 +27,13 @@ final class WatchViewModel: ObservableObject {
         updateProgress()
     }
     
-    /// HealthKit에서 활성 에너지(kcal) 받아와서 현재 칼로리, 도달률 계산
-    public func fetchActiveEnergyFromHealthKit() {
-        HealthKitManager.shared.readActiveEnergyBurned { [weak self] kcal in
+    
+    func observeHealthKitData() {
+        healthKitManager.observeActiveEnergyBurned { [weak self] newKcal in
+            guard let self = self else { return }
             DispatchQueue.main.async {
-                self?.currentKcal = Int(kcal)
-                self?.updateProgress()
+                self.currentKcal = Int(newKcal)
+                self.updateProgress()
             }
         }
     }
