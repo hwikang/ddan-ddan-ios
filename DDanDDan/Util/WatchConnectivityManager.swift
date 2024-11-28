@@ -29,17 +29,28 @@ final class WatchConnectivityManager: NSObject, ObservableObject, WCSessionDeleg
     /// - Parameters
     /// `message`: 전송할 키값과 데이터
     func sendMessage(message: [String: Any]) {
-        print("Sending message to Watch")
-        if WCSession.default.isReachable {
-            WCSession.default.sendMessage(message, replyHandler: { response in
-                print("Message sent successfully: \(response)")
-            }, errorHandler: { error in
+            print("Sending message to Watch")
+            if WCSession.default.isReachable {
+                WCSession.default.sendMessage(message, replyHandler: { response in
+                    print("Message sent successfully: \(response)")
+                }, errorHandler: { error in
                 print("Error sending message: \(error.localizedDescription)")
-            })
-        } else {
-            print("Watch is not reachable")
+                })
+            } else {
+                print("Watch is not reachable")
+            }
         }
     }
+    
+    func transferUserInfo(info: [String: Any]) {
+        if WCSession.default.activationState == .activated {
+            WCSession.default.transferUserInfo(info)
+            print("User info transferred: \(info)")
+        } else {
+            print("WCSession is not activated")
+        }
+    }
+    
     
     // MARK: - 필수 구현 메서드 및 Delegate 메서드
     
@@ -51,19 +62,19 @@ final class WatchConnectivityManager: NSObject, ObservableObject, WCSessionDeleg
             if activationState == .activated {
                 // 여기에 펫 정보를 보내는 코드 추가
                 let goalKcal = UserDefaultValue.purposeKcal
-                let petType = UserDefaultValue.petType
-                let level = UserDefaultValue.level
-                
-                let message = ["purposeKcal": goalKcal]
-                let petTypeMessage = ["petType": petType]
-                let levelMessage = ["level" : level]
-                
-                sendMessage(message: message)
-                sendMessage(message: petTypeMessage)
-                sendMessage(message: levelMessage)
-            }
+            let petType = UserDefaultValue.petType
+            let level = UserDefaultValue.level
+            
+            let setting: [String : Any] = [
+                "purposeKcal": goalKcal,
+                "petType": petType,
+                "level" : level
+            ]
+            
+            self.transferUserInfo(info: setting)
         }
-        
+    }
+    
     
     /// 세션 비활성화되었을 때 호출
     func sessionDidBecomeInactive(_ session: WCSession) {    }

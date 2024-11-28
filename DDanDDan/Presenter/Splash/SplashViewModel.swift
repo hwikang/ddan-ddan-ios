@@ -36,17 +36,13 @@ final class SplashViewModel: ObservableObject {
                 UserDefaultValue.purposeKcal = userData.purposeCalorie
                 UserDefaultValue.level = petData.mainPet.level
                 
-                let goalKcal = userData.purposeCalorie
-                let petType = petData.mainPet.type.rawValue
-                let level = petData.mainPet.level
+                let info: [String: Any] = [
+                    "purposeKcal": userData.purposeCalorie,
+                    "petType": petData.mainPet.type.rawValue,
+                    "level": petData.mainPet.level
+                ]
                 
-                let message = ["purposeKcal": goalKcal]
-                let petTypeMessage = ["petType": petType]
-                let levelMessage = ["level" : level]
-                
-                WatchConnectivityManager.shared.sendMessage(message: message)
-                WatchConnectivityManager.shared.sendMessage(message: petTypeMessage)
-                WatchConnectivityManager.shared.sendMessage(message: levelMessage)
+                WatchConnectivityManager.shared.transferUserInfo(info: info)
                 
                 self.coordinator.setRoot(to: .home)
             }

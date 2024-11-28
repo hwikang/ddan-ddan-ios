@@ -85,17 +85,14 @@ final class HomeViewModel: ObservableObject {
                 toyCount: userInfo.toyQuantity
             )
             
-            let goalKcal = userInfo.purposeCalorie
-            let petType = petInfo.mainPet.type.rawValue
-            let level = petInfo.mainPet.level
-            
-            let message = ["purposeKcal": goalKcal]
-            let petTypeMessage = ["petType": petType]
-            let levelMessage = ["level" : level]
-            
-            WatchConnectivityManager.shared.sendMessage(message: message)
-            WatchConnectivityManager.shared.sendMessage(message: petTypeMessage)
-            WatchConnectivityManager.shared.sendMessage(message: levelMessage)
+            let info: [String: Any] = [
+                "purposeKcal": userInfo.purposeCalorie,
+                "petType": petInfo.mainPet.type.rawValue,
+                "level": petInfo.mainPet.level
+            ]
+
+            WatchConnectivityManager.shared.transferUserInfo(info: info)
+
         }
     }
     
