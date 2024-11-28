@@ -42,9 +42,26 @@ public struct NetworkManager {
         
         // 응답 로그 출력
         print("\n📥 Response:")
-        if let error = result.error {
-            print("🔹 Error: \(error.localizedDescription)")
-            return .failure(NetworkError.requestFailed(error.errorDescription ?? ""))
+        if let error = result.error as? AFError {
+            print("🔹 AFError: \(error.localizedDescription)")
+            
+            if let statusCode = error.responseCode {
+                if let data = result.data {
+                    do {
+                        let errorResponse = try JSONDecoder().decode(ServerErrorResponse.self, from: data)
+                        print("🔹 Server Error Code: \(errorResponse.code)")
+                        print("🔹 Server Error Message: \(errorResponse.message)")
+                        return .failure(NetworkError.serverError(statusCode, errorResponse.code))
+                    } catch {
+                        return .failure(NetworkError.failToDecode(error.localizedDescription))
+                    }
+                } else {
+                    print("🔹 Server Error: No data available")
+                    return .failure(NetworkError.serverError(statusCode, "Unknown error"))
+                }
+            }
+            
+            return .failure(NetworkError.requestFailed(error.errorDescription ?? "Unknown error"))
         }
         
         guard let data = result.data else {
@@ -75,7 +92,7 @@ public struct NetworkManager {
         } else {
             print("🔹 Server Error: \(response.statusCode)")
             print("====================================")
-            return .failure(NetworkError.serverError(response.statusCode))
+            return .failure(NetworkError.serverError(response.statusCode, response.description))
         }
     }
 }
