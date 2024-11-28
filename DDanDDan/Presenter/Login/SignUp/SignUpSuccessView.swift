@@ -31,6 +31,7 @@ struct SignUpSuccessView: View {
                 GreenButton(action: {
                     Task {
                         await viewModel.login()
+                        coordinator.triggerHomeUpdate()
                         coordinator.setRoot(to: .home)
                     }
                 }, title: "시작하기", disabled: .constant(false))
