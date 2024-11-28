@@ -16,6 +16,7 @@ final class WatchViewModel: ObservableObject {
     @Published var currentKcalProgress: Double = 0.0
     @Published var viewConfig: (Image, Color)?
     @Published var showLoginAlert = false
+    private let watchConnectivityManager: WatchConnectivityManager = .shared
     
     init(currentKcal: Int = 0) {
         self.currentKcal = currentKcal
@@ -59,19 +60,22 @@ final class WatchViewModel: ObservableObject {
     }
     
     private func bindWatchApp() {
-        WatchConnectivityManager.shared.$watchPet
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] watchPet in
-                guard let self = self else { return }
-                
-                if let watchPet {
-                    self.goalKcal = watchPet.goalKcal
-                    self.viewConfig = configureUI(petType: watchPet.petType, level: watchPet.level)
-                    self.updateProgress()
-                } else {
-                    self.showLoginAlert = true
-                }
+        Publishers.CombineLatest3(
+            watchConnectivityManager.$purposeKcal,
+            watchConnectivityManager.$petType,
+            watchConnectivityManager.$level
+        )
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] purposeKcal, petType, level in
+            guard let self = self else { return }
+            
+            // 데이터 통합 처리
+            self.goalKcal = Int(purposeKcal)
+            if let petTypeEnum = PetType(rawValue: petType) {
+                self.viewConfig = self.configureUI(petType: petTypeEnum, level: level)
             }
-            .store(in: &cancellables)
+            self.updateProgress()
+        }
+        .store(in: &cancellables)
     }
 }
