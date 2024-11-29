@@ -50,6 +50,7 @@ struct UpdateCalorieView: View {
                 GreenButton(action: {
                     Task {
                         if await viewModel.update() {
+                            coordinator.triggerHomeUpdate()
                             coordinator.pop()
                         }
                     }
