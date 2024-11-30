@@ -44,7 +44,7 @@ struct DeleteUserConfirmView: View {
                 GreenButton(action: {
                     if isChecked {
                         Task {
-                            if await viewModel.deleteUser(reason: selectedReason) {
+                            if await viewModel.deleteUser(reasons: selectedReason) {
                                 coordinator.setRoot(to: .login)
                             }
                         }
