@@ -58,5 +58,5 @@ struct DeleteUserConfirmView: View {
 }
 
 #Preview {
-    DeleteUserConfirmView(viewModel: DeleteUserViewModel(), coordinator: AppCoordinator(), selectedReason: [])
+    DeleteUserConfirmView(viewModel: DeleteUserViewModel(repository: SettingRepository()), coordinator: AppCoordinator(), selectedReason: [])
 }

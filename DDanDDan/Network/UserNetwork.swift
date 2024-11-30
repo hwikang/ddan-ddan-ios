@@ -87,7 +87,7 @@ public struct UserNetwork {
     
     //MARK: - DELETE
     
-    public func deleteUser(accessToken: String, reason: String) async -> Result<EmptyResponse, NetworkError> {
+    public func deleteUser(accessToken: String, reason: String) async -> Result<EmptyEntity, NetworkError> {
         let parameter: Parameters = ["cause": reason]
         let headers: HTTPHeaders = ["Authorization": "Bearer " + accessToken]
         return await manager.request(url: PathString.User.user,

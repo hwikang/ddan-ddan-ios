@@ -9,7 +9,8 @@ import Foundation
 
 protocol SettingRepositoryProtocol {
     func update(name: String?, purposeCalorie: Int?) async -> Result<UserData, NetworkError>
-    func deleteUser(reason: String) async -> Result<EmptyResponse, NetworkError> 
+    func deleteUser(reason: String) async -> Result<EmptyEntity, NetworkError>
+    func getUserData() async -> UserData?
 }
 
 public struct SettingRepository: SettingRepositoryProtocol {
@@ -23,8 +24,11 @@ public struct SettingRepository: SettingRepositoryProtocol {
         }
         return result
     }
-    public func deleteUser(reason: String) async -> Result<EmptyResponse, NetworkError> {
+    public func deleteUser(reason: String) async -> Result<EmptyEntity, NetworkError> {
         guard let accessToken = await UserManager.shared.accessToken else { return .failure(.requestFailed("Access Token Nil"))}
         return await network.deleteUser(accessToken: accessToken, reason: reason)
+    }
+    public func getUserData() async -> UserData? {
+        await UserManager.shared.getUserData()
     }
 }

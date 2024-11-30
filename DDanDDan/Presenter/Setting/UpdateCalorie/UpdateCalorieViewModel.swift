@@ -13,12 +13,20 @@ public protocol UpdateCalorieViewModelProtocol: ObservableObject {
 
 final class UpdateCalorieViewModel: UpdateCalorieViewModelProtocol {
   
-    @Published var calorie: Int
+    @Published var calorie: Int = 100
     private let repository: SettingRepositoryProtocol
 
-    init(calorie: Int, repository: SettingRepositoryProtocol) {
-        self.calorie = calorie
+    init(repository: SettingRepositoryProtocol) {
         self.repository = repository
+        getUserCalorie()
+    }
+    
+    private func getUserCalorie() {
+        Task {
+            if let userData = await repository.getUserData() {
+                calorie = userData.purposeCalorie
+            }
+        }
     }
     
     public func update() async -> Bool {

@@ -16,7 +16,7 @@ final class DeleteUserViewModel: ObservableObject {
         getUserName()
     }
     public func deleteUser(reasons: Set<String>) async -> Bool {
-        let result = await repository.deleteUser(reason: reasons.reduce("") { $0 + $1 })
+        let result = await repository.deleteUser(reason: reasons.reduce("") { $0 + ", " + $1 })
         switch result {
         case .success:
             return true

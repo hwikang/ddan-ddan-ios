@@ -65,5 +65,5 @@ struct UpdateCalorieView: View {
 }
 
 #Preview {
-    UpdateCalorieView(viewModel: UpdateCalorieViewModel(calorie: 100, repository: SettingRepository()), coordinator: AppCoordinator())
+    UpdateCalorieView(viewModel: UpdateCalorieViewModel(repository: SettingRepository()), coordinator: AppCoordinator())
 }
