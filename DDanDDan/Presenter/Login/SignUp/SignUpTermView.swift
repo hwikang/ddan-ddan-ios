@@ -82,7 +82,7 @@ public struct SignUpTermView: View {
             } 
             .navigationDestination(for: SignUpPath.self) { path in
                 switch path {
-                case .term: SignUpTermView(viewModel: SignUpViewModel(repository: SignUpRepository()), coordinator: coordinator)
+                case .term: SignUpTermView(viewModel: viewModel, coordinator: coordinator)
                 case .egg: SignUpEggView(viewModel: viewModel, coordinator: coordinator)
                 case .nickname: SignUpNicknameView(viewModel: viewModel, coordinator: coordinator)
                 case .calorie: SignUpCalorieView(viewModel: viewModel, coordinator: coordinator)

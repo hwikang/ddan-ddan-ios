@@ -11,7 +11,7 @@ import SwiftUI
 /// WatchConnectivity 관리하는 클래스, iOS - Watch 간 데이터 통신 담당
 final class WatchConnectivityManager: NSObject, ObservableObject, WCSessionDelegate {
     static let shared = WatchConnectivityManager()
-
+    
     // MARK: - Init
     
     override private init() {
@@ -41,29 +41,39 @@ final class WatchConnectivityManager: NSObject, ObservableObject, WCSessionDeleg
         }
     }
     
+    func transferUserInfo(info: [String: Any]) {
+        if WCSession.default.activationState == .activated {
+            WCSession.default.transferUserInfo(info)
+            print("User info transferred: \(info)")
+        } else {
+            print("WCSession is not activated")
+        }
+    }
+    
+    
     // MARK: - 필수 구현 메서드 및 Delegate 메서드
     
     /// WCSessionDelegate 프로토콜 메서드 - 세션 활성화 완료 시 호출
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: (any Error)?) {
-            print("WCSession activation completed with state: \(activationState)")
-            
-            // 세션이 활성화된 후 펫 정보를 보냄
-            if activationState == .activated {
-                // 여기에 펫 정보를 보내는 코드 추가
-                let goalKcal = UserDefaultValue.purposeKcal
-                let petType = UserDefaultValue.petType
-                let level = UserDefaultValue.level
-                
-                let message = ["purposeKcal": goalKcal]
-                let petTypeMessage = ["petType": petType]
-                let levelMessage = ["level" : level]
-                
-                sendMessage(message: message)
-                sendMessage(message: petTypeMessage)
-                sendMessage(message: levelMessage)
-            }
-        }
+        print("WCSession activation completed with state: \(activationState)")
         
+        // 세션이 활성화된 후 펫 정보를 보냄
+        if activationState == .activated {
+            // 여기에 펫 정보를 보내는 코드 추가
+            let goalKcal = UserDefaultValue.purposeKcal
+            let petType = UserDefaultValue.petType
+            let level = UserDefaultValue.level
+            
+            let setting: [String : Any] = [
+                "purposeKcal": goalKcal,
+                "petType": petType,
+                "level" : level
+            ]
+            
+            self.transferUserInfo(info: setting)
+        }
+    }
+    
     
     /// 세션 비활성화되었을 때 호출
     func sessionDidBecomeInactive(_ session: WCSession) {    }

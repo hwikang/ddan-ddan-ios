@@ -48,7 +48,7 @@ struct ContentView: View {
         .ignoresSafeArea()
         .onAppear {
             HealthKitManager.shared.requestAuthorization { isGranted in
-                viewModel.fetchActiveEnergyFromHealthKit()
+                viewModel.observeHealthKitData()
             }
         }
         .onTapGesture {

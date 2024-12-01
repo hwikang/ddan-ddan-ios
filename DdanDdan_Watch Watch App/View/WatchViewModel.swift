@@ -17,6 +17,9 @@ final class WatchViewModel: ObservableObject {
     @Published var viewConfig: (Image, Color)?
     @Published var showLoginAlert = false
     
+    private let healthKitManager: HealthKitManager = .shared
+    private let watchConnectivityManager: WatchConnectivityManager = .shared
+    
     init(currentKcal: Int = 0) {
         self.currentKcal = currentKcal
         
@@ -24,12 +27,13 @@ final class WatchViewModel: ObservableObject {
         updateProgress()
     }
     
-    /// HealthKit에서 활성 에너지(kcal) 받아와서 현재 칼로리, 도달률 계산
-    public func fetchActiveEnergyFromHealthKit() {
-        HealthKitManager.shared.readActiveEnergyBurned { [weak self] kcal in
+    
+    func observeHealthKitData() {
+        healthKitManager.observeActiveEnergyBurned { [weak self] newKcal in
+            guard let self = self else { return }
             DispatchQueue.main.async {
-                self?.currentKcal = Int(kcal)
-                self?.updateProgress()
+                self.currentKcal = Int(newKcal)
+                self.updateProgress()
             }
         }
     }
@@ -59,19 +63,22 @@ final class WatchViewModel: ObservableObject {
     }
     
     private func bindWatchApp() {
-        WatchConnectivityManager.shared.$watchPet
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] watchPet in
-                guard let self = self else { return }
-                
-                if let watchPet {
-                    self.goalKcal = watchPet.goalKcal
-                    self.viewConfig = configureUI(petType: watchPet.petType, level: watchPet.level)
-                    self.updateProgress()
-                } else {
-                    self.showLoginAlert = true
-                }
+        Publishers.CombineLatest3(
+            watchConnectivityManager.$purposeKcal,
+            watchConnectivityManager.$petType,
+            watchConnectivityManager.$level
+        )
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] purposeKcal, petType, level in
+            guard let self = self else { return }
+            
+            // 데이터 통합 처리
+            self.goalKcal = Int(purposeKcal)
+            if let petTypeEnum = PetType(rawValue: petType) {
+                self.viewConfig = self.configureUI(petType: petTypeEnum, level: level)
             }
-            .store(in: &cancellables)
+            self.updateProgress()
+        }
+        .store(in: &cancellables)
     }
 }

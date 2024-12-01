@@ -79,16 +79,6 @@ struct HomeView: View {
                     viewModel.showRandomBubble(type: .success)
                 }
             }
-            TransparentOverlayView(isPresented: $viewModel.isDailyGoalMet) {
-                DialogView(
-                    show: $viewModel.isDailyGoalMet,
-                    title: "목표 칼로리를 달성했어요!",
-                    description: "먹이 3개를 받으세요.",
-                    rightButtonTitle: "확인",
-                    leftButtonTitle: "취소") {
-                        viewModel.homePetModel.feedCount += 3
-                    }
-            }
             .onChange(of: viewModel.isLevelUp) { newLevel in
                 if newLevel {
                     coordinator.push( to: .upgradePet(
@@ -105,15 +95,16 @@ struct HomeView: View {
             }
             .onChange(of: viewModel.isGoalMet) { newValue in
                 if newValue {
-                    coordinator.push( to: .successThreeDay(totalKcal: 1000))
+                    coordinator.push( to: .successThreeDay(totalKcal: viewModel.threeDaysTotalKcal))
                 }
             }
             .onReceive(coordinator.$shouldUpdateHomeView) { shouldUpdate in
                 if shouldUpdate {
                     Task {
                         await viewModel.fetchHomeInfo()
+                        
+                        coordinator.shouldUpdateHomeView = false
                     }
-                    coordinator.shouldUpdateHomeView = false
                 }
             }
 

@@ -26,8 +26,8 @@ struct NewPetView: View {
                 GreenButton(action: {
                     Task {
                         await viewModel.createRandomPet()
+                        coordinator.pop()
                     }
-                    coordinator.pop()
                 }, title: "시작하기", disabled: .constant(false))
                 .padding(.bottom, 44)
             }
@@ -39,7 +39,7 @@ struct NewPetView: View {
     var imageView: some View {
         ZStack {
             Image(.pangGraphics)
-            Image(.eggBlue)
+            Image(.pinkEgg)
                 .offset(y: 18)
         }
     }

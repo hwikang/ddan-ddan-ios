@@ -85,17 +85,14 @@ final class HomeViewModel: ObservableObject {
                 toyCount: userInfo.toyQuantity
             )
             
-            let goalKcal = userInfo.purposeCalorie
-            let petType = petInfo.mainPet.type.rawValue
-            let level = petInfo.mainPet.level
-            
-            let message = ["purposeKcal": goalKcal]
-            let petTypeMessage = ["petType": petType]
-            let levelMessage = ["level" : level]
-            
-            WatchConnectivityManager.shared.sendMessage(message: message)
-            WatchConnectivityManager.shared.sendMessage(message: petTypeMessage)
-            WatchConnectivityManager.shared.sendMessage(message: levelMessage)
+            let info: [String: Any] = [
+                "purposeKcal": userInfo.purposeCalorie,
+                "petType": petInfo.mainPet.type.rawValue,
+                "level": petInfo.mainPet.level
+            ]
+
+            WatchConnectivityManager.shared.transferUserInfo(info: info)
+
         }
     }
     
@@ -180,12 +177,10 @@ final class HomeViewModel: ObservableObject {
     private func handleKcalUpdate(newKcal: Int) {
         let kcalDifference = (newKcal % 100) - (previousKcal % 100)
         
-        if kcalDifference >= 1 {
             Task {
                 await saveCurrentKcal(currentKcal: newKcal)
             }
             previousKcal = newKcal
-        }
         
         if newKcal >= homePetModel.goalKcal {
             DispatchQueue.main.async { [weak self] in
@@ -208,21 +203,21 @@ final class HomeViewModel: ObservableObject {
                 
                 /// 현재 먹이 개수와 다르면 먹이 얻기
                 if self.homePetModel.feedCount != dailyInfo.user.foodQuantity {
-                    self.earnFood = dailyInfo.user.foodQuantity - self.homePetModel.feedCount
-                    self.isPresentEarnFood = true
+                    if dailyInfo.user.foodQuantity - self.homePetModel.feedCount == 3 {
+                        self.isDailyGoalMet = true
+                    } else {
+                        self.earnFood = dailyInfo.user.foodQuantity - self.homePetModel.feedCount
+                        self.isPresentEarnFood = true
+                    }
                 }
                 
                 if self.homePetModel.toyCount != dailyInfo.user.toyQuantity {
                     healthKitManager.readThreeDaysTotalKcal { [weak self] totalKcal in
                         guard let self else { return }
-                        self.threeDaysTotalKcal = Int(totalKcal)
-                        self.isGoalMet = true
-                    }
-                }
-                
-                if currentKcal >= dailyInfo.user.purposeCalorie {
-                    DispatchQueue.main.async { [weak self] in
-                        self?.isDailyGoalMet = true
+                        DispatchQueue.main.async {
+                            self.threeDaysTotalKcal = Int(totalKcal)
+                            self.isGoalMet = true
+                        }
                     }
                 }
                 

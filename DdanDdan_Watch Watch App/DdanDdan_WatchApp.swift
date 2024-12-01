@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct DdanDdan_Watch_Watch_AppApp: App {
     private let wcSession = WatchConnectivityManager.shared
+    
     var body: some Scene {
         WindowGroup {
             ContentView(viewModel: WatchViewModel())
