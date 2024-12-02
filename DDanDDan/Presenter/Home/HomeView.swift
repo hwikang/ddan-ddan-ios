@@ -8,6 +8,8 @@
 import SwiftUI
 import HealthKit
 
+import Lottie
+
 enum HomePath: Hashable {
     case setting
     case petArchive
@@ -42,9 +44,7 @@ struct HomeView: View {
                             .transition(.opacity)
                             .frame(minWidth: 75, maxWidth: 167, minHeight: 56)
                             .offset(y: 10)
-                        viewModel.homePetModel.petType.image(for: viewModel.homePetModel.level)
-                            .scaledToFit()
-                            .frame(width: 105, height: 105)
+                        petImage
                             .onTapGesture {
                                 viewModel.showRandomBubble(type: .normal)
                             }
@@ -107,7 +107,7 @@ struct HomeView: View {
                     }
                 }
             }
-
+            
         }
         .navigationDestination(for: HomePath.self) { path in
             switch path {
@@ -160,6 +160,27 @@ extension HomeView {
             Text("\(viewModel.homePetModel.goalKcal) kcal")
                 .font(.neoDunggeunmo22)
                 .foregroundStyle(.white)
+        }
+    }
+    
+    var petImage: some View {
+        Group {
+            if viewModel.homePetModel.petType == .pinkCat ||
+                viewModel.homePetModel.petType == .greenHam {
+                if viewModel.isPlayingSpecialAnimation {
+                    LottieView(animation: .named(viewModel.currentLottieAnimation))
+                        .playing(loopMode: .playOnce)
+                        .frame(width: 105, height: 105)
+                } else {
+                    LottieView(animation: .named(viewModel.homePetModel.petType.lottieString(level: viewModel.homePetModel.level)))
+                        .playing(loopMode: .loop)
+                        .frame(width: 105, height: 105)
+                }
+            } else {
+                viewModel.homePetModel.petType.image(for: viewModel.homePetModel.level)
+                    .scaledToFit()
+                    .frame(width: 105, height: 105)
+            }
         }
     }
     

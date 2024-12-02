@@ -9,8 +9,11 @@ import SwiftUI
 import HealthKit
 
 final class HomeViewModel: ObservableObject {
-    @Published var homePetModel: HomeModel = .init(petType: .bluePenguin, level: 0, exp: 0, goalKcal: 0, feedCount: 0, toyCount: 0)
+    @Published var homePetModel: HomeModel = .init(petType: .pinkCat, level: 2, exp: 0, goalKcal: 0, feedCount: 0, toyCount: 0)
     
+    @Published var isPlayingSpecialAnimation: Bool = false
+
+    @Published var currentLottieAnimation: String = ""
     @Published var isDailyGoalMet: Bool = false
     @Published var isGoalMet: Bool = false
     @Published var isMaxLevel: Bool = false
@@ -62,6 +65,19 @@ final class HomeViewModel: ObservableObject {
         observeHealthKitData()
     }
     
+    func updateLottieAnimation(for action: LottieMode) {
+        guard !isPlayingSpecialAnimation else { return } // 이미 애니메이션이 재생 중인 경우 무시
+
+        isPlayingSpecialAnimation = true
+        currentLottieAnimation = homePetModel.petType.lottieString(level: homePetModel.level, mode: action)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) { [weak self] in
+            guard let self else { return }
+            self.isPlayingSpecialAnimation = false
+            self.currentLottieAnimation = "" // 초기 상태로 복구
+        }
+    }
+
     @MainActor
     func fetchHomeInfo() async {
         
@@ -110,6 +126,7 @@ final class HomeViewModel: ObservableObject {
         if case .success(let petData) = result {
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
+                self.updateLottieAnimation(for: .eatPlay)
                 
                 self.showRandomBubble(type: .eat)
                 self.homePetModel.feedCount = petData.user.foodQuantity
@@ -125,6 +142,9 @@ final class HomeViewModel: ObservableObject {
                     self.isMaxLevel = true
                 }
             }
+        } else if case .failure(let failure) = result {
+            toastMessage = "성장이 끝난 펫이에요!"
+            showToastMessage()
         }
     }
     
@@ -142,7 +162,7 @@ final class HomeViewModel: ObservableObject {
         if case .success(let petData) = result {
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
-                
+                self.updateLottieAnimation(for: .eatPlay)
                 self.showRandomBubble(type: .play)
                 self.homePetModel.toyCount = petData.user.toyQuantity
                 self.homePetModel.exp = petData.pet.expPercent
@@ -157,6 +177,9 @@ final class HomeViewModel: ObservableObject {
                     self.isMaxLevel = true
                 }
             }
+        } else if case .failure(let failure) = result {
+            toastMessage = "성장이 끝난 펫이에요!"
+            showToastMessage()
         }
     }
     
