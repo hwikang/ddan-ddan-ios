@@ -35,10 +35,10 @@ final class AppCoordinator: ObservableObject {
     @Published var shouldUpdateHomeView = false
 
     func determineRootView() {
-        if let _ = user.accessToken {
+        if UserDefaultValue.needToShowOnboarding {
+            rootView = .onboarding
+        } else if let _ = user.accessToken {
             rootView = user.isSignUpRequired() ? .signUp : .home
-        } else {
-            rootView = UserDefaultValue.needToShowOnboarding ? .onboarding : .login
         }
     }
     
