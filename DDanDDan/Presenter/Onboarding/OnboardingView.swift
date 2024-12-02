@@ -23,7 +23,6 @@ struct OnboardingView: View {
     
     init(coordinator: AppCoordinator) {
         self.coordinator = coordinator
-        UserDefaultValue.needToShowOnboarding = false
     }
     
     var body: some View {
@@ -37,8 +36,8 @@ struct OnboardingView: View {
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
                 Button {
-                    
                     if UserDefaultValue.requestAuthDone {
+                        UserDefaultValue.needToShowOnboarding = false
                         coordinator.setRoot(to: .login)
                     } else {
                         showAuthDialog.toggle()

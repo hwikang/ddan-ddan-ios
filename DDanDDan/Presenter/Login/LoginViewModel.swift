@@ -69,8 +69,8 @@ public class LoginViewModel: NSObject, ObservableObject {
             case .failure(let error):
                 DispatchQueue.main.async { [weak self] in
                     switch error {
-                    case .serverError(let code, let message):
-                        self?.toastMessage = "로그인에 실패했습니다: \(message)"
+                    case .serverError(_, let message):
+                        self?.toastMessage += ": \(message)"
                     case .dataNil, .encodingError, .failToDecode, .invalidResponse, .requestFailed, .urlError:
                         break
                     }

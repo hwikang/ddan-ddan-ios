@@ -22,9 +22,7 @@ struct SplashView: View {
             }
         }
         .onAppear {
-            Task {
-                await viewModel.performInitialSetup() // 초기 작업 실행
-            }
+            viewModel.navigateToNextScreen()
         }
     }
 }

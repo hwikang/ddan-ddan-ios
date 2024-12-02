@@ -10,7 +10,7 @@ import Foundation
 final class SplashViewModel: ObservableObject {
     private let coordinator: AppCoordinator
     private let homeRepository: HomeRepository
-
+    
     init(
         coordinator: AppCoordinator,
         homeRepository: HomeRepository
@@ -18,12 +18,12 @@ final class SplashViewModel: ObservableObject {
         self.coordinator = coordinator
         self.homeRepository = homeRepository
     }
-
-
+    
+    
     func performInitialSetup() async {
         async let userInfo = homeRepository.getUserInfo()
         async let petInfo = homeRepository.getMainPetInfo()
-
+        
         if case .success(let userData) = await userInfo,
            case .success(let petData) = await petInfo {
             DispatchQueue.main.async {
@@ -52,20 +52,22 @@ final class SplashViewModel: ObservableObject {
             }
         }
     }
-
-    @MainActor private func navigateToNextScreen() {
-        if UserManager.shared.accessToken != nil {
+    
+    @MainActor
+    func navigateToNextScreen() {
+        if !UserDefaultValue.isOnboardingComplete {
+            coordinator.setRoot(to: .onboarding)
+        } else if UserManager.shared.accessToken != nil {
             if UserManager.shared.isSignUpRequired() {
                 coordinator.setRoot(to: .signUp)
             } else {
-                coordinator.setRoot(to: .home)
+                Task {
+                    await self.performInitialSetup()
+                    coordinator.setRoot(to: .home)
+                }
             }
         } else {
-            if UserDefaultValue.needToShowOnboarding {
-                coordinator.setRoot(to: .onboarding)
-            } else {
-                coordinator.setRoot(to: .login)
-            }
+            coordinator.setRoot(to: .login)
         }
     }
 }
