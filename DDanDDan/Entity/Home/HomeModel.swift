@@ -24,7 +24,7 @@ enum LottieMode {
 extension PetType {
     func lottieString(level: Int, mode: LottieMode = .normal) -> String {
         switch (self, level, mode) {
-        // pinkCat Lottie
+            // pinkCat Lottie
         case (.pinkCat, 1, .normal): return LottieString.cat.lv1.normal
         case (.pinkCat, 1, .eatPlay): return LottieString.cat.lv1.eatPlay
         case (.pinkCat, 2, .normal): return LottieString.cat.lv2.normal
@@ -36,7 +36,7 @@ extension PetType {
         case (.pinkCat, 5, .normal): return LottieString.cat.lv5.normal
         case (.pinkCat, 5, .eatPlay): return LottieString.cat.lv5.eatPlay
             
-        // greenHam Lottie
+            // greenHam Lottie
         case (.greenHam, 1, .normal): return LottieString.hamster.lv1.normal
         case (.greenHam, 1, .eatPlay): return LottieString.hamster.lv1.eatPlay
         case (.greenHam, 2, .normal): return LottieString.hamster.lv2.normal
@@ -61,18 +61,17 @@ extension PetType {
             //            case (.bluePenguin, 5, .eatPlay): return LottieString.penguin.lv5.eat_play
             //
             //            // purpleDog Lottie
-            //            case (.purpleDog, 1, .normal): return LottieString.dog.lv1.normal
-            //            case (.purpleDog, 1, .eatPlay): return LottieString.dog.lv1.eat_play
-            //            case (.purpleDog, 2, .normal): return LottieString.dog.lv2.normal
-            //            case (.purpleDog, 2, .eatPlay): return LottieString.dog.lv2.eat_play
-            //            case (.purpleDog, 3, .normal): return LottieString.dog.lv3.normal
-            //            case (.purpleDog, 3, .eatPlay): return LottieString.dog.lv3.eat_play
-            //            case (.purpleDog, 4, .normal): return LottieString.dog.lv4.normal
-            //            case (.purpleDog, 4, .eatPlay): return LottieString.dog.lv4.eat_play
-            //            case (.purpleDog, 5, .normal): return LottieString.dog.lv5.normal
-            //            case (.purpleDog, 5, .eatPlay): return LottieString.dog.lv5.eat_play
-            //
-            // 기본값
+        case (.purpleDog, 1, .normal): return LottieString.puppy.lv1.normal
+        case (.purpleDog, 1, .eatPlay): return LottieString.puppy.lv1.eatPlay
+        case (.purpleDog, 2, .normal): return LottieString.puppy.lv2.normal
+        case (.purpleDog, 2, .eatPlay): return LottieString.puppy.lv2.eatPlay
+        case (.purpleDog, 3, .normal): return LottieString.puppy.lv3.normal
+        case (.purpleDog, 3, .eatPlay): return LottieString.puppy.lv3.eatPlay
+        case (.purpleDog, 4, .normal): return LottieString.puppy.lv4.normal
+        case (.purpleDog, 4, .eatPlay): return LottieString.puppy.lv4.eatPlay
+        case (.purpleDog, 5, .normal): return LottieString.puppy.lv5.normal
+        case (.purpleDog, 5, .eatPlay): return LottieString.puppy.lv5.eatPlay
+            
         default: return LottieString.cat.lv1.normal
         }
     }

@@ -165,8 +165,7 @@ extension HomeView {
     
     var petImage: some View {
         Group {
-            if viewModel.homePetModel.petType == .pinkCat ||
-                viewModel.homePetModel.petType == .greenHam {
+            if (viewModel.homePetModel.petType != .bluePenguin) {
                 if viewModel.isPlayingSpecialAnimation {
                     LottieView(animation: .named(viewModel.currentLottieAnimation))
                         .playing(loopMode: .playOnce)
