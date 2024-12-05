@@ -42,14 +42,12 @@ struct DeleteUserConfirmView: View {
                 .padding(.leading, 20)
                 .padding(.bottom, 20)
                 GreenButton(action: {
-                    if isChecked {
-                        Task {
-                            if await viewModel.deleteUser(reasons: selectedReason) {
-                                coordinator.setRoot(to: .login)
-                            }
+                    Task {
+                        if await viewModel.deleteUser(reasons: selectedReason) {
+                            coordinator.setRoot(to: .login)
                         }
                     }
-                }, title: "탈퇴하기", disabled: .constant(selectedReason.isEmpty))
+                }, title: "탈퇴하기", disabled: Binding(get: { !isChecked }, set: {_ in}))
             }
         }
         .navigationBarHidden(true)
