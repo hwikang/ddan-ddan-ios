@@ -46,6 +46,7 @@ public struct SignUpEggView: View {
                 
             }
         }
+        .navigationBarHidden(true)
     }
     
     var eggGrid: some View {

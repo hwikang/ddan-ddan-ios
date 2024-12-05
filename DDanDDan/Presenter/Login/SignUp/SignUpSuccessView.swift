@@ -40,6 +40,7 @@ struct SignUpSuccessView: View {
                 }, title: "시작하기", disabled: .constant(false))
             }
         }
+        .navigationBarHidden(true)
     }
 }
 

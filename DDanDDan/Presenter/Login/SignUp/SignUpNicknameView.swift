@@ -52,8 +52,8 @@ public struct SignUpNicknameView: View {
                     buttonDisabled = nickname.isEmpty
                 }
             }
-         
         }
+        .navigationBarHidden(true)
     }
 }
 

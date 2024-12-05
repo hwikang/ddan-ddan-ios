@@ -54,7 +54,7 @@ struct SignUpCalorieView: View {
                     }
                 }, title: "다음", disabled: .constant(false))
             }
-            
+            .navigationBarHidden(true)
         }
     }
     
