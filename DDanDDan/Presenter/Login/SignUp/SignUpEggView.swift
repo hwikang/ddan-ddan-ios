@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-public struct SignUpEggView: View {
-    public let viewModel: SignUpViewModelProtocol
+public struct SignUpEggView<ViewModel: SignUpViewModelProtocol>: View {
+    @ObservedObject var viewModel: ViewModel
     @State private var buttonDisabled: Bool = true
     @State private var selectedEgg: PetType? = nil
     @ObservedObject var coordinator: AppCoordinator

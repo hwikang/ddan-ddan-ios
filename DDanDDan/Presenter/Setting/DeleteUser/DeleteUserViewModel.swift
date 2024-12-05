@@ -8,14 +8,25 @@
 import Foundation
 
 final class DeleteUserViewModel: ObservableObject {
-    init() {
+    @Published var name: String = ""
+    private let repository: SettingRepositoryProtocol
+
+    init(repository: SettingRepositoryProtocol) {
+        self.repository = repository
         getUserName()
     }
-    @Published var name: String = ""
-    
-    public func deleteUser(reason: Set<String>) async -> Bool {
-        //TODO: delete User API
-        return true
+    public func deleteUser(reasons: Set<String>) async -> Bool {
+        let result = await repository.deleteUser(reason: reasons.reduce("") {
+            $0.isEmpty ? $1 : $0 + ", " + $1 }
+        )
+        switch result {
+        case .success:
+            return true
+        case .failure(let error):
+            //TODO: 에러처리
+            return false
+        }
+        
     }
     
     public func getUserName() {

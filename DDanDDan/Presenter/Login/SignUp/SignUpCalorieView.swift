@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct SignUpCalorieView: View {
-    public let viewModel: SignUpViewModelProtocol
+struct SignUpCalorieView<ViewModel: SignUpViewModelProtocol>: View {
+    @ObservedObject var viewModel: ViewModel
     @State private var calorie: Int = 100
     @ObservedObject var coordinator: AppCoordinator
-    
+    public let name: String
     var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
@@ -49,7 +49,7 @@ struct SignUpCalorieView: View {
                 GreenButton(action: {
                     Task {
                         //TODO: 실패처리
-                        await viewModel.updateCalorie(calorie: calorie)
+                        await viewModel.updateCalorie(name: name, calorie: calorie)
                         coordinator.push(to: .egg)
                     }
                 }, title: "다음", disabled: .constant(false))
@@ -70,5 +70,5 @@ struct SignUpCalorieView: View {
 }
 
 #Preview {
-    SignUpCalorieView(viewModel: SignUpViewModel(repository: SignUpRepository()), coordinator: AppCoordinator())
+    SignUpCalorieView(viewModel: SignUpViewModel(repository: SignUpRepository()), coordinator: AppCoordinator(), name: "")
 }

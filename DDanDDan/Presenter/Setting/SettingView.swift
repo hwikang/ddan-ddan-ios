@@ -100,13 +100,13 @@ struct SettingView: View {
         case .updateNickname:
             UpdateNicknameView(coordinator: coordinator, viewModel: UpdateNicknameViewModel(nickname: "", repository: SettingRepository()))
         case .updateCalorie:
-            UpdateCalorieView(viewModel: UpdateCalorieViewModel(calorie: 100, repository: SettingRepository()), coordinator: coordinator)
+            UpdateCalorieView(viewModel: UpdateCalorieViewModel(repository: SettingRepository()), coordinator: coordinator)
         case .updateTerms:
             SettingTermView(coordinator: coordinator)
         case .deleteUser:
             DeleteUserView(coordinator: coordinator)
-        case .deleteUserConfirm(let reasons):
-            DeleteUserConfirmView(viewModel: DeleteUserViewModel(), coordinator: coordinator, selectedReason: reasons)
+        case .deleteUserConfirm(let reasons): 
+            DeleteUserConfirmView(viewModel: DeleteUserViewModel(repository: SettingRepository()), coordinator: coordinator, selectedReason: reasons)
         default:
             EmptyView()
         }

@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-public struct SignUpNicknameView: View {
-    public let viewModel: SignUpViewModelProtocol
+public struct SignUpNicknameView<ViewModel: SignUpViewModelProtocol>: View {
+    @ObservedObject var viewModel: ViewModel
     @State private var buttonDisabled: Bool = true
     @State private var nickname: String = ""
     @ObservedObject var coordinator: AppCoordinator
@@ -43,7 +43,7 @@ public struct SignUpNicknameView: View {
                 GreenButton(action: {
                     Task {
                         if await viewModel.updateNickname(name: nickname) {
-                            coordinator.push(to: .calorie)
+                            coordinator.push(to: .calorie(name: nickname))
                             
                         }
                     }
