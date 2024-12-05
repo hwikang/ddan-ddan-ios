@@ -43,9 +43,9 @@ struct DeleteUserConfirmView: View {
                 .padding(.bottom, 20)
                 GreenButton(action: {
                     Task {
-                        if await viewModel.deleteUser(reasons: selectedReason) {
-                            coordinator.setRoot(to: .login)
-                        }
+                        _ = await viewModel.deleteUser(reasons: selectedReason)
+                        coordinator.setRoot(to: .login)
+                        
                     }
                 }, title: "탈퇴하기", disabled: Binding(get: { !isChecked }, set: {_ in}))
             }
