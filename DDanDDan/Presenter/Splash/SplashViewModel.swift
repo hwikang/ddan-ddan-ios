@@ -57,7 +57,8 @@ final class SplashViewModel: ObservableObject {
     func navigateToNextScreen() {
         if !UserDefaultValue.isOnboardingComplete {
             coordinator.setRoot(to: .onboarding)
-        } else if UserManager.shared.accessToken != nil {
+        } else if let accessToken = UserManager.shared.accessToken,
+                  !accessToken.isEmpty {
             if UserManager.shared.isSignUpRequired() {
                 coordinator.setRoot(to: .signUp)
             } else {
@@ -70,4 +71,5 @@ final class SplashViewModel: ObservableObject {
             coordinator.setRoot(to: .login)
         }
     }
+    
 }
