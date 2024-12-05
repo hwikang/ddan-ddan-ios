@@ -33,14 +33,6 @@ final class AppCoordinator: ObservableObject {
     @StateObject var user = UserManager.shared
     
     @Published var shouldUpdateHomeView = false
-
-    func determineRootView() {
-        if UserDefaultValue.needToShowOnboarding {
-            rootView = .onboarding
-        } else if let _ = user.accessToken {
-            rootView = user.isSignUpRequired() ? .signUp : .home
-        }
-    }
     
     func setRoot(to path: AppPath) {
         navigationPath.removeLast(navigationPath.count)
@@ -53,10 +45,6 @@ final class AppCoordinator: ObservableObject {
     
     func popToRoot() {
         navigationPath.removeLast(navigationPath.count)
-    }
-    
-    func presentSheet<View: SwiftUI.View>(view: View) {
-        sheetView = AnyView(view)
     }
     
     func push(to path: SignUpPath) {
