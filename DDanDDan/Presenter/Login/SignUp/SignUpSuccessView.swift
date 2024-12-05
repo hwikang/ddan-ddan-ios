@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import Lottie
+
 struct SignUpSuccessView<ViewModel: SignUpViewModelProtocol>: View {
     @ObservedObject var viewModel: ViewModel
     @ObservedObject var coordinator: AppCoordinator
@@ -16,13 +18,14 @@ struct SignUpSuccessView<ViewModel: SignUpViewModelProtocol>: View {
             Color.black.edgesIgnoringSafeArea(.all)
             VStack(alignment: .leading) {
                 Text("딴딴에 가입하신 것을\n환영해요!")
-                    .font(.system(size: 24, weight: .bold))
+                    .font(.neoDunggeunmo24)
                     .lineSpacing(8)
                     .foregroundStyle(.white)
                     .padding(.top, 80)
                     .padding(.horizontal, 20)
                 HStack(alignment: .center) {
-                    Image("signUpSuccess")
+                    LottieView(animation: .named(LottieString.confetti))
+                        .playing(loopMode: .playOnce)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.top, 64)
@@ -37,6 +40,7 @@ struct SignUpSuccessView<ViewModel: SignUpViewModelProtocol>: View {
                 }, title: "시작하기", disabled: .constant(false))
             }
         }
+        .navigationBarHidden(true)
     }
 }
 

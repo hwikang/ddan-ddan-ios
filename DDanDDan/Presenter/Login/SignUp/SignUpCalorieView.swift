@@ -54,7 +54,7 @@ struct SignUpCalorieView<ViewModel: SignUpViewModelProtocol>: View {
                     }
                 }, title: "다음", disabled: .constant(false))
             }
-            
+            .navigationBarHidden(true)
         }
     }
     

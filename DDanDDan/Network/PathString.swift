@@ -15,9 +15,9 @@ enum PathString {
     }
     
     enum User {
-        static let user = "/v1/user/me"
-        static let mainPet = "/v1/user/me/main-pet"
-        static let updateDailyKcal = "/v1/user/me/daily-calorie"
+        static let user = "/v1/users/me"
+        static let mainPet = "/v1/users/me/main-pet"
+        static let updateDailyKcal = "/v1/users/me/daily-calorie"
     }
     
     enum Auth {

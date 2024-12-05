@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "egg.png",
+      "filename" : "egg-1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "egg@2x.png",
+      "filename" : "egg@2x-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "egg@3x.png",
+      "filename" : "egg@3x-1.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

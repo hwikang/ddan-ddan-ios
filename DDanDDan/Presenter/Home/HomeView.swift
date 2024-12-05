@@ -8,6 +8,8 @@
 import SwiftUI
 import HealthKit
 
+import Lottie
+
 enum HomePath: Hashable {
     case setting
     case petArchive
@@ -20,6 +22,8 @@ struct HomeView: View {
     @ObservedObject var coordinator: AppCoordinator
     @StateObject var viewModel: HomeViewModel
     
+    private let isSEDevice = UIScreen.isSESizeDevice
+    
     var body: some View {
         
         ZStack {
@@ -27,14 +31,19 @@ struct HomeView: View {
                 .ignoresSafeArea()
             VStack {
                 navigationBar
-                    .padding(.bottom, 16)
+                    .padding(.top, 20)
+                    .padding(.bottom, isSEDevice ? 8 : 16)
                 kcalView
-                    .padding(.bottom, 14)
+                    .padding(.bottom, isSEDevice ? 24 : 14)
                 ZStack {
-                    viewModel.homePetModel.petType.backgroundImage
-                        .scaledToFit()
-                        .padding(.horizontal, 53)
-                        .clipped()
+                    if isSEDevice {
+                        viewModel.homePetModel.petType.seBackgroundImage
+                            .scaledToFit()
+                            .padding(.horizontal, 53)
+                    } else {
+                        viewModel.homePetModel.petType.backgroundImage
+                            .scaledToFit()
+                    }
                     VStack {
                         Image(viewModel.bubbleImage)
                             .opacity(viewModel.showBubble ? 1 : 0)
@@ -42,17 +51,15 @@ struct HomeView: View {
                             .transition(.opacity)
                             .frame(minWidth: 75, maxWidth: 167, minHeight: 56)
                             .offset(y: 10)
-                        viewModel.homePetModel.petType.image(for: viewModel.homePetModel.level)
-                            .scaledToFit()
-                            .frame(width: 105, height: 105)
+                        petImage
                             .onTapGesture {
                                 viewModel.showRandomBubble(type: .normal)
                             }
                     }
-                    .offset(y: 70)
+                    .offset(y: isSEDevice ? 20 : 65)
                     
                 }
-                .padding(.bottom, 32)
+                .padding(.bottom, isSEDevice ? 15 : 32)
                 levelView
                     .padding(.bottom, 20)
                 actionButtonView
@@ -107,7 +114,7 @@ struct HomeView: View {
                     }
                 }
             }
-
+            
         }
         .navigationDestination(for: HomePath.self) { path in
             switch path {
@@ -137,16 +144,14 @@ extension HomeView {
                 Image(.iconDocs)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 20)
-            
             Button(action: {
                 coordinator.push(to: .setting)
             }) {
                 Image(.iconSetting)
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
-            .padding(.trailing, 20)
         }
+        .padding(.horizontal, 32)
     }
     
     var kcalView: some View {
@@ -160,6 +165,26 @@ extension HomeView {
             Text("\(viewModel.homePetModel.goalKcal) kcal")
                 .font(.neoDunggeunmo22)
                 .foregroundStyle(.white)
+        }
+    }
+    
+    var petImage: some View {
+        Group {
+            if (viewModel.homePetModel.petType != .bluePenguin) {
+                if viewModel.isPlayingSpecialAnimation {
+                    LottieView(animation: .named(viewModel.currentLottieAnimation))
+                        .playing(loopMode: .playOnce)
+                        .frame(width: 105, height: 105)
+                } else {
+                    LottieView(animation: .named(viewModel.homePetModel.petType.lottieString(level: viewModel.homePetModel.level)))
+                        .playing(loopMode: .loop)
+                        .frame(width: 105, height: 105)
+                }
+            } else {
+                viewModel.homePetModel.petType.image(for: viewModel.homePetModel.level)
+                    .scaledToFit()
+                    .frame(width: 105, height: 105)
+            }
         }
     }
     

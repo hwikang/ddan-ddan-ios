@@ -10,7 +10,7 @@ import Foundation
 public struct UserDefaultValue {
     //Auth
     @UserDefault(key: "acessToken", defaultValue: nil)
-    static public var acessToken: String?  
+    static public var acessToken: String?
     @UserDefault(key: "refreshToken", defaultValue: nil)
     static public var refreshToken: String?
     
@@ -52,7 +52,19 @@ public struct UserDefault<T> {
             return UserDefaults.standard.object(forKey: key) as? T ?? defaultValue
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: key)
+            if let value = newValue as? OptionalProtocol, value.isNil {
+                UserDefaults.standard.removeObject(forKey: key)
+            } else {
+                UserDefaults.standard.set(newValue, forKey: key)
+            }
         }
     }
+}
+
+protocol OptionalProtocol {
+    var isNil: Bool { get }
+}
+
+extension Optional: OptionalProtocol {
+    var isNil: Bool { self == nil }
 }

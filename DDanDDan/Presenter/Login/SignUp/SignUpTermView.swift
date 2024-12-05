@@ -34,7 +34,7 @@ public struct SignUpTermView<ViewModel: SignUpViewModelProtocol>: View {
                     VStack(alignment: .leading) {
                         
                         Text("딴딴에 오신 것을 환영합니다")
-                            .font(.system(size: 24, weight: .bold))
+                            .font(.neoDunggeunmo24)
                             .foregroundStyle(.white)
                         
                             .padding(.top, 80)

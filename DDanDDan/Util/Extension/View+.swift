@@ -19,16 +19,23 @@ extension View {
     }
 }
 
+extension UIScreen {
+    static var isSESizeDevice: Bool {
+        let width = UIScreen.main.bounds.size.width
+        let height = UIScreen.main.bounds.size.height
+        return (width == 320 && height == 568) || (width == 375 && height == 667)
+    }
+}
 
 struct TransparentOverlayView<Content: View>: View {
     @Binding var isPresented: Bool
     let content: Content
-
+    
     init(isPresented: Binding<Bool>, @ViewBuilder content: () -> Content) {
         self._isPresented = isPresented
         self.content = content()
     }
-
+    
     var body: some View {
         ZStack {
             if isPresented {
@@ -49,6 +56,6 @@ struct TransparentBackground: UIViewRepresentable {
         }
         return view
     }
-
+    
     func updateUIView(_ uiView: UIView, context: Context) {}
 }

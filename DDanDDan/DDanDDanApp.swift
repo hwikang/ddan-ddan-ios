@@ -17,7 +17,6 @@ struct DDanDDanApp: App {
     
     init() {
         KakaoSDK.initSDK(appKey: Config.kakaoKey)
-        appCoordinator.determineRootView()
     }
     
     var body: some Scene {

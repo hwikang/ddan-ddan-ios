@@ -19,7 +19,7 @@ public struct SignUpEggView<ViewModel: SignUpViewModelProtocol>: View {
             VStack(alignment: .leading) {
                 
                 Text("마음에 드는\n알을 선택해 주세요")
-                    .font(.system(size: 24, weight: .bold))
+                    .font(.neoDunggeunmo24)
                     .foregroundStyle(.white)
                     .padding(.top, 80)
                     .padding(.horizontal, 20)
@@ -46,6 +46,7 @@ public struct SignUpEggView<ViewModel: SignUpViewModelProtocol>: View {
                 
             }
         }
+        .navigationBarHidden(true)
     }
     
     var eggGrid: some View {

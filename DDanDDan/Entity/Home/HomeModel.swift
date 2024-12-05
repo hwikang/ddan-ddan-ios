@@ -16,65 +16,63 @@ struct HomeModel {
     var toyCount: Int
 }
 
-struct WatchPetModel: Codable {
-    var petType: PetType
-    var goalKcal: Int
-    var level: Int
+enum LottieMode {
+    case normal
+    case eatPlay
 }
 
-public enum PetType: String, Codable {
-    case pinkCat = "CAT"
-    case greenHam = "HAMSTER"
-    case purpleDog = "DOG"
-    case bluePenguin = "PENGUIN"
-    
-    
-    
-    var backgroundImage: Image {
-        switch self {
-        case .pinkCat: return Image(.pinkBackground).resizable()
-        case .greenHam: return Image(.greenBackground).resizable()
-        case .purpleDog: return Image(.purpleBackground).resizable()
-        case .bluePenguin: return Image(.blueBackground).resizable()
-        }
-    }
-    
-    var color: Color  {
-        switch self {
-        case .pinkCat: return .pinkGraphics
-        case .greenHam: return .greenGraphics
-        case .purpleDog: return .purpleGraphics
-        case .bluePenguin: return .blueGraphics
-        }
-    }
-    
-    func image(for level: Int) -> Image {
-        switch (self, level) {
-        case (.pinkCat, 1): return Image(.pinkEgg).resizable()
-        case (.pinkCat, 2): return Image(.pinkLv1).resizable()
-        case (.pinkCat, 3): return Image(.pinkLv2).resizable()
-        case (.pinkCat, 4): return Image(.pinkLv3).resizable()
-        case (.pinkCat, 5): return Image(.pinkLv4).resizable()
+extension PetType {
+    func lottieString(level: Int, mode: LottieMode = .normal) -> String {
+        switch (self, level, mode) {
+            // pinkCat Lottie
+        case (.pinkCat, 1, .normal): return LottieString.cat.lv1.normal
+        case (.pinkCat, 1, .eatPlay): return LottieString.cat.lv1.eatPlay
+        case (.pinkCat, 2, .normal): return LottieString.cat.lv2.normal
+        case (.pinkCat, 2, .eatPlay): return LottieString.cat.lv2.eatPlay
+        case (.pinkCat, 3, .normal): return LottieString.cat.lv3.normal
+        case (.pinkCat, 3, .eatPlay): return LottieString.cat.lv3.eatPlay
+        case (.pinkCat, 4, .normal): return LottieString.cat.lv4.normal
+        case (.pinkCat, 4, .eatPlay): return LottieString.cat.lv4.eatPlay
+        case (.pinkCat, 5, .normal): return LottieString.cat.lv5.normal
+        case (.pinkCat, 5, .eatPlay): return LottieString.cat.lv5.eatPlay
             
-        case (.greenHam, 1): return Image(.greenEgg).resizable()
-        case (.greenHam, 2): return Image(.greenLv1).resizable()
-        case (.greenHam, 3): return Image(.greenLv2).resizable()
-        case (.greenHam, 4): return Image(.greenLv3).resizable()
-        case (.greenHam, 5): return Image(.greenLv4).resizable()
+            // greenHam Lottie
+        case (.greenHam, 1, .normal): return LottieString.hamster.lv1.normal
+        case (.greenHam, 1, .eatPlay): return LottieString.hamster.lv1.eatPlay
+        case (.greenHam, 2, .normal): return LottieString.hamster.lv2.normal
+        case (.greenHam, 2, .eatPlay): return LottieString.hamster.lv2.eatPlay
+        case (.greenHam, 3, .normal): return LottieString.hamster.lv3.normal
+        case (.greenHam, 3, .eatPlay): return LottieString.hamster.lv3.eatPlay
+        case (.greenHam, 4, .normal): return LottieString.hamster.lv4.normal
+        case (.greenHam, 4, .eatPlay): return LottieString.hamster.lv4.eatPlay
+        case (.greenHam, 5, .normal): return LottieString.hamster.lv5.normal
+        case (.greenHam, 5, .eatPlay): return LottieString.hamster.lv5.eatPlay
             
-        case (.bluePenguin, 1): return Image(.blueEgg).resizable()
-        case (.bluePenguin, 2): return Image(.blueLv1).resizable()
-        case (.bluePenguin, 3): return Image(.blueLv2).resizable()
-        case (.bluePenguin, 4): return Image(.blueLv3).resizable()
-        case (.bluePenguin, 5): return Image(.blueLv4).resizable()
+            //            // bluePenguin Lottie
+            //            case (.bluePenguin, 1, .normal): return LottieString.penguin.lv1.normal
+            //            case (.bluePenguin, 1, .eatPlay): return LottieString.penguin.lv1.eat_play
+            //            case (.bluePenguin, 2, .normal): return LottieString.penguin.lv2.normal
+            //            case (.bluePenguin, 2, .eatPlay): return LottieString.penguin.lv2.eat_play
+            //            case (.bluePenguin, 3, .normal): return LottieString.penguin.lv3.normal
+            //            case (.bluePenguin, 3, .eatPlay): return LottieString.penguin.lv3.eat_play
+            //            case (.bluePenguin, 4, .normal): return LottieString.penguin.lv4.normal
+            //            case (.bluePenguin, 4, .eatPlay): return LottieString.penguin.lv4.eat_play
+            //            case (.bluePenguin, 5, .normal): return LottieString.penguin.lv5.normal
+            //            case (.bluePenguin, 5, .eatPlay): return LottieString.penguin.lv5.eat_play
+            //
+            //            // purpleDog Lottie
+        case (.purpleDog, 1, .normal): return LottieString.puppy.lv1.normal
+        case (.purpleDog, 1, .eatPlay): return LottieString.puppy.lv1.eatPlay
+        case (.purpleDog, 2, .normal): return LottieString.puppy.lv2.normal
+        case (.purpleDog, 2, .eatPlay): return LottieString.puppy.lv2.eatPlay
+        case (.purpleDog, 3, .normal): return LottieString.puppy.lv3.normal
+        case (.purpleDog, 3, .eatPlay): return LottieString.puppy.lv3.eatPlay
+        case (.purpleDog, 4, .normal): return LottieString.puppy.lv4.normal
+        case (.purpleDog, 4, .eatPlay): return LottieString.puppy.lv4.eatPlay
+        case (.purpleDog, 5, .normal): return LottieString.puppy.lv5.normal
+        case (.purpleDog, 5, .eatPlay): return LottieString.puppy.lv5.eatPlay
             
-        case (.purpleDog, 1): return Image(.purpleEgg).resizable()
-        case (.purpleDog, 2): return Image(.purpleLv1).resizable()
-        case (.purpleDog, 3): return Image(.purpleLv2).resizable()
-        case (.purpleDog, 4): return Image(.purpleLv3).resizable()
-        case (.purpleDog, 5): return Image(.purpleLv4).resizable()
-            
-        default: return Image(.pinkEgg).resizable() // 기본 이미지
+        default: return LottieString.cat.lv1.normal
         }
     }
 }

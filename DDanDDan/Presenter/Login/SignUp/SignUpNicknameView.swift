@@ -20,7 +20,7 @@ public struct SignUpNicknameView<ViewModel: SignUpViewModelProtocol>: View {
                 VStack(alignment: .leading) {
                     
                     Text("별명을 알려주세요")
-                        .font(.system(size: 24, weight: .bold))
+                        .font(.neoDunggeunmo24)
                         .foregroundStyle(.white)
                         .padding(.top, 80)
                     
@@ -52,8 +52,8 @@ public struct SignUpNicknameView<ViewModel: SignUpViewModelProtocol>: View {
                     buttonDisabled = nickname.isEmpty
                 }
             }
-         
         }
+        .navigationBarHidden(true)
     }
 }
 
