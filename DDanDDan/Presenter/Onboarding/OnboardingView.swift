@@ -69,7 +69,7 @@ struct OnboardingView: View {
                 .transaction { transaction in
                     transaction.disablesAnimations = true
                 }
-                .padding(.bottom, 1)
+                .padding(.bottom, 20)
             }
         }
         
@@ -103,7 +103,10 @@ struct OnboardingItemView: View {
                 .padding(.top, 48)
                 .padding(.bottom, 28)
             Image(item.image)
-                .ignoresSafeArea()
+                .resizable()
+                .frame(maxWidth: .infinity)
+                .padding(0)
+                .aspectRatio(contentMode: .fit)
             Spacer()
         }
     }
