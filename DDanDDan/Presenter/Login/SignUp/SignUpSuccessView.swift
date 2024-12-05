@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct SignUpSuccessView: View {
-    public let viewModel: SignUpViewModelProtocol
+struct SignUpSuccessView<ViewModel: SignUpViewModelProtocol>: View {
+    @ObservedObject var viewModel: ViewModel
     @ObservedObject var coordinator: AppCoordinator
     
     var body: some View {

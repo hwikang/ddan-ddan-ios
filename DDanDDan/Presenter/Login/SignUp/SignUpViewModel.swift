@@ -6,13 +6,14 @@
 //
 
 import Foundation
-public protocol SignUpViewModelProtocol {
+
+public protocol SignUpViewModelProtocol: ObservableObject {
     func updateNickname(name: String) async -> Bool
-    func updateCalorie(calorie: Int) async -> Bool
+    func updateCalorie(name: String, calorie: Int) async -> Bool
     func login() async -> Bool
     func updatePet(petType: PetType) async -> Bool
 }
-struct SignUpViewModel: SignUpViewModelProtocol {
+final class SignUpViewModel: SignUpViewModelProtocol {
     private let repository: SignUpRepositoryProtocol
     init(repository: SignUpRepositoryProtocol) {
         self.repository = repository
@@ -52,8 +53,8 @@ struct SignUpViewModel: SignUpViewModelProtocol {
             return false
         }
     }
-    public func updateCalorie(calorie: Int) async -> Bool {
-        let result = await repository.update(name: nil, purposeCalorie: calorie)
+    public func updateCalorie(name: String, calorie: Int) async -> Bool {
+        let result = await repository.update(name: name, purposeCalorie: calorie)
         UserDefaultValue.purposeKcal = calorie
         switch result {
         case .success:
