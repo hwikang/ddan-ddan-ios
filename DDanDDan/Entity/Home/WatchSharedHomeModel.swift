@@ -30,6 +30,15 @@ public enum PetType: String, Codable {
         }
     }
     
+    var seBackgroundImage: Image {
+        switch self {
+        case .pinkCat: return Image(.seBgPink).resizable()
+        case .greenHam: return Image(.seBgGreen).resizable()
+        case .purpleDog: return Image(.seBgPurple).resizable()
+        case .bluePenguin: return Image(.seBgBlue).resizable()
+        }
+    }
+    
     var color: Color  {
         switch self {
         case .pinkCat: return .pinkGraphics
