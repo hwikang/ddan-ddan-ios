@@ -16,9 +16,9 @@ struct OnboardingView: View {
     let coordinator: AppCoordinator
     
     private let pageItemList: [OnboardingItem] = [
-        .init(title: "오늘 소비한 칼로리로\n귀여운 펫을 키워보세요", desc: "desc1", imageName: "image1"),
-        .init(title: "펫이 다 자라면\n또 다른 펫을 키울 수 있어요", desc: "desc2", imageName: "image2"),
-        .init(title: "꾸준히 운동해\n소중한 펫을 지켜주세요!", desc: "desc3", imageName: "image3")
+        .init(title: "오늘 소비한 칼로리로\n귀여운 펫을 키워보세요", image: .onboarding1),
+        .init(title: "펫이 다 자라면\n또 다른 펫을 키울 수 있어요", image: .onboarding2),
+        .init(title: "꾸준히 운동해\n소중한 펫을 지켜주세요!", image: .onboarding3)
     ]
     
     init(coordinator: AppCoordinator) {
@@ -27,7 +27,7 @@ struct OnboardingView: View {
     
     var body: some View {
         ZStack {
-            Color.black.edgesIgnoringSafeArea(.all)
+            Color.backgroundBlack.edgesIgnoringSafeArea(.all)
             VStack {
                 TabView(selection: $currentPageIndex) {
                     ForEach(pageItemList, id: \.self) { item in
@@ -51,20 +51,21 @@ struct OnboardingView: View {
                         .foregroundColor(.black)
                 }
                 .fullScreenCover(isPresented: $showAuthDialog, content: {
-                    DialogView(show: $showAuthDialog, title: "위치 권한을 허용해주세요", description: "지역 기반 기능 사용 시 위치 권한이 필요합니다.", rightButtonTitle: "허용", leftButtonTitle: "허용안함") {
+                    DialogView(show: $showAuthDialog, title: "건강 데이터 접근 권한을 허용해주세요", description: "서비스 이용을 위하여 건강데이터 접근 권한이 필요합니다.", rightButtonTitle: "허용", leftButtonTitle: "허용안함") {
                         HealthKitManager.shared.requestAuthorization { isEnable in
                             if isEnable {
                                 UserDefaultValue.requestAuthDone = true
                                 showSignup.toggle()
                                 HealthKitManager.shared.readActiveEnergyBurned { energy in
                                     print(energy)
+                                    coordinator.setRoot(to: .login)
                                 }
                             }
                         }
                         
                     }
                 })
-                .background(Color.clear)
+                .background(Color.backgroundGray)
                 .transaction { transaction in
                     transaction.disablesAnimations = true
                 }
@@ -80,11 +81,10 @@ struct OnboardingView: View {
 }
 
 struct OnboardingItem: Hashable {
-    public let title: String, desc: String, imageName: String
-    init(title: String, desc: String, imageName: String) {
+    public let title: String, image: ImageResource
+    init(title: String, image: ImageResource) {
         self.title = title
-        self.desc = desc
-        self.imageName = imageName
+        self.image = image
     }
 }
 
@@ -97,27 +97,14 @@ struct OnboardingItemView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             Text(item.title)
-                .font(.system(size: 24, weight: .bold))
+                .font(.neoDunggeunmo24)
                 .foregroundStyle(.white)
                 .padding(.horizontal, 20)
                 .padding(.top, 48)
-            Text(item.desc)
-                .font(.title3)
-                .foregroundStyle(.white)
-                .multilineTextAlignment(.leading)
-                .padding(.horizontal, 20)
-            
+                .padding(.bottom, 28)
+            Image(item.image)
+                .ignoresSafeArea()
             Spacer()
-            HStack {
-                Spacer()
-                Rectangle()
-                    .fill(Color.gray)
-                    .frame(width: 280, height: 280)
-                Spacer()
-            }
-            Spacer()
-            
-            
         }
     }
 }
