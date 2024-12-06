@@ -12,6 +12,9 @@ enum SettingPath: Hashable, CaseIterable {
         [.updateNickname, .updateCalorie, .notification, .updateTerms, .deleteUser, .logout]
     }
     
+    static var topSection: [SettingPath] { [.updateNickname, updateCalorie] }
+    static var bottomSection: [SettingPath] { [.notification, .updateTerms, .deleteUser, .logout] }
+    
     case updateNickname
     case updateCalorie
     case notification
@@ -37,78 +40,112 @@ struct SettingView: View {
     @ObservedObject public var coordinator: AppCoordinator
     @State private var notificationState = true
     @State private var showLogoutDialog = false
-    
-    var body: some View {
-        ZStack {
-            Color.backgroundGray.edgesIgnoringSafeArea(.all)
-            VStack {
-                CustomNavigationBar(title: "설정") {
-                    coordinator.pop()
-                }
-                List(SettingPath.allCases, id: \.self) { item in
-                    HStack(alignment: .firstTextBaseline) {
-                        switch item {
-                        case .notification:
-                            Text(item.description)
-                        case .logout:
-                            Button(item.description) {
-                                showLogoutDialog.toggle()
-                            }
-                        default:
-                            Button(item.description) {
-                                coordinator.push(to: item)
-                            }
-                        }
-                        Spacer()
-                        if item == .notification {
-                            Toggle("", isOn: $notificationState).labelsHidden()
-                        } else {
-                            Image(systemName: "chevron.right").foregroundColor(.white)
-                        }
-                    }
-                    .foregroundStyle(.white)
-                    .listRowBackground(Color.backgroundBlack)
-                }
-                .navigationDestination(for: SettingPath.self, destination: { type in
-                    getDestination(type: type)
-                })
-                .transparentFullScreenCover(isPresented: $showLogoutDialog) {
-                    DialogView(show: $showLogoutDialog, title: "정말 로그아웃 하시겠습니까", description: "", rightButtonTitle: "로그아웃", leftButtonTitle: "취소") {
-                        Task {
-                            await UserManager.shared.logout()
-                            coordinator.triggerHomeUpdate()
-                            coordinator.setRoot(to: .login)
-                        }
-                    }
-                }
-                .transaction{ tran in
-                    tran.disablesAnimations = true
-                }
-                .listRowSeparator(.hidden)
-                .listStyle(.plain)
-            }
-        }
-        .navigationBarHidden(true)
-        .onAppear {
-            print("설정뷰 진입 완료")
+    var appVersion: String {
+        if let dictionary = Bundle.main.infoDictionary,
+           let version = dictionary["CFBundleShortVersionString"] as? String {
+            return version
+        } else {
+            return "버전 정보 없음"
         }
     }
     
-    @ViewBuilder
-    private func getDestination(type: SettingPath) -> some View {
-        switch type {
-        case .updateNickname:
-            UpdateNicknameView(coordinator: coordinator, viewModel: UpdateNicknameViewModel(nickname: "", repository: SettingRepository()))
-        case .updateCalorie:
-            UpdateCalorieView(viewModel: UpdateCalorieViewModel(repository: SettingRepository()), coordinator: coordinator)
-        case .updateTerms:
-            SettingTermView(coordinator: coordinator)
-        case .deleteUser:
-            DeleteUserView(coordinator: coordinator)
-        case .deleteUserConfirm(let reasons): 
-            DeleteUserConfirmView(viewModel: DeleteUserViewModel(repository: SettingRepository()), coordinator: coordinator, selectedReason: reasons)
+    var body: some View {
+        ZStack(alignment: .topLeading) {
+            Color.backgroundGray.edgesIgnoringSafeArea(.all)
+            VStack(alignment: .leading, spacing: 0) {
+                CustomNavigationBar(title: "설정") {
+                    coordinator.pop()
+                }
+                VStack(spacing: 8) {
+                    SectionView(items: SettingPath.topSection, notificationState: $notificationState, showLogoutDialog: $showLogoutDialog, coordinator: coordinator)
+                    
+                    SectionView(items: SettingPath.bottomSection, notificationState: $notificationState, showLogoutDialog: $showLogoutDialog, coordinator: coordinator)
+                }
+                Text("앱 버전 \(appVersion)")
+                    .font(.body3_regular12)
+                    .foregroundStyle(.iconGray)
+                    .frame(height: 46)
+                    .padding(.leading, 20)
+            }
+            .transparentFullScreenCover(isPresented: $showLogoutDialog) {
+                DialogView(show: $showLogoutDialog, title: "정말 로그아웃 하시겠습니까", description: "", rightButtonTitle: "로그아웃", leftButtonTitle: "취소") {
+                    Task {
+                        await UserManager.shared.logout()
+                        coordinator.triggerHomeUpdate()
+                        coordinator.setRoot(to: .login)
+                    }
+                }
+            }
+        }
+        .navigationBarHidden(true)
+    }
+    
+}
+
+
+struct SectionView: View {
+    let items: [SettingPath]
+    @Binding var notificationState: Bool
+    @Binding var showLogoutDialog: Bool
+    let coordinator: AppCoordinator
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            ForEach(items, id: \.self) { item in
+                Button(action: {
+                    handleAction(for: item)
+                }) {
+                    HStack {
+                        Text(item.description)
+                            .font(.heading6_semibold16)
+                        Spacer()
+                        if item == .notification {
+                            Button {
+                                notificationState.toggle()
+                            } label: {
+                                Image(notificationState ? .toggleOn : .toggleOff)
+                            }
+                            .buttonStyle(.plain)
+                        } else {
+                            Image(.arrowRight)
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                    .frame(height: 46)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.backgroundBlack)
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(.white)
+            }
+        }
+        .navigationDestination(for: SettingPath.self) { path in
+            switch path {
+            case .updateNickname:
+                UpdateNicknameView(coordinator: coordinator, viewModel: UpdateNicknameViewModel(nickname: "", repository: SettingRepository()))
+            case .updateCalorie:
+                UpdateCalorieView(viewModel: UpdateCalorieViewModel(repository: SettingRepository()), coordinator: coordinator)
+            case .updateTerms:
+                SettingTermView(coordinator: coordinator)
+            case .deleteUser:
+                DeleteUserView(coordinator: coordinator)
+            case .deleteUserConfirm(let reasons):
+                DeleteUserConfirmView(viewModel: DeleteUserViewModel(repository: SettingRepository()), coordinator: coordinator, selectedReason: reasons)
+            case .notification, .logout:
+                EmptyView()
+            }
+        }
+    }
+    
+    private func handleAction(for item: SettingPath) {
+        switch item {
+        case .notification:
+            // TODO: 푸시 알림 설정
+            break
+        case .logout:
+            showLogoutDialog.toggle()
         default:
-            EmptyView()
+            coordinator.push(to: item)
         }
     }
 }
