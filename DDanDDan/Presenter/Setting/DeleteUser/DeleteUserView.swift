@@ -27,20 +27,23 @@ struct DeleteUserView: View {
                     .font(.heading3_bold24)
                     .lineSpacing(8)
                     .foregroundStyle(.white)
-                    .padding(.top, 32)
-                    .padding(.horizontal, 20)
+                    .padding(EdgeInsets(top: 20, leading: 20, bottom: 60, trailing: 20))
                 List(reasons, id: \.self) { reason in
                     DeleteUserReasonButton(title: reason, isSelected: selectedReason.contains(reason)) {
                         addReason(reason: reason)
-                    } .foregroundStyle(.white)
-                        .listRowBackground(Color.backgroundBlack)
+                    }
+                    .foregroundStyle(.white)
+                    .listRowBackground(Color.backgroundBlack)
+                    .listRowSeparator(.hidden)
                 }
-                .listRowSeparator(.hidden)
+                .listRowSpacing(4)
                 .listStyle(.plain)
+                .scrollDisabled(true)
                 Spacer()
                 GreenButton(action: {
                     coordinator.push(to: .deleteUserConfirm(reasons: selectedReason))
                 }, title: "탈퇴하기", disabled: .constant(selectedReason.isEmpty))
+                .padding(.bottom, 20)
             }
         }
         .navigationBarHidden(true)
