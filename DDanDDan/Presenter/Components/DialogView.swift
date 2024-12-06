@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DialogView: View {
     @Binding public var show: Bool
-    public let title: String, description: String, rightButtonTitle: String ,leftButtonTitle: String
+    public let title: String, description: String, rightButtonTitle: String, leftButtonTitle: String
     var rightButtonHandler: (() -> Void)?
     
     var body: some View {
@@ -17,50 +17,54 @@ struct DialogView: View {
             Color.black.opacity(0.4)
                 .edgesIgnoringSafeArea(.all)
             
-            VStack {
+            VStack(alignment: .center) {
                 Text(title)
-                    .font(.headline)
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundStyle(Color.white)
-                    .padding()
+                    .font(.heading6_semibold16)
+                    .foregroundStyle(Color.textHeadlinePrimary)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 40)
                 
-                Text(description)
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundStyle(Color(red: 166/255, green: 166/255, blue: 166/255))
+                if !description.isEmpty {
+                    Text(description)
+                        .font(.body2_regular14)
+                        .foregroundStyle(Color.textBodyTeritary)
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 3)
+                }
                 
-                
-                HStack(alignment: .center) {
+                HStack(spacing: 12) {
                     Button(leftButtonTitle) {
                         withAnimation {
                             show.toggle()
                         }
                     }
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .frame(height: 56)
-                    .background(Color.gray)
-                    .foregroundColor(.white)
+                    .frame(height: 48)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.buttonAlternative)
+                    .foregroundColor(.textButtonAlternative)
+                    .font(.heading6_semibold16)
                     .cornerRadius(4)
+                    
                     Button(rightButtonTitle) {
                         withAnimation {
                             show.toggle()
                             rightButtonHandler?()
                         }
                     }
-                    
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .frame(height: 56)
-                    .background(Color(red: 19/255, green: 230/255, blue: 149/255))
-                    .foregroundColor(.black)
+                    .frame(height: 48)
+                    .frame(maxWidth: .infinity)
+                    .font(.heading6_semibold16)
+                    .background(Color.buttonGreen)
+                    .foregroundColor(.textButtonPrimaryDefault)
                     .cornerRadius(4)
                 }
-                .padding(20)
+                .padding(EdgeInsets(top: 28, leading: 20, bottom: 20, trailing: 20))
             }
-            .frame(width: 300, height: 200)
             .background(Color(red: 33/255, green: 33/255, blue: 33/255))
             .cornerRadius(8)
             .shadow(radius: 20)
+            .frame(width: 300)
         }
-        .background(Color.clear.opacity(0))
     }
 }
 
