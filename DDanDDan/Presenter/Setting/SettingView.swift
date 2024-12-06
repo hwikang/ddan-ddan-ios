@@ -122,7 +122,7 @@ struct SectionView: View {
         .navigationDestination(for: SettingPath.self) { path in
             switch path {
             case .updateNickname:
-                UpdateNicknameView(coordinator: coordinator, viewModel: UpdateNicknameViewModel(nickname: "", repository: SettingRepository()))
+                UpdateNicknameView(coordinator: coordinator, viewModel: UpdateNicknameViewModel(nickname: UserDefaultValue.nickName, repository: SettingRepository()))
             case .updateCalorie:
                 UpdateCalorieView(viewModel: UpdateCalorieViewModel(repository: SettingRepository()), coordinator: coordinator)
             case .updateTerms:

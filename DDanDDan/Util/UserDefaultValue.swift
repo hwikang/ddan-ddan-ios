@@ -28,6 +28,9 @@ public struct UserDefaultValue {
     static public var level: Int
     @UserDefault(key: "userId", defaultValue: "")
     static public var userId: String
+    @UserDefault(key: "nickName", defaultValue: "")
+    static public var nickName: String
+
     @UserDefault(key: "petId", defaultValue: "")
     static public var petId: String
     
