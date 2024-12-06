@@ -199,7 +199,7 @@ extension HomeView {
                     .cornerRadius(8)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Text(String(format: "%.0f%%", viewModel.homePetModel.exp))
-                    .font(.subTitle1_semibold16)
+                    .font(.subTitle1_semibold14)
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity, alignment: .trailing)
             }
