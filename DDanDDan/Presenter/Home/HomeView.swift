@@ -25,7 +25,6 @@ struct HomeView: View {
     private let isSEDevice = UIScreen.isSESizeDevice
     
     var body: some View {
-        
         ZStack {
             Color(.backgroundBlack)
                 .ignoresSafeArea()
@@ -33,38 +32,20 @@ struct HomeView: View {
                 navigationBar
                     .padding(.top, 20)
                     .padding(.bottom, isSEDevice ? 8 : 16)
+                
+                    .padding(.horizontal, 32)
                 kcalView
                     .padding(.bottom, isSEDevice ? 24 : 14)
-                ZStack {
-                    if isSEDevice {
-                        viewModel.homePetModel.petType.seBackgroundImage
-                            .scaledToFit()
-                            .padding(.horizontal, 53)
-                    } else {
-                        viewModel.homePetModel.petType.backgroundImage
-                            .scaledToFit()
-                    }
-                    VStack {
-                        Image(viewModel.bubbleImage)
-                            .opacity(viewModel.showBubble ? 1 : 0)
-                            .animation(.easeInOut(duration: 0.3).delay(0.1), value: viewModel.showBubble)
-                            .transition(.opacity)
-                            .frame(minWidth: 75, maxWidth: 167, minHeight: 56)
-                            .offset(y: 10)
-                        petImage
-                            .onTapGesture {
-                                viewModel.showRandomBubble(type: .normal)
-                            }
-                    }
-                    .offset(y: isSEDevice ? 20 : 65)
-                    
-                }
-                .padding(.bottom, isSEDevice ? 15 : 32)
+                petBackgroundView
+                    .padding(.bottom, isSEDevice ? 15 : 28)
                 levelView
                     .padding(.bottom, 20)
+                    .padding(.horizontal, 32)
                 actionButtonView
+                    .padding(.bottom, isSEDevice ? 20 : 60)
+                
+                    .padding(.horizontal, 32)
             }
-            .frame(maxHeight: .infinity, alignment: .top)
             TransparentOverlayView(isPresented: $viewModel.showToast) {
                 VStack {
                     ToastView(message: viewModel.toastMessage)
@@ -151,11 +132,11 @@ extension HomeView {
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
         }
-        .padding(.horizontal, 32)
+        .padding(.horizontal, 40)
     }
     
     var kcalView: some View {
-        HStack(spacing: 4) {
+        HStack(alignment: .lastTextBaseline,spacing: 4) {
             Text("\(viewModel.currentKcal)")
                 .font(.neoDunggeunmo52)
                 .foregroundStyle(.white)
@@ -165,6 +146,33 @@ extension HomeView {
             Text("\(viewModel.homePetModel.goalKcal) kcal")
                 .font(.neoDunggeunmo22)
                 .foregroundStyle(.white)
+        }
+    }
+    
+    var petBackgroundView: some View {
+        ZStack {
+            if isSEDevice {
+                viewModel.homePetModel.petType.seBackgroundImage
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            } else {
+                viewModel.homePetModel.petType.backgroundImage
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            }
+            VStack {
+                Image(viewModel.bubbleImage)
+                    .opacity(viewModel.showBubble ? 1 : 0)
+                    .animation(.easeInOut(duration: 0.3).delay(0.1), value: viewModel.showBubble)
+                    .transition(.opacity)
+                    .frame(minWidth: 75, maxWidth: 167, minHeight: 56)
+                    .offset(y: 10)
+                petImage
+                    .onTapGesture {
+                        viewModel.showRandomBubble(type: .normal)
+                    }
+            }
+            .offset(y: isSEDevice ? 20 : 50)
         }
     }
     
@@ -196,7 +204,7 @@ extension HomeView {
                     .padding(4)
                     .foregroundStyle(.white)
                     .background(.borderGray)
-                    .cornerRadius(8)
+                    .cornerRadius(4)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Text(String(format: "%.0f%%", viewModel.homePetModel.exp))
                     .font(.subTitle1_semibold14)
@@ -225,11 +233,10 @@ extension HomeView {
                         }
                     }
                 }
-                .padding(.leading, 12) // 첫 번째 여백은 8, 그 외의 여백은 HStack 내에서 처리됨
+                .padding(.leading, 8)
             }
         }
-        .frame(maxWidth: .infinity)
-        .padding(.horizontal, 32)
+        .padding(.horizontal, 40)
     }
     
     var actionButtonView: some View {
@@ -248,8 +255,8 @@ extension HomeView {
                 }
         }
         .frame(maxWidth: .infinity)
+        .padding(.horizontal, 40)
         .frame(height: 66)
-        .padding(.horizontal, 32)
     }
 }
 
