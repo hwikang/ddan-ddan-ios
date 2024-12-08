@@ -12,7 +12,7 @@ public enum SignUpPath: Hashable {
     case term
     case egg
     case nickname
-    case calorie(name: String)
+    case calorie
     case success
     case main
     case viewTerm(url:String)
@@ -85,7 +85,7 @@ public struct SignUpTermView<ViewModel: SignUpViewModelProtocol>: View {
                 case .term: SignUpTermView(viewModel: viewModel, coordinator: coordinator)
                 case .egg: SignUpEggView(viewModel: viewModel, coordinator: coordinator)
                 case .nickname: SignUpNicknameView(viewModel: viewModel, coordinator: coordinator)
-                case .calorie(let name): SignUpCalorieView(viewModel: viewModel, coordinator: coordinator, name: name)
+                case .calorie: SignUpCalorieView(viewModel: viewModel, coordinator: coordinator)
                 case .success: SignUpSuccessView(viewModel: viewModel, coordinator: coordinator)
                 case .main: SettingView(coordinator: coordinator)
                 case .viewTerm(url: let url):

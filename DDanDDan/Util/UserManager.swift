@@ -11,7 +11,6 @@ actor UserManager: ObservableObject {
     static let shared = UserManager()
     
     @MainActor @Published var accessToken: String? = UserDefaultValue.acessToken
-    private var userData: UserData?
     @MainActor public var kakaoToken: String?
     @MainActor public var appleToken: String?
     private var refreshToken: String? = UserDefaultValue.refreshToken
@@ -19,14 +18,6 @@ actor UserManager: ObservableObject {
     
     private init() {
         
-    }
-    
-    func setUserData(_ data: UserData) {
-        self.userData = data
-    }
-    
-    func getUserData() -> UserData? {
-        return self.userData
     }
     
     func setToken(accessToken: String, refreshToken: String) async {
@@ -44,7 +35,6 @@ actor UserManager: ObservableObject {
     
     func login(loginData: LoginData) async {
         refreshToken = loginData.refreshToken
-        userData = loginData.user
         UserDefaultValue.acessToken = loginData.accessToken
         UserDefaultValue.refreshToken = loginData.refreshToken
         UserDefaultValue.isOnboardingComplete = loginData.isOnboardingComplete
@@ -55,7 +45,6 @@ actor UserManager: ObservableObject {
     }
     
     func logout() async {
-        userData = nil
         refreshToken = nil
         await MainActor.run {
             accessToken = nil
