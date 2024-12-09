@@ -62,7 +62,17 @@ struct UpdateCalorieView: View {
                             
                 }, title: "변경 완료", disabled: .constant(false))
             }
-            
+            TransparentOverlayView(isPresented: $viewModel.showToast) {
+                VStack {
+                    ToastView(message: viewModel.toastMessage)
+                }
+                .transition(.asymmetric(
+                    insertion: .move(edge: .top).combined(with: .opacity),
+                    removal: .opacity))
+                .animation(.spring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.3), value: viewModel.showToast)
+                .position(x: UIScreen.main.bounds.width / 2 + 10, y: UIScreen.main.bounds.height - 250)
+            }
+
         }
         .navigationBarHidden(true)
     }
