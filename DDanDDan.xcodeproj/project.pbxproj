@@ -57,6 +57,7 @@
 		36465DC92CFDF11600784E8A /* puppy_level2_play+eat.json in Resources */ = {isa = PBXBuildFile; fileRef = 36465DB92CFDF11600784E8A /* puppy_level2_play+eat.json */; };
 		36465E2F2D030AFE00784E8A /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 36465E2E2D030AFE00784E8A /* Config.xcconfig */; };
 		364B37962D03916C00E72BFF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364B37952D03916C00E72BFF /* LoginView.swift */; };
+		364B37982D04781900E72BFF /* Adjusted+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364B37972D04781900E72BFF /* Adjusted+.swift */; };
 		3650CCCD2CCAA22500ED5967 /* NeoDunggeunmoPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 362864B92C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf */; };
 		3650CCCE2CCAA22B00ED5967 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362864A72C89D64100029452 /* Font.swift */; };
 		3650CCD22CCAB7BD00ED5967 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8758CF02C8EDF6B0038CCBB /* HealthKitManager.swift */; };
@@ -223,6 +224,7 @@
 		36465DBF2CFDF11600784E8A /* puppy_level5_play+eat.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "puppy_level5_play+eat.json"; sourceTree = "<group>"; };
 		36465E2E2D030AFE00784E8A /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		364B37952D03916C00E72BFF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		364B37972D04781900E72BFF /* Adjusted+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Adjusted+.swift"; sourceTree = "<group>"; };
 		367A796A2CDCB2060055771B /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
 		367A796C2CDCB30A0055771B /* PetArchiveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetArchiveModel.swift; sourceTree = "<group>"; };
 		367A796E2CDCBC210055771B /* PathString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathString.swift; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 				367A79AA2CDE07980055771B /* View+.swift */,
 				36F6E81B2CEE4FF900B395FB /* Array+.swift */,
 				36F6E8222CEE8F0B00B395FB /* String+.swift */,
+				364B37972D04781900E72BFF /* Adjusted+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1089,6 +1092,7 @@
 				F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */,
 				F809E2FE2CBD0841001BE099 /* DeleteUserConfirmView.swift in Sources */,
 				F80DF7332CB384F8004FF1F2 /* SettingTermView.swift in Sources */,
+				364B37982D04781900E72BFF /* Adjusted+.swift in Sources */,
 				F88663D32CC8EE29008DB860 /* AuthNetwork.swift in Sources */,
 				F859C0482C7068DF007B886A /* SignUpData.swift in Sources */,
 				363CC4482CCADC6A00D2EE47 /* WatchConnectivityManager.swift in Sources */,
