@@ -18,9 +18,14 @@ struct DeleteUserConfirmView: View {
         ZStack {
             Color.backgroundBlack.edgesIgnoringSafeArea(.all)
             VStack(alignment: .leading) {
-                CustomNavigationBar(title: "") {
-                    coordinator.pop()
-                }
+                CustomNavigationBar(
+                    title: "",
+                    leftButtonImage: Image(.arrow),
+                    leftButtonAction: {
+                        coordinator.pop()
+                    },
+                    buttonSize: 24
+                )
                 Text(viewModel.name + "님\n탈퇴하기 전에 확인해주세요")
                     .font(.heading3_bold24)
                     .lineSpacing(8)

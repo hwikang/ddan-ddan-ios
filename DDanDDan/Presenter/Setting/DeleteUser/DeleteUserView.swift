@@ -20,9 +20,14 @@ struct DeleteUserView: View {
         ZStack {
             Color.backgroundBlack.edgesIgnoringSafeArea(.all)
             VStack(alignment: .leading) {
-                CustomNavigationBar(title: "") {
-                    coordinator.pop()
-                }
+                CustomNavigationBar(
+                    title: "",
+                    leftButtonImage: Image(.arrow),
+                    leftButtonAction: {
+                        coordinator.pop()
+                    },
+                    buttonSize: 24
+                )
                 Text("탈퇴하는 이유가 무엇인가요?")
                     .font(.heading3_bold24)
                     .lineSpacing(8)
@@ -69,7 +74,7 @@ struct DeleteUserReasonButton: View {
         self.action = action
     }
     var body: some View {
-      
+        
         Button(action: action) {
             HStack {
                 Text(title)

@@ -53,9 +53,14 @@ struct SettingView: View {
         ZStack(alignment: .topLeading) {
             Color.backgroundGray.edgesIgnoringSafeArea(.all)
             VStack(alignment: .leading, spacing: 0) {
-                CustomNavigationBar(title: "설정") {
-                    coordinator.pop()
-                }
+                CustomNavigationBar(
+                    title: "설정",
+                    leftButtonImage: Image(.arrow),
+                    leftButtonAction: {
+                        coordinator.pop()
+                    },
+                    buttonSize: 24
+                )
                 VStack(spacing: 8) {
                     SectionView(items: SettingPath.topSection, notificationState: $notificationState, showLogoutDialog: $showLogoutDialog, coordinator: coordinator)
                     

@@ -33,9 +33,14 @@ struct SettingTermView: View {
         ZStack {
             Color.backgroundBlack.edgesIgnoringSafeArea(.all)
             VStack {
-                CustomNavigationBar(title: "약관 및 개인정보 처리 동의") {
-                    coordinator.pop()
-                }
+                CustomNavigationBar(
+                    title: "약관 및 개인정보 처리 동의",
+                    leftButtonImage: Image(.arrow),
+                    leftButtonAction: {
+                        coordinator.pop()
+                    },
+                    buttonSize: 24
+                )
                 List(SettingTerm.allCases, id: \.self) { item in
                     NavigationLink(destination: WebView(url: item.urlString)) {
                         Text(item.description)

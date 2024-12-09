@@ -9,19 +9,29 @@ import SwiftUI
 
 struct CustomNavigationBar: View {
     var title: String
-    var backButtonAction: (() -> Void)? = nil
+    var leftButtonImage: Image?
+    var leftButtonAction: (() -> Void)? = nil
+    var rightButtonImage: Image?
+    var rightButtonAction: (() -> Void)? = nil
+    var buttonSize: Int
     
     var body: some View {
         ZStack {
             Color.backgroundBlack
-                .ignoresSafeArea(edges: .top)
+                .ignoresSafeArea(edges: [.top, .horizontal])
             
             HStack {
-                if let backButtonAction = backButtonAction {
-                    Button(action: backButtonAction) {
-                        Image(.arrow)
+                if let leftButtonImage = leftButtonImage,
+                   let leftButtonAction = leftButtonAction {
+                    Button(action: leftButtonAction) {
+                        leftButtonImage
+                            .resizable()
+                            .scaledToFit()
                     }
-                    .frame(width: 24, height: 24)
+                    .frame(width: buttonSize.adjustedWidth, height: buttonSize.adjusted)
+                } else {
+                    Spacer()
+                        .frame(width: buttonSize.adjusted)
                 }
                 
                 Spacer()
@@ -32,11 +42,20 @@ struct CustomNavigationBar: View {
                 
                 Spacer()
                 
-                if backButtonAction != nil {
+                if let rightButtonImage = rightButtonImage,
+                   let rightButtonAction = rightButtonAction {
+                    Button(action: rightButtonAction) {
+                        rightButtonImage
+                            .resizable()
+                            .scaledToFit()
+                    }
+                    .frame(width: buttonSize.adjusted, height: buttonSize.adjusted)
+                } else {
                     Spacer()
-                        .frame(width: 24)
+                        .frame(width: buttonSize.adjusted)
                 }
             }
+            .padding(.horizontal, 20)
         }
         .frame(height: 40)
     }
