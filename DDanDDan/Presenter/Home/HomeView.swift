@@ -185,7 +185,7 @@ extension HomeView {
                         viewModel.showRandomBubble(type: .normal)
                     }
             }
-            .offset(y: isSEDevice ? 35.adjusted : 60.adjusted)
+            .offset(y: isSEDevice ? 35.adjusted : 63.adjustedHeight)
         }
     }
     
