@@ -142,9 +142,21 @@ final class HomeViewModel: ObservableObject {
                     self.isMaxLevel = true
                 }
             }
-        } else if case .failure(let failure) = result {
-            toastMessage = "성장이 끝난 펫이에요!"
-            showToastMessage()
+        } else if case .failure(let error) = result {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                switch error {
+                case .serverError(_, let code):
+                    if code == "PE003" {
+                        self.toastMessage = "성장이 끝난 펫이에요!"
+                    } else {
+                        self.toastMessage = "오류가 발생했습니다: \(code)"
+                    }
+                case .dataNil, .encodingError, .failToDecode, .invalidResponse, .requestFailed, .urlError:
+                    break
+                }
+                self.showToastMessage()
+            }
         }
     }
     
@@ -177,9 +189,21 @@ final class HomeViewModel: ObservableObject {
                     self.isMaxLevel = true
                 }
             }
-        } else if case .failure(let failure) = result {
-            toastMessage = "성장이 끝난 펫이에요!"
-            showToastMessage()
+        } else if case .failure(let error) = result {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                switch error {
+                case .serverError(_, let code):
+                    if code == "PE003" {
+                        self.toastMessage = "성장이 끝난 펫이에요!"
+                    } else {
+                        self.toastMessage = "오류가 발생했습니다: \(code)"
+                    }
+                case .dataNil, .encodingError, .failToDecode, .invalidResponse, .requestFailed, .urlError:
+                    break
+                }
+                self.showToastMessage()
+            }
         }
     }
     
