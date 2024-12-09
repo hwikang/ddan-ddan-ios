@@ -386,7 +386,6 @@
 				360E6B3D2CEDF8010059661E /* LevelUp */,
 				367A79692CDCAB560055771B /* Archive */,
 				367A79682CDCAB4D0055771B /* Challenge */,
-				367A79672CDCAB390055771B /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -435,13 +434,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		367A79672CDCAB390055771B /* Components */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 		367A79682CDCAB4D0055771B /* Challenge */ = {
