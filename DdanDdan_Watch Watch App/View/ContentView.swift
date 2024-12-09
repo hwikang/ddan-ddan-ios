@@ -17,7 +17,6 @@ struct ContentView: View {
                 kcalLabel
             } else {
                 viewModel.viewConfig?.0 ?? Image(.blueEgg)
-                    .resizable()
             }
         }
     }
@@ -39,7 +38,6 @@ struct ContentView: View {
         ZStack(alignment: .center) {
             Color(.backgroundBlack)
             centerView
-                .frame(width: 100, height: 100)
             DonutChartView(
                 targetProgress: $viewModel.currentKcalProgress,
                 lineColor: viewModel.viewConfig?.1 ?? .blueGraphics
@@ -99,6 +97,6 @@ struct DonutChartView: View {
 }
 
 
-//#Preview {
-//    ContentView(viewModel: .init(goalKcal: 400))
-//}
+#Preview {
+    ContentView(viewModel: .init(currentKcal: 250))
+}
