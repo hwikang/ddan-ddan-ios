@@ -17,8 +17,10 @@ struct ContentView: View {
                 kcalLabel
             } else {
                 viewModel.viewConfig?.0 ?? Image(.blueEgg)
+                    .resizable()
             }
         }
+        .frame(width: 107, height: 107)
     }
     
     var kcalLabel: some View {
