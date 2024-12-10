@@ -60,7 +60,7 @@ struct ThreeDaySuccessView: View {
                         .font(.heading5_semibold18)
                         .foregroundStyle(.textHeadlinePrimary)
                     Text("\(content)")
-                        .font(.subTitle1_semibold16)
+                        .font(.subTitle1_semibold14)
                         .foregroundStyle(.textBodyTeritary)
                 }
             }

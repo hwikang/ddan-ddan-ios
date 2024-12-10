@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 final class SplashViewModel: ObservableObject {
     private let coordinator: AppCoordinator
     private let homeRepository: HomeRepository
@@ -19,13 +18,14 @@ final class SplashViewModel: ObservableObject {
         self.homeRepository = homeRepository
     }
     
-    
     func performInitialSetup() async {
         async let userInfo = homeRepository.getUserInfo()
         async let petInfo = homeRepository.getMainPetInfo()
         
-        if case .success(let userData) = await userInfo,
-           case .success(let petData) = await petInfo {
+        do {
+            let userData = try await unwrapResult(userInfo)
+            let petData = try await unwrapResult(petInfo)
+            
             DispatchQueue.main.async {
                 self.coordinator.userInfo = userData
                 self.coordinator.petInfo = petData
@@ -46,7 +46,7 @@ final class SplashViewModel: ObservableObject {
                 
                 self.coordinator.setRoot(to: .home)
             }
-        } else {
+        } catch {
             DispatchQueue.main.async {
                 self.coordinator.setRoot(to: .login)
             }
@@ -64,7 +64,6 @@ final class SplashViewModel: ObservableObject {
             } else {
                 Task {
                     await self.performInitialSetup()
-                    coordinator.setRoot(to: .home)
                 }
             }
         } else {
@@ -72,4 +71,13 @@ final class SplashViewModel: ObservableObject {
         }
     }
     
+    /// 통신 결과를 안전하게 처리하는 헬퍼 메서드
+    private func unwrapResult<T>(_ result: Result<T, NetworkError>) async throws -> T {
+        switch result {
+        case .success(let data):
+            return data
+        case .failure(let error):
+            throw error
+        }
+    }
 }

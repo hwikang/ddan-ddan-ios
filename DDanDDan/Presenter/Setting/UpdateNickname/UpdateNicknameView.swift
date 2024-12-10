@@ -16,9 +16,14 @@ struct UpdateNicknameView<ViewModel: UpdateNicknameViewModelProtocol>: View {
         ZStack {
             Color.backgroundBlack.edgesIgnoringSafeArea(.all)
             VStack(alignment: .leading) {
-                CustomNavigationBar(title: "내 별명 수정") {
-                    coordinator.pop()
-                }
+                CustomNavigationBar(
+                    title: "내 별명 수정",
+                    leftButtonImage: Image(.arrow),
+                    leftButtonAction: {
+                        coordinator.pop()
+                    },
+                    buttonSize: 24
+                )
                 VStack(alignment: .leading) {
                     
                     Text("별명을 알려주세요")

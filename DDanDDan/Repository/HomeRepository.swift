@@ -37,9 +37,11 @@ public struct HomeRepository: HomeRepositoryProtocol {
         
        // print(accessToken)
         let result = await userNetwork.fetchUserInfo(accessToken: accessToken)
+
         
         return result.map { userData in
-            HomeUserInfo(
+            UserDefaultValue.nickName = userData.name
+            return HomeUserInfo(
                 id: userData.id,
                 purposeCalorie: userData.purposeCalorie,
                 foodQuantity: userData.foodQuantity,

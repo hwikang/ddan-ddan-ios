@@ -24,7 +24,8 @@ public struct SignUpRepository: SignUpRepositoryProtocol {
         guard let accessToken = await UserManager.shared.accessToken else { return .failure(.requestFailed("Access Token Nil"))}
         let result = await network.update(accessToken: accessToken, name: name, purposeCalorie: purposeCalorie)
         if case .success(let userData) = result {
-            await UserManager.shared.setUserData(userData)
+            UserDefaultValue.purposeKcal = userData.purposeCalorie
+            UserDefaultValue.nickName = userData.name
         }
         return result
     }

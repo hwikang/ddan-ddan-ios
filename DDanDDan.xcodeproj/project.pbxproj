@@ -55,6 +55,9 @@
 		36465DC72CFDF11600784E8A /* puppy_level1_play+eat.json in Resources */ = {isa = PBXBuildFile; fileRef = 36465DB72CFDF11600784E8A /* puppy_level1_play+eat.json */; };
 		36465DC82CFDF11600784E8A /* puppy_level3_default.json in Resources */ = {isa = PBXBuildFile; fileRef = 36465DBA2CFDF11600784E8A /* puppy_level3_default.json */; };
 		36465DC92CFDF11600784E8A /* puppy_level2_play+eat.json in Resources */ = {isa = PBXBuildFile; fileRef = 36465DB92CFDF11600784E8A /* puppy_level2_play+eat.json */; };
+		36465E2F2D030AFE00784E8A /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 36465E2E2D030AFE00784E8A /* Config.xcconfig */; };
+		364B37962D03916C00E72BFF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364B37952D03916C00E72BFF /* LoginView.swift */; };
+		364B37982D04781900E72BFF /* Adjusted+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364B37972D04781900E72BFF /* Adjusted+.swift */; };
 		3650CCCD2CCAA22500ED5967 /* NeoDunggeunmoPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 362864B92C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf */; };
 		3650CCCE2CCAA22B00ED5967 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362864A72C89D64100029452 /* Font.swift */; };
 		3650CCD22CCAB7BD00ED5967 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8758CF02C8EDF6B0038CCBB /* HealthKitManager.swift */; };
@@ -130,11 +133,9 @@
 		F8C10C0F2C5782720037D6A5 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F8C10C0E2C5782720037D6A5 /* KakaoSDKAuth */; };
 		F8C10C112C5782720037D6A5 /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = F8C10C102C5782720037D6A5 /* KakaoSDKCommon */; };
 		F8C10C132C5782720037D6A5 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = F8C10C122C5782720037D6A5 /* KakaoSDKUser */; };
-		F8C10C182C57955C0037D6A5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C10C172C57955C0037D6A5 /* LoginView.swift */; };
 		F8C10C1A2C57970B0037D6A5 /* SignUpTermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C10C192C57970B0037D6A5 /* SignUpTermView.swift */; };
 		F8FD4FAE2C7A09F900147C4F /* SignUpCalorieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FD4FAD2C7A09F900147C4F /* SignUpCalorieView.swift */; };
 		F8FD4FB02C7A0FF600147C4F /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FD4FAF2C7A0FF600147C4F /* SignUpViewModel.swift */; };
-		F9E11AC22CFC4F8C004F45D8 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F9E11AC12CFC4F8C004F45D8 /* Config.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -221,6 +222,9 @@
 		36465DBD2CFDF11600784E8A /* puppy_level4_play+eat.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "puppy_level4_play+eat.json"; sourceTree = "<group>"; };
 		36465DBE2CFDF11600784E8A /* puppy_level5_default.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = puppy_level5_default.json; sourceTree = "<group>"; };
 		36465DBF2CFDF11600784E8A /* puppy_level5_play+eat.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "puppy_level5_play+eat.json"; sourceTree = "<group>"; };
+		36465E2E2D030AFE00784E8A /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		364B37952D03916C00E72BFF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		364B37972D04781900E72BFF /* Adjusted+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Adjusted+.swift"; sourceTree = "<group>"; };
 		367A796A2CDCB2060055771B /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
 		367A796C2CDCB30A0055771B /* PetArchiveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetArchiveModel.swift; sourceTree = "<group>"; };
 		367A796E2CDCBC210055771B /* PathString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathString.swift; sourceTree = "<group>"; };
@@ -294,11 +298,9 @@
 		F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDanDDanApp.swift; sourceTree = "<group>"; };
 		F8AB332F2C2EAD2E00BC16C9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		F8AB33342C2EAD2F00BC16C9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		F8C10C172C57955C0037D6A5 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = DDanDDan/LoginView.swift; sourceTree = SOURCE_ROOT; };
 		F8C10C192C57970B0037D6A5 /* SignUpTermView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTermView.swift; sourceTree = "<group>"; };
 		F8FD4FAD2C7A09F900147C4F /* SignUpCalorieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCalorieView.swift; sourceTree = "<group>"; };
 		F8FD4FAF2C7A0FF600147C4F /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
-		F9E11AC12CFC4F8C004F45D8 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -384,7 +386,6 @@
 				360E6B3D2CEDF8010059661E /* LevelUp */,
 				367A79692CDCAB560055771B /* Archive */,
 				367A79682CDCAB4D0055771B /* Challenge */,
-				367A79672CDCAB390055771B /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -433,13 +434,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		367A79672CDCAB390055771B /* Components */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 		367A79682CDCAB4D0055771B /* Challenge */ = {
@@ -491,6 +485,7 @@
 				367A79AA2CDE07980055771B /* View+.swift */,
 				36F6E81B2CEE4FF900B395FB /* Array+.swift */,
 				36F6E8222CEE8F0B00B395FB /* String+.swift */,
+				364B37972D04781900E72BFF /* Adjusted+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -772,7 +767,7 @@
 		F8AB332C2C2EAD2E00BC16C9 /* DDanDDan */ = {
 			isa = PBXGroup;
 			children = (
-				F9E11AC12CFC4F8C004F45D8 /* Config.xcconfig */,
+				36465E2E2D030AFE00784E8A /* Config.xcconfig */,
 				F8AB332D2C2EAD2E00BC16C9 /* DDanDDanApp.swift */,
 				367A79722CDD092A0055771B /* AppCoordinator.swift */,
 				362864902C89BF9900029452 /* Resource */,
@@ -798,7 +793,7 @@
 		F8C10C142C57950D0037D6A5 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				F8C10C172C57955C0037D6A5 /* LoginView.swift */,
+				364B37952D03916C00E72BFF /* LoginView.swift */,
 				F88663D62CC8F0D2008DB860 /* LoginViewModel.swift */,
 				F88663DD2CC9E69D008DB860 /* SignUp */,
 			);
@@ -1011,7 +1006,7 @@
 				36465D882CF7F39200784E8A /* cat_level3_default.json in Resources */,
 				362864BA2C8A4B9000029452 /* NeoDunggeunmoPro-Regular.ttf in Resources */,
 				3628649D2C89CA2000029452 /* Pretendard-Regular.otf in Resources */,
-				F9E11AC22CFC4F8C004F45D8 /* Config.xcconfig in Resources */,
+				36465E2F2D030AFE00784E8A /* Config.xcconfig in Resources */,
 				3628649C2C89CA2000029452 /* Pretendard-Medium.otf in Resources */,
 				F8758CF32C8EE1F60038CCBB /* Assets.xcassets in Resources */,
 				362864A12C89CA2000029452 /* Pretendard-Bold.otf in Resources */,
@@ -1066,6 +1061,7 @@
 				F88663DA2CC8F952008DB860 /* LoginRepository.swift in Sources */,
 				F88663CF2CC8ED65008DB860 /* NetworkError.swift in Sources */,
 				F8FD4FB02C7A0FF600147C4F /* SignUpViewModel.swift in Sources */,
+				364B37962D03916C00E72BFF /* LoginView.swift in Sources */,
 				F8AB33302C2EAD2E00BC16C9 /* OnboardingView.swift in Sources */,
 				367A796B2CDCB2060055771B /* HomeRepository.swift in Sources */,
 				F809E2FA2CBD05F5001BE099 /* UserData.swift in Sources */,
@@ -1088,18 +1084,17 @@
 				F8AB332E2C2EAD2E00BC16C9 /* DDanDDanApp.swift in Sources */,
 				F809E2FE2CBD0841001BE099 /* DeleteUserConfirmView.swift in Sources */,
 				F80DF7332CB384F8004FF1F2 /* SettingTermView.swift in Sources */,
+				364B37982D04781900E72BFF /* Adjusted+.swift in Sources */,
 				F88663D32CC8EE29008DB860 /* AuthNetwork.swift in Sources */,
 				F859C0482C7068DF007B886A /* SignUpData.swift in Sources */,
 				363CC4482CCADC6A00D2EE47 /* WatchConnectivityManager.swift in Sources */,
 				36BAF1CD2CA48BAE00BEBCE7 /* HomeModel.swift in Sources */,
 				367A79732CDD092A0055771B /* AppCoordinator.swift in Sources */,
 				36C1FE0A2CA4AAAE007CA188 /* LevelUpView.swift in Sources */,
-				F8C10C182C57955C0037D6A5 /* LoginView.swift in Sources */,
 				F88FC6DF2CCF3BF70033D4C9 /* Pet.swift in Sources */,
 				36F6E7EB2CEE411D00B395FB /* Config.swift in Sources */,
 				367A79DD2CE4B65D0055771B /* TokenInterceptor.swift in Sources */,
 				367A797A2CDD6D410055771B /* ImageDialogView.swift in Sources */,
-				F8C10C182C57955C0037D6A5 /* LoginView.swift in Sources */,
 				F809E2FC2CBD06A1001BE099 /* UserManager.swift in Sources */,
 				367A79762CDD544A0055771B /* PetArchiveViewModel.swift in Sources */,
 				F8773BBD2CA541F4009A608F /* UpdateNicknameViewModel.swift in Sources */,
@@ -1311,7 +1306,7 @@
 		};
 		F8AB33362C2EAD2F00BC16C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F9E11AC12CFC4F8C004F45D8 /* Config.xcconfig */;
+			baseConfigurationReference = 36465E2E2D030AFE00784E8A /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1376,7 +1371,7 @@
 		};
 		F8AB33372C2EAD2F00BC16C9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F9E11AC12CFC4F8C004F45D8 /* Config.xcconfig */;
+			baseConfigurationReference = 36465E2E2D030AFE00784E8A /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

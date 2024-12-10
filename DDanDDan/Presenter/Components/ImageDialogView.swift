@@ -16,19 +16,22 @@ struct ImageDialogView: View {
         ZStack {
             Color.black.opacity(0.4)
                 .edgesIgnoringSafeArea(.all)
-            VStack(alignment: .center) {
-                Image(image)
-                    .resizable()
-                    .frame(width: 64, height: 64)
-                    .padding(.bottom, 24)
-                    .padding(.top, 20)
-                Text(title)
-                    .font(.headline)
-                    .font(.heading7_medium16)
-                    .foregroundStyle(Color.white)
-                Text(description)
-                    .font(.body2_regular14)
-                    .foregroundStyle(Color(red: 166/255, green: 166/255, blue: 166/255))
+            VStack {
+                Spacer()
+                    .frame(height: 40)
+                VStack(alignment: .center) {
+                    Image(image)
+                        .resizable()
+                        .frame(width: 64, height: 64)
+                        .padding(.bottom, 24)
+                    Text(title)
+                        .font(.heading6_semibold16)
+                        .foregroundStyle(Color.textHeadlinePrimary)
+                        .padding(.bottom, 4)
+                    Text(description)
+                        .font(.subTitle1_semibold14)
+                        .foregroundStyle(Color.textBodyTeritary)
+                }
                 Button(buttonTitle) {
                     withAnimation {
                         show.toggle()
@@ -37,14 +40,13 @@ struct ImageDialogView: View {
                 }
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .frame(height: 56)
+                .font(.heading6_semibold16)
                 .background(Color.buttonGreen)
                 .foregroundColor(.black)
-                .cornerRadius(4)
                 .padding(20)
-                
             }
             .frame(width: 308, height: 278)
-            .background(Color(red: 33/255, green: 33/255, blue: 33/255))
+            .background(Color.backgroundGray)
             .cornerRadius(8)
             .shadow(radius: 20)
         }

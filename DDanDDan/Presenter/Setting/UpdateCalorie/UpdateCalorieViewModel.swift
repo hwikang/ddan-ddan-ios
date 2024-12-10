@@ -12,36 +12,24 @@ public protocol UpdateCalorieViewModelProtocol: ObservableObject {
 }
 
 final class UpdateCalorieViewModel: UpdateCalorieViewModelProtocol {
-  
+    
+    @Published var showToast: Bool = false
+    @Published var toastMessage: String = ""
     @Published var calorie: Int = 100
     private let repository: SettingRepositoryProtocol
-
+    
     init(repository: SettingRepositoryProtocol) {
         self.repository = repository
-        getUserCalorie()
-    }
-    
-    private func getUserCalorie() {
-        Task {
-            if let userData = await repository.getUserData() {
-                calorie = userData.purposeCalorie
-            }
-        }
+        calorie =  UserDefaultValue.purposeKcal
     }
     
     public func update() async -> Bool {
-        var userName = ""
         
-        if let user = await getUserName() {
-            userName = user
-        } else {
-            userName = UserDefaultValue.userId
-        }
-        
-        let result = await repository.update(name: userName, purposeCalorie: calorie)
+        let result = await repository.update(name: UserDefaultValue.nickName,
+                                             purposeCalorie: calorie)
         switch result {
         case .success:
-            UserDefaultValue.purposeKcal = calorie
+            showToastMessage(message: "하루 목표 칼로리가 변경되었어요")
             return true
         case .failure(let failure):
             //TODO: 에러처리
@@ -49,18 +37,31 @@ final class UpdateCalorieViewModel: UpdateCalorieViewModelProtocol {
         }
     }
     
-    private func getUserName() async -> String? {
-        let user = await UserManager.shared.getUserData()
-        return user?.name
-    }
-    
     public func increaseCalorie() {
-        guard calorie < 1000 else { return }
+        guard calorie < 1000 else {
+            showToastMessage(message: "최대 1000칼로리까지 성장할 수 있어요")
+            return
+        }
         calorie += 100
     }
     
     public func decreaseCalorie() {
-        guard calorie > 100 else { return }
+        guard calorie > 100 else {
+            showToastMessage(message: "최소 100칼로리 이상 설정해주세요")
+            return
+        }
         calorie -= 100
+    }
+    
+    private func showToastMessage(message: String) {
+        toastMessage = message
+        showToast = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            self?.hideToastMessage()
+        }
+    }
+    
+    private func hideToastMessage() {
+        showToast = false
     }
 }

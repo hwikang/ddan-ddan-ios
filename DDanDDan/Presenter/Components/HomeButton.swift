@@ -31,7 +31,10 @@ struct HomeButton: View {
       .padding(.vertical, 12)
       .padding(.horizontal, 43)
     }
-    .border(.borderGray, width: 2)
+    .overlay(
+        RoundedRectangle(cornerRadius: 8)
+            .stroke(Color.borderGray, lineWidth: 4)
+    )
     .cornerRadius(8)
   }
 }

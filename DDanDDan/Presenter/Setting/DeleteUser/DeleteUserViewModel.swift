@@ -13,7 +13,7 @@ final class DeleteUserViewModel: ObservableObject {
 
     init(repository: SettingRepositoryProtocol) {
         self.repository = repository
-        getUserName()
+        name = UserDefaultValue.nickName
     }
     public func deleteUser(reasons: Set<String>) async -> Bool {
         let result = await repository.deleteUser(reason: reasons.reduce("") {
@@ -25,15 +25,6 @@ final class DeleteUserViewModel: ObservableObject {
         case .failure(let error):
             //TODO: 에러처리
             return false
-        }
-        
-    }
-    
-    public func getUserName() {
-        Task {
-            if let name = await UserManager.shared.getUserData()?.name {
-                self.name = name
-            }
         }
         
     }

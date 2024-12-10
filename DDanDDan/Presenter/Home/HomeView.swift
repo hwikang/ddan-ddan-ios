@@ -25,46 +25,37 @@ struct HomeView: View {
     private let isSEDevice = UIScreen.isSESizeDevice
     
     var body: some View {
-        
         ZStack {
             Color(.backgroundBlack)
-                .ignoresSafeArea()
-            VStack {
-                navigationBar
-                    .padding(.top, 20)
-                    .padding(.bottom, isSEDevice ? 8 : 16)
+                .ignoresSafeArea(edges: [.vertical])
+            VStack(alignment: .center) {
+                CustomNavigationBar(
+                    title: "",
+                    leftButtonImage: Image(.iconDocs),
+                    leftButtonAction: {
+                        coordinator.push(to: .petArchive)
+                    },
+                    rightButtonImage: Image(.iconSetting),
+                    rightButtonAction: {
+                        coordinator.push(to: .setting)
+                    },
+                    buttonSize: 28
+                )
                 kcalView
-                    .padding(.bottom, isSEDevice ? 24 : 14)
-                ZStack {
-                    if isSEDevice {
-                        viewModel.homePetModel.petType.seBackgroundImage
-                            .scaledToFit()
-                            .padding(.horizontal, 53)
-                    } else {
-                        viewModel.homePetModel.petType.backgroundImage
-                            .scaledToFit()
-                    }
-                    VStack {
-                        Image(viewModel.bubbleImage)
-                            .opacity(viewModel.showBubble ? 1 : 0)
-                            .animation(.easeInOut(duration: 0.3).delay(0.1), value: viewModel.showBubble)
-                            .transition(.opacity)
-                            .frame(minWidth: 75, maxWidth: 167, minHeight: 56)
-                            .offset(y: 10)
-                        petImage
-                            .onTapGesture {
-                                viewModel.showRandomBubble(type: .normal)
-                            }
-                    }
-                    .offset(y: isSEDevice ? 20 : 65)
-                    
-                }
-                .padding(.bottom, isSEDevice ? 15 : 32)
+                    .padding(.bottom, isSEDevice ? 24 : 14.adjusted)
+                petBackgroundView
+                    .padding(.bottom, isSEDevice ? 15 : 28.adjusted)
+                
+                    .padding(.horizontal, isSEDevice ? 28 : 32.adjustedWidth)
                 levelView
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 20.adjusted)
+                    .padding(.horizontal, isSEDevice ? 28 : 32.adjustedWidth)
                 actionButtonView
+                    .padding(.horizontal, isSEDevice ? 28 : 32.adjustedWidth)
             }
-            .frame(maxHeight: .infinity, alignment: .top)
+            .padding(.top, isSEDevice ? 16 : 40.adjustedHeight)
+            .padding(.bottom, isSEDevice ? 24 : 60.adjustedHeight)
+            .frame(maxWidth: 375.adjustedWidth, maxHeight: 800.adjustedHeight, alignment: .center)
             TransparentOverlayView(isPresented: $viewModel.showToast) {
                 VStack {
                     ToastView(message: viewModel.toastMessage)
@@ -125,7 +116,7 @@ struct HomeView: View {
             case .successThreeDay(let totalKcal):
                 ThreeDaySuccessView(coordinator: coordinator, totalKcal: totalKcal)
             case .newPet:
-                NewPetView(coordinator: coordinator, viewModel: NewPetViewModel(homeRepository: HomeRepository()))
+                NewPetView(coordinator: coordinator, viewModel: NewPetViewModel(homeRepository: HomeRepository(), coordinator: coordinator))
             case .upgradePet(let level, let petType):
                 LevelUpView(coordinator: coordinator, level: level, petType: petType)
             }
@@ -137,25 +128,27 @@ struct HomeView: View {
 extension HomeView {
     /// 네비게이션 바
     var navigationBar: some View {
-        HStack {
+        HStack(alignment: .center) {
             Button(action: {
                 coordinator.push(to: .petArchive)
             }) {
                 Image(.iconDocs)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(width: 28.adjusted, height: 28.adjusted)
+            Spacer()
             Button(action: {
                 coordinator.push(to: .setting)
             }) {
                 Image(.iconSetting)
             }
-            .frame(maxWidth: .infinity, alignment: .trailing)
+            .frame(width: 28.adjusted, height: 28.adjusted)
         }
-        .padding(.horizontal, 32)
+        .frame(height: 30.adjusted)
+        .background(.blue)
     }
     
     var kcalView: some View {
-        HStack(spacing: 4) {
+        HStack(alignment: .lastTextBaseline,spacing: 4) {
             Text("\(viewModel.currentKcal)")
                 .font(.neoDunggeunmo52)
                 .foregroundStyle(.white)
@@ -168,22 +161,50 @@ extension HomeView {
         }
     }
     
+    var petBackgroundView: some View {
+        ZStack {
+            if isSEDevice {
+                viewModel.homePetModel.petType.seBackgroundImage
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            } else {
+                viewModel.homePetModel.petType.backgroundImage
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 400.adjusted)
+            }
+            VStack {
+                Image(viewModel.bubbleImage)
+                    .opacity(viewModel.showBubble ? 1 : 0)
+                    .animation(.easeInOut(duration: 0.3).delay(0.1), value: viewModel.showBubble)
+                    .transition(.opacity)
+                    .frame(minWidth: 75, maxWidth: 167, minHeight: 56)
+                    .offset(y: 16.adjustedHeight)
+                petImage
+                    .onTapGesture {
+                        viewModel.showRandomBubble(type: .normal)
+                    }
+            }
+            .offset(y: isSEDevice ? 35.adjusted : 63.adjustedHeight)
+        }
+    }
+    
     var petImage: some View {
         Group {
             if (viewModel.homePetModel.petType != .bluePenguin) {
                 if viewModel.isPlayingSpecialAnimation {
                     LottieView(animation: .named(viewModel.currentLottieAnimation))
                         .playing(loopMode: .playOnce)
-                        .frame(width: 105, height: 105)
+                        .frame(width: 100.adjusted, height: 100.adjusted)
                 } else {
                     LottieView(animation: .named(viewModel.homePetModel.petType.lottieString(level: viewModel.homePetModel.level)))
                         .playing(loopMode: .loop)
-                        .frame(width: 105, height: 105)
+                        .frame(width: 100.adjusted, height: 100.adjusted)
                 }
             } else {
                 viewModel.homePetModel.petType.image(for: viewModel.homePetModel.level)
                     .scaledToFit()
-                    .frame(width: 105, height: 105)
+                    .frame(width: 100.adjusted, height: 100.adjusted)
             }
         }
     }
@@ -193,47 +214,45 @@ extension HomeView {
             HStack {
                 Text("Lv.\(viewModel.homePetModel.level)")
                     .font(.neoDunggeunmo14)
-                    .padding(4)
+                    .padding(4.adjusted)
                     .foregroundStyle(.white)
                     .background(.borderGray)
-                    .cornerRadius(8)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .cornerRadius(4)
+                Spacer()
                 Text(String(format: "%.0f%%", viewModel.homePetModel.exp))
-                    .font(.subTitle1_semibold16)
+                    .font(.subTitle1_semibold14)
                     .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
             }
+            .padding(.bottom, 8)
             ZStack(alignment: .leading) {
                 Image(.gaugeBackground)
                     .resizable()
+                    .aspectRatio(contentMode: .fill)
                     .frame(height: 28)
-                
                 // expCount 계산
                 let expCount = min(Int(viewModel.homePetModel.exp) / 3, 28)
                 
                 // Rectangle 생성
-                HStack(spacing: 4) {  // HStack을 사용하여 왼쪽 정렬 및 패딩 처리
-                    ForEach(0..<29, id: \.self) { index in
+                HStack(spacing: 4) {
+                    ForEach(0..<25, id: \.self) { index in
                         if index < expCount {
                             Rectangle()
                                 .fill(viewModel.homePetModel.petType.color)
-                                .frame(width: 8, height: 12)
+                                .frame(width: 8.adjusted, height: 12)
                         } else {
                             Rectangle()
-                                .fill(Color.clear)  // 비어 있는 부분은 투명하게
-                                .frame(width: 8, height: 12)
+                                .fill(Color.clear)
+                                .frame(width: 8.adjusted, height: 12)
                         }
                     }
                 }
-                .padding(.leading, 12) // 첫 번째 여백은 8, 그 외의 여백은 HStack 내에서 처리됨
+                .padding(.leading, 8)
             }
         }
-        .frame(maxWidth: .infinity)
-        .padding(.horizontal, 32)
     }
     
     var actionButtonView: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 12.adjusted) {
             HomeButton(buttonTitle: "먹이주기", count: viewModel.homePetModel.feedCount)
                 .onTapGesture {
                     Task {
@@ -249,7 +268,6 @@ extension HomeView {
         }
         .frame(maxWidth: .infinity)
         .frame(height: 66)
-        .padding(.horizontal, 32)
     }
 }
 

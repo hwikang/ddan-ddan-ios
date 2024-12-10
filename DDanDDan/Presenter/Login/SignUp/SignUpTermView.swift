@@ -12,7 +12,7 @@ public enum SignUpPath: Hashable {
     case term
     case egg
     case nickname
-    case calorie(name: String)
+    case calorie
     case success
     case main
     case viewTerm(url:String)
@@ -56,15 +56,13 @@ public struct SignUpTermView<ViewModel: SignUpViewModelProtocol>: View {
                         TermButton(title: "서비스 이용약관", imageName: serviceTermAgree ? "checkboxSelected" :"checkbox", pointTitle: "(필수)") {
                             serviceTermAgree.toggle()
                         } viewTerm: {
-                            //TODO: 약관 url 변경
-                            coordinator.push(to: .viewTerm(url: "https://www.naver.com"))
+                            coordinator.push(to: .viewTerm(url: "https://www.notion.so/4105267fc3b849fba10b8a3155809255"))
                         }
                         .padding(.top, 12)
                         TermButton(title: "개인정보 처리방침", imageName:privacyTermAgree ? "checkboxSelected" :"checkbox", pointTitle: "(필수)") {
                             privacyTermAgree.toggle()
                         }viewTerm: {
-                            //TODO: 약관 url 변경
-                            coordinator.push(to: .viewTerm(url: "https://www.naver.com"))
+                            coordinator.push(to: .viewTerm(url: "https://www.notion.so/1d544c615c44412fa51d2ecb9f98116a"))
                         }
                         .padding(.top, 12)
                         
@@ -85,7 +83,7 @@ public struct SignUpTermView<ViewModel: SignUpViewModelProtocol>: View {
                 case .term: SignUpTermView(viewModel: viewModel, coordinator: coordinator)
                 case .egg: SignUpEggView(viewModel: viewModel, coordinator: coordinator)
                 case .nickname: SignUpNicknameView(viewModel: viewModel, coordinator: coordinator)
-                case .calorie(let name): SignUpCalorieView(viewModel: viewModel, coordinator: coordinator, name: name)
+                case .calorie: SignUpCalorieView(viewModel: viewModel, coordinator: coordinator)
                 case .success: SignUpSuccessView(viewModel: viewModel, coordinator: coordinator)
                 case .main: SettingView(coordinator: coordinator)
                 case .viewTerm(url: let url):

@@ -6,7 +6,10 @@
 //
 
 import SwiftUI
+import UIKit
+
 import HealthKit
+
 
 final class HomeViewModel: ObservableObject {
     @Published var homePetModel: HomeModel = .init(petType: .pinkCat, level: 2, exp: 0, goalKcal: 0, feedCount: 0, toyCount: 0)
@@ -67,7 +70,7 @@ final class HomeViewModel: ObservableObject {
     
     func updateLottieAnimation(for action: LottieMode) {
         guard !isPlayingSpecialAnimation else { return } // 이미 애니메이션이 재생 중인 경우 무시
-
+        
         isPlayingSpecialAnimation = true
         currentLottieAnimation = homePetModel.petType.lottieString(level: homePetModel.level, mode: action)
         
@@ -77,7 +80,7 @@ final class HomeViewModel: ObservableObject {
             self.currentLottieAnimation = "" // 초기 상태로 복구
         }
     }
-
+    
     @MainActor
     func fetchHomeInfo() async {
         
@@ -106,9 +109,9 @@ final class HomeViewModel: ObservableObject {
                 "petType": petInfo.mainPet.type.rawValue,
                 "level": petInfo.mainPet.level
             ]
-
+            
             WatchConnectivityManager.shared.transferUserInfo(info: info)
-
+            
         }
     }
     
@@ -117,6 +120,7 @@ final class HomeViewModel: ObservableObject {
         guard homePetModel.feedCount > 0 else {
             DispatchQueue.main.async { [weak self] in
                 self?.toastMessage = "먹이가 부족해요!"
+                self?.triggerHapticFeedback(style: .warning)
                 self?.showToastMessage()
             }
             return
@@ -132,6 +136,8 @@ final class HomeViewModel: ObservableObject {
                 self.homePetModel.feedCount = petData.user.foodQuantity
                 self.homePetModel.exp = petData.pet.expPercent
                 
+                self.triggerHapticFeedback(style: .success)
+                
                 // 레벨 변화 확인
                 if self.homePetModel.level != petData.pet.level {
                     self.homePetModel.level = petData.pet.level
@@ -142,9 +148,22 @@ final class HomeViewModel: ObservableObject {
                     self.isMaxLevel = true
                 }
             }
-        } else if case .failure(let failure) = result {
-            toastMessage = "성장이 끝난 펫이에요!"
-            showToastMessage()
+        } else if case .failure(let error) = result {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                switch error {
+                case .serverError(_, let code):
+                    if code == "PE003" {
+                        self.toastMessage = "성장이 끝난 펫이에요!"
+                        self.triggerHapticFeedback(style: .error)
+                    } else {
+                        self.toastMessage = "오류가 발생했습니다: \(code)"
+                    }
+                case .dataNil, .encodingError, .failToDecode, .invalidResponse, .requestFailed, .urlError:
+                    break
+                }
+                self.showToastMessage()
+            }
         }
     }
     
@@ -154,6 +173,7 @@ final class HomeViewModel: ObservableObject {
             DispatchQueue.main.async { [weak self] in
                 self?.toastMessage = "장난감이 부족해요!"
                 self?.showToastMessage()
+                self?.triggerHapticFeedback(style: .error)
             }
             return
         }
@@ -167,6 +187,8 @@ final class HomeViewModel: ObservableObject {
                 self.homePetModel.toyCount = petData.user.toyQuantity
                 self.homePetModel.exp = petData.pet.expPercent
                 
+                self.triggerHapticFeedback(style: .success)
+                
                 // 레벨 변화 확인
                 if self.homePetModel.level != petData.pet.level {
                     self.homePetModel.level = petData.pet.level
@@ -177,9 +199,22 @@ final class HomeViewModel: ObservableObject {
                     self.isMaxLevel = true
                 }
             }
-        } else if case .failure(let failure) = result {
-            toastMessage = "성장이 끝난 펫이에요!"
-            showToastMessage()
+        } else if case .failure(let error) = result {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                switch error {
+                case .serverError(_, let code):
+                    if code == "PE003" {
+                        self.toastMessage = "성장이 끝난 펫이에요!"
+                        self.triggerHapticFeedback(style: .error)
+                    } else {
+                        self.toastMessage = "오류가 발생했습니다: \(code)"
+                    }
+                case .dataNil, .encodingError, .failToDecode, .invalidResponse, .requestFailed, .urlError:
+                    break
+                }
+                self.showToastMessage()
+            }
         }
     }
     
@@ -195,15 +230,15 @@ final class HomeViewModel: ObservableObject {
             }
         }
     }
-
+    
     /// 서버 전송 - 칼로리 업데이트 시
     private func handleKcalUpdate(newKcal: Int) {
         let kcalDifference = (newKcal % 100) - (previousKcal % 100)
         
-            Task {
-                await saveCurrentKcal(currentKcal: newKcal)
-            }
-            previousKcal = newKcal
+        Task {
+            await saveCurrentKcal(currentKcal: newKcal)
+        }
+        previousKcal = newKcal
         
         if newKcal >= homePetModel.goalKcal {
             DispatchQueue.main.async { [weak self] in
@@ -292,4 +327,11 @@ final class HomeViewModel: ObservableObject {
     private func hideToastMessage() {
         showToast = false
     }
+    
+    
+    private func triggerHapticFeedback(style: UINotificationFeedbackGenerator.FeedbackType) {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(style)
+    }
+
 }

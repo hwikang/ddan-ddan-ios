@@ -23,63 +23,47 @@ struct PetArchiveView: View {
                 .ignoresSafeArea()
             
             VStack {
-                HStack {
-                    Button {
+                CustomNavigationBar(
+                    title: "펫 보관함",leftButtonImage: Image(.arrow), leftButtonAction: {
                         coordinator.pop()
-                    } label: {
-                        Image(.arrow)
-                    }
-                    .frame(width: 24, height: 24)
-                    
-                    Spacer()
-                    
-                    Text("펫 보관함")
-                        .font(.heading6_semibold16)
-                        .foregroundStyle(.white)
-                    
-                    Spacer()
-                    Rectangle()
-                        .frame(width: 24, height: 24)
-                        .foregroundStyle(.clear)
-                    
-                }
-                .frame(height: 48)
-                .padding(.horizontal, 20)
+                    },
+                    buttonSize: 24
+                )
                 .padding(.bottom, 28)
-                    HStack {
-                        LazyVGrid(columns: columns, spacing: 20) {
-                            ForEach(0..<9, id: \.self) { index in
-                                ZStack {
-                                    let pet = viewModel.petList[safe: index]
-                                    
-                                    // UserDefaults에서 저장된 petId와 비교하여 border 색상 설정
-                                    RoundedRectangle(cornerSize: CGSize(width: 8, height: 8))
-                                        .stroke(viewModel.selectedIndex == index ? Color.buttonGreen : Color.clear, lineWidth: 4)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 8).foregroundColor(.borderGray)
-                                        )
+                HStack {
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(0..<9, id: \.self) { index in
+                            ZStack {
+                                let pet = viewModel.petList[safe: index]
+                                
+                                // UserDefaults에서 저장된 petId와 비교하여 border 색상 설정
+                                RoundedRectangle(cornerSize: CGSize(width: 8, height: 8))
+                                    .stroke(viewModel.selectedIndex == index ? Color.buttonGreen : Color.clear, lineWidth: 4)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 8).foregroundColor(.borderGray)
+                                    )
+                                    .frame(maxWidth: 100, maxHeight: 100)
+                                
+                                if let pet = pet {
+                                    pet.type.image(for: pet.level)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
                                         .frame(maxWidth: 100, maxHeight: 100)
-                                    
-                                    if let pet = pet {
-                                        pet.type.image(for: pet.level)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(maxWidth: 100, maxHeight: 100)
-                                    } else {
-                                        Image(.questionMark)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 48, height: 48)
-                                            .padding(24)
-                                    }
+                                } else {
+                                    Image(.questionMark)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 48, height: 48)
+                                        .padding(24)
                                 }
-                                .onTapGesture {
-                                    viewModel.toggleSelection(for: index)
-                                }
+                            }
+                            .onTapGesture {
+                                viewModel.toggleSelection(for: index)
                             }
                         }
                     }
-                    .padding(.horizontal, 20)
+                }
+                .padding(.horizontal, 20)
                 Spacer()
                 GreenButton(action: {
                     if !viewModel.petId.isEmpty {

@@ -9,7 +9,7 @@ import Foundation
 
 public protocol SignUpViewModelProtocol: ObservableObject {
     func updateNickname(name: String) async -> Bool
-    func updateCalorie(name: String, calorie: Int) async -> Bool
+    func updateCalorie(calorie: Int) async -> Bool
     func login() async -> Bool
     func updatePet(petType: PetType) async -> Bool
 }
@@ -44,7 +44,7 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     }
     
     public func updateNickname(name: String) async -> Bool {
-        let result = await repository.update(name: name, purposeCalorie: nil)
+        let result = await repository.update(name: name, purposeCalorie: 100)
         switch result {
         case .success:
             return true
@@ -53,7 +53,8 @@ final class SignUpViewModel: SignUpViewModelProtocol {
             return false
         }
     }
-    public func updateCalorie(name: String, calorie: Int) async -> Bool {
+    public func updateCalorie(calorie: Int) async -> Bool {
+        let name = UserDefaultValue.nickName
         let result = await repository.update(name: name, purposeCalorie: calorie)
         UserDefaultValue.purposeKcal = calorie
         switch result {

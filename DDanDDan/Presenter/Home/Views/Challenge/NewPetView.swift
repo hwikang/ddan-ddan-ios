@@ -26,7 +26,6 @@ struct NewPetView: View {
                 GreenButton(action: {
                     Task {
                         await viewModel.createRandomPet()
-                        coordinator.pop()
                     }
                 }, title: "시작하기", disabled: .constant(false))
                 .padding(.bottom, 44)
@@ -46,5 +45,5 @@ struct NewPetView: View {
 }
 
 #Preview {
-    NewPetView(coordinator: .init(), viewModel: .init(homeRepository: HomeRepository()))
+    NewPetView(coordinator: .init(), viewModel: .init(homeRepository: HomeRepository(), coordinator: .init()))
 }

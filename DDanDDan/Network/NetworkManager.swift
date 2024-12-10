@@ -18,10 +18,13 @@ public struct NetworkManager {
         self.session = Session(configuration: config, interceptor: interceptor)
     }
     
-    public func request<T: Decodable>(url: String, method: HTTPMethod,
-                                      headers: HTTPHeaders? = nil,
-                                      parameters: Parameters? = nil,
-                                      encoding: ParameterEncoding = URLEncoding.default) async -> Result<T, NetworkError> {
+    public func request<T: Decodable>(
+        url: String,
+        method: HTTPMethod,
+        headers: HTTPHeaders? = nil,
+        parameters: Parameters? = nil,
+        encoding: ParameterEncoding = URLEncoding.default
+    ) async -> Result<T, NetworkError> {
         guard let url = URL(string: baseURL + url) else {
             return .failure(NetworkError.urlError)
         }
@@ -38,7 +41,9 @@ public struct NetworkManager {
         }
         
         let result = await session.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers)
-            .validate().serializingData().response
+            .validate(statusCode: 200..<401)
+            .serializingData()
+            .response
         
         // 응답 로그 출력
         print("\n📥 Response:")
@@ -78,7 +83,18 @@ public struct NetworkManager {
         
         print("🔹 Status Code: \(response.statusCode)")
         
-        if 200..<400 ~= response.statusCode {
+        if response.statusCode == 400 {
+            do {
+                let errorResponse = try JSONDecoder().decode(ServerErrorResponse.self, from: data)
+                print("🔹 400 Error - Code: \(errorResponse.code), Message: \(errorResponse.message)")
+                return .failure(NetworkError.serverError(400, errorResponse.code))
+            } catch {
+                print("🔹 400 Decoding Error: \(error.localizedDescription)")
+                return .failure(NetworkError.failToDecode(error.localizedDescription))
+            }
+        }
+        
+        if 200..<300 ~= response.statusCode {
             do {
                 let networkResponse = try JSONDecoder().decode(T.self, from: data)
                 print("🔹 Success: \(networkResponse)")

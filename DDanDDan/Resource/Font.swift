@@ -24,7 +24,7 @@ extension Font {
   static let heading7_medium16: Font = .custom("Pretendard-Medium", size: 16)
   
   /// subTitle
-  static let subTitle1_semibold16: Font = .custom("Pretendard-SemiBold", size: 14)
+  static let subTitle1_semibold14: Font = .custom("Pretendard-SemiBold", size: 14)
   
   /// body
   static let body1_regular16: Font = .custom("Pretendard-Regular", size: 16)

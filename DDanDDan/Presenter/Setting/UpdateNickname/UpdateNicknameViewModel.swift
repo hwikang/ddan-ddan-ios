@@ -21,7 +21,8 @@ final class UpdateNicknameViewModel: UpdateNicknameViewModelProtocol {
     }
    
     public func update() async -> Bool {
-        let result = await repository.update(name: nickname, purposeCalorie: nil)
+
+        let result = await repository.update(name: nickname, purposeCalorie: UserDefaultValue.purposeKcal)
         switch result {
         case .success:
             return true
