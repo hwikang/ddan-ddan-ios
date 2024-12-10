@@ -116,7 +116,7 @@ struct HomeView: View {
             case .successThreeDay(let totalKcal):
                 ThreeDaySuccessView(coordinator: coordinator, totalKcal: totalKcal)
             case .newPet:
-                NewPetView(coordinator: coordinator, viewModel: NewPetViewModel(homeRepository: HomeRepository()))
+                NewPetView(coordinator: coordinator, viewModel: NewPetViewModel(homeRepository: HomeRepository(), coordinator: coordinator))
             case .upgradePet(let level, let petType):
                 LevelUpView(coordinator: coordinator, level: level, petType: petType)
             }
