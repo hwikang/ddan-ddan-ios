@@ -183,7 +183,7 @@ extension HomeView {
                     .animation(.easeInOut(duration: 0.3).delay(0.1), value: viewModel.showBubble)
                     .transition(.opacity)
                     .frame(minWidth: 75, maxWidth: 167, minHeight: 56)
-                    .offset(y: 16.adjustedHeight)
+                    .offset(y: viewModel.showBubble ? 10.adjustedHeight : 16)
                 petImage
                     .onTapGesture {
                         viewModel.showRandomBubble(type: .normal)
@@ -198,7 +198,7 @@ extension HomeView {
             if (viewModel.homePetModel.petType != .bluePenguin) {
                 if viewModel.isPlayingSpecialAnimation {
                     LottieView(animation: .named(viewModel.currentLottieAnimation))
-                        .playing(loopMode: .playOnce)
+                        .playing(loopMode: .loop)
                         .frame(width: 100.adjusted, height: 100.adjusted)
                 } else {
                     LottieView(animation: .named(viewModel.homePetModel.petType.lottieString(level: viewModel.homePetModel.level)))
