@@ -84,16 +84,20 @@ struct HomeView: View {
                         petType: viewModel.homePetModel.petType
                     )
                     )
+                    viewModel.isLevelUp = false
                 }
             }
             .onChange(of: viewModel.isMaxLevel) { newValue in
                 if newValue {
                     coordinator.push( to: .newPet)
+                    
+                    viewModel.isMaxLevel = false
                 }
             }
             .onChange(of: viewModel.isGoalMet) { newValue in
                 if newValue {
                     coordinator.push( to: .successThreeDay(totalKcal: viewModel.threeDaysTotalKcal))
+                    viewModel.isGoalMet = false
                 }
             }
             .onReceive(coordinator.$shouldUpdateHomeView) { shouldUpdate in
