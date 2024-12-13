@@ -183,7 +183,7 @@ extension HomeView {
                     .animation(.easeInOut(duration: 0.3).delay(0.1), value: viewModel.showBubble)
                     .transition(.opacity)
                     .frame(minWidth: 75, maxWidth: 167, minHeight: 56)
-                    .offset(y: viewModel.showBubble ? 10.adjustedHeight : 16)
+                    .offset(y: viewModel.showBubble ? 10.adjustedHeight : 20)
                 petImage
                     .onTapGesture {
                         viewModel.showRandomBubble(type: .normal)
