@@ -73,7 +73,7 @@ struct SettingView: View {
                     .padding(.leading, 20)
             }
             .transparentFullScreenCover(isPresented: $showLogoutDialog) {
-                DialogView(show: $showLogoutDialog, title: "정말 로그아웃 하시겠습니까", description: "", rightButtonTitle: "로그아웃", leftButtonTitle: "취소") {
+                DialogView(show: $showLogoutDialog, title: "정말 로그아웃 하시겠습니까?", description: "", rightButtonTitle: "로그아웃", leftButtonTitle: "취소") {
                     Task {
                         await UserManager.shared.logout()
                         coordinator.triggerHomeUpdate()
