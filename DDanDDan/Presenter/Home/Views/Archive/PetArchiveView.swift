@@ -32,7 +32,7 @@ struct PetArchiveView: View {
                 .padding(.bottom, 28)
                 HStack {
                     LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(0..<9, id: \.self) { index in
+                        ForEach(0..<viewModel.gridItemCount, id: \.self) { index in
                             ZStack {
                                 let pet = viewModel.petList[safe: index]
                                 
