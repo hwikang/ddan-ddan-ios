@@ -7,10 +7,12 @@
 
 import Foundation
 
+import KakaoSDKUser
+
 final class DeleteUserViewModel: ObservableObject {
     @Published var name: String = ""
     private let repository: SettingRepositoryProtocol
-
+    
     init(repository: SettingRepositoryProtocol) {
         self.repository = repository
         name = UserDefaultValue.nickName
@@ -21,6 +23,14 @@ final class DeleteUserViewModel: ObservableObject {
         )
         switch result {
         case .success:
+            UserApi.shared.unlink {(error) in
+                if let error = error {
+                    print(error)
+                }
+                else {
+                    print("unlink() success.")
+                }
+            }
             return true
         case .failure(let error):
             //TODO: 에러처리
