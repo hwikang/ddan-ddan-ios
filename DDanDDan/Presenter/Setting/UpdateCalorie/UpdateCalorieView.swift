@@ -62,7 +62,7 @@ struct UpdateCalorieView: View {
                             
                 }, title: "변경 완료", disabled: .constant(false))
             }
-            TransparentOverlayView(isPresented: $viewModel.showToast) {
+            TransparentOverlayView(isPresented: $viewModel.showToast, isDimView: false) {
                 VStack {
                     ToastView(message: viewModel.toastMessage)
                 }

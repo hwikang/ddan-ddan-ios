@@ -29,10 +29,16 @@ extension UIScreen {
 
 struct TransparentOverlayView<Content: View>: View {
     @Binding var isPresented: Bool
+    var isDimView: Bool
     let content: Content
     
-    init(isPresented: Binding<Bool>, @ViewBuilder content: () -> Content) {
+    init(
+        isPresented: Binding<Bool>,
+        isDimView: Bool = true,
+        @ViewBuilder content: () -> Content
+    ) {
         self._isPresented = isPresented
+        self.isDimView = isDimView
         self.content = content()
     }
     
@@ -40,11 +46,11 @@ struct TransparentOverlayView<Content: View>: View {
         ZStack {
             if isPresented {
                 content
-                    .background(Color.black.opacity(0.5)) // Optional background
-                    .transition(.identity) // No animation
+                    .background( isDimView ? Color.black.opacity(0.5) : Color.clear)
+                    .transition(.identity)
             }
         }
-        .animation(nil, value: isPresented) // Ensure no animation
+        .animation(nil, value: isPresented)
     }
 }
 
