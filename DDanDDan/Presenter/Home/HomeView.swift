@@ -228,7 +228,7 @@ extension HomeView {
                     .aspectRatio(contentMode: .fill)
                     .frame(height: 28)
                 // expCount 계산
-                let expCount = min(Int(viewModel.homePetModel.exp) / 3, 28)
+                let expCount = min(Int(viewModel.homePetModel.exp) / 4, 25)
                 
                 // Rectangle 생성
                 HStack(spacing: 4) {
@@ -253,15 +253,11 @@ extension HomeView {
         HStack(spacing: 12.adjusted) {
             HomeButton(buttonTitle: "먹이주기", count: viewModel.homePetModel.feedCount)
                 .onTapGesture {
-                    Task {
-                        await viewModel.feedPet()
-                    }
+                    viewModel.feedPet()
                 }
             HomeButton(buttonTitle: "놀아주기", count: viewModel.homePetModel.toyCount)
                 .onTapGesture {
-                    Task {
-                        await viewModel.playWithPet()
-                    }
+                    viewModel.playWithPet()
                 }
         }
         .frame(maxWidth: .infinity)
