@@ -51,7 +51,8 @@ final class PetArchiveViewModel: ObservableObject {
             UserDefaultValue.userId = petArchive.ownerUserId
             DispatchQueue.main.async { [weak self] in
                 self?.petList = petArchive.pets
-                if petArchive.pets.count > 9 { self?.gridItemCount = petArchive.pets.count }
+                let petCount = petArchive.pets.count
+                self?.gridItemCount = max(9, Int(ceil(Double(petCount) / 3.0)) * 3)
             }
         }
     }
