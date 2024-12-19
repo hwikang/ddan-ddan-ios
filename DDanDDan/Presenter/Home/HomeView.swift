@@ -56,7 +56,7 @@ struct HomeView: View {
             .padding(.top, isSEDevice ? 16 : 40.adjustedHeight)
             .padding(.bottom, isSEDevice ? 24 : 60.adjustedHeight)
             .frame(maxWidth: 375.adjustedWidth, maxHeight: 800.adjustedHeight, alignment: .center)
-            TransparentOverlayView(isPresented: $viewModel.showToast) {
+            TransparentOverlayView(isPresented: $viewModel.showToast, isDimView: false) {
                 VStack {
                     ToastView(message: viewModel.toastMessage)
                 }
@@ -228,7 +228,7 @@ extension HomeView {
                     .aspectRatio(contentMode: .fill)
                     .frame(height: 28)
                 // expCount 계산
-                let expCount = min(Int(viewModel.homePetModel.exp) / 4, 25)
+                let expCount = min(Int(viewModel.homePetModel.exp) / 4, (viewModel.homePetModel.exp == 100 ? 25 : 25 - 1))
                 
                 // Rectangle 생성
                 HStack(spacing: 4) {
