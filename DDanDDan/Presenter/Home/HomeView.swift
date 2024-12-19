@@ -195,19 +195,13 @@ extension HomeView {
     
     var petImage: some View {
         Group {
-            if (viewModel.homePetModel.petType != .bluePenguin) {
-                if viewModel.isPlayingSpecialAnimation {
-                    LottieView(animation: .named(viewModel.currentLottieAnimation))
-                        .playing(loopMode: .loop)
-                        .frame(width: 100.adjusted, height: 100.adjusted)
-                } else {
-                    LottieView(animation: .named(viewModel.homePetModel.petType.lottieString(level: viewModel.homePetModel.level)))
-                        .playing(loopMode: .loop)
-                        .frame(width: 100.adjusted, height: 100.adjusted)
-                }
+            if viewModel.isPlayingSpecialAnimation {
+                LottieView(animation: .named(viewModel.currentLottieAnimation))
+                    .playing(loopMode: .loop)
+                    .frame(width: 100.adjusted, height: 100.adjusted)
             } else {
-                viewModel.homePetModel.petType.image(for: viewModel.homePetModel.level)
-                    .scaledToFit()
+                LottieView(animation: .named(viewModel.homePetModel.petType.lottieString(level: viewModel.homePetModel.level)))
+                    .playing(loopMode: .loop)
                     .frame(width: 100.adjusted, height: 100.adjusted)
             }
         }
