@@ -30,11 +30,23 @@ struct OnboardingView: View {
             Color.backgroundBlack.edgesIgnoringSafeArea(.all)
             VStack {
                 TabView(selection: $currentPageIndex) {
-                    ForEach(pageItemList, id: \.self) { item in
-                        OnboardingItemView(item: item)
+                    ForEach(0..<pageItemList.count, id: \.self) { index in
+                        OnboardingItemView(item: pageItemList[index])
+                            .tag(index)
                     }
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                
+                HStack(spacing: 12) {
+                    ForEach(0..<pageItemList.count, id: \.self) { index in
+                        Rectangle()
+                            .fill(index == currentPageIndex ? Color.greenGraphics : Color.borderGray)
+                            .frame(width: 8, height: 8)
+                            .animation(.easeInOut(duration: 0.3), value: currentPageIndex)
+                    }
+                }
+                .padding(.vertical, 19)
+                
                 Button {
                     if UserDefaultValue.requestAuthDone {
                         UserDefaultValue.needToShowOnboarding = false
@@ -51,7 +63,7 @@ struct OnboardingView: View {
                         .foregroundColor(.black)
                 }
                 .fullScreenCover(isPresented: $showAuthDialog, content: {
-                    DialogView(show: $showAuthDialog, title: "건강 데이터 접근 권한을 허용해주세요", description: "서비스 이용을 위하여 건강데이터 접근 권한이 필요합니다.", rightButtonTitle: "허용", leftButtonTitle: "허용안함") {
+                    DialogView(show: $showAuthDialog, title: "건강 데이터 접근 권한을 허용해주세요", description: "서비스 이용을 위하여 건강데이터\n 접근 권한이 필요합니다.", rightButtonTitle: "허용", leftButtonTitle: "허용안함") {
                         HealthKitManager.shared.requestAuthorization { isEnable in
                             if isEnable {
                                 UserDefaultValue.requestAuthDone = true
