@@ -48,19 +48,19 @@ extension PetType {
         case (.greenHam, 5, .normal): return LottieString.hamster.lv5.normal
         case (.greenHam, 5, .eatPlay): return LottieString.hamster.lv5.eatPlay
             
-            //            // bluePenguin Lottie
-            //            case (.bluePenguin, 1, .normal): return LottieString.penguin.lv1.normal
-            //            case (.bluePenguin, 1, .eatPlay): return LottieString.penguin.lv1.eat_play
-            //            case (.bluePenguin, 2, .normal): return LottieString.penguin.lv2.normal
-            //            case (.bluePenguin, 2, .eatPlay): return LottieString.penguin.lv2.eat_play
-            //            case (.bluePenguin, 3, .normal): return LottieString.penguin.lv3.normal
-            //            case (.bluePenguin, 3, .eatPlay): return LottieString.penguin.lv3.eat_play
-            //            case (.bluePenguin, 4, .normal): return LottieString.penguin.lv4.normal
-            //            case (.bluePenguin, 4, .eatPlay): return LottieString.penguin.lv4.eat_play
-            //            case (.bluePenguin, 5, .normal): return LottieString.penguin.lv5.normal
-            //            case (.bluePenguin, 5, .eatPlay): return LottieString.penguin.lv5.eat_play
-            //
-            //            // purpleDog Lottie
+            // bluePenguin Lottie
+        case (.bluePenguin, 1, .normal): return LottieString.penguin.lv1.normal
+        case (.bluePenguin, 1, .eatPlay): return LottieString.penguin.lv1.eatPlay
+        case (.bluePenguin, 2, .normal): return LottieString.penguin.lv2.normal
+        case (.bluePenguin, 2, .eatPlay): return LottieString.penguin.lv2.eatPlay
+        case (.bluePenguin, 3, .normal): return LottieString.penguin.lv3.normal
+        case (.bluePenguin, 3, .eatPlay): return LottieString.penguin.lv3.eatPlay
+        case (.bluePenguin, 4, .normal): return LottieString.penguin.lv4.normal
+        case (.bluePenguin, 4, .eatPlay): return LottieString.penguin.lv4.eatPlay
+        case (.bluePenguin, 5, .normal): return LottieString.penguin.lv5.normal
+        case (.bluePenguin, 5, .eatPlay): return LottieString.penguin.lv5.eatPlay
+            
+            // purpleDog Lottie
         case (.purpleDog, 1, .normal): return LottieString.puppy.lv1.normal
         case (.purpleDog, 1, .eatPlay): return LottieString.puppy.lv1.eatPlay
         case (.purpleDog, 2, .normal): return LottieString.puppy.lv2.normal
