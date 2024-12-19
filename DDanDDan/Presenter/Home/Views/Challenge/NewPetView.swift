@@ -18,6 +18,7 @@ struct NewPetView: View {
                 Spacer()
                 imageView
                 Text("새로운 펫을\n키울 수 있어요!")
+                    .lineSpacing(8)
                     .multilineTextAlignment(.center)
                     .font(.neoDunggeunmo24)
                     .foregroundStyle(.white)
