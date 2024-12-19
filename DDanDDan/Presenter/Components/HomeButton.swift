@@ -24,9 +24,11 @@ struct HomeButton: View {
         Text(buttonTitle)
           .font(.heading6_semibold16)
           .foregroundStyle(.white)
+          .lineSpacing(6)
         Text("\(count)개 보유")
           .font(.body3_regular12)
           .foregroundStyle(.textBodyTeritary)
+          .lineSpacing(8)
       }
       .padding(.vertical, 12)
       .padding(.horizontal, 43)

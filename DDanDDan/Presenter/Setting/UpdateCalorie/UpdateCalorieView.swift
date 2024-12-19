@@ -24,7 +24,7 @@ struct UpdateCalorieView: View {
                     },
                     buttonSize: 24
                 )
-                Text("하루 목표 칼로리를\n설정해주세요")
+                Text("하루 목표 칼로리를\n설정해 주세요")
                     .font(.neoDunggeunmo24)
                     .lineSpacing(8)
                     .foregroundStyle(.white)

@@ -73,7 +73,7 @@ struct HomeView: View {
                     title: "먹이를 얻었어요!",
                     description: "사과 \(viewModel.earnFood)개",
                     buttonTitle: "획득하기"
-                ) {
+                 ) {
                     viewModel.showRandomBubble(type: .success)
                 }
             }
@@ -210,7 +210,7 @@ extension HomeView {
     var levelView: some View {
         VStack {
             HStack {
-                Text("Lv.\(viewModel.homePetModel.level)")
+                Text("LV.\(viewModel.homePetModel.level)")
                     .font(.neoDunggeunmo14)
                     .padding(4.adjusted)
                     .foregroundStyle(.white)
