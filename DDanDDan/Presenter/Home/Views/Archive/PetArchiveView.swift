@@ -42,13 +42,13 @@ struct PetArchiveView: View {
                                     .background(
                                         RoundedRectangle(cornerRadius: 8).foregroundColor(.borderGray)
                                     )
-                                    .frame(maxWidth: 100, maxHeight: 100)
+                                    .frame(width: 100, height: 100)
                                 
                                 if let pet = pet {
-                                    pet.type.image(for: pet.level)
+                                    Image(pet.type.image(for: pet.level))
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
-                                        .frame(maxWidth: 100, maxHeight: 100)
+                                        .frame(maxWidth: 80, maxHeight: 80)
                                 } else {
                                     Image(.questionMark)
                                         .resizable()
