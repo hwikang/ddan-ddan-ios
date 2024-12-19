@@ -48,33 +48,33 @@ public enum PetType: String, Codable {
         }
     }
     
-    func image(for level: Int) -> Image {
+    func image(for level: Int) -> ImageResource {
         switch (self, level) {
-        case (.pinkCat, 1): return Image(.pinkEgg).resizable()
-        case (.pinkCat, 2): return Image(.pinkLv1).resizable()
-        case (.pinkCat, 3): return Image(.pinkLv2).resizable()
-        case (.pinkCat, 4): return Image(.pinkLv3).resizable()
-        case (.pinkCat, 5): return Image(.pinkLv4).resizable()
+        case (.pinkCat, 1): return .pinkEgg
+        case (.pinkCat, 2): return .pinkLv1
+        case (.pinkCat, 3): return .pinkLv2
+        case (.pinkCat, 4): return .pinkLv3
+        case (.pinkCat, 5): return .pinkLv4
             
-        case (.greenHam, 1): return Image(.greenEgg).resizable()
-        case (.greenHam, 2): return Image(.greenLv1).resizable()
-        case (.greenHam, 3): return Image(.greenLv2).resizable()
-        case (.greenHam, 4): return Image(.greenLv3).resizable()
-        case (.greenHam, 5): return Image(.greenLv4).resizable()
+        case (.greenHam, 1): return .greenEgg
+        case (.greenHam, 2): return .greenLv1
+        case (.greenHam, 3): return .greenLv2
+        case (.greenHam, 4): return .greenLv3
+        case (.greenHam, 5): return .greenLv4
             
-        case (.bluePenguin, 1): return Image(.blueEgg).resizable()
-        case (.bluePenguin, 2): return Image(.blueLv1).resizable()
-        case (.bluePenguin, 3): return Image(.blueLv2).resizable()
-        case (.bluePenguin, 4): return Image(.blueLv3).resizable()
-        case (.bluePenguin, 5): return Image(.blueLv4).resizable()
+        case (.bluePenguin, 1): return .blueEgg
+        case (.bluePenguin, 2): return .blueLv1
+        case (.bluePenguin, 3): return .blueLv2
+        case (.bluePenguin, 4): return .blueLv3
+        case (.bluePenguin, 5): return .blueLv4
             
-        case (.purpleDog, 1): return Image(.purpleEgg).resizable()
-        case (.purpleDog, 2): return Image(.purpleLv1).resizable()
-        case (.purpleDog, 3): return Image(.purpleLv2).resizable()
-        case (.purpleDog, 4): return Image(.purpleLv3).resizable()
-        case (.purpleDog, 5): return Image(.purpleLv4).resizable()
+        case (.purpleDog, 1): return .purpleEgg
+        case (.purpleDog, 2): return .purpleLv1
+        case (.purpleDog, 3): return .purpleLv2
+        case (.purpleDog, 4): return .purpleLv3
+        case (.purpleDog, 5): return .purpleLv4
             
-        default: return Image(.blueEgg).resizable() // 기본 이미지
+        default: return .blueEgg // 기본 이미지
         }
     }
 }

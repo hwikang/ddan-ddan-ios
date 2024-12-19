@@ -14,7 +14,7 @@ final class WatchViewModel: ObservableObject {
     @Published var goalKcal: Int?
     @Published var currentKcal: Int
     @Published var currentKcalProgress: Double = 0.0
-    @Published var viewConfig: (Image, Color)?
+    @Published var viewConfig: (ImageResource, Color)?
     @Published var showLoginAlert = false
     
     private let healthKitManager: HealthKitManager = .shared
@@ -49,7 +49,7 @@ final class WatchViewModel: ObservableObject {
     }
     
     /// petType에 따른 UI 설정
-    public func configureUI(petType: PetType, level: Int) -> (Image, Color) {
+    public func configureUI(petType: PetType, level: Int) -> (ImageResource, Color) {
         return (petType.image(for: level), petType.color)
     }
     

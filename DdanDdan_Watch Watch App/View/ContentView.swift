@@ -16,8 +16,7 @@ struct ContentView: View {
             if isTapped {
                 kcalLabel
             } else {
-                viewModel.viewConfig?.0 ?? Image(.blueEgg)
-                    .resizable()
+                imageView
             }
         }
         .frame(width: 107, height: 107)
@@ -30,10 +29,19 @@ struct ContentView: View {
                 .foregroundStyle(
                     viewModel.isGoalMet ? viewModel.viewConfig?.1 ?? .white : .white
                 )
+                .minimumScaleFactor(0.5)
+                .lineLimit(1)
             Text("kcal")
                 .font(.neoDunggeunmo16)
                 .foregroundStyle(.white)
         }
+    }
+    
+    var imageView: some View {
+        Image(viewModel.viewConfig?.0 ?? .blueEgg)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 100, height: 100) 
     }
     
     var body: some View {

@@ -45,7 +45,7 @@ struct LevelUpView: View {
     var imageView: some View {
         ZStack {
             Image(.pangGraphics)
-            petType.image(for: level)
+            Image(petType.image(for: level))
                 .resizable()
                 .frame(width: 96, height: 96)
                 .aspectRatio(contentMode: .fill)
