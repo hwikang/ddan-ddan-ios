@@ -15,7 +15,7 @@ struct SignUpCalorieView<ViewModel: SignUpViewModelProtocol>: View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
             VStack(alignment: .leading) {
-                Text("하루 목표 칼로리를\n설정해주세요")
+                Text("하루 목표 칼로리를\n설정해 주세요")
                     .font(.neoDunggeunmo24)
                     .lineSpacing(8)
                     .foregroundStyle(.white)

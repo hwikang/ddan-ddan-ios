@@ -9,15 +9,15 @@ import SwiftUI
 
 enum SettingPath: Hashable, CaseIterable {
     static var allCases: [SettingPath] {
-        [.updateNickname, .updateCalorie, .notification, .updateTerms, .deleteUser, .logout]
+        [.updateNickname, .updateCalorie, .updateTerms, .deleteUser, .logout]
     }
     
     static var topSection: [SettingPath] { [.updateNickname, updateCalorie] }
-    static var bottomSection: [SettingPath] { [.notification, .updateTerms, .deleteUser, .logout] }
+    static var bottomSection: [SettingPath] { [.updateTerms, .deleteUser, .logout] }
     
     case updateNickname
     case updateCalorie
-    case notification
+//    case notification
     case updateTerms
     case deleteUser
     case deleteUserConfirm(reasons: Set<String>)
@@ -27,7 +27,7 @@ enum SettingPath: Hashable, CaseIterable {
         switch self {
         case .updateNickname: "내 별명 수정"
         case .updateCalorie: "목표 칼로리 수정"
-        case .notification: "푸시 알림"
+//        case .notification: "푸시 알림"
         case .updateTerms: "약관 및 개인정보 처리 동의"
         case .deleteUser: "탈퇴하기"
         case .logout: "로그아웃"
@@ -73,7 +73,7 @@ struct SettingView: View {
                     .padding(.leading, 20)
             }
             .transparentFullScreenCover(isPresented: $showLogoutDialog) {
-                DialogView(show: $showLogoutDialog, title: "정말 로그아웃 하시겠습니까", description: "", rightButtonTitle: "로그아웃", leftButtonTitle: "취소") {
+                DialogView(show: $showLogoutDialog, title: "정말 로그아웃 하시겠습니까?", description: "", rightButtonTitle: "로그아웃", leftButtonTitle: "취소") {
                     Task {
                         await UserManager.shared.logout()
                         coordinator.triggerHomeUpdate()
@@ -104,18 +104,19 @@ struct SectionView: View {
                         Text(item.description)
                             .font(.heading6_semibold16)
                         Spacer()
-                        if item == .notification {
-                            Button {
-                                notificationState.toggle()
-                            } label: {
-                                Image(notificationState ? .toggleOn : .toggleOff)
-                            }
-                            .buttonStyle(.plain)
-                        } else {
+//                        if item == .notification {
+//                            Button {
+//                                notificationState.toggle()
+//                            } label: {
+//                                Image(notificationState ? .toggleOn : .toggleOff)
+//                            }
+//                            .buttonStyle(.plain)
+//                        } else {
                             Image(.arrowRight)
-                        }
+//                        }
                     }
                     .padding(.horizontal, 20)
+//                    .padding(.vertical, 14)
                     .frame(height: 46)
                     .frame(maxWidth: .infinity)
                     .background(Color.backgroundBlack)
@@ -136,7 +137,7 @@ struct SectionView: View {
                 DeleteUserView(coordinator: coordinator)
             case .deleteUserConfirm(let reasons):
                 DeleteUserConfirmView(viewModel: DeleteUserViewModel(repository: SettingRepository()), coordinator: coordinator, selectedReason: reasons)
-            case .notification, .logout:
+            case .logout:
                 EmptyView()
             }
         }
@@ -144,9 +145,9 @@ struct SectionView: View {
     
     private func handleAction(for item: SettingPath) {
         switch item {
-        case .notification:
-            // TODO: 푸시 알림 설정
-            break
+//        case .notification:
+//            // TODO: 푸시 알림 설정
+//            break
         case .logout:
             showLogoutDialog.toggle()
         default:

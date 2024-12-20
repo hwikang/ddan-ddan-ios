@@ -24,7 +24,7 @@ struct UpdateCalorieView: View {
                     },
                     buttonSize: 24
                 )
-                Text("하루 목표 칼로리를\n설정해주세요")
+                Text("하루 목표 칼로리를\n설정해 주세요")
                     .font(.neoDunggeunmo24)
                     .lineSpacing(8)
                     .foregroundStyle(.white)
@@ -62,7 +62,7 @@ struct UpdateCalorieView: View {
                             
                 }, title: "변경 완료", disabled: .constant(false))
             }
-            TransparentOverlayView(isPresented: $viewModel.showToast) {
+            TransparentOverlayView(isPresented: $viewModel.showToast, isDimView: false) {
                 VStack {
                     ToastView(message: viewModel.toastMessage)
                 }

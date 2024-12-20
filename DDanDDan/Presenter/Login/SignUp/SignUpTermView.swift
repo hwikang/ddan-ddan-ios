@@ -33,15 +33,16 @@ public struct SignUpTermView<ViewModel: SignUpViewModelProtocol>: View {
                 VStack(alignment: .leading) {
                     VStack(alignment: .leading) {
                         
-                        Text("딴딴에 오신 것을 환영합니다")
+                        Text("딴딴의 서비스 이용 약관에\n동의해 주세요")
                             .font(.neoDunggeunmo24)
                             .foregroundStyle(.white)
-                        
                             .padding(.top, 80)
+                            .lineSpacing(8)
                         Text("서비스 시작 및 가입을 위해 먼저\n가입 및 정보 제공에 동의해 주세요.")
                             .font(.system(size: 16))
                             .foregroundStyle(.gray)
                             .padding(.top, 8)
+                            .padding(.bottom, 32)
                         Button {
                             let isAllAgree = serviceTermAgree && privacyTermAgree
                             buttonDisabled = isAllAgree

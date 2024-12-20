@@ -33,30 +33,33 @@ struct DialogView: View {
                 }
                 
                 HStack(spacing: 12) {
-                    Button(leftButtonTitle) {
+                    Button {
                         withAnimation {
                             show.toggle()
                         }
+                    } label: {
+                        Text(leftButtonTitle)
+                            .frame(height: 48)
+                            .frame(maxWidth: .infinity)
+                            .background(Color.buttonAlternative)
+                            .foregroundColor(.textButtonAlternative)
+                            .font(.heading6_semibold16)
+                            .cornerRadius(4)
                     }
-                    .frame(height: 48)
-                    .frame(maxWidth: .infinity)
-                    .background(Color.buttonAlternative)
-                    .foregroundColor(.textButtonAlternative)
-                    .font(.heading6_semibold16)
-                    .cornerRadius(4)
-                    
-                    Button(rightButtonTitle) {
+                    Button {
                         withAnimation {
                             show.toggle()
                             rightButtonHandler?()
                         }
+                    } label: {
+                        Text(rightButtonTitle)
+                            .frame(height: 48)
+                            .frame(maxWidth: .infinity)
+                            .font(.heading6_semibold16)
+                            .background(Color.buttonGreen)
+                            .foregroundColor(.textButtonPrimaryDefault)
+                            .cornerRadius(4)
                     }
-                    .frame(height: 48)
-                    .frame(maxWidth: .infinity)
-                    .font(.heading6_semibold16)
-                    .background(Color.buttonGreen)
-                    .foregroundColor(.textButtonPrimaryDefault)
-                    .cornerRadius(4)
                 }
                 .padding(EdgeInsets(top: 28, leading: 20, bottom: 20, trailing: 20))
             }

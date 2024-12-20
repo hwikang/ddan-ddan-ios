@@ -24,7 +24,7 @@ struct GreenButton: View {
             }
         } label: {
             Text(title)
-                .font(.system(size: 16, weight: .medium))
+                .font(.heading6_semibold16)
                 .frame(maxWidth: .infinity, maxHeight: 60)
                 .background(disabled ? greyColor : greenColor)
                 .foregroundColor(disabled ? .gray : .black)

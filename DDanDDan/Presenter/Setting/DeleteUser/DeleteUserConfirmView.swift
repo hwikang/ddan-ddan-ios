@@ -26,8 +26,8 @@ struct DeleteUserConfirmView: View {
                     },
                     buttonSize: 24
                 )
-                Text(viewModel.name + "님\n탈퇴하기 전에 확인해주세요")
-                    .font(.heading3_bold24)
+                Text(viewModel.name + "님\n탈퇴하기 전 확인해 주세요")
+                    .font(.neoDunggeunmo24)
                     .lineSpacing(8)
                     .foregroundStyle(.white)
                     .padding(.top, 20)

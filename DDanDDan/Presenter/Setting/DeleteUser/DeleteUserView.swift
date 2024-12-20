@@ -28,11 +28,11 @@ struct DeleteUserView: View {
                     },
                     buttonSize: 24
                 )
-                Text("탈퇴하는 이유가 무엇인가요?")
-                    .font(.heading3_bold24)
+                Text("탈퇴하는 이유가\n무엇인가요?")
+                    .font(.neoDunggeunmo24)
                     .lineSpacing(8)
                     .foregroundStyle(.white)
-                    .padding(EdgeInsets(top: 20, leading: 20, bottom: 60, trailing: 20))
+                    .padding(EdgeInsets(top: 20, leading: 20, bottom: 32, trailing: 20))
                 List(reasons, id: \.self) { reason in
                     DeleteUserReasonButton(title: reason, isSelected: selectedReason.contains(reason)) {
                         addReason(reason: reason)

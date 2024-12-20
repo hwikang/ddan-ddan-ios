@@ -56,7 +56,7 @@ struct HomeView: View {
             .padding(.top, isSEDevice ? 16 : 40.adjustedHeight)
             .padding(.bottom, isSEDevice ? 24 : 60.adjustedHeight)
             .frame(maxWidth: 375.adjustedWidth, maxHeight: 800.adjustedHeight, alignment: .center)
-            TransparentOverlayView(isPresented: $viewModel.showToast) {
+            TransparentOverlayView(isPresented: $viewModel.showToast, isDimView: false) {
                 VStack {
                     ToastView(message: viewModel.toastMessage)
                 }
@@ -73,7 +73,7 @@ struct HomeView: View {
                     title: "먹이를 얻었어요!",
                     description: "사과 \(viewModel.earnFood)개",
                     buttonTitle: "획득하기"
-                ) {
+                 ) {
                     viewModel.showRandomBubble(type: .success)
                 }
             }
@@ -84,16 +84,20 @@ struct HomeView: View {
                         petType: viewModel.homePetModel.petType
                     )
                     )
+                    viewModel.isLevelUp = false
                 }
             }
             .onChange(of: viewModel.isMaxLevel) { newValue in
                 if newValue {
                     coordinator.push( to: .newPet)
+                    
+                    viewModel.isMaxLevel = false
                 }
             }
             .onChange(of: viewModel.isGoalMet) { newValue in
                 if newValue {
                     coordinator.push( to: .successThreeDay(totalKcal: viewModel.threeDaysTotalKcal))
+                    viewModel.isGoalMet = false
                 }
             }
             .onReceive(coordinator.$shouldUpdateHomeView) { shouldUpdate in
@@ -179,7 +183,7 @@ extension HomeView {
                     .animation(.easeInOut(duration: 0.3).delay(0.1), value: viewModel.showBubble)
                     .transition(.opacity)
                     .frame(minWidth: 75, maxWidth: 167, minHeight: 56)
-                    .offset(y: 16.adjustedHeight)
+                    .offset(y: viewModel.showBubble ? (viewModel.homePetModel.level > 3 ? 5 : 10.adjustedHeight) : 25)
                 petImage
                     .onTapGesture {
                         viewModel.showRandomBubble(type: .normal)
@@ -191,19 +195,13 @@ extension HomeView {
     
     var petImage: some View {
         Group {
-            if (viewModel.homePetModel.petType != .bluePenguin) {
-                if viewModel.isPlayingSpecialAnimation {
-                    LottieView(animation: .named(viewModel.currentLottieAnimation))
-                        .playing(loopMode: .playOnce)
-                        .frame(width: 100.adjusted, height: 100.adjusted)
-                } else {
-                    LottieView(animation: .named(viewModel.homePetModel.petType.lottieString(level: viewModel.homePetModel.level)))
-                        .playing(loopMode: .loop)
-                        .frame(width: 100.adjusted, height: 100.adjusted)
-                }
+            if viewModel.isPlayingSpecialAnimation {
+                LottieView(animation: .named(viewModel.currentLottieAnimation))
+                    .playing(loopMode: .loop)
+                    .frame(width: 100.adjusted, height: 100.adjusted)
             } else {
-                viewModel.homePetModel.petType.image(for: viewModel.homePetModel.level)
-                    .scaledToFit()
+                LottieView(animation: .named(viewModel.homePetModel.petType.lottieString(level: viewModel.homePetModel.level)))
+                    .playing(loopMode: .loop)
                     .frame(width: 100.adjusted, height: 100.adjusted)
             }
         }
@@ -212,7 +210,7 @@ extension HomeView {
     var levelView: some View {
         VStack {
             HStack {
-                Text("Lv.\(viewModel.homePetModel.level)")
+                Text("LV.\(viewModel.homePetModel.level)")
                     .font(.neoDunggeunmo14)
                     .padding(4.adjusted)
                     .foregroundStyle(.white)
@@ -230,7 +228,7 @@ extension HomeView {
                     .aspectRatio(contentMode: .fill)
                     .frame(height: 28)
                 // expCount 계산
-                let expCount = min(Int(viewModel.homePetModel.exp) / 3, 28)
+                let expCount = min(Int(viewModel.homePetModel.exp) / 4, (viewModel.homePetModel.exp == 100 ? 25 : 25 - 1))
                 
                 // Rectangle 생성
                 HStack(spacing: 4) {
@@ -255,15 +253,11 @@ extension HomeView {
         HStack(spacing: 12.adjusted) {
             HomeButton(buttonTitle: "먹이주기", count: viewModel.homePetModel.feedCount)
                 .onTapGesture {
-                    Task {
-                        await viewModel.feedPet()
-                    }
+                    viewModel.feedPet()
                 }
             HomeButton(buttonTitle: "놀아주기", count: viewModel.homePetModel.toyCount)
                 .onTapGesture {
-                    Task {
-                        await viewModel.playWithPet()
-                    }
+                    viewModel.playWithPet()
                 }
         }
         .frame(maxWidth: .infinity)

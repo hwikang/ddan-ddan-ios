@@ -94,4 +94,32 @@ enum LottieString {
             static let eatPlay = "puppy_level5_play+eat"
         }
     }
+    
+    enum penguin {
+        
+        enum lv1 {
+            static let normal = "penguin_level1_default"
+            static let eatPlay = "penguin_level1_play+eat"
+        }
+        
+        enum lv2 {
+            static let normal = "penguin_level2_default"
+            static let eatPlay = "penguin_level2_play+eat"
+        }
+        
+        enum lv3 {
+            static let normal = "penguin_level3_default"
+            static let eatPlay = "penguin_level3_play+eat"
+        }
+        
+        enum lv4 {
+            static let normal = "penguin_level4_default"
+            static let eatPlay = "penguin_level4_play+eat"
+        }
+        
+        enum lv5 {
+            static let normal = "penguin_level5_default"
+            static let eatPlay = "penguin_level5_play+eat"
+        }
+    }
 }

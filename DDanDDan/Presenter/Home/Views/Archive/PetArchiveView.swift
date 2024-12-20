@@ -32,7 +32,7 @@ struct PetArchiveView: View {
                 .padding(.bottom, 28)
                 HStack {
                     LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(0..<9, id: \.self) { index in
+                        ForEach(0..<viewModel.gridItemCount, id: \.self) { index in
                             ZStack {
                                 let pet = viewModel.petList[safe: index]
                                 
@@ -42,13 +42,13 @@ struct PetArchiveView: View {
                                     .background(
                                         RoundedRectangle(cornerRadius: 8).foregroundColor(.borderGray)
                                     )
-                                    .frame(maxWidth: 100, maxHeight: 100)
+                                    .frame(width: 100, height: 100)
                                 
                                 if let pet = pet {
-                                    pet.type.image(for: pet.level)
+                                    Image(pet.type.image(for: pet.level))
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
-                                        .frame(maxWidth: 100, maxHeight: 100)
+                                        .frame(maxWidth: 80, maxHeight: 80)
                                 } else {
                                     Image(.questionMark)
                                         .resizable()
@@ -86,7 +86,7 @@ struct PetArchiveView: View {
                 }
                 .transition(.asymmetric(
                     insertion: .move(edge: .top).combined(with: .opacity),
-                    removal: .opacity)) // 사라질 때는 페이드 아웃만
+                    removal: .opacity))
                 .animation(.spring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.3), value: viewModel.showToast)
                 .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 250)
             }

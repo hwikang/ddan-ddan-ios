@@ -28,6 +28,7 @@ struct LevelUpView: View {
                     .padding(.horizontal, 40)
                 Text("lv.\(level)로\n업그레이드 되었어요!")
                     .multilineTextAlignment(.center)
+                    .lineSpacing(8)
                     .font(.neoDunggeunmo24)
                     .foregroundStyle(.white)
                     .padding(.vertical, 32)
@@ -45,7 +46,7 @@ struct LevelUpView: View {
     var imageView: some View {
         ZStack {
             Image(.pangGraphics)
-            petType.image(for: level)
+            Image(petType.image(for: level))
                 .resizable()
                 .frame(width: 96, height: 96)
                 .aspectRatio(contentMode: .fill)

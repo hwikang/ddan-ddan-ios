@@ -16,6 +16,7 @@ final class PetArchiveViewModel: ObservableObject {
     @Published var petId: String = ""
     @Published var isSelectedMainPet: Bool = false
     @Published var showToast = false
+    @Published var gridItemCount: Int = 9
     
     
     init(repository: HomeRepositoryProtocol) {
@@ -50,6 +51,8 @@ final class PetArchiveViewModel: ObservableObject {
             UserDefaultValue.userId = petArchive.ownerUserId
             DispatchQueue.main.async { [weak self] in
                 self?.petList = petArchive.pets
+                let petCount = petArchive.pets.count
+                self?.gridItemCount = max(9, Int(ceil(Double(petCount) / 3.0)) * 3)
             }
         }
     }
