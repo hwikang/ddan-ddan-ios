@@ -1,13 +1,12 @@
 {
-  "originHash" : "2f222b66b7291b8d7193df078dd2561382a38dd4564f39a7d397432e1f462ea9",
   "pins" : [
     {
       "identity" : "alamofire",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "f455c2975872ccd2d9c81594c658af65716e9b9a",
-        "version" : "5.9.1"
+        "revision" : "e16d3481f5ed35f0472cb93350085853d754913f",
+        "version" : "5.10.1"
       }
     },
     {
@@ -15,10 +14,46 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kakao/kakao-ios-sdk.git",
       "state" : {
-        "revision" : "66b3bddc2657e8ccb7a16fa0264aac99c57be09b",
-        "version" : "2.22.5"
+        "revision" : "f50278451e3ea7e131fb94e08e3fe86023d84930",
+        "version" : "2.22.6"
+      }
+    },
+    {
+      "identity" : "librlottie-xcode",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/librlottie-Xcode.git",
+      "state" : {
+        "revision" : "4ae1ba205910c804ee2d4cd7dd7f122964fe3aad",
+        "version" : "0.2.1"
+      }
+    },
+    {
+      "identity" : "lottie-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-ios",
+      "state" : {
+        "revision" : "fe4c6fe3a0aa66cdeb51d549623c82ca9704b9a5",
+        "version" : "4.5.0"
+      }
+    },
+    {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "state" : {
+        "revision" : "10d06f6a33bafae8c164fbfd1f03391f6d4692b3",
+        "version" : "5.20.0"
+      }
+    },
+    {
+      "identity" : "sdwebimagelottiecoder",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImageLottieCoder",
+      "state" : {
+        "revision" : "c9f65679a9b0510b89673507f548a7c0f17ba95f",
+        "version" : "0.2.0"
       }
     }
   ],
-  "version" : 3
+  "version" : 2
 }

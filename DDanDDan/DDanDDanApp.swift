@@ -2,7 +2,7 @@
 //  DDanDDanApp.swift
 //  DDanDDan
 //
-//  Created by paytalab on 6/28/24.
+//  Created by hwikang on 6/28/24.
 //
 
 import SwiftUI
@@ -11,21 +11,47 @@ import KakaoSDKAuth
 
 @main
 struct DDanDDanApp: App {
+    @StateObject var user = UserManager.shared
+    @StateObject private var appCoordinator = AppCoordinator()
+    private let watchConnection = WatchConnectivityManager.shared
+    
     init() {
-        KakaoSDK.initSDK(appKey: "87ce44f4ab5c4efbff8e1db25c007bbe")
+        KakaoSDK.initSDK(appKey: Config.kakaoKey)
     }
+    
     var body: some Scene {
-        
         WindowGroup {
-          
-            OnboardingView()
+            ContentView()
+                .environmentObject(appCoordinator)
+                .environmentObject(user)
                 .onOpenURL { url in
                     if (AuthApi.isKakaoTalkLoginUrl(url)) {
-                        _ = AuthController.handleOpenUrl(url: url)
+                        AuthController.handleOpenUrl(url: url)
                     }
                 }
-            
-            
         }
     }
 }
+
+struct ContentView: View {
+    @EnvironmentObject var coordinator: AppCoordinator
+    @EnvironmentObject var user: UserManager
+    
+    var body: some View {
+        NavigationStack(path: $coordinator.navigationPath) {
+            switch coordinator.rootView {
+            case .splash:
+                SplashView(viewModel: SplashViewModel(coordinator: coordinator, homeRepository: HomeRepository()))
+            case .signUp:
+                SignUpTermView(viewModel: SignUpViewModel(repository: SignUpRepository()), coordinator: coordinator)
+            case .home:
+                HomeView(coordinator: coordinator, viewModel: .init(repository: HomeRepository(), userInfo: coordinator.userInfo, petInfo: coordinator.petInfo))
+            case .onboarding:
+                OnboardingView(coordinator: coordinator)
+            case .login:
+                LoginView(viewModel: LoginViewModel(repository: LoginRepository(), appCoordinator: coordinator))
+            }
+        }
+    }
+}
+
