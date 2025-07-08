@@ -12,7 +12,7 @@ public struct NetworkManager {
     private let baseURL = Config.baseURL
     private let session: Session
     
-    public init(interceptor: Interceptor? = nil) {
+    public init(interceptor: RequestInterceptor? = nil) {
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .returnCacheDataElseLoad
         self.session = Session(configuration: config, interceptor: interceptor)

@@ -9,13 +9,21 @@ import Foundation
 
 import Alamofire
 
-public final class TokenInterceptor: Interceptor {
+public final class TokenInterceptor: RequestInterceptor {
     
     private let maxRetryCount = 3
     private var retryCounts: [URLRequest: Int] = [:]
-    
-    public override func retry(_ request: Request, for session: Session, dueTo error: any Error, completion: @escaping (RetryResult) -> Void) {
+  
+    public func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, any Error>) -> Void) {
+        var urlRequest = urlRequest
+        if let accessToken = UserDefaultValue.acessToken {
+            urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+            print("🔹 TokenInterceptor: 최신 토큰으로 헤더 업데이트")
+        }
         
+        completion(.success(urlRequest))
+    }
+    public func retry(_ request: Request, for session: Session, dueTo error: any Error, completion: @escaping (RetryResult) -> Void) {
         guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 else {
             completion(.doNotRetryWithError(error))
             return
@@ -55,5 +63,7 @@ public final class TokenInterceptor: Interceptor {
                 completion(.doNotRetry)
             }
         }
+        
     }
+
 }
